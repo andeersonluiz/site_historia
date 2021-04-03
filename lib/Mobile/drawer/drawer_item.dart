@@ -7,11 +7,9 @@ class DrawerItem extends StatelessWidget {
   DrawerItem(this.title, this.icon);
   @override
   Widget build(BuildContext context) {
-    return  ListTile(
-        leading: Icon(icon),
-        title: Text(title),
-      );
-    
-    
+    return ListTile(
+      leading: Icon(icon, color: Theme.of(context).backgroundColor),
+      title: Text(title),
+    );
   }
 }

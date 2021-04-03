@@ -1,9 +1,7 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:site_historia/Desktop/itemAppBar_desktop.dart';
-import 'package:site_historia/Desktop/itemPopupMenuAppBar_desktop.dart';
-import 'package:site_historia/Theme/ThemeConfig.dart';
+import 'package:site_historia/Desktop/appBar/itemAppBar_desktop.dart';
+import 'package:site_historia/Desktop/appBar/itemPopupMenuAppBar_desktop.dart';
 
 class CustomAppBar extends StatefulWidget {
   @override
@@ -29,7 +27,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Icon(FontAwesomeIcons.bookOpen, size: 40),
+            child: Icon(FontAwesomeIcons.bookOpen, size: 30),
           ),
           Spacer(),
           ItemAppBar('Inicio', () {}),
