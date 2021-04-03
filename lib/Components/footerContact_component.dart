@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:site_historia/Components/footerIconButton_component.dart';
 
@@ -30,16 +29,15 @@ class FooterContact extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               IconButtonFooter(Icons.phone, () {}),
-              Text('Telefone'),
+              Text('(21) 9999-9999',style: Theme.of(context).textTheme.caption,),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               IconButtonFooter(Icons.email, () {}),
-              AutoSizeText(
-                'email@gmail.com',
-                minFontSize: 5,
+              Text(
+                'email@gmail.com',style: Theme.of(context).textTheme.caption,
               ),
             ],
           ),

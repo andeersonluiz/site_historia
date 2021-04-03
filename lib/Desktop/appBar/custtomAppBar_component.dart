@@ -32,8 +32,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
           Spacer(),
           ItemAppBar('Inicio', () {}),
           ItemAppBar('Coordenação de História', () {}),
-          ItemPopUpMenuAppBar(
-              'Projetos', ['Projeto 1', 'Projeto 2', 'Projeto 3']),
+          ItemPopUpMenuAppBar('Projetos',
+              ['Projeto 1123 12312312asdsa', 'Projeto 2', 'Projeto 3']),
           ItemAppBar('Noticias', () {}),
           ItemPopUpMenuAppBar('Quadros', ['Quadro 1', 'Quadro 2', 'Quadro 3']),
           ItemAppBar('Vestibular', () {}),

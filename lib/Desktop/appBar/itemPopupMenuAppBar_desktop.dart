@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hovering/hovering.dart';
 
 class ItemPopUpMenuAppBar extends StatefulWidget {
   final String name;
@@ -22,31 +23,41 @@ class _ItemPopUpMenuAppBarState extends State<ItemPopUpMenuAppBar>
 
   @override
   Widget build(BuildContext context) {
-    return PopupMenuButton(
-      color: Theme.of(context).primaryColor,
-      itemBuilder: (ctx) => widget.listItems.map((e) {
-        if (widget.listItems.first == e) {
-          rotationController.forward();
-        }
-        return PopupMenuItem(child: Text(e));
-      }).toList(),
-      onCanceled: () {
-        rotationController.animateBack(0.0);
-      },
-      child: Row(children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child:
-              Text(widget.name, style: TextStyle(fontWeight: FontWeight.bold)),
+    return HoverButton(
+      hoverColor: Theme.of(context).hoverColor,
+      shape: BeveledRectangleBorder(),
+      padding: EdgeInsets.all(0),
+      hoverPadding: EdgeInsets.all(0),
+      onpressed: () {},
+      child: Container(
+        height: double.infinity,
+        child: PopupMenuButton(
+          color: Theme.of(context).primaryColor,
+          itemBuilder: (ctx) => widget.listItems.map((e) {
+            if (widget.listItems.first == e) {
+              rotationController.forward();
+            }
+            return PopupMenuItem(
+                child: Text(e, style: Theme.of(context).textTheme.bodyText2));
+          }).toList(),
+          onCanceled: () {
+            rotationController.animateBack(0.0);
+          },
+          child: Row(children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(widget.name,
+                  style: Theme.of(context).textTheme.bodyText2),
+            ),
+            RotationTransition(
+                turns: Tween(begin: 0.0, end: 0.5).animate(rotationController),
+                child: Icon(Icons.keyboard_arrow_down_rounded,
+                    color: Theme.of(context).iconTheme.color))
+          ]),
+          elevation: 8,
+          offset: Offset(0, 69),
         ),
-        RotationTransition(
-            turns: Tween(begin: 0.0, end: 0.5).animate(rotationController),
-            child: Icon(
-              Icons.keyboard_arrow_down_rounded,
-            ))
-      ]),
-      elevation: 8,
-      offset: Offset(0, 45),
+      ),
     );
   }
 }

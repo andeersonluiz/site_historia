@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:site_historia/Mobile/drawer/drawerTitleSubItem.dart';
 import 'package:site_historia/Mobile/drawer/drawer_item.dart';
 import 'package:site_historia/Mobile/drawer/drawer_subItem.dart';
 
@@ -16,10 +17,9 @@ class NavigationDrawer extends StatelessWidget {
               Icons.home,
             ),
             DrawerItem('Coordenação de História', Icons.auto_stories),
-            ExpansionTile(
-              leading: Icon(Icons.whatshot_outlined,
-                  color: Theme.of(context).backgroundColor),
-              title: Text('Projetos'),
+            DrawerItemWithSubItem(
+              title: 'Projetos',
+              icon: Icons.whatshot_outlined,
               children: [
                 DrawerSubItem('Projeto 1', Icons.whatshot_outlined),
                 DrawerSubItem('Projeto 2', Icons.whatshot_outlined),
@@ -27,10 +27,9 @@ class NavigationDrawer extends StatelessWidget {
               ],
             ),
             DrawerItem('Noticias', Icons.cast_for_education),
-            ExpansionTile(
-              title: Text('Quadros'),
-              leading: Icon(Icons.watch_later_outlined,
-                  color: Theme.of(context).backgroundColor),
+            DrawerItemWithSubItem(
+              title: 'Quadros',
+              icon: Icons.watch_later_outlined,
               children: [
                 DrawerSubItem('Quadro 1', Icons.whatshot_outlined),
                 DrawerSubItem('Quadro 2', Icons.whatshot_outlined),

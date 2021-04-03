@@ -13,6 +13,7 @@ class ThemeConfig {
   static Color textColor = Color.fromRGBO(232, 223, 220, 1);
   static Color white = Colors.white;
   static Color brownLight = Color.fromRGBO(245, 230, 225, 0.5);
+  static Color hoverColor = Color.fromRGBO(245, 230, 225, 0.3);
 
   static ThemeData theme = ThemeData(
     backgroundColor: brownLight,
@@ -20,6 +21,7 @@ class ThemeConfig {
     accentColor: brownLight,
     scaffoldBackgroundColor: brownLight,
     unselectedWidgetColor: brownLight,
+    hoverColor: hoverColor,
     iconTheme: IconThemeData(
       color: textColor,
     ),
@@ -46,7 +48,7 @@ class ThemeConfig {
       button: GoogleFonts.roboto(
           fontSize: 14, fontWeight: FontWeight.w500, letterSpacing: 1.25),
       caption: GoogleFonts.roboto(
-          fontSize: 12, fontWeight: FontWeight.w400, letterSpacing: 0.4),
+          fontSize: 13, fontWeight: FontWeight.w400, letterSpacing: 0.4),
       overline: GoogleFonts.roboto(
           fontSize: 10, fontWeight: FontWeight.w400, letterSpacing: 1.5),
     ).apply(

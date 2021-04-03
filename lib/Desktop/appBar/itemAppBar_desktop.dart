@@ -1,5 +1,5 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:hovering/hovering.dart';
 
 class ItemAppBar extends StatelessWidget {
   final String title;
@@ -9,17 +9,21 @@ class ItemAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: InkWell(
-          child: AutoSizeText(title,
-              minFontSize: 10,
-              maxFontSize: 40,
-              style: TextStyle(fontWeight: FontWeight.bold)),
-          onTap: () => function,
+    return HoverButton(
+      hoverColor: Theme.of(context).hoverColor,
+      shape: BeveledRectangleBorder(),
+      padding: EdgeInsets.all(0),
+      hoverPadding: EdgeInsets.all(0),
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            title,
+            style: Theme.of(context).textTheme.bodyText2,
+          ),
         ),
       ),
+      onpressed: () {},
     );
   }
 }
