@@ -9,11 +9,11 @@ class ListPost extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          PostTile('Title Notice 1'),
-          PostTile('Title Notice 2'),
-          PostTile('Title Notice 3'),
-          PostTile('Title Notice 4'),
-          PostTile('Title Notice 5'),
+          PosteTile('Title Notice 1'),
+          PosteTile('Title Notice 2'),
+          PosteTile('Title Notice 3'),
+          PosteTile('Title Notice 4'),
+          PosteTile('Title Notice 5'),
         ],
       ),
     );

@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class PosteTile extends StatelessWidget {
+class PostTile extends StatelessWidget {
   final noticeText;
-
-  PosteTile(this.noticeText);
+  final descriptionNotice;
+  PostTile(this.noticeText, this.descriptionNotice);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-                color: Colors.black, offset: Offset(0.0, 1.0), blurRadius: 3.0)
-          ]),
-      width: 100,
-      height: 100,
-      child: Column(
+      margin: EdgeInsets.all(16.0),
+      width: MediaQuery.of(context).size.width * 0.45,
+      height: 120,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            flex: 8,
+            flex: 3,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
@@ -34,8 +30,51 @@ class PosteTile extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 2,
-            child: Center(child: Text(noticeText)),
+            flex: 7,
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: EdgeInsets.all(4.0),
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        'Study',
+                        style: GoogleFonts.roboto(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            letterSpacing: 0.5,
+                            color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      noticeText,
+                      style: GoogleFonts.roboto(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0.5,
+                          color: Theme.of(context).primaryColor),
+                    ),
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        descriptionNotice,
+                        style: GoogleFonts.roboto(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            letterSpacing: 0.5,
+                            color: Theme.of(context).primaryColor),
+                      )),
+                ]),
           )
         ],
       ),

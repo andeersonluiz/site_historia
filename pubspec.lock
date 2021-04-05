@@ -529,6 +529,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  relative_scale:
+    dependency: "direct main"
+    description:
+      name: relative_scale
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   responsive_builder:
     dependency: "direct main"
     description:

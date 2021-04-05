@@ -11,8 +11,6 @@ class DrawerItemWithSubItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-        title: Text(title),
-        leading: Icon(icon, color: Theme.of(context).backgroundColor),
-        children: children);
+        title: Text(title), leading: Icon(icon), children: children);
   }
 }

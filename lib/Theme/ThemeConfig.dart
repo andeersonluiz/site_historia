@@ -10,9 +10,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ThemeConfig {
   static Color brown = Color.fromRGBO(87, 42, 30, 1);
+  static Color brownOpacity = Color.fromRGBO(87, 42, 30, 0.5);
   static Color textColor = Color.fromRGBO(232, 223, 220, 1);
   static Color white = Colors.white;
-  static Color brownLight = Color.fromRGBO(245, 230, 225, 0.5);
+  static Color brownLight = Color.fromRGBO(191, 169, 138, 0.5);
+  static Color brownPodcast = Color.fromRGBO(191, 169, 138, 0.5);
   static Color hoverColor = Color.fromRGBO(245, 230, 225, 0.3);
 
   static ThemeData theme = ThemeData(
@@ -22,6 +24,7 @@ class ThemeConfig {
     scaffoldBackgroundColor: brownLight,
     unselectedWidgetColor: brownLight,
     hoverColor: hoverColor,
+    selectedRowColor: brownOpacity,
     iconTheme: IconThemeData(
       color: textColor,
     ),
