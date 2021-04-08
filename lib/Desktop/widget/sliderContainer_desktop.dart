@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:site_historia/model/notice_model.dart';
 
 class SliderContainer extends StatelessWidget {
-  final String title;
-  final String subTitle;
-  final String image;
+  final Notice notice;
+  final double sizeContainer;
+  final maxLinesSubtitle;
   SliderContainer({
-    required this.title,
-    required this.subTitle,
-    required this.image,
+    required this.notice,
+    required this.sizeContainer,
+    required this.maxLinesSubtitle,
   });
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class SliderContainer extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           child: Image.network(
-            image,
+            notice.imageHeader,
             fit: BoxFit.fill,
           ),
         ),
@@ -25,7 +26,7 @@ class SliderContainer extends StatelessWidget {
           alignment: Alignment.bottomLeft,
           child: Container(
             width: double.infinity,
-            height: 130,
+            height: sizeContainer,
             color: Theme.of(context).selectedRowColor,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -35,17 +36,15 @@ class SliderContainer extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        title,
+                        notice.title,
                         style: Theme.of(context).textTheme.headline4,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(subTitle,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          style: Theme.of(context).textTheme.subtitle1),
-                    )
+                    Text(notice.subtitle,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        textAlign: TextAlign.left,
+                        style: Theme.of(context).textTheme.subtitle1),
                   ]),
             ),
           ),

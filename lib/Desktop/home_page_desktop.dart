@@ -20,7 +20,9 @@ class HomePageDesktop extends StatelessWidget {
             Expanded(
                 flex: 5,
                 child: Container(
-                    color: ThemeConfig.brownPodcast, child: LatestPodcast())),
+                    height: 500,
+                    color: ThemeConfig.brownPodcast,
+                    child: LatestPodcast())),
           ]),
           Divider(height: 1),
           FooterDesktop(),

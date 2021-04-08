@@ -13,7 +13,7 @@ class ThemeConfig {
   static Color brownOpacity = Color.fromRGBO(87, 42, 30, 0.5);
   static Color textColor = Color.fromRGBO(232, 223, 220, 1);
   static Color white = Colors.white;
-  static Color brownLight = Color.fromRGBO(191, 169, 138, 0.5);
+  static Color brownLight = Color.fromRGBO(191, 169, 138, 0.3);
   static Color brownPodcast = Color.fromRGBO(191, 169, 138, 0.5);
   static Color hoverColor = Color.fromRGBO(245, 230, 225, 0.3);
 
@@ -57,6 +57,7 @@ class ThemeConfig {
     ).apply(
       bodyColor: textColor,
       displayColor: textColor,
+      decorationColor: textColor,
     ),
   );
 }

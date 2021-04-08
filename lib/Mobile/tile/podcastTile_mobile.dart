@@ -2,22 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:site_historia/model/notice_model.dart';
 
-class PodcastTile extends StatelessWidget {
+class PodcastTileMobile extends StatelessWidget {
   final Notice podcast;
-  PodcastTile(this.podcast);
+  final widthPercentual;
+  PodcastTileMobile(this.podcast, this.widthPercentual);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(16.0),
-      width: MediaQuery.of(context).size.width * 0.45,
+      width: MediaQuery.of(context).size.width * widthPercentual,
       height: 120,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            flex: 3,
+            flex: 4,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
@@ -29,7 +30,7 @@ class PodcastTile extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 7,
+            flex: 6,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,

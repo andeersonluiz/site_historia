@@ -39,7 +39,10 @@ dependencies:
   provider: ^5.0.0
   sticky_headers: ^0.2.0
   hovering: ^1.0.4
-  relative_scale: ^2.0.0
+  cloud_firestore: ^1.0.4
+  firebase_core: ^1.0.3
+  firebase_storage: ^8.0.2
+  intl: ^0.17.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

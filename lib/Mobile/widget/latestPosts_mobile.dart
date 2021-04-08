@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:site_historia/Desktop/tile/podcastTile_desktop.dart';
+import 'package:site_historia/Mobile/tile/postTile_mobile.dart';
 import 'package:site_historia/firebase/notice_firestore.dart';
 import 'package:site_historia/model/notice_model.dart';
 
-class LatestPodcast extends StatelessWidget {
+class LatestPostsMobile extends StatelessWidget {
   final noticeFirestore = NoticeFirestore();
+  final widthPercentual;
+  LatestPostsMobile(this.widthPercentual);
   @override
   Widget build(BuildContext context) {
-    /**CONECTAR AO BD PARA CARREGAR ULTIMOS PODCAST DO SITE*/
-
+    /**CONECTAR AO BD PARA CARREGAR ULTIMAS POSTAGENS DO SITE*/
     return FutureBuilder(
-      future: noticeFirestore.getPodcasts(),
+      future: noticeFirestore.getNotices(),
       builder: (ctx, snp) {
         if (snp.hasData) {
           List<Notice> listNotices = snp.data as List<Notice>;
@@ -22,7 +23,7 @@ class LatestPodcast extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Ultimos Podcasts",
+                  "Ultimas Postagens",
                   style: GoogleFonts.roboto(
                       fontSize: 22,
                       fontWeight: FontWeight.w500,
@@ -30,9 +31,9 @@ class LatestPodcast extends StatelessWidget {
                       color: Theme.of(context).primaryColor),
                 ),
               ),
-              PodcastTile(listNotices[0]),
-              PodcastTile(listNotices[1]),
-              PodcastTile(listNotices[2]),
+              PostTileMobile(listNotices[0], widthPercentual),
+              PostTileMobile(listNotices[1], widthPercentual),
+              PostTileMobile(listNotices[2], widthPercentual),
             ],
           );
         } else if (snp.hasError) {

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:site_historia/Desktop/tile/podcastTile_desktop.dart';
+import 'package:site_historia/Mobile/tile/podcastTile_mobile.dart';
 import 'package:site_historia/firebase/notice_firestore.dart';
 import 'package:site_historia/model/notice_model.dart';
 
-class LatestPodcast extends StatelessWidget {
+class LatestPodcastMobile extends StatelessWidget {
   final noticeFirestore = NoticeFirestore();
+  final widthPercentual;
+  LatestPodcastMobile(this.widthPercentual);
+
   @override
   Widget build(BuildContext context) {
     /**CONECTAR AO BD PARA CARREGAR ULTIMOS PODCAST DO SITE*/
@@ -30,9 +33,9 @@ class LatestPodcast extends StatelessWidget {
                       color: Theme.of(context).primaryColor),
                 ),
               ),
-              PodcastTile(listNotices[0]),
-              PodcastTile(listNotices[1]),
-              PodcastTile(listNotices[2]),
+              PodcastTileMobile(listNotices[0], widthPercentual),
+              PodcastTileMobile(listNotices[1], widthPercentual),
+              PodcastTileMobile(listNotices[2], widthPercentual),
             ],
           );
         } else if (snp.hasError) {
