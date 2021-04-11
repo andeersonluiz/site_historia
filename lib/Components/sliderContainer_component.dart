@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:site_historia/model/notice_model.dart';
+
+import '../model/notice_model.dart';
 
 class SliderContainer extends StatelessWidget {
   final Notice notice;

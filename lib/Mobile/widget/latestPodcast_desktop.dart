@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:site_historia/Desktop/tile/podcastTile_desktop.dart';
-import 'package:site_historia/firebase/notice_firestore.dart';
-import 'package:site_historia/model/notice_model.dart';
+
+import '../../Desktop/tile/podcastTile_desktop.dart';
+import '../../firebase/notice_firestore.dart';
+import '../../model/notice_model.dart';
 
 class LatestPodcast extends StatelessWidget {
   final noticeFirestore = NoticeFirestore();

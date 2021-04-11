@@ -1,8 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:site_historia/Desktop/widget/sliderContainer_desktop.dart';
-import 'package:site_historia/firebase/notice_firestore.dart';
-import 'package:site_historia/model/notice_model.dart';
+
+import '../../Components/sliderContainer_component.dart';
+import '../../firebase/notice_firestore.dart';
+import '../../model/notice_model.dart';
 
 class SliderImageMobile extends StatefulWidget {
   @override

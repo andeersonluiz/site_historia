@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:site_historia/Desktop/appBar/custtomAppBar_component.dart';
-import 'package:site_historia/Desktop/footer/footer_desktop.dart';
-import 'package:site_historia/Desktop/widget/latestPodcast_desktop.dart';
-import 'package:site_historia/Desktop/widget/latestPosts_desktop.dart';
-import 'package:site_historia/Desktop/widget/sliderImage_desktop.dart';
-import 'package:site_historia/Theme/ThemeConfig.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
+
+import '../Theme/ThemeConfig.dart';
+import 'appBar/custtomAppBar_desktop.dart';
+import 'footer/footer_desktop.dart';
+import 'widget/latestPodcast_desktop.dart';
+import 'widget/latestPosts_desktop.dart';
+import 'widget/sliderImage_desktop.dart';
 
 class HomePageDesktop extends StatelessWidget {
   @override

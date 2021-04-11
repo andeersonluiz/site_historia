@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:site_historia/Desktop/home_page_desktop.dart';
-import 'package:site_historia/Mobile/home_page_mobile.dart';
-import 'package:site_historia/Mobile/drawer/navigation_drawer_component.dart';
+import '../Desktop/home_page_desktop.dart';
+import '../Mobile/home_page_mobile.dart';
+import '../Mobile/drawer/navigation_drawer_component.dart';
 
 class Home extends StatefulWidget {
   @override

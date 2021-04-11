@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:site_historia/model/notice_model.dart';
+
+import '../../model/notice_model.dart';
 
 class PostTileMobile extends StatelessWidget {
   final Notice notice;

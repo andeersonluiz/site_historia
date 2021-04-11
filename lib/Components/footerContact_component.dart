@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:site_historia/Components/footerIconButton_component.dart';
+
+import 'footerIconButton_component.dart';
 
 class FooterContact extends StatelessWidget {
   @override
@@ -29,7 +30,10 @@ class FooterContact extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               IconButtonFooter(Icons.phone, () {}),
-              Text('(21) 9999-9999',style: Theme.of(context).textTheme.caption,),
+              Text(
+                '(21) 9999-9999',
+                style: Theme.of(context).textTheme.caption,
+              ),
             ],
           ),
           Row(
@@ -37,7 +41,8 @@ class FooterContact extends StatelessWidget {
             children: [
               IconButtonFooter(Icons.email, () {}),
               Text(
-                'email@gmail.com',style: Theme.of(context).textTheme.caption,
+                'email@gmail.com',
+                style: Theme.of(context).textTheme.caption,
               ),
             ],
           ),

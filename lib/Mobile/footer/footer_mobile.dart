@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:site_historia/Components/footerContact_component.dart';
-import 'package:site_historia/Mobile/footer/mini/footerMini_mobile.dart';
+import '../../Components/footerContact_component.dart';
+import 'mini/footerMini_mobile.dart';
 import '../../Components/footerAbout_component.dart';
 
 class FooterMobile extends StatelessWidget {

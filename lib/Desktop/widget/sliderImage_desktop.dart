@@ -1,8 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:site_historia/Desktop/widget/sliderContainer_desktop.dart';
-import 'package:site_historia/firebase/notice_firestore.dart';
-import 'package:site_historia/model/notice_model.dart';
+
+import '../../Components/sliderContainer_component.dart';
+import '../../firebase/notice_firestore.dart';
+import '../../model/notice_model.dart';
 
 class SliderImageDesktop extends StatefulWidget {
   @override
@@ -10,14 +11,7 @@ class SliderImageDesktop extends StatefulWidget {
 }
 
 class _SliderImageDesktopState extends State<SliderImageDesktop> {
-  final List<Color> colors = [
-    Colors.red,
-    Colors.green,
-    Colors.yellow,
-    Colors.blue,
-    Colors.orange
-  ];
-  final List<int> example = [0, 1, 2, 3, 4];
+  final List<int> pagination = [0, 1, 2, 3, 4];
   int _current = 0;
   final noticeFirestore = NoticeFirestore();
 
@@ -60,13 +54,13 @@ class _SliderImageDesktopState extends State<SliderImageDesktop> {
                 return Container();
               } else {
                 return Container(
-                  height: 400,
+                  height: 450,
                 );
               }
             }),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: example.map((i) {
+          children: pagination.map((i) {
             return Container(
                 height: 8,
                 width: 8,

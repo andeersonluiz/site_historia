@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:site_historia/Mobile/widget/latestPodcast_mobile.dart';
-import 'package:site_historia/Mobile/widget/latestPosts_mobile.dart';
-import 'package:site_historia/Mobile/widget/sliderImage_mobile.dart';
-import 'package:site_historia/Mobile/footer/footer_mobile.dart';
-import 'package:site_historia/Theme/ThemeConfig.dart';
+
+import '../Theme/ThemeConfig.dart';
+import 'footer/footer_mobile.dart';
+import 'widget/latestPodcast_mobile.dart';
+import 'widget/latestPosts_mobile.dart';
+import 'widget/sliderImage_mobile.dart';
 
 class HomePageMobile extends StatelessWidget {
   @override

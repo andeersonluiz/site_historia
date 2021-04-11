@@ -33,12 +33,16 @@ class _ItemPopUpMenuAppBarState extends State<ItemPopUpMenuAppBar>
         height: double.infinity,
         child: PopupMenuButton(
           color: Theme.of(context).primaryColor,
-          itemBuilder: (ctx) => widget.listItems.map((e) {
-            if (widget.listItems.first == e) {
+          itemBuilder: (ctx) => widget.listItems.map((item) {
+            if (widget.listItems.first == item) {
               rotationController.forward();
             }
             return PopupMenuItem(
-                child: Text(e, style: Theme.of(context).textTheme.bodyText2));
+                child: GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, widget.name,
+                        arguments: item),
+                    child: Text(item,
+                        style: Theme.of(context).textTheme.bodyText2)));
           }).toList(),
           onCanceled: () {
             rotationController.animateBack(0.0);

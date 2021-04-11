@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:site_historia/Components/footerAbout_component.dart';
-import 'package:site_historia/Components/footerIconButton_component.dart';
+
+import '../../../Components/footerAbout_component.dart';
+import '../../../Components/footerIconButton_component.dart';
 
 class FooterMini extends StatelessWidget {
   @override

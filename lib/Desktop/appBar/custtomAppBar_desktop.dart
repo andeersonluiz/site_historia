@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:site_historia/Desktop/appBar/itemAppBar_desktop.dart';
-import 'package:site_historia/Desktop/appBar/itemPopupMenuAppBar_desktop.dart';
+import 'package:provider/provider.dart';
+
+import '../../Support/RoutesName_support.dart';
+import '../../firebase/frame_firestore.dart';
+import '../../firebase/project_firestore.dart';
+import 'itemAppBar_desktop.dart';
+import 'itemPopupMenuAppBar_desktop.dart';
 
 class CustomAppBar extends StatefulWidget {
   @override
@@ -13,6 +18,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    ProjectFirestore projectFirestore = Provider.of<ProjectFirestore>(context);
+    FrameFirestore frameFirestore = Provider.of<FrameFirestore>(context);
+
     return Container(
       height: 70,
       width: width,
@@ -30,15 +38,15 @@ class _CustomAppBarState extends State<CustomAppBar> {
             child: Icon(FontAwesomeIcons.bookOpen, size: 30),
           ),
           Spacer(),
-          ItemAppBar('Inicio', () {}),
-          ItemAppBar('Coordenação de História', () {}),
-          ItemPopUpMenuAppBar('Projetos',
-              ['Projeto 1123 12312312asdsa', 'Projeto 2', 'Projeto 3']),
-          ItemAppBar('Noticias', () {}),
-          ItemPopUpMenuAppBar('Quadros', ['Quadro 1', 'Quadro 2', 'Quadro 3']),
-          ItemAppBar('Vestibular', () {}),
-          ItemAppBar('Recomendações', () {}),
-          ItemAppBar('Acervo', () {}),
+          ItemAppBar(RouteNames.HOME, () {}),
+          ItemAppBar(RouteNames.ABOUT, () {}),
+          ItemPopUpMenuAppBar(
+              RouteNames.PROJECTS, projectFirestore.listProjects),
+          ItemAppBar(RouteNames.NOTICES, () {}),
+          ItemPopUpMenuAppBar(RouteNames.FRAMES, frameFirestore.listFrames),
+          ItemAppBar(RouteNames.EXAM, () {}),
+          ItemAppBar(RouteNames.RECOMENDATIONS, () {}),
+          ItemAppBar(RouteNames.COLLECTION, () {}),
         ],
       ),
     );

@@ -10,20 +10,19 @@ class ItemAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HoverButton(
-      hoverColor: Theme.of(context).hoverColor,
-      shape: BeveledRectangleBorder(),
-      padding: EdgeInsets.all(0),
-      hoverPadding: EdgeInsets.all(0),
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            title,
-            style: Theme.of(context).textTheme.bodyText2,
+        hoverColor: Theme.of(context).hoverColor,
+        shape: BeveledRectangleBorder(),
+        padding: EdgeInsets.all(0),
+        hoverPadding: EdgeInsets.all(0),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              title,
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
           ),
         ),
-      ),
-      onpressed: () {},
-    );
+        onpressed: () => Navigator.pushNamed(context, title));
   }
 }

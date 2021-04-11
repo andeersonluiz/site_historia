@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:site_historia/Mobile/tile/postTile_mobile.dart';
-import 'package:site_historia/firebase/notice_firestore.dart';
-import 'package:site_historia/model/notice_model.dart';
+
+import '../../firebase/notice_firestore.dart';
+import '../../model/notice_model.dart';
+import '../tile/postTile_mobile.dart';
 
 class LatestPostsMobile extends StatelessWidget {
   final noticeFirestore = NoticeFirestore();
