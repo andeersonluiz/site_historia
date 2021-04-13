@@ -14,7 +14,6 @@ class CustomAppBar extends StatefulWidget {
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
-  bool open = false;
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -38,36 +37,18 @@ class _CustomAppBarState extends State<CustomAppBar> {
             child: Icon(FontAwesomeIcons.bookOpen, size: 30),
           ),
           Spacer(),
-          ItemAppBar(RouteNames.HOME, () {}),
-          ItemAppBar(RouteNames.ABOUT, () {}),
+          ItemAppBar("Inicio", RouteNames.HOME, () {}),
+          ItemAppBar("Coordenação de História", RouteNames.ABOUT, () {}),
           ItemPopUpMenuAppBar(
-              RouteNames.PROJECTS, projectFirestore.listProjects),
-          ItemAppBar(RouteNames.NOTICES, () {}),
-          ItemPopUpMenuAppBar(RouteNames.FRAMES, frameFirestore.listFrames),
-          ItemAppBar(RouteNames.EXAM, () {}),
-          ItemAppBar(RouteNames.RECOMENDATIONS, () {}),
-          ItemAppBar(RouteNames.COLLECTION, () {}),
+              "Projetos", RouteNames.PROJECTS, projectFirestore.listProjects),
+          ItemAppBar("Noticias", RouteNames.NOTICES, () {}),
+          ItemPopUpMenuAppBar(
+              "Quadros", RouteNames.FRAMES, frameFirestore.listFrames),
+          ItemAppBar("Vestibular", RouteNames.EXAM, () {}),
+          ItemAppBar("Recomendações", RouteNames.RECOMENDATIONS, () {}),
+          ItemAppBar("Acervo", RouteNames.COLLECTION, () {}),
         ],
       ),
     );
-  }
-
-  showMenus(BuildContext context) async {
-    await showMenu(
-            context: context,
-            position: RelativeRect.fromLTRB(0, 45, 0, 0),
-            color: Colors.red,
-            items: ['aaa', 'afasd', 'dasdpa']
-                .map((e) => PopupMenuItem(child: Text(e), value: e))
-                .toList())
-        .then((value) {
-      if (value == null) {
-        setState(() {
-          open = false;
-        });
-      } else {
-        open = true;
-      }
-    });
   }
 }

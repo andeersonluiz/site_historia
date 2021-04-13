@@ -43,7 +43,10 @@ dependencies:
   firebase_core: ^1.0.3
   firebase_storage: ^8.0.2
   intl: ^0.17.0
-dev_dependencies:
+  beamer: ^0.11.3
+  fluro: ^2.0.3 
+  responsive_grid: ^2.0.0
+sdev_dependencies:
   flutter_test:
     sdk: flutter
 

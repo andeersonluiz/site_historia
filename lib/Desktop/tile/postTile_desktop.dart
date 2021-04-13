@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../model/notice_model.dart';
 
@@ -45,11 +44,10 @@ class PostTile extends StatelessWidget {
                       ),
                       child: Text(
                         'Study',
-                        style: GoogleFonts.roboto(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            letterSpacing: 0.5,
-                            color: Theme.of(context).primaryColor),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText2!
+                            .copyWith(color: Theme.of(context).primaryColor),
                       ),
                     ),
                   ),
@@ -57,22 +55,20 @@ class PostTile extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       notice.title,
-                      style: GoogleFonts.roboto(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w400,
-                          letterSpacing: 0.5,
-                          color: Theme.of(context).primaryColor),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline6!
+                          .copyWith(color: Theme.of(context).primaryColor),
                     ),
                   ),
                   Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         notice.datePost,
-                        style: GoogleFonts.roboto(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            letterSpacing: 0.5,
-                            color: Theme.of(context).primaryColor),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText2!
+                            .copyWith(color: Theme.of(context).primaryColor),
                       )),
                 ]),
           )

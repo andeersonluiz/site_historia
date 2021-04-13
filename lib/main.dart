@@ -1,13 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Screens/loading_screen.dart';
-
-import 'Route/generateRoute_route.dart';
-import 'Screens/home_screen.dart';
+import 'package:site_historia/firebase/teacher_firestore.dart';
+import 'Route/fluroRouter.dart';
 import 'Store/support_store.dart';
 import 'Support/RoutesName_support.dart';
 import 'Theme/ThemeConfig.dart';
@@ -22,12 +19,14 @@ import 'firebase/project_firestore.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FluroRouting.setupRouter();
   runApp(MultiProvider(providers: [
     Provider<SupportStore>(
       create: (_) => SupportStore(),
     ),
     Provider<ProjectFirestore>(create: (_) => ProjectFirestore()),
     Provider<FrameFirestore>(create: (_) => FrameFirestore()),
+    Provider<TeacherFirestore>(create: (_) => TeacherFirestore()),
   ], child: MyApp()));
 }
 
@@ -51,8 +50,8 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Site Historia',
             theme: ThemeConfig.theme,
-            onGenerateRoute: RouteGenerator.generateRoute,
             initialRoute: RouteNames.HOME,
+            onGenerateRoute: FluroRouting.router.generator,
           );
         } else {
           return Loading();
@@ -66,7 +65,6 @@ class MyApp extends StatelessWidget {
     FrameFirestore frameFirestore = Provider.of<FrameFirestore>(context);
     await projectFirestore.getProjectsName();
     await frameFirestore.getFramesName();
-    print("foi");
     return [];
   }
 }

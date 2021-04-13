@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import '../../firebase/notice_firestore.dart';
 import '../../model/notice_model.dart';
 import '../tile/postTile_mobile.dart';
@@ -25,11 +23,10 @@ class LatestPostsMobile extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   "Ultimas Postagens",
-                  style: GoogleFonts.roboto(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 0.15,
-                      color: Theme.of(context).primaryColor),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline5!
+                      .copyWith(color: Theme.of(context).primaryColor),
                 ),
               ),
               PostTileMobile(listNotices[0], widthPercentual),

@@ -1,12 +1,14 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
+import 'package:site_historia/Route/fluroRouter.dart';
 
 class ItemAppBar extends StatelessWidget {
   final String title;
+  final String path;
   final Function function;
 
-  ItemAppBar(this.title, this.function);
-
+  ItemAppBar(this.title, this.path, this.function);
   @override
   Widget build(BuildContext context) {
     return HoverButton(
@@ -19,10 +21,11 @@ class ItemAppBar extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               title,
-              style: Theme.of(context).textTheme.bodyText2,
+              style: Theme.of(context).textTheme.bodyText1,
             ),
           ),
         ),
-        onpressed: () => Navigator.pushNamed(context, title));
+        onpressed: () => FluroRouting.router
+            .navigateTo(context, path, transition: TransitionType.fadeIn));
   }
 }

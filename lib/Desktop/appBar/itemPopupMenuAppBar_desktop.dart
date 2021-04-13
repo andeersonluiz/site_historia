@@ -3,8 +3,9 @@ import 'package:hovering/hovering.dart';
 
 class ItemPopUpMenuAppBar extends StatefulWidget {
   final String name;
+  final String path;
   final List<String> listItems;
-  ItemPopUpMenuAppBar(this.name, this.listItems);
+  ItemPopUpMenuAppBar(this.name, this.path, this.listItems);
 
   @override
   _ItemPopUpMenuAppBarState createState() => _ItemPopUpMenuAppBarState();
@@ -39,10 +40,10 @@ class _ItemPopUpMenuAppBarState extends State<ItemPopUpMenuAppBar>
             }
             return PopupMenuItem(
                 child: GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, widget.name,
+                    onTap: () => Navigator.pushNamed(context, widget.path,
                         arguments: item),
                     child: Text(item,
-                        style: Theme.of(context).textTheme.bodyText2)));
+                        style: Theme.of(context).textTheme.bodyText1)));
           }).toList(),
           onCanceled: () {
             rotationController.animateBack(0.0);
@@ -51,7 +52,7 @@ class _ItemPopUpMenuAppBarState extends State<ItemPopUpMenuAppBar>
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(widget.name,
-                  style: Theme.of(context).textTheme.bodyText2),
+                  style: Theme.of(context).textTheme.bodyText1),
             ),
             RotationTransition(
                 turns: Tween(begin: 0.0, end: 0.5).animate(rotationController),

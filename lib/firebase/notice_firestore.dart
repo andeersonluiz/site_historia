@@ -33,7 +33,6 @@ class NoticeFirestore {
     });
     List<Notice> notices = [];
     results.forEach((item) {
-      print(item.data());
       notices.add(Notice.fromJson(item.data()));
     });
     return notices;
@@ -50,7 +49,6 @@ class NoticeFirestore {
     });
     List<Notice> podcasts = [];
     results.forEach((item) {
-      print(item.data());
       podcasts.add(Notice.fromJson(item.data()));
     });
     return podcasts;
@@ -66,7 +64,6 @@ class NoticeFirestore {
     print("Uuuux");
     List<Notice> topheaders = [];
     result.docs.forEach((item) {
-      print(item.data());
       topheaders.add(Notice.fromJson(item.data()));
     });
     return topheaders;
@@ -75,6 +72,7 @@ class NoticeFirestore {
   Future<String> getHeadNotice(String idNotice) async {
     ListResult result = await FirebaseStorage.instance
         .ref()
+        .child("notices")
         .child(idNotice)
         .child("head")
         .listAll();
@@ -85,6 +83,7 @@ class NoticeFirestore {
   Future<List<String>> getContentNotice(String idNotice) async {
     ListResult result = await FirebaseStorage.instance
         .ref()
+        .child("notices")
         .child(idNotice)
         .child("content")
         .listAll();

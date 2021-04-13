@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:site_historia/Desktop/about_page_desktop.dart';
 import 'package:site_historia/Desktop/appBar/custtomAppBar_desktop.dart';
 import 'package:sticky_headers/sticky_headers.dart';
-import '../Desktop/home_page_desktop.dart';
-import '../Mobile/home_page_mobile.dart';
 import '../Mobile/drawer/navigation_drawer_component.dart';
 
-class Home extends StatefulWidget {
+class About extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _AboutState createState() => _AboutState();
 }
 
-class _HomeState extends State<Home> {
+class _AboutState extends State<About> {
   @override
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
@@ -42,9 +41,9 @@ class _HomeState extends State<Home> {
           child: Column(
             children: [
               ScreenTypeLayout(
-                  mobile: HomePageMobile(),
+                  mobile: AboutPageDesktop(),
                   desktop: StickyHeader(
-                      header: CustomAppBar(), content: HomePageDesktop())),
+                      header: CustomAppBar(), content: AboutPageDesktop())),
             ],
           ),
         ),

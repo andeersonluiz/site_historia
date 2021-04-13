@@ -1,10 +1,23 @@
+enum Pages {
+  Home,
+  About,
+  Projects,
+  Notices,
+  Frames,
+  Exam,
+  Recomendations,
+  Collection,
+}
+
+enum PageState { none, addPage, addAll, addWidget, pop, replace, replaceAll }
+
 class RouteNames {
-  static const String HOME = "Inicio";
-  static const String ABOUT = "Coordenação de História";
-  static const String PROJECTS = "Projetos";
-  static const String NOTICES = "Noticias";
-  static const String FRAMES = "Quadros";
-  static const String EXAM = "Vestibular";
-  static const String RECOMENDATIONS = "Recomendações";
-  static const String COLLECTION = "Acervo";
+  static const String HOME = "/inicio";
+  static const String ABOUT = "/coordenacaodehistoria";
+  static const String PROJECTS = "/projetos";
+  static const String NOTICES = "/noticias";
+  static const String FRAMES = "/quadros";
+  static const String EXAM = "/vestibular";
+  static const String RECOMENDATIONS = "/recomendacoes";
+  static const String COLLECTION = "/acervo";
 }
