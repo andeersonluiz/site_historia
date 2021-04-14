@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class ItemPopUpMenuAppBar extends StatefulWidget {
   final String name;
   final String path;
-  final List<String> listItems;
+  final List<dynamic> listItems;
   ItemPopUpMenuAppBar(this.name, this.path, this.listItems);
 
   @override
@@ -40,9 +41,9 @@ class _ItemPopUpMenuAppBarState extends State<ItemPopUpMenuAppBar>
             }
             return PopupMenuItem(
                 child: GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, widget.path,
-                        arguments: item),
-                    child: Text(item,
+                    onTap: () => VxNavigator.of(context)
+            .push(Uri(path:widget.path,queryParameters: {"id":item.id.toString()}),params: item),
+                    child: Text(item.name,
                         style: Theme.of(context).textTheme.bodyText1)));
           }).toList(),
           onCanceled: () {

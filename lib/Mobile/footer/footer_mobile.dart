@@ -7,7 +7,6 @@ class FooterMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    print(width);
     return Container(
       height: 200,
       color: Theme.of(context).primaryColor,

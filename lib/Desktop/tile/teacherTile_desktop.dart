@@ -18,7 +18,7 @@ class TeacherTile extends StatelessWidget {
             flex: 6,
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
+                shape: BoxShape.circle,
                 image: DecorationImage(
                   image: AssetImage("assets/test.jpg"),
                   fit: BoxFit.fill,
@@ -31,7 +31,7 @@ class TeacherTile extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: AutoSizeText(
-                teacher.name + "sadiaosjiosadjoi",
+                teacher.name,
                 maxFontSize: 20,
                 minFontSize: 5,
                 style: Theme.of(context)
@@ -58,7 +58,7 @@ class TeacherTile extends StatelessWidget {
     return AutoSizeText(
       string,
       maxFontSize: 20,
-      minFontSize: 10,
+      minFontSize: 8,
       maxLines: 2,
       textAlign: TextAlign.center,
       style: Theme.of(context)

@@ -13,7 +13,7 @@ enum PageState { none, addPage, addAll, addWidget, pop, replace, replaceAll }
 
 class RouteNames {
   static const String HOME = "/inicio";
-  static const String ABOUT = "/coordenacaodehistoria";
+  static const String ABOUT = "/coordenacao";
   static const String PROJECTS = "/projetos";
   static const String NOTICES = "/noticias";
   static const String FRAMES = "/quadros";

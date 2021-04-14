@@ -1,14 +1,12 @@
-import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
-import 'package:site_historia/Route/fluroRouter.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class ItemAppBar extends StatelessWidget {
   final String title;
   final String path;
-  final Function function;
 
-  ItemAppBar(this.title, this.path, this.function);
+  ItemAppBar(this.title, this.path,);
   @override
   Widget build(BuildContext context) {
     return HoverButton(
@@ -25,7 +23,6 @@ class ItemAppBar extends StatelessWidget {
             ),
           ),
         ),
-        onpressed: () => FluroRouting.router
-            .navigateTo(context, path, transition: TransitionType.fadeIn));
+        onpressed: () => VxNavigator.of(context).replace(Uri.parse(path)));
   }
 }

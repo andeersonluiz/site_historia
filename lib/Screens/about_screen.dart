@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:site_historia/Desktop/about_page_desktop.dart';
 import 'package:site_historia/Desktop/appBar/custtomAppBar_desktop.dart';
+import 'package:site_historia/Mobile/about_page_mobile.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import '../Mobile/drawer/navigation_drawer_component.dart';
 
@@ -38,14 +39,10 @@ class _AboutState extends State<About> {
               ]),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child: Column(
-            children: [
-              ScreenTypeLayout(
-                  mobile: AboutPageDesktop(),
-                  desktop: StickyHeader(
-                      header: CustomAppBar(), content: AboutPageDesktop())),
-            ],
-          ),
+          child: ScreenTypeLayout(
+              mobile: AboutPageMobile(),
+              desktop: StickyHeader(
+                  header: CustomAppBar(), content: AboutPageDesktop())),
         ),
       ),
     );

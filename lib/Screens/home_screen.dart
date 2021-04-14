@@ -39,14 +39,10 @@ class _HomeState extends State<Home> {
               ]),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child: Column(
-            children: [
-              ScreenTypeLayout(
-                  mobile: HomePageMobile(),
-                  desktop: StickyHeader(
-                      header: CustomAppBar(), content: HomePageDesktop())),
-            ],
-          ),
+          child: ScreenTypeLayout(
+              mobile: HomePageMobile(),
+              desktop: StickyHeader(
+                  header: CustomAppBar(), content: HomePageDesktop())),
         ),
       ),
     );

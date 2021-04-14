@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/firebase/frame_firestore.dart';
 import 'package:site_historia/firebase/project_firestore.dart';
@@ -19,30 +20,55 @@ class NavigationDrawer extends StatelessWidget {
         color: Theme.of(context).primaryColor,
         child: ListView(
           children: [
-            DrawerHeader(child: Container(height: 100, child: Text('Titleee'))),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(FontAwesomeIcons.bookOpen),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Coordenação de História',
+                      style: Theme.of(context).textTheme.subtitle2,
+                    ),
+                  ),
+                ],
+              )),
+            ),
             DrawerItem(
+              "Inicio",
               RouteNames.HOME,
               Icons.home,
             ),
-            DrawerItem(RouteNames.ABOUT, Icons.auto_stories),
+            DrawerItem("Coordenação de História", RouteNames.ABOUT,
+                Icons.auto_stories),
             DrawerItemWithSubItem(
-              title: RouteNames.PROJECTS,
+              title: "Projetos",
               icon: Icons.whatshot_outlined,
-              children: projectFirestore.listProjects
-                  .map((item) => DrawerSubItem(item, Icons.whatshot_outlined))
+              children: projectFirestore.listProjectsOrdenedByName
+                  .map((item) => DrawerSubItem(
+                      item, RouteNames.PROJECTS, Icons.whatshot_outlined))
                   .toList(),
             ),
-            DrawerItem(RouteNames.NOTICES, Icons.cast_for_education),
+            DrawerItem(
+                "Noticias", RouteNames.NOTICES, Icons.cast_for_education),
             DrawerItemWithSubItem(
-              title: RouteNames.FRAMES,
+              title: "Quadros",
               icon: Icons.watch_later_outlined,
-              children: frameFirestore.listFrames
-                  .map((item) => DrawerSubItem(item, Icons.whatshot_outlined))
+              children: frameFirestore.listFramesOrdenedByName
+                  .map((item) => DrawerSubItem(
+                      item, RouteNames.FRAMES, Icons.whatshot_outlined))
                   .toList(),
             ),
-            DrawerItem(RouteNames.EXAM, Icons.brush),
-            DrawerItem(RouteNames.RECOMENDATIONS, Icons.recommend),
-            DrawerItem(RouteNames.COLLECTION, Icons.book),
+            DrawerItem("Vestibular", RouteNames.EXAM, Icons.brush),
+            DrawerItem(
+                "Recomendações", RouteNames.RECOMENDATIONS, Icons.recommend),
+            DrawerItem("Acervo", RouteNames.COLLECTION, Icons.book),
           ],
         ),
       ),

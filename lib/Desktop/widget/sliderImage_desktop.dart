@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:site_historia/Screens/errorLoad_screen.dart';
 
 import '../../Components/sliderContainer_component.dart';
 import '../../firebase/notice_firestore.dart';
@@ -51,7 +52,7 @@ class _SliderImageDesktopState extends State<SliderImageDesktop> {
                   }).toList(),
                 );
               } else if (snp.hasError) {
-                return Container();
+                return ErrorLoad(color: Theme.of(context).primaryColor);
               } else {
                 return Container(
                   height: 450,

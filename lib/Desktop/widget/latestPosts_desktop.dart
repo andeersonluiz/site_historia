@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:site_historia/Components/customLoading_component.dart';
+import 'package:site_historia/Screens/errorLoad_screen.dart';
 
 import '../../firebase/notice_firestore.dart';
 import '../../model/notice_model.dart';
@@ -34,12 +36,9 @@ class LatestPosts extends StatelessWidget {
             ],
           );
         } else if (snp.hasError) {
-          return Container();
+          return ErrorLoad(color: Theme.of(context).primaryColor);
         } else {
-          return Container(
-              child: Center(
-                  child: CircularProgressIndicator(
-                      backgroundColor: Theme.of(context).primaryColor)));
+          return CustomLoading();
         }
       },
     );

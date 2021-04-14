@@ -10,11 +10,8 @@ class NoticeFirestore {
     QuerySnapshot result = await query.get();
     /*
     for(int i=3;i<=6;i++){
-      print("xuuu");
       String url = await getHeadNotice("notice1");
-      print("uuu");
       List<String> urls = await getContentNotice("notice1");
-     // print(url+", "+ urls[0]);
 
     instance.collection("notices").doc(i.toString()).set(
     {
@@ -61,7 +58,6 @@ class NoticeFirestore {
         .where('isTopHeader', isEqualTo: true)
         .limit(5);
     QuerySnapshot result = await query.get();
-    print("Uuuux");
     List<Notice> topheaders = [];
     result.docs.forEach((item) {
       topheaders.add(Notice.fromJson(item.data()));
