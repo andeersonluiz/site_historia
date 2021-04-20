@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:site_historia/Desktop/widget/listTeachers_desktop.dart';
+import 'package:site_historia/Components/listTeachers_component.dart';
 import 'package:site_historia/Mobile/footer/footer_mobile.dart';
 import 'package:site_historia/Mobile/widget/customDivider_desktop.dart';
 
@@ -11,8 +11,7 @@ class AboutPageMobile extends StatefulWidget {
 class _AboutPageMobileState extends State<AboutPageMobile> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
+    return  Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -57,7 +56,7 @@ class _AboutPageMobileState extends State<AboutPageMobile> {
           ListTeachers(),
           FooterMobile()
         ],
-      ),
+      
     );
   }
 }

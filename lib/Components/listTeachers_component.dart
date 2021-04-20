@@ -15,12 +15,15 @@ class ListTeachers extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
-          "Professores",
-          style: Theme.of(context)
-              .textTheme
-              .headline5!
-              .copyWith(color: Theme.of(context).primaryColor),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            "Professores",
+            style: Theme.of(context)
+                .textTheme
+                .headline5!
+                .copyWith(color: Theme.of(context).primaryColor),
+          ),
         ),
         FutureBuilder(
             future: teacherFirestore.getTeachers(),
@@ -31,8 +34,10 @@ class ListTeachers extends StatelessWidget {
                 );
               } else if (snp.hasData) {
                 List<Teacher> listTeachers = snp.data as List<Teacher>;
-                return Center(
+                return SingleChildScrollView(
                   child: GridView.count(
+                      physics: ScrollPhysics(),
+                      primary: true,
                       shrinkWrap: true,
                       crossAxisCount: (MediaQuery.of(context).size.width ~/
                                   sizeImage) >

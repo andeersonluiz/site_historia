@@ -20,4 +20,6 @@ class RouteNames {
   static const String EXAM = "/vestibular";
   static const String RECOMENDATIONS = "/recomendacoes";
   static const String COLLECTION = "/acervo";
+  static const String ADMIN = "/admin";
+  static const String ADMIN_INFO = "/adminInfo";
 }

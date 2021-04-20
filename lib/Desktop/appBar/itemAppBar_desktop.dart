@@ -5,8 +5,10 @@ import 'package:velocity_x/velocity_x.dart';
 class ItemAppBar extends StatelessWidget {
   final String title;
   final String path;
-
-  ItemAppBar(this.title, this.path,);
+  ItemAppBar(
+    this.title,
+    this.path,
+  );
   @override
   Widget build(BuildContext context) {
     return HoverButton(

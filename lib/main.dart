@@ -1,8 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:site_historia/Screens/adminInfo_screen.dart';
+import 'package:site_historia/Screens/admin_screen.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Screens/loading_screen.dart';
+import 'package:site_historia/Screens/project_screen.dart';
+import 'package:site_historia/firebase/login_auth.dart';
 import 'package:site_historia/firebase/teacher_firestore.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -34,13 +39,14 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
+  final username="";
   @override
   Widget build(BuildContext context) {
     ProjectFirestore projectFirestore = Provider.of<ProjectFirestore>(context);
 
     return FutureBuilder(
       future: _loadInitialData(context),
-      builder: (BuildContext context, AsyncSnapshot snp) {
+      builder: (BuildContext ctx, AsyncSnapshot snp) {
         if (snp.hasError) {
           return MaterialApp(
             theme: ThemeConfig.theme,
@@ -56,26 +62,52 @@ class MyApp extends StatelessWidget {
             title: 'Site Historia',
             theme: ThemeConfig.theme,
             routeInformationParser: VxInformationParser(),
-            routerDelegate: VxNavigator(routes: {
-              "/": (_, __) => MaterialPage(child: Home()),
-              RouteNames.HOME: (_, __) => MaterialPage(child: Home()),
-              RouteNames.ABOUT: (_, __) => MaterialPage(child: About()),
+            routerDelegate: VxNavigator(
+              
+              routes: {
+              "/": (_, __) {
+                if (Uri.base.path != "/") {
+                  return MaterialPage(
+                    child: Loading(),
+                  );
+                } else {
+                  return MaterialPage(
+                    child: Loading(redirect: true,),
+                  );
+                }
+              },
+              RouteNames.HOME: (_, __) {
+                 return MaterialPage(
+                    child: HomeScreen(),
+                  );},
+              RouteNames.ABOUT: (_, __) => MaterialPage(child: AboutScreen()),
               RouteNames.PROJECTS: (uri, __) {
                 final id = uri.queryParameters["id"];
-                final project = projectFirestore.getProjectById(id.toString());//Pega a referencia do projeto
-                return MaterialPage(child: Home());
+                final project = projectFirestore.getProjectById(
+                    id.toString()); //Pega a referencia do projeto
+                return MaterialPage(child: ProjectScreen(project));
               },
-              RouteNames.NOTICES: (_, __) => MaterialPage(child: Home()),
-              RouteNames.FRAMES: (_, __) => MaterialPage(child: Home()),
-              RouteNames.EXAM: (_, __) => MaterialPage(child: Home()),
-              RouteNames.RECOMENDATIONS: (_, __) => MaterialPage(child: Home()),
-              RouteNames.COLLECTION: (_, __) => MaterialPage(child: Home()),
+              RouteNames.NOTICES: (_, __) => MaterialPage(child: HomeScreen()),
+              RouteNames.FRAMES: (_, __) => MaterialPage(child: HomeScreen()),
+              RouteNames.EXAM: (_, __) => MaterialPage(child: HomeScreen()),
+              RouteNames.RECOMENDATIONS: (_, __) =>
+                  MaterialPage(child: HomeScreen()),
+              RouteNames.COLLECTION: (_, __) =>
+                  MaterialPage(child: HomeScreen()),
+              RouteNames.ADMIN: (_, __) => MaterialPage(child: AdminScreen()),
+              RouteNames.ADMIN_INFO: (uri, __) {
+                if (!snp.hasData) {
+                  return  MaterialPage(child: Loading(redirect: true,));
+                }else{
+                  
+                return MaterialPage(child: AdminInfoScreen(snp.data));}
+              },
             }),
           );
         } else {
           return Loading();
         }
-      },
+      },  
     );
   }
 
@@ -84,6 +116,11 @@ class MyApp extends StatelessWidget {
     FrameFirestore frameFirestore = Provider.of<FrameFirestore>(context);
     await projectFirestore.getProjectsName();
     await frameFirestore.getFramesName();
+                User? user =LoginAuth.getUser();
+
+    if(user!=null){
+      return projectFirestore.getUsernameByUid(user.uid);
+    }
     return [];
   }
 }

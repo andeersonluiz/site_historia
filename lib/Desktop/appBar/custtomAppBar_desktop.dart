@@ -39,8 +39,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
           Spacer(),
           ItemAppBar("Inicio", RouteNames.HOME),
           ItemAppBar("Coordenação de História", RouteNames.ABOUT),
-          ItemPopUpMenuAppBar("Projetos", RouteNames.PROJECTS,
-              projectFirestore.listProjectsOrdenedByName),
+          ItemPopUpMenuAppBar(
+            "Projetos",
+            RouteNames.PROJECTS,
+            projectFirestore.listProjectsOrdenedByName,
+          ),
           ItemAppBar("Noticias", RouteNames.NOTICES),
           ItemPopUpMenuAppBar("Quadros", RouteNames.FRAMES,
               frameFirestore.listFramesOrdenedByName),

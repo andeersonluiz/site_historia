@@ -43,11 +43,11 @@ dependencies:
   firebase_core: ^1.0.3
   firebase_storage: ^8.0.2
   intl: ^0.17.0
-  beamer: ^0.11.3
-  fluro: ^2.0.3 
   responsive_grid: ^2.0.0
   velocity_x: ^2.6.1
   url_strategy: ^0.2.0  
+  firebase_auth: ^1.1.0
+  html_editor_enhanced: ^1.8.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

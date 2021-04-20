@@ -7,12 +7,12 @@ import '../Desktop/home_page_desktop.dart';
 import '../Mobile/home_page_mobile.dart';
 import '../Mobile/drawer/navigation_drawer_component.dart';
 
-class Home extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return ResponsiveBuilder(

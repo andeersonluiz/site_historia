@@ -7,12 +7,12 @@ import 'package:site_historia/Mobile/about_page_mobile.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import '../Mobile/drawer/navigation_drawer_component.dart';
 
-class About extends StatefulWidget {
+class AboutScreen extends StatefulWidget {
   @override
-  _AboutState createState() => _AboutState();
+  _AboutScreenState createState() => _AboutScreenState();
 }
 
-class _AboutState extends State<About> {
+class _AboutScreenState extends State<AboutScreen> {
   @override
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
@@ -21,7 +21,7 @@ class _AboutState extends State<About> {
         appBar: sizingInformation.isDesktop
             ? null
             : AppBar(automaticallyImplyLeading: false, actions: [
-                Padding(
+                Padding(    
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Icon(FontAwesomeIcons.bookOpen, size: 30),
                 ),

@@ -10,8 +10,8 @@ class NoticeFirestore {
     QuerySnapshot result = await query.get();
     /*
     for(int i=3;i<=6;i++){
-      String url = await getHeadNotice("notice1");
-      List<String> urls = await getContentNotice("notice1");
+      String url = await getHeadNotice(i.toString());
+      List<String> urls = await getContentNotice(i.toString());
 
     instance.collection("notices").doc(i.toString()).set(
     {

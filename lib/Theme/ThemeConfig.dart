@@ -25,6 +25,14 @@ class ThemeConfig {
     unselectedWidgetColor: brownLight,
     hoverColor: hoverColor,
     selectedRowColor: brownOpacity,
+    buttonTheme: ButtonThemeData(
+      
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(brown) ,
+        )
+    ),
     iconTheme: IconThemeData(
       color: textColor,
     ),

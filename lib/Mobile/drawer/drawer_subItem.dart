@@ -16,9 +16,11 @@ class DrawerSubItem extends StatelessWidget {
       padding: EdgeInsets.all(0),
       hoverPadding: EdgeInsets.all(0),
       onpressed: () {
-        print("objectId ${object.id.toString()}");
-        VxNavigator.of(context)
-            .push(Uri(path:path,queryParameters: {"id":object.id.toString()}),params: object);
+        VxNavigator.of(context).replace(
+          Uri(path: path, queryParameters: {"id": object.id.toString()}),
+          params: object,
+        );
+        Navigator.of(context).pop();
       },
       child: Padding(
         padding: const EdgeInsets.only(left: 8.0),

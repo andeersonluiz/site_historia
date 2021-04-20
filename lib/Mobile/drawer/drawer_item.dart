@@ -16,6 +16,7 @@ class DrawerItem extends StatelessWidget {
         padding: EdgeInsets.all(0),
         hoverPadding: EdgeInsets.all(0),
         onpressed: () {
+          
           VxNavigator.of(context).replace(Uri.parse(path));
         },
         child: ListTile(
