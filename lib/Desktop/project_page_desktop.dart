@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_html/style.dart';
 import 'package:site_historia/Desktop/footer/footer_desktop.dart';
 import 'package:site_historia/model/project_model.dart';
 
@@ -48,13 +50,15 @@ class ProjectPageDesktop extends StatelessWidget {
                 flex: 7,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    project.content,
-                    textAlign: TextAlign.justify,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
-                        .copyWith(color: Theme.of(context).primaryColor),
+                  child: Html(
+                    data: project.content,
+                    style: {
+                      "p": Style(
+                          fontSize: FontSize(12),
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0.25,
+                          color: Theme.of(context).primaryColor)
+                    },
                   ),
                 ),
               ),
@@ -90,7 +94,7 @@ class ProjectPageDesktop extends StatelessWidget {
                             ),
                           ),
                         ),
-                      for (var participant in project.participant)
+                      for (var participant in project.participants)
                         Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: Center(

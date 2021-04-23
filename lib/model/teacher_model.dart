@@ -4,6 +4,7 @@ class Teacher {
   String image;
   String projects;
   List<dynamic> links;
+  bool checked;
 
   Teacher({
     required this.id,
@@ -11,6 +12,7 @@ class Teacher {
     required this.image,
     required this.projects,
     required this.links,
+    required this.checked,
   });
 
   factory Teacher.fromJson(Map<String, dynamic> json) {
@@ -28,13 +30,16 @@ class Teacher {
         name: json['name'],
         image: json['image'],
         projects: tempProject,
-        links: json['links']);
+        links: json['links'],
+        checked: false);
   }
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,
         'image': image,
-        'projects': projects,
+        'projects': projects
+            .split(",")
+            .map((e) => e.replaceAll(",", "").replaceAll(".", "").trim()),
         'links': links,
       };
 }

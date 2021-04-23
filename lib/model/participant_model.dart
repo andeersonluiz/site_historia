@@ -1,17 +1,18 @@
-class Participant{
+class Participant {
   String name;
   String status;
 
-  Participant({required this.name,required this.status});
+  Participant({required this.name, required this.status});
 
-  factory Participant.fromJsoN(Map<String,dynamic> json){
+  factory Participant.fromJson(Map<String, dynamic> json) {
     return Participant(
-    name:json['name'],
-    status: json['status'],
-  );}
+      name: json['name'],
+      status: json['status'],
+    );
+  }
 
-  Map<String,dynamic> toJson()=>{
-    'name':name,
-    'status':status,
-  };
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'status': status,
+      };
 }

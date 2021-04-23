@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:intl/intl.dart';
+import 'package:site_historia/model/participant_model.dart';
+import 'package:site_historia/model/teacher_model.dart';
 
 import '../model/project_model.dart';
 
 class ProjectFirestore {
   late List<Project> listProjectsOrdenedByName = [];
-  String username="";
+  String username = "";
   getProjects() async {
     FirebaseFirestore instance = FirebaseFirestore.instance;
     Query query = instance.collection("projects").orderBy('id');
@@ -20,31 +23,6 @@ class ProjectFirestore {
   }
 
   getProjectsName() async {
-    /*for (int i = 0; i <= 3; i++) {
-      String url = await getHeadProject(i.toString());
-      List<String> urls = await getContentProject(i.toString());
-      List<Map<String,dynamic>> teachers = await getTeacherByNameProject(i%2==0?"Projeto 1":"Projeto 2");
-      instance.collection("projects").doc(i.toString()).set({
-        "id": i,
-        "name": "Projeto ${i + 1}", 
-        "imageHeader": url,
-        "imageContent":urls,
-        "content":"Lorem ${i+1} ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum sagittis maximus. Morbi metus lacus, consectetur sit amet lorem a, laoreet pharetra est. Aliquam faucibus, orci id ultricies placerat, magna lacus fringilla neque, ut finibus nunc enim a neque. Proin aliquam purus at rutrum dictum. Nullam volutpat mollis metus in placerat. Suspendisse eleifend, ligula in eleifend interdum, enim lacus eleifend ipsum, ac suscipit ligula orci at ex. Pellentesque congue bibendum justo, vel varius urna. Aliquam sit amet velit a nulla blandit luctus.\n\nMorbi accumsan sodales vestibulum. Quisque sed molestie dui. Nam vel nunc ac est molestie congue eget vitae ipsum. Sed tincidunt facilisis magna vitae dapibus. Mauris consectetur erat eget erat posuere congue. Morbi venenatis nibh ac urna blandit, quis tristique tellus pulvinar. Aenean porta, lectus eget consectetur semper, felis felis consectetur sem, a accumsan tellus velit a velit. Nunc ut arcu vel mi imperdiet cursus quis eget lorem. Etiam cursus tempor est ut tristique.",
-        "teachers":teachers,
-        
-        "participants": [
-        {
-          "name":"Aluno ${i+1}",
-          "status":"Aluno",
-        },
-        {
-          "name":"Aluna $i",
-          "status":"Aluno",
-        },
-        
-        ],
-      });
-    }*/
     FirebaseFirestore instance = FirebaseFirestore.instance;
     Query query = instance.collection("projects").orderBy('name');
     QuerySnapshot result = await query.get();
@@ -99,8 +77,43 @@ class ProjectFirestore {
   }
 
   Future<String> getUsernameByUid(String uid) async {
-    var result = await FirebaseFirestore.instance.collection("admins").doc(uid).get();
-    username=result.data()!["name"];
+    var result =
+        await FirebaseFirestore.instance.collection("admins").doc(uid).get();
+    username = result.data()!["name"];
     return username;
+  }
+
+  Future<bool> addProject(
+      String title,
+      String imageHeader,
+      String? content,
+      List<Teacher> listTeacher,
+      List<String> listParticipant,
+      String author) async {
+    try {
+      QuerySnapshot result =
+          await FirebaseFirestore.instance.collection("projects").get();
+      int nextId = result.docs.length;
+      List<Participant> listParticipants = [];
+      listParticipant.forEach((element) {
+        listParticipants.add(Participant(name: element, status: "Aluno"));
+      });
+      Project project = Project(
+          id: nextId,
+          author: author,
+          content: content.toString(),
+          datePost: DateFormat("dd-MM-yyyy hh:mm").format(DateTime.now()),
+          imageHeader: imageHeader,
+          name: title,
+          participants: listParticipants,
+          teachers: listTeacher);
+      await FirebaseFirestore.instance
+          .collection("projects")
+          .doc(nextId.toString())
+          .set(project.toJson());
+    } catch (e) {
+      return false;
+    }
+    return true;
   }
 }

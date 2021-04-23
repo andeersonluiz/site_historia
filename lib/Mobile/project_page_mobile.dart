@@ -82,7 +82,7 @@ class ProjectPageMobile extends StatelessWidget {
                       ),
                     ),
                   ),
-                for (var participant in project.participant)
+                for (var participant in project.participants)
                   Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Center(

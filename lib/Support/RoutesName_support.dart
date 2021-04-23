@@ -22,4 +22,5 @@ class RouteNames {
   static const String COLLECTION = "/acervo";
   static const String ADMIN = "/admin";
   static const String ADMIN_INFO = "/adminInfo";
+  static const String ADD_PROJECT = "/adminInfo/addProj";
 }

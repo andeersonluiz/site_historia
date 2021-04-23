@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:site_historia/Desktop/adminProject_page_desktop.dart';
+import 'package:site_historia/Desktop/addProject_page_desktop.dart';
 import 'package:site_historia/Desktop/appBar/verticalAppBar_desktop.dart';
 import '../Mobile/drawer/navigation_drawer_component.dart';
 
-class AdminInfoScreen extends StatefulWidget {
+class AdminAddProjectScreen extends StatefulWidget {
   @override
-  _AdminInfoScreenState createState() => _AdminInfoScreenState();
+  _AdminAddProjectScreenState createState() => _AdminAddProjectScreenState();
 }
 
-class _AdminInfoScreenState extends State<AdminInfoScreen> {
+class _AdminAddProjectScreenState extends State<AdminAddProjectScreen> {
   @override
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
@@ -25,7 +25,7 @@ class _AdminInfoScreenState extends State<AdminInfoScreen> {
                 height: MediaQuery.of(context).size.height,
                 child: Row(children: [
                   VerticalAppBar(),
-                  AdminProjectsPage(),
+                  Expanded(child: AddProjectPage()),
                 ]),
               )),
         ),
