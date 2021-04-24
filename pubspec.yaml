@@ -39,18 +39,18 @@ dependencies:
   provider: ^5.0.0
   sticky_headers: ^0.2.0
   hovering: ^1.0.4
-  cloud_firestore: ^1.0.4
   firebase_core: ^1.0.3
-  firebase_storage: ^8.0.2
   intl: ^0.17.0
   responsive_grid: ^2.0.0
   velocity_x: ^2.6.1
   url_strategy: ^0.2.0  
-  firebase_auth: ^1.1.0
   html_editor_enhanced: ^1.8.0
   image_picker: ^0.7.4
   fluttertoast: ^8.0.6
   flutter_html: ^2.0.0-nullsafety.0
+  universal_html: ^2.0.8
+  firebase: ^9.0.1
+  url_launcher: ^6.0.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

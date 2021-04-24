@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:site_historia/Components/CustomText_component.dart';
 import 'package:site_historia/Components/customLoading_component.dart';
-import 'package:site_historia/Desktop/widget/projectCard_desktop.dart';
+import 'package:site_historia/Desktop/widget/adminProjectCard_desktop.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Support/RoutesName_support.dart';
 import 'package:site_historia/firebase/project_firestore.dart';
 import 'package:site_historia/model/project_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class AdminProjectsPage extends StatelessWidget {
+class AdminListProjectsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final projectFirestore = Provider.of<ProjectFirestore>(context);
@@ -27,17 +28,12 @@ class AdminProjectsPage extends StatelessWidget {
                   children: [
                     ListTile(
                       leading: Icon(Icons.add_circle_rounded),
-                      title: Text(
-                        "Adicionar Projeto",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1!
-                            .copyWith(color: Theme.of(context).primaryColor),
-                      ),
+                      title: CustomText("Adicionar Projeto",
+                          style: Theme.of(context).textTheme.bodyText1),
                       onTap: () => VxNavigator.of(context)
                           .push(Uri.parse(RouteNames.ADD_PROJECT)),
                     ),
-                    for (var project in listProjects) ProjectCard(project),
+                    for (var project in listProjects) AdminProjectCard(project),
                   ],
                 );
               } else {

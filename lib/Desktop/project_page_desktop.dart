@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_html/style.dart';
+import 'package:site_historia/Components/htmlViewer_component.dart';
 import 'package:site_historia/Desktop/footer/footer_desktop.dart';
 import 'package:site_historia/model/project_model.dart';
 
@@ -50,19 +49,12 @@ class ProjectPageDesktop extends StatelessWidget {
                 flex: 7,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Html(
-                    data: project.content,
-                    style: {
-                      "p": Style(
-                          fontSize: FontSize(12),
-                          fontWeight: FontWeight.w400,
-                          letterSpacing: 0.25,
-                          color: Theme.of(context).primaryColor)
-                    },
-                  ),
+                  child: HtmlViewer(project.content),
                 ),
               ),
-              VerticalDivider(),
+              VerticalDivider(
+                thickness: 1.0,
+              ),
               Expanded(
                 flex: 3,
                 child: Column(
@@ -112,6 +104,34 @@ class ProjectPageDesktop extends StatelessWidget {
               ),
             ],
           ),
+        ),
+        Divider(
+          thickness: 1.0,
+        ),
+        Row(
+          children: [
+            Padding(
+              padding:
+                  const EdgeInsets.only(right: 20.0, left: 20.0, bottom: 20.0),
+              child: Text(
+                "Autor: ${project.author}",
+                style: Theme.of(context).textTheme.caption!.copyWith(
+                    color: Theme.of(context).primaryColor,
+                    fontStyle: FontStyle.italic),
+              ),
+            ),
+            Spacer(),
+            Padding(
+              padding:
+                  const EdgeInsets.only(right: 20.0, left: 20.0, bottom: 20.0),
+              child: Text(
+                "Data publicação: ${project.datePost}",
+                style: Theme.of(context).textTheme.caption!.copyWith(
+                    color: Theme.of(context).primaryColor,
+                    fontStyle: FontStyle.italic),
+              ),
+            ),
+          ],
         ),
         FooterDesktop(),
       ],

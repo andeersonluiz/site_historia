@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:site_historia/Components/customLoading_component.dart';
-import 'package:site_historia/Desktop/adminAddProject_page_desktop.dart';
+import 'package:site_historia/Desktop/adminListProjects_page_desktop.dart';
 import 'package:site_historia/Desktop/appBar/verticalAppBar_desktop.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/firebase/project_firestore.dart';
 import '../Mobile/drawer/navigation_drawer_component.dart';
 
-class AdminAddProjectScreen extends StatefulWidget {
+class AdminProjectsScreen extends StatefulWidget {
   final String username;
-  AdminAddProjectScreen(this.username);
+  AdminProjectsScreen(this.username);
   @override
-  _AdminAddProjectScreenState createState() => _AdminAddProjectScreenState();
+  _AdminProjectsScreenState createState() => _AdminProjectsScreenState();
 }
 
-class _AdminAddProjectScreenState extends State<AdminAddProjectScreen> {
+class _AdminProjectsScreenState extends State<AdminProjectsScreen> {
   @override
   Widget build(BuildContext context) {
     final projectFirestore = Provider.of<ProjectFirestore>(context);
@@ -37,7 +37,7 @@ class _AdminAddProjectScreenState extends State<AdminAddProjectScreen> {
                       height: MediaQuery.of(context).size.height,
                       child: Row(children: [
                         VerticalAppBar(),
-                        Expanded(child: AdminAddProjectPage()),
+                        AdminListProjectsPage(),
                       ]),
                     )),
               );

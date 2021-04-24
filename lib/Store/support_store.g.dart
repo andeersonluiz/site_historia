@@ -9,11 +9,11 @@ part of 'support_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$SupportStore on _SupportStoreBase, Store {
-  Computed<String>? _$pathImageComputed;
+  Computed<PickedFile?>? _$pathImageComputed;
 
   @override
-  String get pathImage =>
-      (_$pathImageComputed ??= Computed<String>(() => super.pathImage,
+  PickedFile? get pathImage =>
+      (_$pathImageComputed ??= Computed<PickedFile?>(() => super.pathImage,
               name: '_SupportStoreBase.pathImage'))
           .value;
   Computed<String>? _$titleProjectComputed;
@@ -76,13 +76,13 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   final _$_pathImageAtom = Atom(name: '_SupportStoreBase._pathImage');
 
   @override
-  String get _pathImage {
+  PickedFile? get _pathImage {
     _$_pathImageAtom.reportRead();
     return super._pathImage;
   }
 
   @override
-  set _pathImage(String value) {
+  set _pathImage(PickedFile? value) {
     _$_pathImageAtom.reportWrite(value, super._pathImage, () {
       super._pathImage = value;
     });
@@ -249,7 +249,7 @@ mixin _$SupportStore on _SupportStoreBase, Store {
       ActionController(name: '_SupportStoreBase');
 
   @override
-  dynamic updatePath(String newPath) {
+  dynamic updatePath(PickedFile? newPath) {
     final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
         name: '_SupportStoreBase.updatePath');
     try {

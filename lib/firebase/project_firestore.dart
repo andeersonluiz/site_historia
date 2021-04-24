@@ -1,18 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:site_historia/model/participant_model.dart';
 import 'package:site_historia/model/teacher_model.dart';
-
+import 'package:firebase/firebase.dart';
 import '../model/project_model.dart';
 
 class ProjectFirestore {
   late List<Project> listProjectsOrdenedByName = [];
   String username = "";
   getProjects() async {
-    FirebaseFirestore instance = FirebaseFirestore.instance;
-    Query query = instance.collection("projects").orderBy('id');
-    QuerySnapshot result = await query.get();
+    var query = firestore().collection("projects").orderBy('id');
+    var result = await query.get();
     final results = result.docs;
 
     List<Project> projects = [];
@@ -23,9 +21,8 @@ class ProjectFirestore {
   }
 
   getProjectsName() async {
-    FirebaseFirestore instance = FirebaseFirestore.instance;
-    Query query = instance.collection("projects").orderBy('name');
-    QuerySnapshot result = await query.get();
+    var query = firestore().collection("projects").orderBy('name');
+    var result = await query.get();
     result.docs.forEach((item) {
       listProjectsOrdenedByName.add(Project.fromJson(item.data()));
     });
@@ -38,35 +35,21 @@ class ProjectFirestore {
   }
 
   Future<String> getHeadProject(String idProject) async {
-    ListResult result = await FirebaseStorage.instance
+    ListResult result = await storage()
         .ref()
         .child("projects")
         .child("0")
         .child("head")
         .listAll();
-    String url = await result.items.first.getDownloadURL();
-    return url;
-  }
-
-  Future<List<String>> getContentProject(String idProject) async {
-    ListResult result = await FirebaseStorage.instance
-        .ref()
-        .child("projects")
-        .child("0")
-        .child("content")
-        .listAll();
-    List<String> urls = [];
-    result.items.forEach((item) async {
-      urls.add(await item.getDownloadURL());
-    });
-    return urls;
+    Uri url = await result.items.first.getDownloadURL();
+    return url.toString();
   }
 
   Future<List<Map<String, dynamic>>> getTeacherByNameProject(
       String projectName) async {
-    var result = await FirebaseFirestore.instance
+    var result = await firestore()
         .collection("teachers")
-        .where('projects', arrayContains: projectName)
+        .where('projects', "array-contains", projectName)
         .get();
 
     List<Map<String, dynamic>> listTeacher = [];
@@ -77,37 +60,43 @@ class ProjectFirestore {
   }
 
   Future<String> getUsernameByUid(String uid) async {
-    var result =
-        await FirebaseFirestore.instance.collection("admins").doc(uid).get();
-    username = result.data()!["name"];
+    var result = await firestore().collection("admins").doc(uid).get();
+    username = result.data()["name"];
     return username;
   }
 
   Future<bool> addProject(
       String title,
-      String imageHeader,
+      PickedFile? imageHeader,
       String? content,
       List<Teacher> listTeacher,
       List<String> listParticipant,
       String author) async {
     try {
-      QuerySnapshot result =
-          await FirebaseFirestore.instance.collection("projects").get();
+      var result = await firestore().collection("projects").get();
       int nextId = result.docs.length;
       List<Participant> listParticipants = [];
       listParticipant.forEach((element) {
         listParticipants.add(Participant(name: element, status: "Aluno"));
       });
+      var metadata = await imageHeader?.readAsBytes();
+      UploadTaskSnapshot task = await storage()
+          .ref()
+          .child("projects/$nextId.png")
+          .put(metadata, UploadMetadata(contentType: 'image/jpg'))
+          .future;
+
+      Uri url = await task.ref.getDownloadURL();
       Project project = Project(
           id: nextId,
           author: author,
           content: content.toString(),
           datePost: DateFormat("dd-MM-yyyy hh:mm").format(DateTime.now()),
-          imageHeader: imageHeader,
+          imageHeader: url.toString(),
           name: title,
           participants: listParticipants,
           teachers: listTeacher);
-      await FirebaseFirestore.instance
+      await firestore()
           .collection("projects")
           .doc(nextId.toString())
           .set(project.toJson());

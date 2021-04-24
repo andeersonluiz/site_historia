@@ -1,12 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase/firebase.dart';
 
 class LoginAuth {
   static Future<String> loginWithEmailAndPassword(
       String email, String password) async {
     try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-    } on FirebaseException catch (e) {
+      await auth().signInWithEmailAndPassword(email, password);
+    } on FirebaseError catch (e) {
       if (e.code == 'weak-password') {
         return 'A senha dever ter pelo menos seis caracteres.';
       } else if (e.code == 'email-already-in-use') {
@@ -27,6 +26,6 @@ class LoginAuth {
   }
 
   static User? getUser() {
-    return FirebaseAuth.instance.currentUser;
+    return auth().currentUser;
   }
 }

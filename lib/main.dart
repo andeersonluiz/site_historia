@@ -1,9 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Screens/adminAddProject_screen.dart';
-import 'package:site_historia/Screens/adminInfoProject_screen.dart';
+import 'package:site_historia/Screens/adminProjects_screen.dart';
 import 'package:site_historia/Screens/admin_screen.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Screens/loading_screen.dart';
@@ -19,6 +18,7 @@ import 'Support/RoutesName_support.dart';
 import 'Theme/ThemeConfig.dart';
 import 'firebase/frame_firestore.dart';
 import 'firebase/project_firestore.dart';
+import 'package:firebase/firebase.dart';
 
 //Paleta Cores
 //#572a1e (marrom escuro)
@@ -28,6 +28,7 @@ import 'firebase/project_firestore.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   setPathUrlStrategy();
   runApp(MultiProvider(providers: [
     Provider<SupportStore>(
@@ -113,26 +114,34 @@ class MyApp extends StatelessWidget {
                       MaterialPage(child: HomeScreen()),
                   RouteNames.COLLECTION: (_, __) =>
                       MaterialPage(child: HomeScreen()),
-                  RouteNames.ADMIN: (_, __) =>
-                      MaterialPage(child: AdminScreen()),
-                  RouteNames.ADMIN_INFO: (uri, __) {
-                    if (snp.data.isEmpty) {
+                  RouteNames.ADMIN: (_, __) {
+                    User? user = LoginAuth.getUser();
+                    if (user == null) {
+                      return MaterialPage(child: AdminScreen());
+                    } else {
                       return MaterialPage(
                           child: Loading(
-                        redirect: true,
-                      ));
+                              redirect: true, to: RouteNames.ADMIN_INFO));
+                    }
+                  },
+                  RouteNames.ADMIN_INFO: (uri, __) {
+                    User? user = LoginAuth.getUser();
+                    if (user == null) {
+                      return MaterialPage(
+                          child: Loading(redirect: true, to: RouteNames.ADMIN));
                     } else {
-                      return MaterialPage(child: AdminInfoScreen());
+                      return MaterialPage(child: AdminProjectsScreen(user.uid));
                     }
                   },
                   RouteNames.ADD_PROJECT: (uri, __) {
-                    if (snp.data.isEmpty) {
+                    User? user = LoginAuth.getUser();
+                    if (user == null) {
                       return MaterialPage(
-                          child: Loading(
-                        redirect: true,
-                      ));
+                          child: Loading(redirect: true, to: RouteNames.ADMIN));
                     } else {
-                      return MaterialPage(child: AdminAddProjectScreen());
+                      return MaterialPage(
+                        child: AdminAddProjectScreen(user.uid),
+                      );
                     }
                   },
                 }),
@@ -149,10 +158,6 @@ class MyApp extends StatelessWidget {
     FrameFirestore frameFirestore = Provider.of<FrameFirestore>(context);
     await projectFirestore.getProjectsName();
     await frameFirestore.getFramesName();
-    User? user = LoginAuth.getUser();
-    if (user != null) {
-      return projectFirestore.getUsernameByUid(user.uid);
-    }
     return [];
   }
 }

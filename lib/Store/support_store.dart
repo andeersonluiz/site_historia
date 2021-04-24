@@ -1,3 +1,4 @@
+import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:site_historia/Support/errorHander_support.dart';
 import 'package:site_historia/model/teacher_model.dart';
@@ -7,13 +8,13 @@ class SupportStore = _SupportStoreBase with _$SupportStore;
 
 abstract class _SupportStoreBase with Store {
   @observable
-  String _pathImage = "";
+  PickedFile? _pathImage = PickedFile("");
 
   @observable
   String _titleProject = "";
 
   @computed
-  String get pathImage => this._pathImage;
+  PickedFile? get pathImage => this._pathImage;
 
   @computed
   String get titleProject => this._titleProject;
@@ -67,7 +68,7 @@ abstract class _SupportStoreBase with Store {
   String? get htmlContent => this._htmlContent;
 
   @action
-  updatePath(String newPath) {
+  updatePath(PickedFile? newPath) {
     this._pathImage = newPath;
   }
 
@@ -85,6 +86,9 @@ abstract class _SupportStoreBase with Store {
 
   @action
   updateCheckedTeacherLocal(Teacher teacher, int index) {
+    if (!teacher.checked && msgErrorTeacher != "") {
+      clearError(ErrorForm.Teacher);
+    }
     teacherLocal[index] = Teacher(
         name: teacher.name,
         id: teacher.id,
@@ -181,10 +185,79 @@ abstract class _SupportStoreBase with Store {
   @action
   onChangedHtml(String? value) {
     this._htmlContent = value;
+    if (htmlContent != "" && msgErrorContent != "") {
+      clearError(ErrorForm.Content);
+    }
   }
 
   @action
   changeValueParticipant(int index, String text) {
     participantsLocal[index] = text;
+    if (text != "") {
+      clearError(ErrorForm.ParticipantSize);
+      clearError(ErrorForm.Participant);
+    }
+  }
+
+  validateProject() {
+    String err = "";
+    if (titleProject == "") {
+      generateMsgError(ErrorForm.Title, "O titulo não pode ser vazio.");
+      err += "err1";
+    } else if (titleProject.length > 40) {
+      generateMsgError(
+          ErrorForm.Title, "O titulo não ter mais de 40 caracteres.");
+      err += "err2";
+    } else {
+      clearError(ErrorForm.Title);
+    }
+    if (pathImage!.path == "") {
+      generateMsgError(ErrorForm.Image, "Selecione uma imagem titulo.");
+      err += "err3";
+    } else {
+      clearError(ErrorForm.Image);
+    }
+
+    if (htmlContent == "") {
+      generateMsgError(ErrorForm.Content, "O conteudo não pode estar vazio.");
+      err += "err4";
+    } else {
+      clearError(ErrorForm.Content);
+    }
+    if (getTeachers().length == 0) {
+      generateMsgError(
+          ErrorForm.Teacher, "Você deve selecionar pelo menos um professor.");
+      err += "err5";
+    } else {
+      clearError(ErrorForm.Teacher);
+    }
+    if (getParticipants().length == 0) {
+      generateMsgError(
+          ErrorForm.Participant, "Digite pelo menos um participante.");
+      err += "err6";
+    } else {
+      clearError(ErrorForm.Participant);
+    }
+    if (err == "") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  validateParticipant(String? value) {
+    if (int.tryParse(value!) != null) {
+      int num = int.parse(value);
+      if (num > 10) {
+        generateMsgError(ErrorForm.ParticipantSize,
+            "Só pode adicionar até 10 participantes.");
+      } else {
+        addParticipants(int.parse(value));
+        clearError(ErrorForm.ParticipantSize);
+        clearError(ErrorForm.Participant);
+      }
+    } else {
+      generateMsgError(ErrorForm.ParticipantSize, "Digite um numero.");
+    }
   }
 }

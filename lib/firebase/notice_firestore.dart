@@ -1,13 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import '../model/notice_model.dart';
+import 'package:firebase/firebase.dart';
 
 class NoticeFirestore {
   getNotices() async {
-    FirebaseFirestore instance = FirebaseFirestore.instance;
-    Query query =
-        instance.collection("notices").where('tag', isNotEqualTo: "Podcast");
-    QuerySnapshot result = await query.get();
+    var query = firestore().collection("notices").where('tag', "!=", "Podcast");
+    var result = await query.get();
     /*
     for(int i=3;i<=6;i++){
       String url = await getHeadNotice(i.toString());
@@ -26,7 +23,7 @@ class NoticeFirestore {
   }*/
     final results = result.docs;
     results.sort((b, a) {
-      return a['id'].compareTo(b['id']);
+      return a.data()['id'].compareTo(b.data()['id']);
     });
     List<Notice> notices = [];
     results.forEach((item) {
@@ -36,13 +33,11 @@ class NoticeFirestore {
   }
 
   getPodcasts() async {
-    FirebaseFirestore instance = FirebaseFirestore.instance;
-    Query query =
-        instance.collection("notices").where('tag', isEqualTo: "Podcast");
-    QuerySnapshot result = await query.get();
+    var query = firestore().collection("notices").where('tag', "==", "Podcast");
+    var result = await query.get();
     final results = result.docs;
     results.sort((b, a) {
-      return a['id'].compareTo(b['id']);
+      return a.data()['id'].compareTo(b.data()['id']);
     });
     List<Notice> podcasts = [];
     results.forEach((item) {
@@ -52,12 +47,11 @@ class NoticeFirestore {
   }
 
   getSliders() async {
-    FirebaseFirestore instance = FirebaseFirestore.instance;
-    Query query = instance
+    var query = firestore()
         .collection("notices")
-        .where('isTopHeader', isEqualTo: true)
+        .where('isTopHeader', "==", true)
         .limit(5);
-    QuerySnapshot result = await query.get();
+    var result = await query.get();
     List<Notice> topheaders = [];
     result.docs.forEach((item) {
       topheaders.add(Notice.fromJson(item.data()));
@@ -66,27 +60,13 @@ class NoticeFirestore {
   }
 
   Future<String> getHeadNotice(String idNotice) async {
-    ListResult result = await FirebaseStorage.instance
+    ListResult result = await storage()
         .ref()
         .child("notices")
         .child(idNotice)
         .child("head")
         .listAll();
-    String url = await result.items.first.getDownloadURL();
-    return url;
-  }
-
-  Future<List<String>> getContentNotice(String idNotice) async {
-    ListResult result = await FirebaseStorage.instance
-        .ref()
-        .child("notices")
-        .child(idNotice)
-        .child("content")
-        .listAll();
-    List<String> urls = [];
-    result.items.forEach((item) async {
-      urls.add(await item.getDownloadURL());
-    });
-    return urls;
+    Uri url = await result.items.first.getDownloadURL();
+    return url.toString();
   }
 }

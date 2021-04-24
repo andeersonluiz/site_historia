@@ -37,11 +37,8 @@ class _ItemPopUpMenuAppBarState extends State<ItemPopUpMenuAppBar>
           onSelected: (result) {
             int index = result as int;
             rotationController.animateBack(0.0);
-            VxNavigator.of(context).push(
-                Uri(path: widget.path, queryParameters: {
-                  "id": widget.listItems[index].id.toString()
-                }),
-                params: widget.listItems[index]);
+            VxNavigator.of(context).push(Uri(
+                path: widget.path, queryParameters: {"id": index.toString()}));
           },
           color: Theme.of(context).primaryColor,
           itemBuilder: (ctx) => widget.listItems.map((item) {

@@ -5,11 +5,12 @@ import 'package:velocity_x/velocity_x.dart';
 
 class Loading extends StatelessWidget {
   final bool redirect;
-  Loading({this.redirect = false});
+  final String to;
+  Loading({this.redirect = false,this.to=RouteNames.HOME});
   @override
   Widget build(BuildContext context) {
     if(redirect){
-      Future.delayed(Duration(seconds:2)).whenComplete(() => VxNavigator.of(context).push(Uri.parse(RouteNames.HOME)));
+      Future.delayed(Duration(seconds:2)).whenComplete(() => VxNavigator.of(context).push(Uri.parse(to)));
     }
     return Container(
         color: ThemeConfig.brown,
