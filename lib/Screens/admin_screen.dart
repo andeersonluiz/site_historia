@@ -82,7 +82,6 @@ class _AdminScreenState extends State<AdminScreen> {
                           CustomCheckBox(
                             title: "Manter Conectado",
                             value: checkedValue,
-                            controlAffinity: ListTileControlAffinity.leading,
                             onChanged: (newValue) {
                               setState(() {
                                 checkedValue = newValue!;

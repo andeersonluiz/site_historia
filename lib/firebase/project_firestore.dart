@@ -28,7 +28,7 @@ class ProjectFirestore {
     });
   }
 
-  getProjectById(String id) {
+  getProjectById(String? id) {
     return listProjectsOrdenedByName
         .where((element) => element.id.toString() == id)
         .toList()[0];
@@ -100,6 +100,46 @@ class ProjectFirestore {
           .collection("projects")
           .doc(nextId.toString())
           .set(project.toJson());
+    } catch (e) {
+      return false;
+    }
+    return true;
+  }
+
+  Future<bool> updateProject(
+      int id,
+      String title,
+      PickedFile? imageHeader,
+      String? content,
+      List<Teacher> listTeacher,
+      List<String> listParticipant,
+      String author) async {
+    try {
+      List<Participant> listParticipants = [];
+      listParticipant.forEach((element) {
+        listParticipants.add(Participant(name: element, status: "Aluno"));
+      });
+      var metadata = await imageHeader?.readAsBytes();
+      UploadTaskSnapshot task = await storage()
+          .ref()
+          .child("projects/$id.png")
+          .put(metadata, UploadMetadata(contentType: 'image/jpg'))
+          .future;
+
+      Uri url = await task.ref.getDownloadURL();
+      Project project = Project(
+          id: id,
+          author: author,
+          content: content.toString(),
+          datePost: DateFormat("dd-MM-yyyy hh:mm").format(DateTime.now()),
+          imageHeader: url.toString(),
+          name: title,
+          participants: listParticipants,
+          teachers: listTeacher);
+      await firestore()
+          .collection("projects")
+          .doc(id.toString())
+          .update(data: project.toJson());
     } catch (e) {
       return false;
     }

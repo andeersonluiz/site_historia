@@ -16,9 +16,12 @@ import 'package:site_historia/Store/support_store.dart';
 import 'package:site_historia/Support/errorHander_support.dart';
 import 'package:site_historia/firebase/project_firestore.dart';
 import 'package:site_historia/firebase/teacher_firestore.dart';
+import 'package:site_historia/model/project_model.dart';
 import 'package:site_historia/model/teacher_model.dart';
 
-class AdminAddProjectPage extends StatelessWidget {
+class AdminUpdateProjectPage extends StatelessWidget {
+  final Project project;
+  AdminUpdateProjectPage(this.project);
   @override
   Widget build(BuildContext context) {
     final projectFirestore = Provider.of<ProjectFirestore>(context);
@@ -33,7 +36,8 @@ class AdminAddProjectPage extends StatelessWidget {
       builder: (ctx, snp) {
         if (snp.hasData) {
           List<Teacher> listTeachers = snp.data as List<Teacher>;
-          supportStore.createTeacherLocal(listTeachers, null);
+          supportStore.loadDataUpdate(project, listTeachers);
+
           return Container(
             width: 500,
             padding: EdgeInsets.all(16.0),
@@ -42,10 +46,12 @@ class AdminAddProjectPage extends StatelessWidget {
                 CustomTextFormField(
                   hintText: "Insira o titulo",
                   labelText: "Titulo",
+                  initialValue: project.name,
                   onChanged: (text) {
                     supportStore.updateTitle(text);
                   },
                   onFieldSubmitted: (value) {
+                    supportStore.updateTitle(value.toString());
                     supportStore.clearError(ErrorForm.Title);
                   },
                   onEditingComplete: () {
@@ -110,13 +116,21 @@ class AdminAddProjectPage extends StatelessWidget {
                       : ErrorMsg(supportStore.msgErrorImage);
                 }),
                 Observer(builder: (_) {
-                  return Container(
-                      padding: EdgeInsets.symmetric(vertical: 16.0),
-                      height: 400,
-                      child: CustomHtmlEditor(
-                        controller: contentController,
-                        onChange: supportStore.updateContent,
-                      ));
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: Container(
+                        height: 400,
+                        child: CustomHtmlEditor(
+                          controller: contentController,
+                          onChange: (value) {
+                            if (value.toString() ==
+                                supportStore.htmlContent!.toString()) {
+                              supportStore.updateContent(value);
+                            }
+                          },
+                          initialText: supportStore.htmlContent,
+                        )),
+                  );
                 }),
                 Observer(builder: (_) {
                   return supportStore.msgErrorContent == ""
@@ -188,6 +202,8 @@ class AdminAddProjectPage extends StatelessWidget {
                                   hintText:
                                       "Digite o numero de participantes (Max. 10)",
                                   labelText: "Numero de participantes",
+                                  initialValue:
+                                      project.participants.length.toString(),
                                   onFieldSubmitted:
                                       supportStore.validateParticipant)),
                           Observer(builder: (_) {
@@ -203,8 +219,13 @@ class AdminAddProjectPage extends StatelessWidget {
                               itemBuilder: (ctx, index) {
                                 return CustomTextFormField(
                                   textInputType: TextInputType.name,
-                                  onChanged: (value) => supportStore
-                                      .updateParticipants(value, index),
+                                  onChanged: (value) =>
+                                      supportStore.updateParticipants(
+                                    value,
+                                    index,
+                                  ),
+                                  initialValue:
+                                      supportStore.participantsLocal[index],
                                   hintText: "Nome Participante ${index + 1}",
                                   labelText: 'Participante  ${index + 1}',
                                 );
@@ -217,10 +238,11 @@ class AdminAddProjectPage extends StatelessWidget {
                   ],
                 ),
                 CustomButton(
-                  text: "Criar Projeto",
+                  text: "Salvar Alterações",
                   onPressed: () async {
                     if (supportStore.validateProject()) {
-                      var result = await projectFirestore.addProject(
+                      var result = await projectFirestore.updateProject(
+                          project.id,
                           supportStore.titleProject,
                           supportStore.pathImage,
                           supportStore.htmlContent,

@@ -1,6 +1,7 @@
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:site_historia/Support/errorHander_support.dart';
+import 'package:site_historia/model/project_model.dart';
 import 'package:site_historia/model/teacher_model.dart';
 part 'support_store.g.dart';
 
@@ -78,14 +79,31 @@ abstract class _SupportStoreBase with Store {
   }
 
   @action
-  createTeacherLocal(List<Teacher> teachers) {
-    if (teacherLocal.isEmpty) {
-      this.teacherLocal = ObservableList<Teacher>.of(teachers);
+  createTeacherLocal(List<Teacher> teachers, Project? project) {
+    if (project != null) {
+      if (teacherLocal.isEmpty) {
+        teachers.forEach((teacher) {
+          bool contains = false;
+          project.teachers.forEach((projTeacher) {
+            if (teacher.id == projTeacher.id) {
+              teacher.checked = true;
+              this.teacherLocal.add(teacher);
+              contains = true;
+              return;
+            }
+          });
+          if (!contains) {
+            this.teacherLocal.add(teacher);
+          }
+        });
+      }
+    } else {
+      this.teacherLocal = ObservableList.of(teachers);
     }
   }
 
   @action
-  updateCheckedTeacherLocal(Teacher teacher, int index) {
+  updateTeacherLocal(Teacher teacher, int index) {
     if (!teacher.checked && msgErrorTeacher != "") {
       clearError(ErrorForm.Teacher);
     }
@@ -104,19 +122,19 @@ abstract class _SupportStoreBase with Store {
     if (size < lengthParticipants) {
       int dif = lengthParticipants - size;
       while (dif != 0) {
-        participantsLocal.removeLast();
+        this.participantsLocal.removeLast();
         dif--;
       }
     } else if (size > lengthParticipants) {
       int dif = size - lengthParticipants;
       while (dif != 0) {
-        participantsLocal.add("");
+        this.participantsLocal.add("");
         dif--;
       }
     }
   }
 
-  List<String> getParticipants() {
+  List<String> getParticipantsLocal() {
     List<String> participants = [];
     for (int i = 0; i < participantsLocal.length; i++) {
       if (participantsLocal[i] != "") {
@@ -124,6 +142,15 @@ abstract class _SupportStoreBase with Store {
       }
     }
     return participants;
+  }
+
+  @action
+  updateParticipants(String text, int index) {
+    participantsLocal[index] = text;
+    if (text != "" && msgErrorParticipants != "") {
+      clearError(ErrorForm.ParticipantSize);
+      clearError(ErrorForm.Participant);
+    }
   }
 
   List<Teacher> getTeachers() {
@@ -183,19 +210,26 @@ abstract class _SupportStoreBase with Store {
   }
 
   @action
-  onChangedHtml(String? value) {
-    this._htmlContent = value;
+  updateContent(String? value) {
+    if (htmlContent != value) {
+      this._htmlContent = value;
+    }
+
     if (htmlContent != "" && msgErrorContent != "") {
       clearError(ErrorForm.Content);
     }
   }
 
   @action
-  changeValueParticipant(int index, String text) {
-    participantsLocal[index] = text;
-    if (text != "") {
-      clearError(ErrorForm.ParticipantSize);
-      clearError(ErrorForm.Participant);
+  loadDataUpdate(Project project, List<Teacher> teachers) {
+    createTeacherLocal(teachers, project);
+    updatePath(PickedFile(project.imageHeader));
+    updateTitle(project.name);
+    updateContent(project.content);
+    participantsLocal = ObservableList.of(
+        List.generate(project.participants.length, (index) => ""));
+    for (int i = 0; i < project.participants.length; i++) {
+      updateParticipants(project.participants[i].name, i);
     }
   }
 
@@ -231,7 +265,7 @@ abstract class _SupportStoreBase with Store {
     } else {
       clearError(ErrorForm.Teacher);
     }
-    if (getParticipants().length == 0) {
+    if (getParticipantsLocal().length == 0) {
       generateMsgError(
           ErrorForm.Participant, "Digite pelo menos um participante.");
       err += "err6";

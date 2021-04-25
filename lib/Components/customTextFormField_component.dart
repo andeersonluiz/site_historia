@@ -10,8 +10,10 @@ class CustomTextFormField extends StatelessWidget {
   final void Function(String?)? onFieldSubmitted;
   final void Function()? onEditingComplete;
   final obscureText;
+  final String? initialValue;
   CustomTextFormField({
     required this.labelText,
+    this.initialValue,
     this.controller,
     this.onEditingComplete,
     this.onFieldSubmitted,
@@ -27,6 +29,7 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
+        initialValue: initialValue,
         onEditingComplete: onEditingComplete,
         controller: controller,
         keyboardType: textInputType,
@@ -34,6 +37,7 @@ class CustomTextFormField extends StatelessWidget {
         onChanged: onChanged,
         validator: validator,
         onFieldSubmitted: onFieldSubmitted,
+        textInputAction: TextInputAction.next,
         style: Theme.of(context)
             .textTheme
             .caption!

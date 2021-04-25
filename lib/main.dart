@@ -12,6 +12,7 @@ import 'package:site_historia/firebase/teacher_firestore.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'Screens/about_screen.dart';
+import 'Screens/adminUpdateProject_screen.dart';
 import 'Screens/home_screen.dart';
 import 'Store/support_store.dart';
 import 'Support/RoutesName_support.dart';
@@ -20,11 +21,8 @@ import 'firebase/frame_firestore.dart';
 import 'firebase/project_firestore.dart';
 import 'package:firebase/firebase.dart';
 
-//Paleta Cores
-//#572a1e (marrom escuro)
-//#e07d5e (barro)
-//#f3cfb8 (rosa claro)
-//#ffffff (branco)
+import 'model/project_model.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -142,6 +140,22 @@ class MyApp extends StatelessWidget {
                       return MaterialPage(
                         child: AdminAddProjectScreen(user.uid),
                       );
+                    }
+                  },
+                  RouteNames.UPDATE_PROJECT: (uri, params) {
+                    User? user = LoginAuth.getUser();
+                    if (user == null) {
+                      return MaterialPage(
+                          child: Loading(redirect: true, to: RouteNames.ADMIN));
+                    } else {
+                      String? id = uri.queryParameters["id"];
+                      if (id == null) {
+                        id = params['id'] as String?;
+                      }
+                      final Project project =
+                          projectFirestore.getProjectById(id);
+                      return MaterialPage(
+                          child: AdminUpdateProjectScreen(project, user.uid));
                     }
                   },
                 }),

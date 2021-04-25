@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:site_historia/Components/customLoading_component.dart';
-import 'package:site_historia/Desktop/adminListProjects_page_desktop.dart';
+import 'package:site_historia/Desktop/adminProject_page_desktop.dart';
 import 'package:site_historia/Desktop/appBar/verticalAppBar_desktop.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/firebase/project_firestore.dart';
@@ -37,7 +37,7 @@ class _AdminProjectsScreenState extends State<AdminProjectsScreen> {
                       height: MediaQuery.of(context).size.height,
                       child: Row(children: [
                         VerticalAppBar(),
-                        AdminListProjectsPage(),
+                        AdminProjectPage(),
                       ]),
                     )),
               );

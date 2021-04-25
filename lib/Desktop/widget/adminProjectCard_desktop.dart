@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:site_historia/Support/RoutesName_support.dart';
 import 'package:site_historia/model/project_model.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class AdminProjectCard extends StatelessWidget {
   final Project project;
@@ -24,7 +26,9 @@ class AdminProjectCard extends StatelessWidget {
                     Icons.edit,
                     color: Theme.of(context).primaryColor,
                   ),
-                  onPressed: () {},
+                  onPressed: () => VxNavigator.of(context).push(Uri(
+                      path: RouteNames.UPDATE_PROJECT,
+                      queryParameters: {"id": project.id.toString()})),
                 ),
                 IconButton(
                   icon: Icon(
@@ -39,7 +43,7 @@ class AdminProjectCard extends StatelessWidget {
               children: [
                 Expanded(
                     flex: 3,
-                    child: Image.asset("test.jpg",
+                    child: Image.asset(project.imageHeader,
                         fit: BoxFit.fill, height: sizeCard)),
                 Expanded(
                   flex: 7,

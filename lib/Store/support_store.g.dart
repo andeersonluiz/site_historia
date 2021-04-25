@@ -271,22 +271,22 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   }
 
   @override
-  dynamic createTeacherLocal(List<Teacher> teachers) {
+  dynamic createTeacherLocal(List<Teacher> teachers, Project? project) {
     final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
         name: '_SupportStoreBase.createTeacherLocal');
     try {
-      return super.createTeacherLocal(teachers);
+      return super.createTeacherLocal(teachers, project);
     } finally {
       _$_SupportStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic updateCheckedTeacherLocal(Teacher teacher, int index) {
+  dynamic updateTeacherLocal(Teacher teacher, int index) {
     final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
-        name: '_SupportStoreBase.updateCheckedTeacherLocal');
+        name: '_SupportStoreBase.updateTeacherLocal');
     try {
-      return super.updateCheckedTeacherLocal(teacher, index);
+      return super.updateTeacherLocal(teacher, index);
     } finally {
       _$_SupportStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -304,22 +304,33 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   }
 
   @override
-  dynamic onChangedHtml(String? value) {
+  dynamic updateParticipants(String text, int index) {
     final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
-        name: '_SupportStoreBase.onChangedHtml');
+        name: '_SupportStoreBase.updateParticipants');
     try {
-      return super.onChangedHtml(value);
+      return super.updateParticipants(text, index);
     } finally {
       _$_SupportStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic changeValueParticipant(int index, String text) {
+  dynamic updateContent(String? value) {
     final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
-        name: '_SupportStoreBase.changeValueParticipant');
+        name: '_SupportStoreBase.updateContent');
     try {
-      return super.changeValueParticipant(index, text);
+      return super.updateContent(value);
+    } finally {
+      _$_SupportStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic loadDataUpdate(Project project, List<Teacher> teachers) {
+    final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
+        name: '_SupportStoreBase.loadDataUpdate');
+    try {
+      return super.loadDataUpdate(project, teachers);
     } finally {
       _$_SupportStoreBaseActionController.endAction(_$actionInfo);
     }
