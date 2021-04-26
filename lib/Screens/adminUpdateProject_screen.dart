@@ -35,7 +35,8 @@ class AdminUpdateProjectScreen extends StatelessWidget {
                         height: MediaQuery.of(context).size.height,
                         child: Row(children: [
                           VerticalAppBar(),
-                          Expanded(child: AdminUpdateProjectPage(project)),
+                          Expanded(
+                              child: AdminUpdateProjectPageDesktop(project)),
                         ]),
                       )),
                 );

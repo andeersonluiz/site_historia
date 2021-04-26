@@ -18,7 +18,7 @@ class NavigationDrawer extends StatelessWidget {
     return Drawer(
       child: Container(
         color: Theme.of(context).primaryColor,
-        child: ListView(
+        child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -39,6 +39,10 @@ class NavigationDrawer extends StatelessWidget {
                   ),
                 ],
               )),
+            ),
+            Divider(
+              height: 8,
+              thickness: 1.0,
             ),
             DrawerItem(
               "Inicio",

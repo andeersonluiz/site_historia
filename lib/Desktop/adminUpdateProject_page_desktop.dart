@@ -19,9 +19,9 @@ import 'package:site_historia/firebase/teacher_firestore.dart';
 import 'package:site_historia/model/project_model.dart';
 import 'package:site_historia/model/teacher_model.dart';
 
-class AdminUpdateProjectPage extends StatelessWidget {
+class AdminUpdateProjectPageDesktop extends StatelessWidget {
   final Project project;
-  AdminUpdateProjectPage(this.project);
+  AdminUpdateProjectPageDesktop(this.project);
   @override
   Widget build(BuildContext context) {
     final projectFirestore = Provider.of<ProjectFirestore>(context);
@@ -240,14 +240,14 @@ class AdminUpdateProjectPage extends StatelessWidget {
                 CustomButton(
                   text: "Salvar Alterações",
                   onPressed: () async {
-                    if (supportStore.validateProject()) {
+                    if (supportStore.validateProjectDesktop()) {
                       var result = await projectFirestore.updateProject(
                           project.id,
                           supportStore.titleProject,
                           supportStore.pathImage,
                           supportStore.htmlContent,
                           supportStore.getTeachers(),
-                          supportStore.getParticipantsLocal(),
+                          supportStore.getParticipantsLocalFilled(),
                           projectFirestore.username);
                       if (result) {
                         CustomToast.showToast(

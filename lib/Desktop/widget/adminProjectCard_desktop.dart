@@ -43,64 +43,61 @@ class AdminProjectCard extends StatelessWidget {
               children: [
                 Expanded(
                     flex: 3,
-                    child: Image.asset(project.imageHeader,
+                    child: Image.network(project.imageHeader,
                         fit: BoxFit.fill, height: sizeCard)),
                 Expanded(
                   flex: 7,
                   child: Container(
-                    child: Container(
-                      height: sizeCard,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Spacer(),
-                          Center(
-                            child: Padding(
+                    height: sizeCard,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Spacer(),
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(project.name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline4!
+                                    .copyWith(
+                                        color: Theme.of(context).primaryColor)),
+                          ),
+                        ),
+                        Spacer(),
+                        Row(
+                          children: [
+                            Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text(project.name,
+                              child: Text("Autor: " + project.author,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .headline4!
+                                      .bodyText1!
                                       .copyWith(
                                           color:
                                               Theme.of(context).primaryColor)),
                             ),
-                          ),
-                          Spacer(),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text("Autor: " + project.author,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1!
-                                        .copyWith(
-                                            color: Theme.of(context)
-                                                .primaryColor)),
-                              ),
-                              Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text("Data do Post: " + project.datePost,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1!
-                                        .copyWith(
-                                            color: Theme.of(context)
-                                                .primaryColor)),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text("Data do Post: " + project.datePost,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(
+                                          color:
+                                              Theme.of(context).primaryColor)),
+                            )
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ),

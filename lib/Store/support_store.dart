@@ -70,41 +70,45 @@ abstract class _SupportStoreBase with Store {
 
   @action
   updatePath(PickedFile? newPath) {
+    if (newPath!.path != "") {
+      clearError(ErrorForm.Image);
+    }
     this._pathImage = newPath;
   }
 
   @action
   updateTitle(String newTitle) {
+    if (newTitle != "") {
+      clearError(ErrorForm.Title);
+    }
     this._titleProject = newTitle;
   }
 
   @action
   createTeacherLocal(List<Teacher> teachers, Project? project) {
-    if (project != null) {
-      if (teacherLocal.isEmpty) {
-        teachers.forEach((teacher) {
-          bool contains = false;
-          project.teachers.forEach((projTeacher) {
-            if (teacher.id == projTeacher.id) {
-              teacher.checked = true;
-              this.teacherLocal.add(teacher);
-              contains = true;
-              return;
-            }
-          });
-          if (!contains) {
+    if (project != null && teacherLocal.isEmpty) {
+      teachers.forEach((teacher) {
+        bool contains = false;
+        project.teachers.forEach((projTeacher) {
+          if (teacher.id == projTeacher.id) {
+            teacher.checked = true;
             this.teacherLocal.add(teacher);
+            contains = true;
+            return;
           }
         });
-      }
-    } else {
+        if (!contains) {
+          this.teacherLocal.add(teacher);
+        }
+      });
+    } else if (teacherLocal.isEmpty) {
       this.teacherLocal = ObservableList.of(teachers);
     }
   }
 
   @action
   updateTeacherLocal(Teacher teacher, int index) {
-    if (!teacher.checked && msgErrorTeacher != "") {
+    if (msgErrorTeacher != "") {
       clearError(ErrorForm.Teacher);
     }
     teacherLocal[index] = Teacher(
@@ -134,7 +138,7 @@ abstract class _SupportStoreBase with Store {
     }
   }
 
-  List<String> getParticipantsLocal() {
+  List<String> getParticipantsLocalFilled() {
     List<String> participants = [];
     for (int i = 0; i < participantsLocal.length; i++) {
       if (participantsLocal[i] != "") {
@@ -233,7 +237,7 @@ abstract class _SupportStoreBase with Store {
     }
   }
 
-  validateProject() {
+  validateProjectMobileTab1() {
     String err = "";
     if (titleProject == "") {
       generateMsgError(ErrorForm.Title, "O titulo não pode ser vazio.");
@@ -265,7 +269,64 @@ abstract class _SupportStoreBase with Store {
     } else {
       clearError(ErrorForm.Teacher);
     }
-    if (getParticipantsLocal().length == 0) {
+
+    if (err == "") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  validateProjectMobileTab2() {
+    String err = "";
+    if (getParticipantsLocalFilled().length == 0) {
+      generateMsgError(
+          ErrorForm.Participant, "Digite pelo menos um participante.");
+      err += "err6";
+    } else {
+      clearError(ErrorForm.Participant);
+    }
+    if (err == "") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  validateProjectDesktop() {
+    String err = "";
+    if (titleProject == "") {
+      generateMsgError(ErrorForm.Title, "O titulo não pode ser vazio.");
+      err += "err1";
+    } else if (titleProject.length > 40) {
+      generateMsgError(
+          ErrorForm.Title, "O titulo não ter mais de 40 caracteres.");
+      err += "err2";
+    } else {
+      clearError(ErrorForm.Title);
+    }
+    if (pathImage!.path == "") {
+      generateMsgError(ErrorForm.Image, "Selecione uma imagem titulo.");
+      err += "err3";
+    } else {
+      clearError(ErrorForm.Image);
+    }
+
+    if (htmlContent == "") {
+      generateMsgError(ErrorForm.Content, "O conteudo não pode estar vazio.");
+      err += "err4";
+    } else {
+      clearError(ErrorForm.Content);
+    }
+    if (getTeachers().length == 0) {
+      generateMsgError(
+          ErrorForm.Teacher, "Você deve selecionar pelo menos um professor.");
+      err += "err5";
+    } else {
+      clearError(ErrorForm.Teacher);
+    }
+
+    if (getParticipantsLocalFilled().length == 0) {
       generateMsgError(
           ErrorForm.Participant, "Digite pelo menos um participante.");
       err += "err6";
@@ -293,5 +354,19 @@ abstract class _SupportStoreBase with Store {
     } else {
       generateMsgError(ErrorForm.ParticipantSize, "Digite um numero.");
     }
+  }
+
+  clearData() {
+    _pathImage = PickedFile("");
+    _titleProject = "";
+    teacherLocal = ObservableList<Teacher>();
+    participantsLocal = ObservableList<String>();
+    _msgErrorParticipants = "";
+    _msgErrorParticipantsSize = "";
+    _msgErrorTitle = "";
+    _msgErrorImage = "";
+    _msgErrorContent = "";
+    _msgErrorTeacher = "";
+    _htmlContent = "";
   }
 }

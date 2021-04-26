@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 
-class CustomHtmlEditor extends StatelessWidget {
-  final dynamic Function(String?)? onChange;
+
+
+class CustomHtmlEditor extends StatelessWidget{
+    final dynamic Function(String?)? onChange;
   final String? initialText;
   final HtmlEditorController controller;
-
+  final dynamic Function()? onInit;
   CustomHtmlEditor(
-      {required this.onChange, this.initialText, required this.controller});
+      {required this.onChange, this.initialText, required this.controller,this.onInit});
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +27,16 @@ class CustomHtmlEditor extends StatelessWidget {
         htmlEditorOptions: HtmlEditorOptions(
           hint: "Escreva o texto aqui...",
           initialText: initialText,
+          
         ),
+        
         otherOptions: OtherOptions(
-          height: 400,
+          height: 500,
         ),
         callbacks: Callbacks(
           onChange: onChange,
+          onInit: onInit,
+        
         ),
         htmlToolbarOptions: HtmlToolbarOptions(
             buttonFocusColor: Theme.of(context).primaryColor,
@@ -44,6 +50,7 @@ class CustomHtmlEditor extends StatelessWidget {
                 .caption!
                 .copyWith(color: Theme.of(context).primaryColor),
             toolbarType: ToolbarType.nativeGrid,
+          
             defaultToolbarButtons: [
               StyleButtons(),
               FontSettingButtons(fontSizeUnit: false),
@@ -62,4 +69,5 @@ class CustomHtmlEditor extends StatelessWidget {
       ),
     );
   }
+
 }

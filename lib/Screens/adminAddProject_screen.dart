@@ -4,9 +4,10 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:site_historia/Components/customLoading_component.dart';
 import 'package:site_historia/Desktop/adminAddProject_page_desktop.dart';
 import 'package:site_historia/Desktop/appBar/verticalAppBar_desktop.dart';
+import 'package:site_historia/Mobile/adminAddProject_page_mobile.dart';
+import 'package:site_historia/Mobile/drawer/adminNavigation_drawer_component.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/firebase/project_firestore.dart';
-import '../Mobile/drawer/navigation_drawer_component.dart';
 
 class AdminAddProjectScreen extends StatefulWidget {
   final String username;
@@ -20,37 +21,41 @@ class _AdminAddProjectScreenState extends State<AdminAddProjectScreen> {
   Widget build(BuildContext context) {
     final projectFirestore = Provider.of<ProjectFirestore>(context);
 
-    return ResponsiveBuilder(
-      builder: (ctx, sizingInformation) => Scaffold(
-        drawer: sizingInformation.isDesktop ? null : NavigationDrawer(),
-        appBar: sizingInformation.isDesktop ? null : AppBar(),
-        body: FutureBuilder(
-          future: projectFirestore.getUsernameByUid(widget.username),
-          builder: (ctx, snp) {
-            if (snp.hasData) {
-              return SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: ScreenTypeLayout(
-                    mobile: Container(),
-                    desktop: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                      child: Row(children: [
-                        VerticalAppBar(),
-                        Expanded(child: AdminAddProjectPage()),
-                      ]),
-                    )),
-              );
-            } else if (snp.hasError) {
-              return ErrorLoad(
-                color: Theme.of(context).primaryColor,
-              );
-            } else {
-              return CustomLoading();
-            }
-          },
-        ),
-      ),
-    );
+    return FutureBuilder(
+        future: projectFirestore.getUsernameByUid(widget.username),
+        builder: (ctx, snp) {
+          if (snp.hasData) {
+            return ResponsiveBuilder(
+                builder: (ctx, sizingInformation) => Scaffold(
+                    drawer: sizingInformation.isDesktop
+                        ? null
+                        : AdminNavigatorDrawer(),
+                    appBar: sizingInformation.isDesktop
+                        ? null
+                        : AppBar(
+                            centerTitle: true,
+                            title: Text("Adicionar Projeto"),
+                          ),
+                    body: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: ScreenTypeLayout(
+                          mobile: AdminAddProjectPageMobile(),
+                          desktop: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
+                            child: Row(children: [
+                              VerticalAppBar(),
+                              Expanded(child: AdminAddProjectPageDesktop()),
+                            ]),
+                          )),
+                    )));
+          } else if (snp.hasError) {
+            return ErrorLoad(
+              color: Theme.of(context).primaryColor,
+            );
+          } else {
+            return CustomLoading();
+          }
+        });
   }
 }

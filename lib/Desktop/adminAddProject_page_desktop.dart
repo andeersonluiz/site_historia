@@ -13,12 +13,13 @@ import 'package:site_historia/Components/customToast_component.dart';
 import 'package:site_historia/Components/erroMsg_component.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/support_store.dart';
-import 'package:site_historia/Support/errorHander_support.dart';
+import 'package:site_historia/Support/RoutesName_support.dart';
 import 'package:site_historia/firebase/project_firestore.dart';
 import 'package:site_historia/firebase/teacher_firestore.dart';
 import 'package:site_historia/model/teacher_model.dart';
+import 'package:velocity_x/velocity_x.dart';
 
-class AdminAddProjectPage extends StatelessWidget {
+class AdminAddProjectPageDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final projectFirestore = Provider.of<ProjectFirestore>(context);
@@ -26,7 +27,8 @@ class AdminAddProjectPage extends StatelessWidget {
     final teacherFirestore = Provider.of<TeacherFirestore>(context);
     final _picker = ImagePicker();
     final HtmlEditorController contentController = HtmlEditorController();
-
+    final TextEditingController controllerParticipants =
+        TextEditingController();
     return SingleChildScrollView(
         child: FutureBuilder(
       future: teacherFirestore.getTeachers(),
@@ -35,21 +37,16 @@ class AdminAddProjectPage extends StatelessWidget {
           List<Teacher> listTeachers = snp.data as List<Teacher>;
           supportStore.createTeacherLocal(listTeachers, null);
           return Container(
-            width: 500,
             padding: EdgeInsets.all(16.0),
             child: Column(
               children: [
                 CustomTextFormField(
                   hintText: "Insira o titulo",
                   labelText: "Titulo",
+                  maxCharacters: 30,
+                  initialValue: supportStore.titleProject,
                   onChanged: (text) {
                     supportStore.updateTitle(text);
-                  },
-                  onFieldSubmitted: (value) {
-                    supportStore.clearError(ErrorForm.Title);
-                  },
-                  onEditingComplete: () {
-                    supportStore.clearError(ErrorForm.Title);
                   },
                   textInputType: TextInputType.name,
                 ),
@@ -75,15 +72,18 @@ class AdminAddProjectPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           supportStore.pathImage!.path != ""
-                              ? Align(
-                                  alignment: Alignment.bottomLeft,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      supportStore.titleProject,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline3!,
+                              ? Expanded(
+                                  flex: 95,
+                                  child: Align(
+                                    alignment: Alignment.bottomLeft,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        supportStore.titleProject,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline3!,
+                                      ),
                                     ),
                                   ),
                                 )
@@ -91,14 +91,16 @@ class AdminAddProjectPage extends StatelessWidget {
                           Spacer(),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                                child: Icon(Icons.folder),
-                                onTap: () async {
-                                  PickedFile? image = await _picker.getImage(
-                                      source: ImageSource.camera);
-                                  supportStore.updatePath(image);
-                                  supportStore.clearError(ErrorForm.Image);
-                                }),
+                            child: Expanded(
+                              flex: 5,
+                              child: GestureDetector(
+                                  child: Icon(Icons.folder),
+                                  onTap: () async {
+                                    PickedFile? image = await _picker.getImage(
+                                        source: ImageSource.camera);
+                                    supportStore.updatePath(image);
+                                  }),
+                            ),
                           ),
                         ]),
                     height: supportStore.pathImage!.path == "" ? 40 : 300,
@@ -116,6 +118,7 @@ class AdminAddProjectPage extends StatelessWidget {
                       child: CustomHtmlEditor(
                         controller: contentController,
                         onChange: supportStore.updateContent,
+                        initialText: supportStore.htmlContent,
                       ));
                 }),
                 Observer(builder: (_) {
@@ -182,14 +185,31 @@ class AdminAddProjectPage extends StatelessWidget {
                       child: Column(
                         children: [
                           Container(
-                              padding: EdgeInsets.all(8.0),
-                              child: CustomTextFormField(
-                                  textInputType: TextInputType.number,
-                                  hintText:
-                                      "Digite o numero de participantes (Max. 10)",
-                                  labelText: "Numero de participantes",
-                                  onFieldSubmitted:
-                                      supportStore.validateParticipant)),
+                            padding: EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 5,
+                                  child: CustomTextFormField(
+                                    controller: controllerParticipants,
+                                    textInputType: TextInputType.number,
+                                    hintText:
+                                        "Digite o numero de participantes (Max. 10)",
+                                    labelText: "Numero de participantes",
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 5,
+                                  child: CustomButton(
+                                    text: "Gerar participantes",
+                                    onPressed: () =>
+                                        supportStore.validateParticipant(
+                                            controllerParticipants.text),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                           Observer(builder: (_) {
                             return supportStore.msgErrorParticipantsSize == ""
                                 ? Container()
@@ -219,14 +239,18 @@ class AdminAddProjectPage extends StatelessWidget {
                 CustomButton(
                   text: "Criar Projeto",
                   onPressed: () async {
-                    if (supportStore.validateProject()) {
+                    if (supportStore.validateProjectDesktop()) {
                       var result = await projectFirestore.addProject(
                           supportStore.titleProject,
                           supportStore.pathImage,
                           supportStore.htmlContent,
                           supportStore.getTeachers(),
-                          supportStore.getParticipantsLocal(),
+                          supportStore.getParticipantsLocalFilled(),
                           projectFirestore.username);
+                      supportStore.clearData();
+                      VxNavigator.of(context)
+                          .push(Uri.parse(RouteNames.ADMIN_INFO));
+
                       if (result) {
                         CustomToast.showToast(
                             "Projeto cadastro com sucesso!!", Colors.green);

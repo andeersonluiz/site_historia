@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:site_historia/Screens/adminAddProjectParticipant_screen.dart';
 import 'package:site_historia/Screens/adminAddProject_screen.dart';
 import 'package:site_historia/Screens/adminProjects_screen.dart';
 import 'package:site_historia/Screens/admin_screen.dart';
@@ -156,6 +157,18 @@ class MyApp extends StatelessWidget {
                           projectFirestore.getProjectById(id);
                       return MaterialPage(
                           child: AdminUpdateProjectScreen(project, user.uid));
+                    }
+                  },
+
+                  RouteNames.ADD_PROJECT_PARTICIPANT: (uri, params) {
+                    User? user = LoginAuth.getUser();
+                    if (user == null) {
+                      return MaterialPage(
+                          child: Loading(redirect: true, to: RouteNames.ADMIN));
+                    } else {
+                      return MaterialPage(
+                        child: AdminAddProjectParticipantScreen(),
+                      );
                     }
                   },
                 }),

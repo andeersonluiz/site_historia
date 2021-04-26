@@ -31,91 +31,94 @@ class _AdminScreenState extends State<AdminScreen> {
     return ResponsiveBuilder(
       builder: (ctx, sizingInformation) => Scaffold(
         body: Center(
-          child: Container(
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(8.0)),
-            width: 400,
-            height: 340,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Area do Admin",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6!
-                        .copyWith(color: Theme.of(context).primaryColor),
+          child: FittedBox(
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8.0)),
+              width: 400,
+              height: 340,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Area do Admin",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline6!
+                          .copyWith(color: Theme.of(context).primaryColor),
+                    ),
                   ),
-                ),
-                Form(
-                    key: _formKey,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          CustomTextFormField(
-                            controller: controllerEmail,
-                            textInputType: TextInputType.emailAddress,
-                            labelText: "Email",
-                            hintText: 'Insira o email',
-                            validator: (word) {
-                              if (word!.isEmpty) {
-                                return 'Este campo é obrigatório';
-                              }
-                              return null;
-                            },
-                          ),
-                          CustomTextFormField(
-                            controller: controllerPassword,
-                            textInputType: TextInputType.visiblePassword,
-                            obscureText: true,
-                            labelText: "Senha",
-                            hintText: 'Insira a senha',
-                            validator: (word) {
-                              if (word!.isEmpty) {
-                                return 'Este campo é obrigatório';
-                              }
-                              return null;
-                            },
-                          ),
-                          CustomCheckBox(
-                            title: "Manter Conectado",
-                            value: checkedValue,
-                            onChanged: (newValue) {
-                              setState(() {
-                                checkedValue = newValue!;
-                              });
-                            },
-                          ),
-                          msgError == "" ? Container() : ErrorMsg(msgError),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                                width: double.infinity,
-                                child: CustomButton(
-                                  text: "Entrar",
-                                  onPressed: () async {
-                                    if (_formKey.currentState!.validate()) {
-                                      String msg = await LoginAuth
-                                          .loginWithEmailAndPassword(
-                                              controllerEmail.text,
-                                              controllerPassword.text);
-                                      if (msg != "") {
-                                        setState(() {
-                                          msgError = msg;
-                                        });
-                                      } else {
-                                        VxNavigator.of(context).push(
-                                            Uri.parse(RouteNames.ADMIN_INFO),
-                                            params: {"logged": true});
+                  Form(
+                      key: _formKey,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CustomTextFormField(
+                              controller: controllerEmail,
+                              textInputType: TextInputType.emailAddress,
+                              labelText: "Email",
+                              hintText: 'Insira o email',
+                              validator: (word) {
+                                if (word!.isEmpty) {
+                                  return 'Este campo é obrigatório';
+                                }
+                                return null;
+                              },
+                            ),
+                            CustomTextFormField(
+                              controller: controllerPassword,
+                              textInputType: TextInputType.visiblePassword,
+                              obscureText: true,
+                              labelText: "Senha",
+                              hintText: 'Insira a senha',
+                              validator: (word) {
+                                if (word!.isEmpty) {
+                                  return 'Este campo é obrigatório';
+                                }
+                                return null;
+                              },
+                            ),
+                            CustomCheckBox(
+                              title: "Manter Conectado",
+                              value: checkedValue,
+                              onChanged: (newValue) {
+                                setState(() {
+                                  checkedValue = newValue!;
+                                });
+                              },
+                            ),
+                            msgError == "" ? Container() : ErrorMsg(msgError),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                  width: double.infinity,
+                                  child: CustomButton(
+                                    text: "Entrar",
+                                    onPressed: () async {
+                                      if (_formKey.currentState!.validate()) {
+                                        String msg = await LoginAuth
+                                            .loginWithEmailAndPassword(
+                                                controllerEmail.text,
+                                                controllerPassword.text);
+                                        if (msg != "") {
+                                          setState(() {
+                                            msgError = msg;
+                                          });
+                                        } else {
+                                          VxNavigator.of(context).push(
+                                              Uri.parse(RouteNames.ADMIN_INFO),
+                                              params: {"logged": true});
+                                        }
                                       }
-                                    }
-                                  },
-                                )),
-                          )
-                        ]))
-              ],
+                                    },
+                                  )),
+                            )
+                          ]))
+                ],
+              ),
             ),
           ),
         ),

@@ -1,6 +1,6 @@
+import 'package:auto_size_text_pk/auto_size_text_pk.dart';
 import 'package:flutter/material.dart';
 import 'package:site_historia/model/teacher_model.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 
 class TeacherTile extends StatelessWidget {
   final Teacher teacher;

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:site_historia/Mobile/footer/footer_mobile.dart';
-import 'package:site_historia/Mobile/widget/customDivider_desktop.dart';
 import 'package:site_historia/model/project_model.dart';
 
 class ProjectPageMobile extends StatelessWidget {
@@ -40,7 +39,9 @@ class ProjectPageMobile extends StatelessWidget {
             ),
           ),
         ]),
-        CustomDivider(),
+        Divider(
+          thickness: 1.0,
+        ),
         IntrinsicHeight(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,7 +57,9 @@ class ProjectPageMobile extends StatelessWidget {
                       .copyWith(color: Theme.of(context).primaryColor),
                 ),
               ),
-              CustomDivider(),
+              Divider(
+                thickness: 1.0,
+              ),
               Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Padding(
                   padding: const EdgeInsets.all(16.0),

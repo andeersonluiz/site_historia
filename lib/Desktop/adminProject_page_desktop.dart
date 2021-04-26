@@ -9,7 +9,7 @@ import 'package:site_historia/firebase/project_firestore.dart';
 import 'package:site_historia/model/project_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class AdminProjectPage extends StatelessWidget {
+class AdminProjectPageDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final projectFirestore = Provider.of<ProjectFirestore>(context);

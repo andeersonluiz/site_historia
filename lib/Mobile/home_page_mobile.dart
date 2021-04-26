@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:site_historia/Mobile/widget/customDivider_desktop.dart';
 
 import '../Theme/ThemeConfig.dart';
 import 'footer/footer_mobile.dart';
@@ -15,7 +14,9 @@ class HomePageMobile extends StatelessWidget {
     return Column(
       children: [
         SliderImageMobile(),
-        CustomDivider(),
+        Divider(
+          thickness: 1.0,
+        ),
         width > 600
             ? Row(children: [
                 Expanded(flex: 5, child: LatestPostsMobile(0.45)),
@@ -34,7 +35,9 @@ class HomePageMobile extends StatelessWidget {
                     color: ThemeConfig.brownPodcast,
                     child: LatestPodcastMobile(1)),
               ]),
-        CustomDivider(),
+        Divider(
+          thickness: 1.0,
+        ),
         FooterMobile(),
       ],
     );
