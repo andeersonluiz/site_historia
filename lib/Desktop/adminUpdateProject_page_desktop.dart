@@ -35,6 +35,7 @@ class AdminUpdateProjectPageDesktop extends StatelessWidget {
       future: teacherFirestore.getTeachers(),
       builder: (ctx, snp) {
         if (snp.hasData) {
+          supportStore.clearData();
           List<Teacher> listTeachers = snp.data as List<Teacher>;
           supportStore.loadDataUpdate(project, listTeachers);
 
@@ -115,23 +116,12 @@ class AdminUpdateProjectPageDesktop extends StatelessWidget {
                       ? Container()
                       : ErrorMsg(supportStore.msgErrorImage);
                 }),
-                Observer(builder: (_) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: Container(
-                        height: 400,
-                        child: CustomHtmlEditor(
-                          controller: contentController,
-                          onChange: (value) {
-                            if (value.toString() ==
-                                supportStore.htmlContent!.toString()) {
-                              supportStore.updateContent(value);
-                            }
-                          },
-                          initialText: supportStore.htmlContent,
-                        )),
-                  );
-                }),
+                CustomHtmlEditor(
+                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                  controller: contentController,
+                  onChange: supportStore.updateContent,
+                  initialText: supportStore.htmlContent,
+                ),
                 Observer(builder: (_) {
                   return supportStore.msgErrorContent == ""
                       ? Container()

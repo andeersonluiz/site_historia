@@ -1,13 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:site_historia/Screens/adminAddProjectParticipant_screen.dart';
 import 'package:site_historia/Screens/adminAddProject_screen.dart';
 import 'package:site_historia/Screens/adminProjects_screen.dart';
 import 'package:site_historia/Screens/admin_screen.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Screens/loading_screen.dart';
 import 'package:site_historia/Screens/project_screen.dart';
+import 'package:site_historia/Support/vxNavigator.dart';
 import 'package:site_historia/firebase/login_auth.dart';
 import 'package:site_historia/firebase/teacher_firestore.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -28,7 +28,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  setPathUrlStrategy();
+  setPathUrlStrategy(); 
   runApp(MultiProvider(providers: [
     Provider<SupportStore>(
       create: (_) => SupportStore(),
@@ -39,12 +39,29 @@ Future<void> main() async {
   ], child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final username = "";
+  var routes;
+
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    routes = VelocityxNavigator.getRoutes(context);
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    ProjectFirestore projectFirestore = Provider.of<ProjectFirestore>(context);
-
+    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     return FutureBuilder(
       future: _loadInitialData(context),
       builder: (BuildContext ctx, AsyncSnapshot snp) {
@@ -63,115 +80,7 @@ class MyApp extends StatelessWidget {
             title: 'Site Historia',
             theme: ThemeConfig.theme,
             routeInformationParser: VxInformationParser(),
-            routerDelegate: VxNavigator(
-                notFoundPage: (_, __) {
-                  return MaterialPage(
-                      child: Loading(
-                    redirect: true,
-                  ));
-                },
-                routes: {
-                  "/": (_, __) {
-                    if (Uri.base.path != "/") {
-                      return MaterialPage(
-                        child: Loading(),
-                      );
-                    } else {
-                      return MaterialPage(
-                        child: Loading(
-                          redirect: true,
-                        ),
-                      );
-                    }
-                  },
-                  RouteNames.HOME: (_, __) {
-                    return MaterialPage(
-                      child: HomeScreen(),
-                    );
-                  },
-                  RouteNames.ABOUT: (_, __) =>
-                      MaterialPage(child: AboutScreen()),
-                  RouteNames.PROJECTS: (uri, __) {
-                    final id = uri.queryParameters["id"];
-                    if (id == null) {
-                      return MaterialPage(
-                          child: Loading(
-                        redirect: true,
-                      ));
-                    }
-
-                    final project = projectFirestore.getProjectById(
-                        id.toString()); //Pega a referencia do projeto
-                    return MaterialPage(child: ProjectScreen(project));
-                  },
-                  RouteNames.NOTICES: (_, __) =>
-                      MaterialPage(child: HomeScreen()),
-                  RouteNames.FRAMES: (_, __) =>
-                      MaterialPage(child: HomeScreen()),
-                  RouteNames.EXAM: (_, __) => MaterialPage(child: HomeScreen()),
-                  RouteNames.RECOMENDATIONS: (_, __) =>
-                      MaterialPage(child: HomeScreen()),
-                  RouteNames.COLLECTION: (_, __) =>
-                      MaterialPage(child: HomeScreen()),
-                  RouteNames.ADMIN: (_, __) {
-                    User? user = LoginAuth.getUser();
-                    if (user == null) {
-                      return MaterialPage(child: AdminScreen());
-                    } else {
-                      return MaterialPage(
-                          child: Loading(
-                              redirect: true, to: RouteNames.ADMIN_INFO));
-                    }
-                  },
-                  RouteNames.ADMIN_INFO: (uri, __) {
-                    User? user = LoginAuth.getUser();
-                    if (user == null) {
-                      return MaterialPage(
-                          child: Loading(redirect: true, to: RouteNames.ADMIN));
-                    } else {
-                      return MaterialPage(child: AdminProjectsScreen(user.uid));
-                    }
-                  },
-                  RouteNames.ADD_PROJECT: (uri, __) {
-                    User? user = LoginAuth.getUser();
-                    if (user == null) {
-                      return MaterialPage(
-                          child: Loading(redirect: true, to: RouteNames.ADMIN));
-                    } else {
-                      return MaterialPage(
-                        child: AdminAddProjectScreen(user.uid),
-                      );
-                    }
-                  },
-                  RouteNames.UPDATE_PROJECT: (uri, params) {
-                    User? user = LoginAuth.getUser();
-                    if (user == null) {
-                      return MaterialPage(
-                          child: Loading(redirect: true, to: RouteNames.ADMIN));
-                    } else {
-                      String? id = uri.queryParameters["id"];
-                      if (id == null) {
-                        id = params['id'] as String?;
-                      }
-                      final Project project =
-                          projectFirestore.getProjectById(id);
-                      return MaterialPage(
-                          child: AdminUpdateProjectScreen(project, user.uid));
-                    }
-                  },
-
-                  RouteNames.ADD_PROJECT_PARTICIPANT: (uri, params) {
-                    User? user = LoginAuth.getUser();
-                    if (user == null) {
-                      return MaterialPage(
-                          child: Loading(redirect: true, to: RouteNames.ADMIN));
-                    } else {
-                      return MaterialPage(
-                        child: AdminAddProjectParticipantScreen(),
-                      );
-                    }
-                  },
-                }),
+            routerDelegate:routes
           );
         } else {
           return Loading();

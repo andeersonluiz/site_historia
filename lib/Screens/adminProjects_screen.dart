@@ -20,8 +20,8 @@ class _AdminProjectsScreenState extends State<AdminProjectsScreen> {
   @override
   Widget build(BuildContext context) {
     final projectFirestore = Provider.of<ProjectFirestore>(context);
-
-    return FutureBuilder(
+    print("fufuuf");
+        return FutureBuilder(
         future: projectFirestore.getUsernameByUid(widget.username),
         builder: (ctx, snp) {
           if (snp.hasData) {

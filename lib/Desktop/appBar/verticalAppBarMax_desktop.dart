@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Desktop/appBar/verticalItem_desktop.dart';
+import 'package:site_historia/Support/RoutesName_support.dart';
 import 'package:site_historia/firebase/project_firestore.dart';
 
 class VerticalAppBarMax extends StatelessWidget {
@@ -18,7 +19,7 @@ class VerticalAppBarMax extends StatelessWidget {
             ),
             Divider(height:0,color: Theme.of(context).iconTheme.color,),
             VerticalItem(
-                "Projetos","",Icons.precision_manufacturing_outlined
+                "Projetos",RouteNames.ADMIN_PROJECTS,Icons.precision_manufacturing_outlined
             ),
             Divider(height:0,color: Theme.of(context).iconTheme.color,),
             VerticalItem(

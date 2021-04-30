@@ -5,6 +5,7 @@ class TeacherFirestore {
   late List<String> listTeachers = [];
 
   getTeachers() async {
+    print("lod prof");
     var query = firestore().collection("teachers").orderBy('name');
     var result = await query.get();
     final results = result.docs;

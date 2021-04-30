@@ -26,9 +26,11 @@ class AdminProjectCardMobile extends StatelessWidget {
                     Icons.edit,
                     color: Theme.of(context).primaryColor,
                   ),
-                  onPressed: () => VxNavigator.of(context).push(Uri(
-                      path: RouteNames.UPDATE_PROJECT,
-                      queryParameters: {"id": project.id.toString()})),
+                  onPressed: () {
+                    VxNavigator.of(context).push(Uri(
+                        path: RouteNames.UPDATE_PROJECT,
+                        queryParameters: {"id": project.id.toString()}));
+                  },
                 ),
                 IconButton(
                   icon: Icon(

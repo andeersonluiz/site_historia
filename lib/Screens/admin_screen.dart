@@ -28,6 +28,7 @@ class _AdminScreenState extends State<AdminScreen> {
   bool checkedValue = false;
   @override
   Widget build(BuildContext context) {
+  print("adminScrren");
     return ResponsiveBuilder(
       builder: (ctx, sizingInformation) => Scaffold(
         body: Center(
@@ -103,14 +104,14 @@ class _AdminScreenState extends State<AdminScreen> {
                                             .loginWithEmailAndPassword(
                                                 controllerEmail.text,
                                                 controllerPassword.text);
+                                        print(LoginAuth.getUser()!.uid);
                                         if (msg != "") {
                                           setState(() {
                                             msgError = msg;
                                           });
                                         } else {
-                                          VxNavigator.of(context).push(
-                                              Uri.parse(RouteNames.ADMIN_INFO),
-                                              params: {"logged": true});
+                                          VxNavigator.of(context).clearAndPush(
+                                              Uri.parse(RouteNames.ADMIN_PROJECTS),);
                                         }
                                       }
                                     },

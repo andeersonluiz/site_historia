@@ -12,6 +12,7 @@ import 'package:velocity_x/velocity_x.dart';
 class AdminProjectPageMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print("mobile pagre project");
     final projectFirestore = Provider.of<ProjectFirestore>(context);
     return Container(
       height: MediaQuery.of(context).size.height,

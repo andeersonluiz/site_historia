@@ -1,6 +1,8 @@
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
+import 'package:provider/provider.dart';
+import 'package:site_historia/Store/support_store.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class VerticalItem extends StatelessWidget {
@@ -11,6 +13,8 @@ class VerticalItem extends StatelessWidget {
   VerticalItem(this.title, this.path, this.icon, {this.isMini = false});
   @override
   Widget build(BuildContext context) {
+    final supportStore = Provider.of<SupportStore>(context);
+
     return HoverButton(
         hoverColor: Theme.of(context).hoverColor,
         shape: BeveledRectangleBorder(),
@@ -49,6 +53,8 @@ class VerticalItem extends StatelessWidget {
                   ),
           ),
         ),
-        onpressed: () => VxNavigator.of(context).replace(Uri.parse(path)));
+        onpressed: () {
+          supportStore.clearData();
+          VxNavigator.of(context).replace(Uri.parse(path));});
   }
 }

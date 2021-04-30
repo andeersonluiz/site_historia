@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:site_historia/Support/errorHander_support.dart';
@@ -73,6 +75,7 @@ abstract class _SupportStoreBase with Store {
     if (newPath!.path != "") {
       clearError(ErrorForm.Image);
     }
+    print("entrei2 $newPath");
     this._pathImage = newPath;
   }
 
@@ -81,11 +84,13 @@ abstract class _SupportStoreBase with Store {
     if (newTitle != "") {
       clearError(ErrorForm.Title);
     }
+    print("entrei");
     this._titleProject = newTitle;
   }
 
   @action
   createTeacherLocal(List<Teacher> teachers, Project? project) {
+
     if (project != null && teacherLocal.isEmpty) {
       teachers.forEach((teacher) {
         bool contains = false;
@@ -226,10 +231,10 @@ abstract class _SupportStoreBase with Store {
 
   @action
   loadDataUpdate(Project project, List<Teacher> teachers) {
-    createTeacherLocal(teachers, project);
     updatePath(PickedFile(project.imageHeader));
     updateTitle(project.name);
     updateContent(project.content);
+    createTeacherLocal(teachers, project);
     participantsLocal = ObservableList.of(
         List.generate(project.participants.length, (index) => ""));
     for (int i = 0; i < project.participants.length; i++) {
@@ -297,7 +302,8 @@ abstract class _SupportStoreBase with Store {
     String err = "";
     if (titleProject == "") {
       generateMsgError(ErrorForm.Title, "O titulo não pode ser vazio.");
-      err += "err1";
+      err +=
+       "err1";
     } else if (titleProject.length > 40) {
       generateMsgError(
           ErrorForm.Title, "O titulo não ter mais de 40 caracteres.");
@@ -311,12 +317,17 @@ abstract class _SupportStoreBase with Store {
     } else {
       clearError(ErrorForm.Image);
     }
-
+    print(htmlContent);
     if (htmlContent == "") {
       generateMsgError(ErrorForm.Content, "O conteudo não pode estar vazio.");
       err += "err4";
     } else {
-      clearError(ErrorForm.Content);
+        try{
+          Element.html(htmlContent,validator:NodeValidator());
+          clearError(ErrorForm.Content);
+        }catch(e){
+          generateMsgError(ErrorForm.Content, "Código html inválido.");
+        }
     }
     if (getTeachers().length == 0) {
       generateMsgError(
@@ -357,6 +368,7 @@ abstract class _SupportStoreBase with Store {
   }
 
   clearData() {
+    print("clean");
     _pathImage = PickedFile("");
     _titleProject = "";
     teacherLocal = ObservableList<Teacher>();

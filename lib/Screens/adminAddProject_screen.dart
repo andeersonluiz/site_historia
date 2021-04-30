@@ -36,9 +36,7 @@ class _AdminAddProjectScreenState extends State<AdminAddProjectScreen> {
                             centerTitle: true,
                             title: Text("Adicionar Projeto"),
                           ),
-                    body: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: ScreenTypeLayout(
+                    body:  ScreenTypeLayout(
                           mobile: AdminAddProjectPageMobile(),
                           desktop: Container(
                             width: MediaQuery.of(context).size.width,
@@ -48,7 +46,7 @@ class _AdminAddProjectScreenState extends State<AdminAddProjectScreen> {
                               Expanded(child: AdminAddProjectPageDesktop()),
                             ]),
                           )),
-                    )));
+                    ));
           } else if (snp.hasError) {
             return ErrorLoad(
               color: Theme.of(context).primaryColor,

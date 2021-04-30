@@ -29,9 +29,16 @@ class ProjectFirestore {
   }
 
   getProjectById(String? id) {
-    return listProjectsOrdenedByName
+    final result= listProjectsOrdenedByName
         .where((element) => element.id.toString() == id)
-        .toList()[0];
+        .toList();
+        print(result.length);
+        if(result.isNotEmpty){
+          return result[0];
+        }else{
+          return null;
+        }
+        
   }
 
   Future<String> getHeadProject(String idProject) async {
