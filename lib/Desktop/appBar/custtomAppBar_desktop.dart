@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:site_historia/Store/project_store.dart';
+import 'package:site_historia/Support/IconsData_support.dart';
 
 import '../../Support/RoutesName_support.dart';
 import '../../firebase/frame_firestore.dart';
-import '../../firebase/project_firestore.dart';
 import 'itemAppBar_desktop.dart';
 import 'itemPopupMenuAppBar_desktop.dart';
 
@@ -17,7 +17,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    ProjectFirestore projectFirestore = Provider.of<ProjectFirestore>(context);
+    ProjectStore projectStore = Provider.of<ProjectStore>(context);
     FrameFirestore frameFirestore = Provider.of<FrameFirestore>(context);
 
     return Container(
@@ -34,7 +34,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Icon(FontAwesomeIcons.bookOpen, size: 30),
+            child: Icon(IconsData.LOGO_ICON, size: 30),
           ),
           Spacer(),
           ItemAppBar("Inicio", RouteNames.HOME),
@@ -42,7 +42,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           ItemPopUpMenuAppBar(
             "Projetos",
             RouteNames.PROJECTS,
-            projectFirestore.listProjectsOrdenedByName,
+            projectStore.listProjectsOrdened,
           ),
           ItemAppBar("Noticias", RouteNames.NOTICES),
           ItemPopUpMenuAppBar("Quadros", RouteNames.FRAMES,

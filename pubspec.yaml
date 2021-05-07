@@ -47,14 +47,18 @@ dependencies:
   html_editor_enhanced: ^2.0.1
   image_picker: ^0.7.4
   fluttertoast: ^8.0.6
-  flutter_html: ^2.0.0-nullsafety.0
+  flutter_html: ^2.0.0-nullsafety.1
   universal_html: ^2.0.8
   firebase: ^9.0.1
   url_launcher: ^6.0.3
   async: ^2.4.2
   draggable_scrollbar: ^0.1.0
   pointer_interceptor: ^0.9.0
-
+  dotted_decoration: ^2.0.0
+  shared_preferences: ^2.0.5
+  shimmer: ^2.0.0
+  flutter_switch: ^0.3.1
+  dropdown_below: ^0.0.7
 dev_dependencies:
   flutter_test:
     sdk: flutter

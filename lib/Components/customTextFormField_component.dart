@@ -1,4 +1,3 @@
-import 'package:draggable_scrollbar/draggable_scrollbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -32,47 +31,41 @@ class CustomTextFormField extends StatelessWidget {
     this.padding = const EdgeInsets.all(8.0),
     this.textInputAction,
     this.focusNode,
-    
   });
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-        padding: padding,
-        child:  TextFormField(
-                initialValue: initialValue,
-                onEditingComplete: onEditingComplete,
-                controller: controller,
-                keyboardType: textInputType,
-                obscureText: obscureText,
-                onChanged: onChanged,
-                validator: validator,
-                focusNode: focusNode,
-                onFieldSubmitted: onFieldSubmitted,
-                textInputAction: textInputAction,
-                style: Theme.of(context)
-                    .textTheme
-                    .caption!
-                    .copyWith(color: Theme.of(context).primaryColor),
-                decoration: InputDecoration(
-                  hintText: hintText,
-                  labelText: labelText,
-                  border: OutlineInputBorder(),
-                  labelStyle: Theme.of(context)
-                      .textTheme
-                      .caption!
-                      .copyWith(color: Theme.of(context).primaryColor),
-                ),
-                inputFormatters: maxCharacters <= 0
-                    ? []
-                    : [
-                        LengthLimitingTextInputFormatter(maxCharacters),
-                      ]),
-              
-            
-          
-        
-      
+    return Padding(
+      padding: padding,
+      child: TextFormField(
+          initialValue: initialValue,
+          onEditingComplete: onEditingComplete,
+          controller: controller,
+          keyboardType: textInputType,
+          obscureText: obscureText,
+          onChanged: onChanged,
+          validator: validator,
+          focusNode: focusNode,
+          onFieldSubmitted: onFieldSubmitted,
+          textInputAction: textInputAction,
+          style: Theme.of(context)
+              .textTheme
+              .caption!
+              .copyWith(color: Theme.of(context).primaryColor),
+          decoration: InputDecoration(
+            hintText: hintText,
+            labelText: labelText,
+            border: OutlineInputBorder(),
+            labelStyle: Theme.of(context)
+                .textTheme
+                .caption!
+                .copyWith(color: Theme.of(context).primaryColor),
+          ),
+          inputFormatters: maxCharacters <= 0
+              ? []
+              : [
+                  LengthLimitingTextInputFormatter(maxCharacters),
+                ]),
     );
   }
 }

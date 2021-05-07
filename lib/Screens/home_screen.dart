@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:site_historia/Desktop/appBar/custtomAppBar_desktop.dart';
+import 'package:site_historia/Support/IconsData_support.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import '../Desktop/home_page_desktop.dart';
 import '../Mobile/home_page_mobile.dart';
@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
             : AppBar(automaticallyImplyLeading: false, actions: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Icon(FontAwesomeIcons.bookOpen, size: 30),
+                  child: Icon(IconsData.LOGO_ICON, size: 30),
                 ),
                 Spacer(),
                 Builder(

@@ -12,7 +12,9 @@ class CustomText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: style!.copyWith(color: colorText),
+      style: style == null
+          ? Theme.of(context).textTheme.caption!.copyWith(color: colorText)
+          : style!.copyWith(color: colorText),
     );
   }
 }

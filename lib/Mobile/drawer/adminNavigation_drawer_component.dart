@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
-import 'package:site_historia/Mobile/drawer/drawer_item.dart';
+import 'package:site_historia/Support/IconsData_support.dart';
 import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Mobile/drawer/admin_drawer_item.dart';
 
 class AdminNavigatorDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PointerInterceptor(
       child: Drawer(
-
         child: Container(
           width: MediaQuery.of(context).size.width,
           color: Theme.of(context).primaryColor,
@@ -36,13 +36,15 @@ class AdminNavigatorDrawer extends StatelessWidget {
                 )),
               ),
               Divider(height: 8, thickness: 1.0),
-              DrawerItem(
-                  "Projetos", RouteNames.ADMIN_PROJECTS, Icons.whatshot_outlined),
-              DrawerItem(
-                  "Noticias", RouteNames.ADMIN_PROJECTS, Icons.cast_for_education),
-              DrawerItem(
-                  "Professores", RouteNames.ADMIN_PROJECTS, Icons.theater_comedy),
-              DrawerItem("Acervo", RouteNames.ADMIN_PROJECTS, Icons.book),
+              AdminDrawerItem("Projetos", RouteNames.ADMIN_PROJECTS,
+                  IconsData.PROJECT_ICON),
+              AdminDrawerItem(
+                  "Noticias", RouteNames.ADMIN_NOTICES, IconsData.NOTICE_ICON),
+              AdminDrawerItem("Professores", RouteNames.ADMIN_PROJECTS,
+                  IconsData.TEACHER_ICON),
+              AdminDrawerItem("Acervo", RouteNames.ADMIN_PROJECTS,
+                  IconsData.COLLECTION_ICON),
+              AdminDrawerItem("Sair", RouteNames.ADMIN, IconsData.LOGOUT_ICON),
             ],
           ),
         ),

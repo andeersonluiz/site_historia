@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:site_historia/Components/customImage_component.dart';
+import 'package:site_historia/Components/htmlViewer_component.dart';
 import 'package:site_historia/Mobile/footer/footer_mobile.dart';
-import 'package:site_historia/model/project_model.dart';
+import 'package:site_historia/Model/project_model.dart';
 
 class ProjectPageMobile extends StatelessWidget {
   final Project project;
@@ -10,17 +12,11 @@ class ProjectPageMobile extends StatelessWidget {
     return Column(
       children: [
         Stack(children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
+          CustomImage(
             height: 200,
-            decoration: BoxDecoration(
-                color: Colors.black.withOpacity(1),
-                image: DecorationImage(
-                  image: NetworkImage(
-                    project.imageHeader,
-                  ),
-                  fit: BoxFit.fill,
-                )),
+            width: MediaQuery.of(context).size.width,
+            image: project.imageHeader,
+            padding: EdgeInsets.zero,
           ),
           Container(
             height: 200,
@@ -40,67 +36,59 @@ class ProjectPageMobile extends StatelessWidget {
           ),
         ]),
         Divider(
+          height: 0,
           thickness: 1.0,
         ),
-        IntrinsicHeight(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: HtmlViewer(project.content),
+            ),
+            Divider(
+              thickness: 1.0,
+            ),
+            Column(mainAxisAlignment: MainAxisAlignment.start, children: [
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  project.content,
-                  textAlign: TextAlign.justify,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1!
-                      .copyWith(color: Theme.of(context).primaryColor),
+                child: Center(
+                  child: Text("Participantes",
+                      maxLines: 1,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5!
+                          .copyWith(color: Theme.of(context).primaryColor)),
                 ),
               ),
-              Divider(
-                thickness: 1.0,
-              ),
-              Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+              for (var teacher in project.teachers)
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(12.0),
                   child: Center(
-                    child: Text("Participantes",
-                        maxLines: 1,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline5!
-                            .copyWith(color: Theme.of(context).primaryColor)),
+                    child: Text(
+                      teacher.name + " (Professor)",
+                      style: Theme.of(context)
+                          .textTheme
+                          .subtitle2!
+                          .copyWith(color: Theme.of(context).primaryColor),
+                    ),
                   ),
                 ),
-                for (var teacher in project.teachers)
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Center(
-                      child: Text(
-                        teacher.name + " (Professor)",
-                        style: Theme.of(context)
-                            .textTheme
-                            .subtitle2!
-                            .copyWith(color: Theme.of(context).primaryColor),
-                      ),
+              for (var participant in project.participants)
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Center(
+                    child: Text(
+                      participant.name + " (Aluno)",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1!
+                          .copyWith(color: Theme.of(context).primaryColor),
                     ),
                   ),
-                for (var participant in project.participants)
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Center(
-                      child: Text(
-                        participant.name + " (Aluno)",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1!
-                            .copyWith(color: Theme.of(context).primaryColor),
-                      ),
-                    ),
-                  ),
-              ]),
-            ],
-          ),
+                ),
+            ]),
+          ],
         ),
         FooterMobile(),
       ],

@@ -1,7 +1,9 @@
+import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:flutter/material.dart';
+import 'package:site_historia/Components/customImage_component.dart';
 import 'package:site_historia/Components/htmlViewer_component.dart';
 import 'package:site_historia/Desktop/footer/footer_desktop.dart';
-import 'package:site_historia/model/project_model.dart';
+import 'package:site_historia/Model/project_model.dart';
 
 class ProjectPageDesktop extends StatelessWidget {
   final Project project;
@@ -9,19 +11,14 @@ class ProjectPageDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.max,
       children: [
         Stack(children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
+          CustomImage(
             height: 300,
-            decoration: BoxDecoration(
-                color: Colors.black.withOpacity(1),
-                image: DecorationImage(
-                  image: NetworkImage(
-                    project.imageHeader,
-                  ),
-                  fit: BoxFit.fill,
-                )),
+            width: MediaQuery.of(context).size.width,
+            image: project.imageHeader,
+            padding: EdgeInsets.zero,
           ),
           Container(
             height: 300,
@@ -41,19 +38,20 @@ class ProjectPageDesktop extends StatelessWidget {
           ),
         ]),
         Divider(height: 1),
-        IntrinsicHeight(
+        Container(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 flex: 7,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: HtmlViewer(project.content),
+                child: Container(
+                  decoration: DottedDecoration(
+                      shape: Shape.line, linePosition: LinePosition.right),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: HtmlViewer(project.content),
+                  ),
                 ),
-              ),
-              VerticalDivider(
-                thickness: 1.0,
               ),
               Expanded(
                 flex: 3,

@@ -1,45 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 import 'package:site_historia/Desktop/appBar/verticalAppBarMax_desktop.dart';
 import 'package:site_historia/Desktop/appBar/verticalAppBarMin_desktop.dart';
-
+import 'package:site_historia/Store/support_store.dart';
 
 class VerticalAppBar extends StatefulWidget {
-
   @override
   _VerticalAppBarState createState() => _VerticalAppBarState();
 }
 
 class _VerticalAppBarState extends State<VerticalAppBar> {
-  double width=300;
-  IconData icon= Icons.arrow_back_ios_sharp;
+  double width = 300;
+  IconData icon = Icons.arrow_back_ios_sharp;
   @override
   Widget build(BuildContext context) {
-    return Center(
+    SupportStore supportStore = Provider.of<SupportStore>(context);
+    return Observer(builder: (_) {
+      return Center(
         child: AnimatedContainer(
-          width: width,
+          width: supportStore.verticalIsMax ? 300 : 75,
           height: MediaQuery.of(context).size.height,
           color: Theme.of(context).primaryColor,
-          duration: Duration(milliseconds:500),
+          duration: Duration(milliseconds: 500),
           curve: Curves.ease,
-          child: Column(children: [
-            icon==Icons.arrow_back_ios_sharp?VerticalAppBarMax():VerticalAppBarMin(),
-            Spacer(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(icon: Icon(icon), onPressed: (){
-                setState((){if(icon==Icons.arrow_back_ios_sharp){
-                  width=75;
-                  icon=Icons.arrow_forward_ios_sharp;
-                }else{
-                  width=300;
-                  icon=Icons.arrow_back_ios_sharp;
-                }});
-                
-              }),
-            )
-          ],),
+          child: Column(
+            children: [
+              supportStore.verticalIsMax
+                  ? VerticalAppBarMax()
+                  : VerticalAppBarMin(),
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                    icon: Icon(supportStore.verticalIsMax
+                        ? Icons.arrow_back_ios_sharp
+                        : Icons.arrow_forward_ios_sharp),
+                    onPressed: () {
+                      supportStore.changeVerticalBar();
+                    }),
+              )
+            ],
+          ),
         ),
-      
-    );
+      );
+    });
   }
 }

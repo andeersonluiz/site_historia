@@ -1,39 +1,44 @@
-import 'package:intl/intl.dart';
-
 class Notice {
   int id;
   String title;
   String subtitle;
   String tag;
-  String imageHeader;
+  String type;
+  String thumb;
   String datePost;
   String content;
   int views;
   bool isTopHeader;
-  Notice(
-      {required this.id,
-      required this.title,
-      required this.subtitle,
-      required this.tag,
-      required this.imageHeader,
-      required this.datePost,
-      required this.content,
-      required this.views,
-      required this.isTopHeader});
+  String author;
+
+  Notice({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.tag,
+    required this.type,
+    required this.thumb,
+    required this.datePost,
+    required this.content,
+    required this.views,
+    required this.isTopHeader,
+    required this.author,
+  });
 
   factory Notice.fromJson(Map<String, dynamic> json) {
-    final f = DateFormat("dd-MM-yyyy hh:mm");
-
     return Notice(
-        id: json['id'],
-        title: json['title'],
-        subtitle: json['subtitle'],
-        tag: json['tag'],
-        imageHeader: json['imageHeader'],
-        datePost: f.format(json['datePost']),
-        content: json['content'],
-        views: json['views'],
-        isTopHeader: json['isTopHeader']);
+      id: json['id'],
+      title: json['title'],
+      subtitle: json['subtitle'],
+      tag: json['tag'],
+      type: json['type'],
+      thumb: json['thumb'],
+      datePost: json['datePost'],
+      content: json['content'],
+      views: json['views'],
+      isTopHeader: json['isTopHeader'],
+      author: json['author'],
+    );
   }
 
   Map<String, dynamic> toJson() => {
@@ -41,7 +46,9 @@ class Notice {
         'title': title,
         'subtitle': subtitle,
         'tag': tag,
-        'imageHeader': imageHeader,
+        'type': type,
+        'thumb': thumb,
+        'author': author,
         'datePost': datePost,
         'content': content,
         'views': views,

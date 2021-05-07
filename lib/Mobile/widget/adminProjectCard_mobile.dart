@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:site_historia/Components/customButton_component.dart';
+import 'package:site_historia/Components/customText_component.dart';
+import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Support/RoutesName_support.dart';
-import 'package:site_historia/model/project_model.dart';
+import 'package:site_historia/Model/project_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class AdminProjectCardMobile extends StatelessWidget {
@@ -10,6 +14,8 @@ class AdminProjectCardMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final projectStore = Provider.of<ProjectStore>(context);
+
     return Container(
       padding: EdgeInsets.all(8.0),
       child: Card(
@@ -37,7 +43,8 @@ class AdminProjectCardMobile extends StatelessWidget {
                     Icons.delete,
                     color: Theme.of(context).primaryColor,
                   ),
-                  onPressed: () {},
+                  onPressed: () =>
+                      _showMaterialDialog(context, project, projectStore),
                 ),
               ],
             ),
@@ -95,5 +102,37 @@ class AdminProjectCardMobile extends StatelessWidget {
             )
           ])),
     );
+  }
+
+  _showMaterialDialog(
+      BuildContext context, Project project, ProjectStore projectStore) {
+    showDialog(
+        context: context,
+        builder: (_) => new AlertDialog(
+              title: new CustomText(
+                "Confirmar Exclusão",
+                style: Theme.of(context).textTheme.headline5,
+              ),
+              content: new CustomText(
+                "Tem certeza que deseja excluir o projeto ${project.name}?",
+                style: Theme.of(context).textTheme.subtitle1,
+              ),
+              actions: <Widget>[
+                CustomButton(
+                    text: "Sim",
+                    onPressed: () async {
+                      await projectStore.deleteProject(project.id);
+                      projectStore.getProjects();
+                      /*** TRANSFORMAR LISTA DE PROJETOS EM MOBX PARA ATUALIZAR DINAMICAMENTE OS VALORES*/
+                      Navigator.of(context).pop();
+                    }),
+                CustomButton(
+                  text: "Não",
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ));
   }
 }

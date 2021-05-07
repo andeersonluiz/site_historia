@@ -1,8 +1,8 @@
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
-import 'package:provider/provider.dart';
-import 'package:site_historia/Store/support_store.dart';
+import 'package:site_historia/Components/customToast_component.dart';
+import 'package:site_historia/firebase/login_auth.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class VerticalItem extends StatelessWidget {
@@ -13,13 +13,11 @@ class VerticalItem extends StatelessWidget {
   VerticalItem(this.title, this.path, this.icon, {this.isMini = false});
   @override
   Widget build(BuildContext context) {
-    final supportStore = Provider.of<SupportStore>(context);
-
     return HoverButton(
         hoverColor: Theme.of(context).hoverColor,
         shape: BeveledRectangleBorder(),
         padding: EdgeInsets.all(8),
-        hoverPadding: EdgeInsets.all(0),
+        hoverPadding: EdgeInsets.zero,
         child: Center(
           child: Tooltip(
             message: title,
@@ -44,17 +42,23 @@ class VerticalItem extends StatelessWidget {
                     ),
                   )
                 : Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: Icon(
                       icon,
                       color: Theme.of(context).iconTheme.color,
-                      size: 30,
+                      size: 24,
                     ),
                   ),
           ),
         ),
-        onpressed: () {
-          supportStore.clearData();
-          VxNavigator.of(context).replace(Uri.parse(path));});
+        onpressed: () async {
+          if (title == "Sair") {
+            await LoginAuth.signOut();
+            CustomToast.showToast("Você saiu com sucesso!", Colors.green);
+          }
+
+          VxNavigator.of(context).pop();
+          VxNavigator.of(context).push(Uri.parse(path));
+        });
   }
 }

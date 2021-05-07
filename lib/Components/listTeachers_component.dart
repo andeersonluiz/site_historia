@@ -4,7 +4,7 @@ import 'package:site_historia/Components/customLoading_component.dart';
 import 'package:site_historia/Desktop/tile/teacherTile_desktop.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/firebase/teacher_firestore.dart';
-import 'package:site_historia/model/teacher_model.dart';
+import 'package:site_historia/Model/teacher_model.dart';
 
 class ListTeachers extends StatelessWidget {
   final sizeImage = 170.0;

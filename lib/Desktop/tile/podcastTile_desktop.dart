@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../model/notice_model.dart';
+import 'package:site_historia/Components/customImage_component.dart';
+import 'package:site_historia/Support/globals_variables.dart';
+import '../../Model/notice_model.dart';
 
 class PodcastTile extends StatelessWidget {
   final Notice podcast;
@@ -16,17 +18,13 @@ class PodcastTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            flex: 3,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                image: DecorationImage(
-                  image: NetworkImage(podcast.imageHeader),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              flex: 3,
+              child: CustomImage(
+                height: 150,
+                image: podcast.thumb,
+                circularRadius: 8.0,
+                padding: EdgeInsets.zero,
+              )),
           Expanded(
             flex: 7,
             child: Column(
@@ -38,10 +36,10 @@ class PodcastTile extends StatelessWidget {
                     child: Container(
                       padding: EdgeInsets.all(4.0),
                       decoration: BoxDecoration(
-                        color: Colors.green,
+                        color: GlobalsVariables.colorByTag[podcast.tag],
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Text('Podcast',
+                      child: Text(podcast.tag,
                           style: Theme.of(context)
                               .textTheme
                               .bodyText2!

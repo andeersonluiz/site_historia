@@ -28,6 +28,7 @@ class ThemeConfig {
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all<Color>(brown),
+
     )),
     iconTheme: IconThemeData(
       color: textColor,

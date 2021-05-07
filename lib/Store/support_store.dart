@@ -1,26 +1,33 @@
-import 'dart:html';
-
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:site_historia/Support/errorHander_support.dart';
-import 'package:site_historia/model/project_model.dart';
-import 'package:site_historia/model/teacher_model.dart';
+import 'package:site_historia/Model/project_model.dart';
+import 'package:site_historia/Model/teacher_model.dart';
 part 'support_store.g.dart';
 
 class SupportStore = _SupportStoreBase with _$SupportStore;
 
 abstract class _SupportStoreBase with Store {
   @observable
+  String _title = "";
+
+  @observable
+  String _subtitle = "";
+
+  @observable
+  String _type = "Podcast";
+
+  @observable
+  String _tag = "Podcast";
+
+  @observable
+  bool _isTopHeader = false;
+
+  @observable
   PickedFile? _pathImage = PickedFile("");
 
   @observable
-  String _titleProject = "";
-
-  @computed
-  PickedFile? get pathImage => this._pathImage;
-
-  @computed
-  String get titleProject => this._titleProject;
+  String? _htmlContent = "";
 
   @observable
   ObservableList<Teacher> teacherLocal = ObservableList<Teacher>();
@@ -28,14 +35,35 @@ abstract class _SupportStoreBase with Store {
   @observable
   ObservableList<String> participantsLocal = ObservableList<String>();
 
-  @observable
-  String _msgErrorParticipants = "";
+  @computed
+  String get title => this._title;
 
-  @observable
-  String _msgErrorParticipantsSize = "";
+  @computed
+  String get subtitle => this._subtitle;
+
+  @computed
+  String get type => this._type;
+
+  @computed
+  String get tag => this._tag;
+
+  @computed
+  bool get isTopHeader => this._isTopHeader;
+
+  @computed
+  PickedFile? get pathImage => this._pathImage;
+
+  @computed
+  String? get htmlContent => this._htmlContent;
 
   @observable
   String _msgErrorTitle = "";
+
+  @observable
+  String _msgErrorSubtitle = "";
+
+  @observable
+  String _msgErrorTopHeader = "";
 
   @observable
   String _msgErrorImage = "";
@@ -46,14 +74,20 @@ abstract class _SupportStoreBase with Store {
   @observable
   String _msgErrorTeacher = "";
 
-  @computed
-  String get msgErrorParticipants => this._msgErrorParticipants;
+  @observable
+  String _msgErrorParticipants = "";
 
-  @computed
-  String get msgErrorParticipantsSize => this._msgErrorParticipantsSize;
+  @observable
+  String _msgErrorParticipantsSize = "";
 
   @computed
   String get msgErrorTitle => this._msgErrorTitle;
+
+  @computed
+  String get msgErrorSubTitle => this._msgErrorSubtitle;
+
+  @computed
+  String get msgErrorTopHeader => this._msgErrorTopHeader;
 
   @computed
   String get msgErrorImage => this._msgErrorImage;
@@ -64,33 +98,82 @@ abstract class _SupportStoreBase with Store {
   @computed
   String get msgErrorTeacher => this._msgErrorTeacher;
 
-  @observable
-  String? _htmlContent = "";
+  @computed
+  String get msgErrorParticipants => this._msgErrorParticipants;
 
   @computed
-  String? get htmlContent => this._htmlContent;
+  String get msgErrorParticipantsSize => this._msgErrorParticipantsSize;
 
-  @action
-  updatePath(PickedFile? newPath) {
-    if (newPath!.path != "") {
-      clearError(ErrorForm.Image);
-    }
-    print("entrei2 $newPath");
-    this._pathImage = newPath;
-  }
+  @observable
+  bool verticalIsMax = true;
 
   @action
   updateTitle(String newTitle) {
     if (newTitle != "") {
       clearError(ErrorForm.Title);
     }
-    print("entrei");
-    this._titleProject = newTitle;
+    this._title = newTitle;
+  }
+
+  @action
+  updateSubTitle(String newSubtitle) {
+    if (newSubtitle != "") {
+      clearError(ErrorForm.SubTitle);
+    }
+    this._subtitle = newSubtitle;
+  }
+
+  @action
+  updateType(String newType) {
+    this._type = newType;
+  }
+
+  @action
+  updateTag(String newTag) {
+    this._tag = newTag;
+  }
+
+  @action
+  updateTopHeader(bool newTopHeader) {
+    this._isTopHeader = newTopHeader;
+  }
+
+  @action
+  updatePath(PickedFile? newPath) {
+    if (newPath!.path != "") {
+      clearError(ErrorForm.Image);
+    }
+    this._pathImage = newPath;
+  }
+
+  @action
+  updateContent(String? value) {
+    if (htmlContent != value) {
+      this._htmlContent = value;
+    }
+
+    if (htmlContent != "" && msgErrorContent != "") {
+      clearError(ErrorForm.Content);
+    }
+  }
+
+  @action
+  changeVerticalBar() {
+    this.verticalIsMax = !this.verticalIsMax;
+  }
+
+  List<Teacher> getTeachers() {
+    List<Teacher> teachers = [];
+    for (int i = 0; i < teacherLocal.length; i++) {
+      if (teacherLocal[i].checked) {
+        teachers.add(teacherLocal[i]);
+      }
+    }
+    return teachers;
   }
 
   @action
   createTeacherLocal(List<Teacher> teachers, Project? project) {
-
     if (project != null && teacherLocal.isEmpty) {
       teachers.forEach((teacher) {
         bool contains = false;
@@ -162,16 +245,6 @@ abstract class _SupportStoreBase with Store {
     }
   }
 
-  List<Teacher> getTeachers() {
-    List<Teacher> teachers = [];
-    for (int i = 0; i < teacherLocal.length; i++) {
-      if (teacherLocal[i].checked) {
-        teachers.add(teacherLocal[i]);
-      }
-    }
-    return teachers;
-  }
-
   generateMsgError(ErrorForm type, String msg) {
     switch (type) {
       case ErrorForm.Title:
@@ -191,6 +264,9 @@ abstract class _SupportStoreBase with Store {
         break;
       case ErrorForm.ParticipantSize:
         this._msgErrorParticipantsSize = msg;
+        break;
+      case ErrorForm.SubTitle:
+        this._msgErrorSubtitle = msg;
         break;
     }
   }
@@ -215,26 +291,17 @@ abstract class _SupportStoreBase with Store {
       case ErrorForm.ParticipantSize:
         this._msgErrorParticipantsSize = "";
         break;
+      case ErrorForm.SubTitle:
+        this._msgErrorSubtitle = "";
+        break;
     }
   }
 
   @action
-  updateContent(String? value) {
-    if (htmlContent != value) {
-      this._htmlContent = value;
-    }
-
-    if (htmlContent != "" && msgErrorContent != "") {
-      clearError(ErrorForm.Content);
-    }
-  }
-
-  @action
-  loadDataUpdate(Project project, List<Teacher> teachers) {
+  loadInitialData(Project project) {
     updatePath(PickedFile(project.imageHeader));
     updateTitle(project.name);
     updateContent(project.content);
-    createTeacherLocal(teachers, project);
     participantsLocal = ObservableList.of(
         List.generate(project.participants.length, (index) => ""));
     for (int i = 0; i < project.participants.length; i++) {
@@ -244,10 +311,10 @@ abstract class _SupportStoreBase with Store {
 
   validateProjectMobileTab1() {
     String err = "";
-    if (titleProject == "") {
+    if (title == "") {
       generateMsgError(ErrorForm.Title, "O titulo não pode ser vazio.");
       err += "err1";
-    } else if (titleProject.length > 40) {
+    } else if (title.length > 40) {
       generateMsgError(
           ErrorForm.Title, "O titulo não ter mais de 40 caracteres.");
       err += "err2";
@@ -300,11 +367,10 @@ abstract class _SupportStoreBase with Store {
 
   validateProjectDesktop() {
     String err = "";
-    if (titleProject == "") {
+    if (title == "") {
       generateMsgError(ErrorForm.Title, "O titulo não pode ser vazio.");
-      err +=
-       "err1";
-    } else if (titleProject.length > 40) {
+      err += "err1";
+    } else if (title.length > 40) {
       generateMsgError(
           ErrorForm.Title, "O titulo não ter mais de 40 caracteres.");
       err += "err2";
@@ -317,17 +383,11 @@ abstract class _SupportStoreBase with Store {
     } else {
       clearError(ErrorForm.Image);
     }
-    print(htmlContent);
     if (htmlContent == "") {
       generateMsgError(ErrorForm.Content, "O conteudo não pode estar vazio.");
       err += "err4";
     } else {
-        try{
-          Element.html(htmlContent,validator:NodeValidator());
-          clearError(ErrorForm.Content);
-        }catch(e){
-          generateMsgError(ErrorForm.Content, "Código html inválido.");
-        }
+      clearError(ErrorForm.Content);
     }
     if (getTeachers().length == 0) {
       generateMsgError(
@@ -336,7 +396,6 @@ abstract class _SupportStoreBase with Store {
     } else {
       clearError(ErrorForm.Teacher);
     }
-
     if (getParticipantsLocalFilled().length == 0) {
       generateMsgError(
           ErrorForm.Participant, "Digite pelo menos um participante.");
@@ -344,6 +403,51 @@ abstract class _SupportStoreBase with Store {
     } else {
       clearError(ErrorForm.Participant);
     }
+    if (err == "") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  validateNotice() {
+    String err = "";
+    if (title == "") {
+      generateMsgError(ErrorForm.Title, "O titulo não pode ser vazio.");
+      err += "err1";
+    } else if (title.length > 40) {
+      generateMsgError(
+          ErrorForm.Title, "O titulo não ter mais de 40 caracteres.");
+      err += "err2";
+    } else {
+      clearError(ErrorForm.Title);
+    }
+
+    if (subtitle == "") {
+      generateMsgError(ErrorForm.SubTitle, "O subtítulo não pode ser vazio.");
+      err += "err3";
+    } else if (subtitle.length > 50) {
+      generateMsgError(
+          ErrorForm.SubTitle, "O subtítulo não ter mais de 50 caracteres.");
+      err += "err4";
+    } else {
+      clearError(ErrorForm.SubTitle);
+    }
+
+    if (pathImage!.path == "") {
+      generateMsgError(ErrorForm.Image, "Selecione uma imagem titulo.");
+      err += "err5";
+    } else {
+      clearError(ErrorForm.Image);
+    }
+
+    if (htmlContent == "") {
+      generateMsgError(ErrorForm.Content, "O conteudo não pode estar vazio.");
+      err += "err6";
+    } else {
+      clearError(ErrorForm.Content);
+    }
+
     if (err == "") {
       return true;
     } else {
@@ -368,9 +472,11 @@ abstract class _SupportStoreBase with Store {
   }
 
   clearData() {
-    print("clean");
     _pathImage = PickedFile("");
-    _titleProject = "";
+    _title = "";
+    _subtitle = "";
+    _tag = "Podcast";
+    _type = "Podcast";
     teacherLocal = ObservableList<Teacher>();
     participantsLocal = ObservableList<String>();
     _msgErrorParticipants = "";

@@ -1,0 +1,20 @@
+import 'package:flutter/material.dart';
+
+class GlobalsVariables {
+  static String username = "";
+  static int sizeCaurosel = 5;
+  static Map<String, Color> colorByTag = {
+    'Podcast': Colors.green,
+    'Estudo': Colors.red,
+  };
+
+  static List<String> types = [
+    'Podcast',
+    'Noticia',
+  ];
+
+  static List<String> tags = [
+    'Podcast',
+    'Estudo',
+  ];
+}

@@ -1,5 +1,5 @@
-import 'package:site_historia/model/participant_model.dart';
-import 'package:site_historia/model/teacher_model.dart';
+import 'package:site_historia/Model/participant_model.dart';
+import 'package:site_historia/Model/teacher_model.dart';
 
 class Project {
   int id;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../model/notice_model.dart';
+import '../Model/notice_model.dart';
+import 'customImage_component.dart';
 
 class SliderContainer extends StatelessWidget {
   final Notice notice;
@@ -16,13 +17,12 @@ class SliderContainer extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          width: double.infinity,
-          height: double.infinity,
-          child: Image.network(
-            notice.imageHeader,
-            fit: BoxFit.fill,
-          ),
-        ),
+            width: double.infinity,
+            height: double.infinity,
+            child: CustomImage(
+              image: notice.thumb,
+              padding: EdgeInsets.zero,
+            )),
         Align(
           alignment: Alignment.bottomLeft,
           child: Container(

@@ -7,7 +7,7 @@ import 'package:site_historia/Desktop/appBar/verticalAppBar_desktop.dart';
 import 'package:site_historia/Mobile/adminProject_page_mobile.dart';
 import 'package:site_historia/Mobile/drawer/adminNavigation_drawer_component.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
-import 'package:site_historia/firebase/project_firestore.dart';
+import 'package:site_historia/Store/project_store.dart';
 
 class AdminProjectsScreen extends StatefulWidget {
   final String username;
@@ -19,10 +19,9 @@ class AdminProjectsScreen extends StatefulWidget {
 class _AdminProjectsScreenState extends State<AdminProjectsScreen> {
   @override
   Widget build(BuildContext context) {
-    final projectFirestore = Provider.of<ProjectFirestore>(context);
-    print("fufuuf");
-        return FutureBuilder(
-        future: projectFirestore.getUsernameByUid(widget.username),
+    final projectStore = Provider.of<ProjectStore>(context);
+    return FutureBuilder(
+        future: projectStore.getUsernameByUid(widget.username),
         builder: (ctx, snp) {
           if (snp.hasData) {
             return ResponsiveBuilder(

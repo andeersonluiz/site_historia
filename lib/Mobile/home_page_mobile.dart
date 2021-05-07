@@ -16,6 +16,7 @@ class HomePageMobile extends StatelessWidget {
         SliderImageMobile(),
         Divider(
           thickness: 1.0,
+          height: 0,
         ),
         width > 600
             ? Row(children: [
@@ -24,7 +25,7 @@ class HomePageMobile extends StatelessWidget {
                     flex: 5,
                     child: Container(
                         color: ThemeConfig.brownPodcast,
-                        child: LatestPodcastMobile(0.45))),
+                        child: LatestPodcastMobile(widthPercentualSize: 0.45))),
               ])
             : Column(children: [
                 Container(
@@ -33,10 +34,11 @@ class HomePageMobile extends StatelessWidget {
                 Container(
                     width: MediaQuery.of(context).size.width,
                     color: ThemeConfig.brownPodcast,
-                    child: LatestPodcastMobile(1)),
+                    child: LatestPodcastMobile(widthPercentualSize: 1)),
               ]),
         Divider(
           thickness: 1.0,
+          height: 0,
         ),
         FooterMobile(),
       ],

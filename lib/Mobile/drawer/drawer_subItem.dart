@@ -13,14 +13,15 @@ class DrawerSubItem extends StatelessWidget {
     return HoverButton(
       hoverColor: Theme.of(context).hoverColor,
       shape: BeveledRectangleBorder(),
-      padding: EdgeInsets.all(0),
-      hoverPadding: EdgeInsets.all(0),
+      padding: EdgeInsets.zero,
+      hoverPadding: EdgeInsets.zero,
       onpressed: () {
-        Scaffold.of(context).openEndDrawer();
-        VxNavigator.of(context).waitAndPush(
+        VxNavigator.of(context).replace(
           Uri(path: path, queryParameters: {"id": object.id.toString()}),
           params: object,
         );
+        Scaffold.of(context).openEndDrawer();
+
       },
       child: Padding(
         padding: const EdgeInsets.only(left: 8.0),

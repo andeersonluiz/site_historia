@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:site_historia/Components/customImage_component.dart';
 import 'package:site_historia/Components/listTeachers_component.dart';
 import 'package:site_historia/Mobile/footer/footer_mobile.dart';
 
@@ -28,16 +29,7 @@ class _AboutPageMobileState extends State<AboutPageMobile> {
         Divider(
           thickness: 1.0,
         ),
-        Container(
-          height: 280,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              "assets/test.jpg",
-              fit: BoxFit.fill,
-            ),
-          ),
-        ),
+        Center(child: CustomImage(height: 200, image: "assets/test.jpg")),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
@@ -47,11 +39,6 @@ class _AboutPageMobileState extends State<AboutPageMobile> {
                 .bodyText1!
                 .copyWith(color: Theme.of(context).primaryColor),
           ),
-        ),
-        Container(
-          color: Theme.of(context).primaryColor.withAlpha(50),
-          width: MediaQuery.of(context).size.width,
-          height: 1,
         ),
         Divider(
           thickness: 1.0,

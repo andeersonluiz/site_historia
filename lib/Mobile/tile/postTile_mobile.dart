@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:site_historia/Components/customImage_component.dart';
+import 'package:site_historia/Support/globals_variables.dart';
 
-import '../../model/notice_model.dart';
+import '../../Model/notice_model.dart';
 
 class PostTileMobile extends StatelessWidget {
   final Notice notice;
@@ -18,17 +20,13 @@ class PostTileMobile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
-              flex: 4,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  image: DecorationImage(
-                    image: NetworkImage(notice.imageHeader),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            ),
+                flex: 4,
+                child: CustomImage(
+                  height: 150,
+                  image: notice.thumb,
+                  circularRadius: 8.0,
+                  padding: EdgeInsets.zero,
+                )),
             Expanded(
               flex: 6,
               child: Column(
@@ -40,11 +38,11 @@ class PostTileMobile extends StatelessWidget {
                       child: Container(
                         padding: EdgeInsets.all(4.0),
                         decoration: BoxDecoration(
-                          color: Colors.red,
+                          color: GlobalsVariables.colorByTag[notice.tag],
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
-                          'Study',
+                          notice.tag,
                           style: Theme.of(context)
                               .textTheme
                               .bodyText2!

@@ -24,6 +24,8 @@ class RouteNames {
   static const String ADMIN_PROJECTS = "/admin/projetos";
   static const String ADD_PROJECT = "/admin/projetos/adicionarProjeto";
   static const String UPDATE_PROJECT = "/admin/projetos/editarProjeto";
-  static const String UPDATE_PROJECT_PARTICIPANT =
-      "/admin/projetos/editarProjeto/participante";
+  static const String ADMIN_NOTICES = "/admin/noticias";
+  static const String ADD_NOTICE = "/admin/noticias/adicionarNoticia";
+
+  static const String UPDATE_NOTICE = "/admin/noticias/editarNoticia";
 }

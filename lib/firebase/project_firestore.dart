@@ -1,14 +1,15 @@
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:site_historia/model/participant_model.dart';
-import 'package:site_historia/model/teacher_model.dart';
+import 'package:site_historia/Model/participant_model.dart';
+import 'package:site_historia/Model/project_model.dart';
+import 'package:site_historia/Model/teacher_model.dart';
 import 'package:firebase/firebase.dart';
-import '../model/project_model.dart';
 
 class ProjectFirestore {
   late List<Project> listProjectsOrdenedByName = [];
   String username = "";
-  getProjects() async {
+
+  static getProjects() async {
     var query = firestore().collection("projects").orderBy('id');
     var result = await query.get();
     final results = result.docs;
@@ -17,28 +18,18 @@ class ProjectFirestore {
     results.forEach((item) {
       projects.add(Project.fromJson(item.data()));
     });
+
     return projects;
   }
 
-  getProjectsName() async {
+  static getProjectsName() async {
     var query = firestore().collection("projects").orderBy('name');
     var result = await query.get();
+    List<Project> projectByName = [];
     result.docs.forEach((item) {
-      listProjectsOrdenedByName.add(Project.fromJson(item.data()));
+      projectByName.add(Project.fromJson(item.data()));
     });
-  }
-
-  getProjectById(String? id) {
-    final result= listProjectsOrdenedByName
-        .where((element) => element.id.toString() == id)
-        .toList();
-        print(result.length);
-        if(result.isNotEmpty){
-          return result[0];
-        }else{
-          return null;
-        }
-        
+    return projectByName;
   }
 
   Future<String> getHeadProject(String idProject) async {
@@ -66,13 +57,12 @@ class ProjectFirestore {
     return listTeacher;
   }
 
-  Future<String> getUsernameByUid(String uid) async {
+  static Future<String> getUsernameByUid(String uid) async {
     var result = await firestore().collection("admins").doc(uid).get();
-    username = result.data()["name"];
-    return username;
+    return result.data()["name"];
   }
 
-  Future<bool> addProject(
+  static Future<bool> addProject(
       String title,
       PickedFile? imageHeader,
       String? content,
@@ -81,18 +71,17 @@ class ProjectFirestore {
       String author) async {
     try {
       var result = await firestore().collection("projects").get();
-      int nextId = result.docs.length;
+      int nextId = result.docs.length + 1;
       List<Participant> listParticipants = [];
       listParticipant.forEach((element) {
         listParticipants.add(Participant(name: element, status: "Aluno"));
       });
-      var metadata = await imageHeader?.readAsBytes();
+      var metadata = await imageHeader!.readAsBytes();
       UploadTaskSnapshot task = await storage()
           .ref()
           .child("projects/$nextId.png")
           .put(metadata, UploadMetadata(contentType: 'image/jpg'))
           .future;
-
       Uri url = await task.ref.getDownloadURL();
       Project project = Project(
           id: nextId,
@@ -113,7 +102,7 @@ class ProjectFirestore {
     return true;
   }
 
-  Future<bool> updateProject(
+  static Future<bool> updateProject(
       int id,
       String title,
       PickedFile? imageHeader,
@@ -126,14 +115,20 @@ class ProjectFirestore {
       listParticipant.forEach((element) {
         listParticipants.add(Participant(name: element, status: "Aluno"));
       });
-      var metadata = await imageHeader?.readAsBytes();
-      UploadTaskSnapshot task = await storage()
-          .ref()
-          .child("projects/$id.png")
-          .put(metadata, UploadMetadata(contentType: 'image/jpg'))
-          .future;
+      Uri url = Uri.parse(imageHeader!.path.toString());
+      var urlPattern =
+          r"(https?|http)://([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?";
+      if (!RegExp(urlPattern, caseSensitive: false)
+          .hasMatch(imageHeader.path)) {
+        var metadata = await imageHeader.readAsBytes();
+        UploadTaskSnapshot task = await storage()
+            .ref()
+            .child("projects/$id.png")
+            .put(metadata, UploadMetadata(contentType: 'image/jpg'))
+            .future;
+        url = await task.ref.getDownloadURL();
+      }
 
-      Uri url = await task.ref.getDownloadURL();
       Project project = Project(
           id: id,
           author: author,
@@ -143,6 +138,7 @@ class ProjectFirestore {
           name: title,
           participants: listParticipants,
           teachers: listTeacher);
+
       await firestore()
           .collection("projects")
           .doc(id.toString())
@@ -151,5 +147,11 @@ class ProjectFirestore {
       return false;
     }
     return true;
+  }
+
+  static deleteProject(int id) async {
+    await firestore().collection("projects").doc(id.toString()).delete();
+    await storage().ref().child("projects/$id.png").delete();
+    return;
   }
 }

@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 class CustomToast {
   static showToast(String msg, Color color) {
     return Fluttertoast.showToast(
-        msg: "Projeto cadastro com sucesso!!",
+        msg: msg,
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,

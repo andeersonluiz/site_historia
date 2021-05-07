@@ -1,6 +1,7 @@
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
 import 'package:flutter/material.dart';
-import 'package:site_historia/model/teacher_model.dart';
+import 'package:site_historia/Components/customImage_component.dart';
+import 'package:site_historia/Model/teacher_model.dart';
 
 class TeacherTile extends StatelessWidget {
   final Teacher teacher;
@@ -15,17 +16,13 @@ class TeacherTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            flex: 6,
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage("assets/test.jpg"),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              flex: 6,
+              child: CustomImage(
+                height: 150,
+                image: "assets/test.jpg",
+                circularRadius: 48.0,
+                padding: EdgeInsets.zero,
+              )),
           Expanded(
             flex: 2,
             child: Padding(

@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:site_historia/Components/customButton_component.dart';
+import 'package:site_historia/Components/customText_component.dart';
+import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Support/RoutesName_support.dart';
-import 'package:site_historia/model/project_model.dart';
+import 'package:site_historia/Model/project_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class AdminProjectCard extends StatelessWidget {
+class AdminProjectCardDesktop extends StatelessWidget {
   final Project project;
   final double sizeCard = 250;
-  AdminProjectCard(this.project);
+  AdminProjectCardDesktop(this.project);
 
   @override
   Widget build(BuildContext context) {
+    final projectStore = Provider.of<ProjectStore>(context);
+
     return Container(
       padding: EdgeInsets.all(8.0),
       child: Card(
@@ -35,7 +41,8 @@ class AdminProjectCard extends StatelessWidget {
                     Icons.delete,
                     color: Theme.of(context).primaryColor,
                   ),
-                  onPressed: () {},
+                  onPressed: () =>
+                      _showMaterialDialog(context, project, projectStore),
                 ),
               ],
             ),
@@ -105,5 +112,36 @@ class AdminProjectCard extends StatelessWidget {
             )
           ])),
     );
+  }
+
+  _showMaterialDialog(
+      BuildContext context, Project project, ProjectStore projectStore) {
+    showDialog(
+        context: context,
+        builder: (_) => new AlertDialog(
+              title: new CustomText(
+                "Confirmar Exclusão",
+                style: Theme.of(context).textTheme.headline5,
+              ),
+              content: new CustomText(
+                "Tem certeza que deseja excluir o projeto ${project.name}?",
+                style: Theme.of(context).textTheme.subtitle1,
+              ),
+              actions: <Widget>[
+                CustomButton(
+                    text: "Sim",
+                    onPressed: () async {
+                      await projectStore.deleteProject(project.id);
+                      projectStore.getProjects();
+                      Navigator.of(context).pop();
+                    }),
+                CustomButton(
+                  text: "Não",
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ));
   }
 }

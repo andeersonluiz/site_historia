@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:site_historia/Components/customImage_component.dart';
 import 'package:site_historia/Desktop/footer/footer_desktop.dart';
 import 'package:site_historia/Components/listTeachers_component.dart';
 
@@ -34,12 +35,10 @@ class _AboutPageDesktopState extends State<AboutPageDesktop> {
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.asset(
-                    "assets/test.jpg",
-                    fit: BoxFit.fill,
-                  ),
-                ),
+                    padding: const EdgeInsets.all(8.0),
+                    child: CustomImage(
+                      image: "assets/test.jpg",
+                    )),
               ),
               Expanded(
                 child: Padding(

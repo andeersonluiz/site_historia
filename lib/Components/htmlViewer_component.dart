@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
@@ -46,15 +48,17 @@ class HtmlViewer extends StatelessWidget {
             color: Theme.of(context).primaryColor),
       },
       customRender: {
-        "li": (ctx, child, attributtes, element) {
-          return customListItem(context, element);
+        "li": (ctx, child) {
+          return customListItem(context, ctx.tree.element!);
         },
-        "a": (ctx, child, attributtes, element) {
+        "a": (ctx, child) {
           return customHyperLink(
-              context, attributtes['href'].toString(), element);
+              context,
+              ctx.tree.element!.attributes['href'].toString(),
+              ctx.tree.element!);
         },
-        "img": (ctx, child, attributtes, element) {
-          return customImage(context, attributtes);
+        "img": (ctx, child) {
+          return customImage(context, ctx.tree.element!.attributes);
         }
       },
     );
@@ -104,9 +108,9 @@ class HtmlViewer extends StatelessWidget {
 
   Image customImage(
     BuildContext context,
-    Map<String, String> attributes,
+    LinkedHashMap<Object, String> attributes,
   ) {
-    if (attributes["class"] == "emoji-img-inline") {
+    if (attributes["class"] == "emo ji-img-inline") {
       return Image.network(attributes["src"].toString(), scale: 4);
     } else {
       return Image.network(attributes["src"].toString(), scale: 1);

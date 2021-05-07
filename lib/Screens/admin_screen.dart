@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:site_historia/Components/customButton_component.dart';
-import 'package:site_historia/Components/customCheckBox_component.dart';
 import 'package:site_historia/Components/customTextFormField_component.dart';
 import 'package:site_historia/Components/erroMsg_component.dart';
 import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/preferences_support.dart';
 import 'package:site_historia/firebase/login_auth.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -26,9 +26,9 @@ class _AdminScreenState extends State<AdminScreen> {
   }
 
   bool checkedValue = false;
+  bool _buttonDisabled = false;
   @override
   Widget build(BuildContext context) {
-  print("adminScrren");
     return ResponsiveBuilder(
       builder: (ctx, sizingInformation) => Scaffold(
         body: Center(
@@ -38,8 +38,9 @@ class _AdminScreenState extends State<AdminScreen> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8.0)),
               width: 400,
-              height: 340,
+              height: 300,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -65,6 +66,10 @@ class _AdminScreenState extends State<AdminScreen> {
                               validator: (word) {
                                 if (word!.isEmpty) {
                                   return 'Este campo é obrigatório';
+                                } else if (!RegExp(
+                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    .hasMatch(word)) {
+                                  return 'Email inválido';
                                 }
                                 return null;
                               },
@@ -82,39 +87,60 @@ class _AdminScreenState extends State<AdminScreen> {
                                 return null;
                               },
                             ),
-                            CustomCheckBox(
-                              title: "Manter Conectado",
-                              value: checkedValue,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  checkedValue = newValue!;
-                                });
-                              },
-                            ),
                             msgError == "" ? Container() : ErrorMsg(msgError),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
                                   width: double.infinity,
                                   child: CustomButton(
-                                    text: "Entrar",
-                                    onPressed: () async {
-                                      if (_formKey.currentState!.validate()) {
-                                        String msg = await LoginAuth
-                                            .loginWithEmailAndPassword(
-                                                controllerEmail.text,
-                                                controllerPassword.text);
-                                        print(LoginAuth.getUser()!.uid);
-                                        if (msg != "") {
-                                          setState(() {
-                                            msgError = msg;
-                                          });
-                                        } else {
-                                          VxNavigator.of(context).clearAndPush(
-                                              Uri.parse(RouteNames.ADMIN_PROJECTS),);
-                                        }
-                                      }
-                                    },
+                                    style: !_buttonDisabled
+                                        ? null
+                                        : ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all<
+                                                        Color>(
+                                                    Theme.of(context)
+                                                        .primaryColor
+                                                        .withAlpha(170)),
+                                          ),
+                                    text: !_buttonDisabled
+                                        ? "Entrar"
+                                        : "Entrando...",
+                                    onPressed: !_buttonDisabled
+                                        ? () async {
+                                            setState(() {
+                                              msgError = "";
+                                            });
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              setState(() {
+                                                _buttonDisabled = true;
+                                              });
+                                              String msg = await LoginAuth
+                                                  .loginWithEmailAndPassword(
+                                                      controllerEmail.text,
+                                                      controllerPassword.text);
+                                              await Future.delayed(
+                                                  Duration(seconds: 1));
+                                              setState(() {
+                                                _buttonDisabled = false;
+                                              });
+                                              if (msg != "") {
+                                                setState(() {
+                                                  msgError = msg;
+                                                });
+                                              } else {
+                                                await Prefs.saveLogin(
+                                                    controllerEmail.text);
+                                                VxNavigator.of(context)
+                                                    .clearAndPush(
+                                                  Uri.parse(RouteNames
+                                                      .ADMIN_PROJECTS),
+                                                );
+                                              }
+                                            }
+                                          }
+                                        : null,
                                   )),
                             )
                           ]))

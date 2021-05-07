@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:site_historia/Desktop/about_page_desktop.dart';
 import 'package:site_historia/Desktop/appBar/custtomAppBar_desktop.dart';
 import 'package:site_historia/Mobile/about_page_mobile.dart';
+import 'package:site_historia/Support/IconsData_support.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import '../Mobile/drawer/navigation_drawer_component.dart';
 
@@ -21,9 +21,9 @@ class _AboutScreenState extends State<AboutScreen> {
         appBar: sizingInformation.isDesktop
             ? null
             : AppBar(automaticallyImplyLeading: false, actions: [
-                Padding(    
+                Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Icon(FontAwesomeIcons.bookOpen, size: 30),
+                  child: Icon(IconsData.LOGO_ICON, size: 30),
                 ),
                 Spacer(),
                 Builder(

@@ -13,11 +13,13 @@ class HomePageDesktop extends StatelessWidget {
       SliderImageDesktop(),
       Divider(height: 1),
       Row(children: [
-        Expanded(flex: 5, child: LatestPosts()),
+        Expanded(flex: 5, child: Container(height: 525, child: LatestPosts())),
         Expanded(
             flex: 5,
             child: Container(
-                color: ThemeConfig.brownPodcast, child: LatestPodcast())),
+                height: 525,
+                color: ThemeConfig.brownPodcast,
+                child: LatestPodcast())),
       ]),
       Divider(height: 1),
       FooterDesktop(),

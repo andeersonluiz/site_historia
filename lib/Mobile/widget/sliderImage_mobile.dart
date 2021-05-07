@@ -1,10 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
+import 'package:site_historia/Components/customLoading_component.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
+import 'package:site_historia/Store/notice_store.dart';
 
 import '../../Components/sliderContainer_component.dart';
-import '../../firebase/notice_firestore.dart';
-import '../../model/notice_model.dart';
+import '../../Model/notice_model.dart';
 
 class SliderImageMobile extends StatefulWidget {
   @override
@@ -19,22 +23,33 @@ class _SliderImageMobileState extends State<SliderImageMobile> {
     Colors.blue,
     Colors.orange
   ];
-  final List<int> example = [0, 1, 2, 3, 4];
   int _current = 0;
-  final noticeFirestore = NoticeFirestore();
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final noticeStore = Provider.of<NoticeStore>(context);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Column(children: [
-        FutureBuilder(
-            future: noticeFirestore.getSliders(),
-            builder: (ctx, snp) {
-              if (snp.hasData) {
-                final List<Notice> listNotices = snp.data as List<Notice>;
-                return width > 600
+      child: Observer(builder: (ctx) {
+        noticeStore.listSliders ?? noticeStore.getSliders();
+        switch (noticeStore.listSliders!.status) {
+          case FutureStatus.pending:
+            return CustomLoading();
+          case FutureStatus.rejected:
+            return ErrorLoad(
+              color: Theme.of(context).primaryColor,
+            );
+          case FutureStatus.fulfilled:
+            final List<Notice> listNotices =
+                noticeStore.listSliders!.value as List<Notice>;
+            final pagination = List.generate(
+                noticeStore.listSliders!.value.length, (index) => index);
+
+            return Column(
+              children: [
+                width > 600
                     ? CarouselSlider(
                         options: CarouselOptions(
                             initialPage: 0,
@@ -60,30 +75,26 @@ class _SliderImageMobileState extends State<SliderImageMobile> {
                           );
                         }).toList(),
                       )
-                    : sliderImageMini(listNotices);
-              } else if (snp.hasError) {
-                return ErrorLoad(color: Theme.of(context).primaryColor);
-              } else {
-                return Container(
-                  height: 200,
-                );
-              }
-            }),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: example.map((i) {
-            return Container(
-                height: 8,
-                width: 8,
-                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: _current == i
-                        ? Theme.of(context).selectedRowColor
-                        : Theme.of(context).primaryColor));
-          }).toList(),
-        )
-      ]),
+                    : sliderImageMini(listNotices),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: pagination.map((i) {
+                    return Container(
+                        height: 8,
+                        width: 8,
+                        margin: EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 10.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: _current == i
+                                ? Theme.of(context).selectedRowColor
+                                : Theme.of(context).primaryColor));
+                  }).toList(),
+                )
+              ],
+            );
+        }
+      }),
     );
   }
 

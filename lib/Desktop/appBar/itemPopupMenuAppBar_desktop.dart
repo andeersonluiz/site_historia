@@ -28,8 +28,8 @@ class _ItemPopUpMenuAppBarState extends State<ItemPopUpMenuAppBar>
     return HoverButton(
       hoverColor: Theme.of(context).hoverColor,
       shape: BeveledRectangleBorder(),
-      padding: EdgeInsets.all(0),
-      hoverPadding: EdgeInsets.all(0),
+      padding: EdgeInsets.zero,
+      hoverPadding: EdgeInsets.zero,
       onpressed: () {},
       child: Container(
         height: double.infinity,

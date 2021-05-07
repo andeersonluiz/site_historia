@@ -9,6 +9,38 @@ part of 'support_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$SupportStore on _SupportStoreBase, Store {
+  Computed<String>? _$titleComputed;
+
+  @override
+  String get title => (_$titleComputed ??=
+          Computed<String>(() => super.title, name: '_SupportStoreBase.title'))
+      .value;
+  Computed<String>? _$subtitleComputed;
+
+  @override
+  String get subtitle =>
+      (_$subtitleComputed ??= Computed<String>(() => super.subtitle,
+              name: '_SupportStoreBase.subtitle'))
+          .value;
+  Computed<String>? _$typeComputed;
+
+  @override
+  String get type => (_$typeComputed ??=
+          Computed<String>(() => super.type, name: '_SupportStoreBase.type'))
+      .value;
+  Computed<String>? _$tagComputed;
+
+  @override
+  String get tag => (_$tagComputed ??=
+          Computed<String>(() => super.tag, name: '_SupportStoreBase.tag'))
+      .value;
+  Computed<bool>? _$isTopHeaderComputed;
+
+  @override
+  bool get isTopHeader =>
+      (_$isTopHeaderComputed ??= Computed<bool>(() => super.isTopHeader,
+              name: '_SupportStoreBase.isTopHeader'))
+          .value;
   Computed<PickedFile?>? _$pathImageComputed;
 
   @override
@@ -16,27 +48,13 @@ mixin _$SupportStore on _SupportStoreBase, Store {
       (_$pathImageComputed ??= Computed<PickedFile?>(() => super.pathImage,
               name: '_SupportStoreBase.pathImage'))
           .value;
-  Computed<String>? _$titleProjectComputed;
+  Computed<String?>? _$htmlContentComputed;
 
   @override
-  String get titleProject =>
-      (_$titleProjectComputed ??= Computed<String>(() => super.titleProject,
-              name: '_SupportStoreBase.titleProject'))
+  String? get htmlContent =>
+      (_$htmlContentComputed ??= Computed<String?>(() => super.htmlContent,
+              name: '_SupportStoreBase.htmlContent'))
           .value;
-  Computed<String>? _$msgErrorParticipantsComputed;
-
-  @override
-  String get msgErrorParticipants => (_$msgErrorParticipantsComputed ??=
-          Computed<String>(() => super.msgErrorParticipants,
-              name: '_SupportStoreBase.msgErrorParticipants'))
-      .value;
-  Computed<String>? _$msgErrorParticipantsSizeComputed;
-
-  @override
-  String get msgErrorParticipantsSize => (_$msgErrorParticipantsSizeComputed ??=
-          Computed<String>(() => super.msgErrorParticipantsSize,
-              name: '_SupportStoreBase.msgErrorParticipantsSize'))
-      .value;
   Computed<String>? _$msgErrorTitleComputed;
 
   @override
@@ -44,6 +62,20 @@ mixin _$SupportStore on _SupportStoreBase, Store {
       (_$msgErrorTitleComputed ??= Computed<String>(() => super.msgErrorTitle,
               name: '_SupportStoreBase.msgErrorTitle'))
           .value;
+  Computed<String>? _$msgErrorSubTitleComputed;
+
+  @override
+  String get msgErrorSubTitle => (_$msgErrorSubTitleComputed ??=
+          Computed<String>(() => super.msgErrorSubTitle,
+              name: '_SupportStoreBase.msgErrorSubTitle'))
+      .value;
+  Computed<String>? _$msgErrorTopHeaderComputed;
+
+  @override
+  String get msgErrorTopHeader => (_$msgErrorTopHeaderComputed ??=
+          Computed<String>(() => super.msgErrorTopHeader,
+              name: '_SupportStoreBase.msgErrorTopHeader'))
+      .value;
   Computed<String>? _$msgErrorImageComputed;
 
   @override
@@ -65,13 +97,95 @@ mixin _$SupportStore on _SupportStoreBase, Store {
           () => super.msgErrorTeacher,
           name: '_SupportStoreBase.msgErrorTeacher'))
       .value;
-  Computed<String?>? _$htmlContentComputed;
+  Computed<String>? _$msgErrorParticipantsComputed;
 
   @override
-  String? get htmlContent =>
-      (_$htmlContentComputed ??= Computed<String?>(() => super.htmlContent,
-              name: '_SupportStoreBase.htmlContent'))
-          .value;
+  String get msgErrorParticipants => (_$msgErrorParticipantsComputed ??=
+          Computed<String>(() => super.msgErrorParticipants,
+              name: '_SupportStoreBase.msgErrorParticipants'))
+      .value;
+  Computed<String>? _$msgErrorParticipantsSizeComputed;
+
+  @override
+  String get msgErrorParticipantsSize => (_$msgErrorParticipantsSizeComputed ??=
+          Computed<String>(() => super.msgErrorParticipantsSize,
+              name: '_SupportStoreBase.msgErrorParticipantsSize'))
+      .value;
+
+  final _$_titleAtom = Atom(name: '_SupportStoreBase._title');
+
+  @override
+  String get _title {
+    _$_titleAtom.reportRead();
+    return super._title;
+  }
+
+  @override
+  set _title(String value) {
+    _$_titleAtom.reportWrite(value, super._title, () {
+      super._title = value;
+    });
+  }
+
+  final _$_subtitleAtom = Atom(name: '_SupportStoreBase._subtitle');
+
+  @override
+  String get _subtitle {
+    _$_subtitleAtom.reportRead();
+    return super._subtitle;
+  }
+
+  @override
+  set _subtitle(String value) {
+    _$_subtitleAtom.reportWrite(value, super._subtitle, () {
+      super._subtitle = value;
+    });
+  }
+
+  final _$_typeAtom = Atom(name: '_SupportStoreBase._type');
+
+  @override
+  String get _type {
+    _$_typeAtom.reportRead();
+    return super._type;
+  }
+
+  @override
+  set _type(String value) {
+    _$_typeAtom.reportWrite(value, super._type, () {
+      super._type = value;
+    });
+  }
+
+  final _$_tagAtom = Atom(name: '_SupportStoreBase._tag');
+
+  @override
+  String get _tag {
+    _$_tagAtom.reportRead();
+    return super._tag;
+  }
+
+  @override
+  set _tag(String value) {
+    _$_tagAtom.reportWrite(value, super._tag, () {
+      super._tag = value;
+    });
+  }
+
+  final _$_isTopHeaderAtom = Atom(name: '_SupportStoreBase._isTopHeader');
+
+  @override
+  bool get _isTopHeader {
+    _$_isTopHeaderAtom.reportRead();
+    return super._isTopHeader;
+  }
+
+  @override
+  set _isTopHeader(bool value) {
+    _$_isTopHeaderAtom.reportWrite(value, super._isTopHeader, () {
+      super._isTopHeader = value;
+    });
+  }
 
   final _$_pathImageAtom = Atom(name: '_SupportStoreBase._pathImage');
 
@@ -88,18 +202,18 @@ mixin _$SupportStore on _SupportStoreBase, Store {
     });
   }
 
-  final _$_titleProjectAtom = Atom(name: '_SupportStoreBase._titleProject');
+  final _$_htmlContentAtom = Atom(name: '_SupportStoreBase._htmlContent');
 
   @override
-  String get _titleProject {
-    _$_titleProjectAtom.reportRead();
-    return super._titleProject;
+  String? get _htmlContent {
+    _$_htmlContentAtom.reportRead();
+    return super._htmlContent;
   }
 
   @override
-  set _titleProject(String value) {
-    _$_titleProjectAtom.reportWrite(value, super._titleProject, () {
-      super._titleProject = value;
+  set _htmlContent(String? value) {
+    _$_htmlContentAtom.reportWrite(value, super._htmlContent, () {
+      super._htmlContent = value;
     });
   }
 
@@ -134,40 +248,6 @@ mixin _$SupportStore on _SupportStoreBase, Store {
     });
   }
 
-  final _$_msgErrorParticipantsAtom =
-      Atom(name: '_SupportStoreBase._msgErrorParticipants');
-
-  @override
-  String get _msgErrorParticipants {
-    _$_msgErrorParticipantsAtom.reportRead();
-    return super._msgErrorParticipants;
-  }
-
-  @override
-  set _msgErrorParticipants(String value) {
-    _$_msgErrorParticipantsAtom.reportWrite(value, super._msgErrorParticipants,
-        () {
-      super._msgErrorParticipants = value;
-    });
-  }
-
-  final _$_msgErrorParticipantsSizeAtom =
-      Atom(name: '_SupportStoreBase._msgErrorParticipantsSize');
-
-  @override
-  String get _msgErrorParticipantsSize {
-    _$_msgErrorParticipantsSizeAtom.reportRead();
-    return super._msgErrorParticipantsSize;
-  }
-
-  @override
-  set _msgErrorParticipantsSize(String value) {
-    _$_msgErrorParticipantsSizeAtom
-        .reportWrite(value, super._msgErrorParticipantsSize, () {
-      super._msgErrorParticipantsSize = value;
-    });
-  }
-
   final _$_msgErrorTitleAtom = Atom(name: '_SupportStoreBase._msgErrorTitle');
 
   @override
@@ -180,6 +260,38 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   set _msgErrorTitle(String value) {
     _$_msgErrorTitleAtom.reportWrite(value, super._msgErrorTitle, () {
       super._msgErrorTitle = value;
+    });
+  }
+
+  final _$_msgErrorSubtitleAtom =
+      Atom(name: '_SupportStoreBase._msgErrorSubtitle');
+
+  @override
+  String get _msgErrorSubtitle {
+    _$_msgErrorSubtitleAtom.reportRead();
+    return super._msgErrorSubtitle;
+  }
+
+  @override
+  set _msgErrorSubtitle(String value) {
+    _$_msgErrorSubtitleAtom.reportWrite(value, super._msgErrorSubtitle, () {
+      super._msgErrorSubtitle = value;
+    });
+  }
+
+  final _$_msgErrorTopHeaderAtom =
+      Atom(name: '_SupportStoreBase._msgErrorTopHeader');
+
+  @override
+  String get _msgErrorTopHeader {
+    _$_msgErrorTopHeaderAtom.reportRead();
+    return super._msgErrorTopHeader;
+  }
+
+  @override
+  set _msgErrorTopHeader(String value) {
+    _$_msgErrorTopHeaderAtom.reportWrite(value, super._msgErrorTopHeader, () {
+      super._msgErrorTopHeader = value;
     });
   }
 
@@ -230,23 +342,112 @@ mixin _$SupportStore on _SupportStoreBase, Store {
     });
   }
 
-  final _$_htmlContentAtom = Atom(name: '_SupportStoreBase._htmlContent');
+  final _$_msgErrorParticipantsAtom =
+      Atom(name: '_SupportStoreBase._msgErrorParticipants');
 
   @override
-  String? get _htmlContent {
-    _$_htmlContentAtom.reportRead();
-    return super._htmlContent;
+  String get _msgErrorParticipants {
+    _$_msgErrorParticipantsAtom.reportRead();
+    return super._msgErrorParticipants;
   }
 
   @override
-  set _htmlContent(String? value) {
-    _$_htmlContentAtom.reportWrite(value, super._htmlContent, () {
-      super._htmlContent = value;
+  set _msgErrorParticipants(String value) {
+    _$_msgErrorParticipantsAtom.reportWrite(value, super._msgErrorParticipants,
+        () {
+      super._msgErrorParticipants = value;
+    });
+  }
+
+  final _$_msgErrorParticipantsSizeAtom =
+      Atom(name: '_SupportStoreBase._msgErrorParticipantsSize');
+
+  @override
+  String get _msgErrorParticipantsSize {
+    _$_msgErrorParticipantsSizeAtom.reportRead();
+    return super._msgErrorParticipantsSize;
+  }
+
+  @override
+  set _msgErrorParticipantsSize(String value) {
+    _$_msgErrorParticipantsSizeAtom
+        .reportWrite(value, super._msgErrorParticipantsSize, () {
+      super._msgErrorParticipantsSize = value;
+    });
+  }
+
+  final _$verticalIsMaxAtom = Atom(name: '_SupportStoreBase.verticalIsMax');
+
+  @override
+  bool get verticalIsMax {
+    _$verticalIsMaxAtom.reportRead();
+    return super.verticalIsMax;
+  }
+
+  @override
+  set verticalIsMax(bool value) {
+    _$verticalIsMaxAtom.reportWrite(value, super.verticalIsMax, () {
+      super.verticalIsMax = value;
     });
   }
 
   final _$_SupportStoreBaseActionController =
       ActionController(name: '_SupportStoreBase');
+
+  @override
+  dynamic updateTitle(String newTitle) {
+    final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
+        name: '_SupportStoreBase.updateTitle');
+    try {
+      return super.updateTitle(newTitle);
+    } finally {
+      _$_SupportStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic updateSubTitle(String newSubtitle) {
+    final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
+        name: '_SupportStoreBase.updateSubTitle');
+    try {
+      return super.updateSubTitle(newSubtitle);
+    } finally {
+      _$_SupportStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic updateType(String newType) {
+    final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
+        name: '_SupportStoreBase.updateType');
+    try {
+      return super.updateType(newType);
+    } finally {
+      _$_SupportStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic updateTag(String newTag) {
+    final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
+        name: '_SupportStoreBase.updateTag');
+    try {
+      return super.updateTag(newTag);
+    } finally {
+      _$_SupportStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic updateTopHeader(bool newTopHeader) {
+    final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
+        name: '_SupportStoreBase.updateTopHeader');
+    try {
+      return super.updateTopHeader(newTopHeader);
+    } finally {
+      _$_SupportStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic updatePath(PickedFile? newPath) {
@@ -260,11 +461,22 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   }
 
   @override
-  dynamic updateTitle(String newTitle) {
+  dynamic updateContent(String? value) {
     final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
-        name: '_SupportStoreBase.updateTitle');
+        name: '_SupportStoreBase.updateContent');
     try {
-      return super.updateTitle(newTitle);
+      return super.updateContent(value);
+    } finally {
+      _$_SupportStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic changeVerticalBar() {
+    final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
+        name: '_SupportStoreBase.changeVerticalBar');
+    try {
+      return super.changeVerticalBar();
     } finally {
       _$_SupportStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -315,22 +527,11 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   }
 
   @override
-  dynamic updateContent(String? value) {
+  dynamic loadInitialData(Project project) {
     final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
-        name: '_SupportStoreBase.updateContent');
+        name: '_SupportStoreBase.loadInitialData');
     try {
-      return super.updateContent(value);
-    } finally {
-      _$_SupportStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic loadDataUpdate(Project project, List<Teacher> teachers) {
-    final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
-        name: '_SupportStoreBase.loadDataUpdate');
-    try {
-      return super.loadDataUpdate(project, teachers);
+      return super.loadInitialData(project);
     } finally {
       _$_SupportStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -341,15 +542,22 @@ mixin _$SupportStore on _SupportStoreBase, Store {
     return '''
 teacherLocal: ${teacherLocal},
 participantsLocal: ${participantsLocal},
+verticalIsMax: ${verticalIsMax},
+title: ${title},
+subtitle: ${subtitle},
+type: ${type},
+tag: ${tag},
+isTopHeader: ${isTopHeader},
 pathImage: ${pathImage},
-titleProject: ${titleProject},
-msgErrorParticipants: ${msgErrorParticipants},
-msgErrorParticipantsSize: ${msgErrorParticipantsSize},
+htmlContent: ${htmlContent},
 msgErrorTitle: ${msgErrorTitle},
+msgErrorSubTitle: ${msgErrorSubTitle},
+msgErrorTopHeader: ${msgErrorTopHeader},
 msgErrorImage: ${msgErrorImage},
 msgErrorContent: ${msgErrorContent},
 msgErrorTeacher: ${msgErrorTeacher},
-htmlContent: ${htmlContent}
+msgErrorParticipants: ${msgErrorParticipants},
+msgErrorParticipantsSize: ${msgErrorParticipantsSize}
     ''';
   }
 }

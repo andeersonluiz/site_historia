@@ -6,17 +6,17 @@ class LoginAuth {
     try {
       await auth().signInWithEmailAndPassword(email, password);
     } on FirebaseError catch (e) {
-      if (e.code == 'weak-password') {
+      if (e.code == 'auth/weak-password') {
         return 'A senha dever ter pelo menos seis caracteres.';
-      } else if (e.code == 'email-already-in-use') {
-        return 'Já existe uma conta registrada nesse email.';
-      } else if (e.code == "invalid-email") {
+      } else if (e.code == 'auth/email-already-in-use') {
+        return 'Já existe uma conta regist  rada nesse email.';
+      } else if (e.code == "auth/invalid-email") {
         return 'Email inválido.';
-      } else if (e.code == "user-not-found") {
+      } else if (e.code == "auth/user-not-found") {
         return 'Email não registrado.';
-      } else if (e.code == "wrong-password") {
+      } else if (e.code == "auth/wrong-password") {
         return 'Senha inválida.';
-      } else if (e.code == "too-many-requests") {
+      } else if (e.code == "auth/too-many-requests") {
         return "Muitas requisições, tente novamente mais tarde.";
       } else {
         return "Erro ao entrar, tente novamente mais tarde.";
@@ -27,5 +27,9 @@ class LoginAuth {
 
   static User? getUser() {
     return auth().currentUser;
+  }
+
+  static signOut() async {
+    await auth().signOut();
   }
 }

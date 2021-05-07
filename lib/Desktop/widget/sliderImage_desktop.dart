@@ -1,10 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
+import 'package:site_historia/Components/customLoading_component.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
-
+import 'package:site_historia/Store/notice_store.dart';
 import '../../Components/sliderContainer_component.dart';
-import '../../firebase/notice_firestore.dart';
-import '../../model/notice_model.dart';
+import '../../Model/notice_model.dart';
 
 class SliderImageDesktop extends StatefulWidget {
   @override
@@ -12,68 +15,72 @@ class SliderImageDesktop extends StatefulWidget {
 }
 
 class _SliderImageDesktopState extends State<SliderImageDesktop> {
-  final List<int> pagination = [0, 1, 2, 3, 4];
   int _current = 0;
-  final noticeFirestore = NoticeFirestore();
 
   @override
   Widget build(BuildContext context) {
+    final noticeStore = Provider.of<NoticeStore>(context);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Column(children: [
-        FutureBuilder(
-            future: noticeFirestore.getSliders(),
-            builder: (ctx, snp) {
-              if (snp.hasData) {
-                final List<Notice> listNotices = snp.data as List<Notice>;
-                return CarouselSlider(
-                  options: CarouselOptions(
-                      initialPage: 0,
-                      enableInfiniteScroll: true,
-                      autoPlay: true,
-                      aspectRatio: 3,
-                      viewportFraction: 0.5,
-                      autoPlayInterval: Duration(seconds: 10),
-                      autoPlayAnimationDuration: Duration(seconds: 2),
-                      autoPlayCurve: Curves.fastLinearToSlowEaseIn,
-                      enlargeCenterPage: true,
-                      scrollDirection: Axis.horizontal,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          _current = index;
-                        });
-                      }),
-                  items: listNotices.map((item) {
-                    return SliderContainer(
-                      notice: item,
-                      sizeContainer: 130,
-                      maxLinesSubtitle: 2,
-                    );
-                  }).toList(),
-                );
-              } else if (snp.hasError) {
-                return ErrorLoad(color: Theme.of(context).primaryColor);
-              } else {
-                return Container(
-                  height: 450,
-                );
-              }
-            }),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: pagination.map((i) {
-            return Container(
-                height: 8,
-                width: 8,
-                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: _current == i
-                        ? Theme.of(context).selectedRowColor
-                        : Theme.of(context).primaryColor));
-          }).toList(),
-        )
-      ]),
+      child: Observer(builder: (ctx) {
+        noticeStore.listSliders ?? noticeStore.getSliders();
+        switch (noticeStore.listSliders!.status) {
+          case FutureStatus.pending:
+            return CustomLoading();
+          case FutureStatus.rejected:
+            return ErrorLoad(
+              color: Theme.of(context).primaryColor,
+            );
+          case FutureStatus.fulfilled:
+            final pagination = List.generate(
+                noticeStore.listSliders!.value.length, (index) => index);
+            final List<Notice> listNotices =
+                noticeStore.listSliders!.value as List<Notice>;
+            return Column(children: [
+              CarouselSlider(
+                options: CarouselOptions(
+                    initialPage: 0,
+                    enableInfiniteScroll: true,
+                    autoPlay: true,
+                    aspectRatio: 3,
+                    viewportFraction: 0.5,
+                    autoPlayInterval: Duration(seconds: 10),
+                    autoPlayAnimationDuration: Duration(seconds: 2),
+                    autoPlayCurve: Curves.fastLinearToSlowEaseIn,
+                    enlargeCenterPage: true,
+                    scrollDirection: Axis.horizontal,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        _current = index;
+                      });
+                    }),
+                items: listNotices.map((item) {
+                  return SliderContainer(
+                    notice: item,
+                    sizeContainer: 130,
+                    maxLinesSubtitle: 2,
+                  );
+                }).toList(),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: pagination.map((i) {
+                  return Container(
+                      height: 8,
+                      width: 8,
+                      margin: EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 10.0),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: _current == i
+                              ? Theme.of(context).selectedRowColor
+                              : Theme.of(context).primaryColor));
+                }).toList(),
+              )
+            ]);
+        }
+      }),
     );
   }
 }

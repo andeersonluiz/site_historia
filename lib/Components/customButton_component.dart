@@ -7,14 +7,16 @@ class CustomButton extends StatelessWidget {
   final EdgeInsets paddingText;
   final bool expandButton;
   final FocusNode? focusNode;
-  CustomButton(
-      {required this.text,
-      required this.onPressed,
-      this.paddingButton = const EdgeInsets.all(8.0),
-      this.paddingText = const EdgeInsets.all(4.0),
-      this.expandButton = false,
-      this.focusNode
-      });
+  final ButtonStyle? style;
+  CustomButton({
+    required this.text,
+    required this.onPressed,
+    this.paddingButton = const EdgeInsets.all(8.0),
+    this.paddingText = const EdgeInsets.all(4.0),
+    this.expandButton = false,
+    this.focusNode,
+    this.style,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,9 @@ class CustomButton extends StatelessWidget {
         padding: paddingButton,
         child: ElevatedButton(
           onPressed: onPressed,
-          style: Theme.of(context).elevatedButtonTheme.style,
+          style: style == null
+              ? Theme.of(context).elevatedButtonTheme.style
+              : style,
           child: Padding(
             padding: paddingText,
             child: expandButton

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
-import 'package:provider/provider.dart';
-import 'package:site_historia/Store/support_store.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class DrawerItem extends StatelessWidget {
@@ -10,21 +8,17 @@ class DrawerItem extends StatelessWidget {
   final String title;
   final bool clearData;
 
-  DrawerItem(this.title, this.path, this.icon,{this.clearData=false});
+  DrawerItem(this.title, this.path, this.icon, {this.clearData = false});
   @override
   Widget build(BuildContext context) {
-    final supportStore = Provider.of<SupportStore>(context);
-
     return HoverButton(
         hoverColor: Theme.of(context).hoverColor,
-
         shape: BeveledRectangleBorder(),
-        padding: EdgeInsets.all(0),
-        hoverPadding: EdgeInsets.all(0),
-        onpressed: () {
-          supportStore.clearData();
+        padding: EdgeInsets.zero,
+        hoverPadding: EdgeInsets.zero,
+        onpressed: () async {
+          VxNavigator.of(context).replace(Uri.parse(path));
           Scaffold.of(context).openEndDrawer();
-          VxNavigator.of(context).waitAndPush(Uri.parse(path));
         },
         child: ListTile(
           leading: Icon(icon, color: Theme.of(context).backgroundColor),
