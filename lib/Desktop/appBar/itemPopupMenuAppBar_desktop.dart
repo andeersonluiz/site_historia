@@ -37,6 +37,8 @@ class _ItemPopUpMenuAppBarState extends State<ItemPopUpMenuAppBar>
           onSelected: (result) {
             int index = result as int;
             rotationController.animateBack(0.0);
+            Navigator.of(context).pop();
+
             VxNavigator.of(context).push(Uri(
                 path: widget.path, queryParameters: {"id": index.toString()}));
           },
@@ -65,7 +67,7 @@ class _ItemPopUpMenuAppBarState extends State<ItemPopUpMenuAppBar>
                     color: Theme.of(context).iconTheme.color))
           ]),
           elevation: 8,
-          offset: Offset(0, 69),
+          offset: Offset(0, 59),
         ),
       ),
     );

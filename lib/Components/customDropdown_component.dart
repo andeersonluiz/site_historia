@@ -26,6 +26,7 @@ class CustomDropdown extends StatelessWidget {
         child: ButtonTheme(
           alignedDropdown: true,
           child: DropdownButton(
+            icon: Icon(Icons.label_important),
             isDense: false,
             items: items
                 .map((value) => DropdownMenuItem(

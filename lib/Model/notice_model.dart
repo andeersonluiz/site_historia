@@ -4,6 +4,7 @@ class Notice {
   String subtitle;
   String tag;
   String type;
+  List<dynamic> audio;
   String thumb;
   String datePost;
   String content;
@@ -17,6 +18,7 @@ class Notice {
     required this.subtitle,
     required this.tag,
     required this.type,
+    required this.audio,
     required this.thumb,
     required this.datePost,
     required this.content,
@@ -32,6 +34,7 @@ class Notice {
       subtitle: json['subtitle'],
       tag: json['tag'],
       type: json['type'],
+      audio: json['audio'],
       thumb: json['thumb'],
       datePost: json['datePost'],
       content: json['content'],
@@ -47,6 +50,7 @@ class Notice {
         'subtitle': subtitle,
         'tag': tag,
         'type': type,
+        'audio': audio,
         'thumb': thumb,
         'author': author,
         'datePost': datePost,

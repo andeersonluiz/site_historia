@@ -21,7 +21,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
     FrameFirestore frameFirestore = Provider.of<FrameFirestore>(context);
 
     return Container(
-      height: 70,
+      height: 60.0,
       width: width,
       decoration:
           BoxDecoration(color: Theme.of(context).primaryColor, boxShadow: [

@@ -33,7 +33,7 @@ class CustomHtmlEditor extends StatelessWidget {
           controller: controller,
           htmlEditorOptions: HtmlEditorOptions(
             hint: "Escreva o texto aqui...",
-            initialText: initialText,
+            initialText: initialText!.replaceAll("video", "iframe"),
           ),
           otherOptions: OtherOptions(
             height: height,
@@ -42,9 +42,6 @@ class CustomHtmlEditor extends StatelessWidget {
             onChange: onChange,
           ),
           htmlToolbarOptions: HtmlToolbarOptions(
-              mediaLinkInsertInterceptor: (String url, InsertFileType type) {
-                return true;
-              },
               buttonFocusColor: Theme.of(context).primaryColor,
               buttonColor: Theme.of(context).primaryColor,
               buttonBorderColor: Colors.black,
@@ -57,7 +54,6 @@ class CustomHtmlEditor extends StatelessWidget {
                   .copyWith(color: Theme.of(context).primaryColor),
               toolbarType: ToolbarType.nativeGrid,
               defaultToolbarButtons: [
-                StyleButtons(),
                 FontSettingButtons(fontSizeUnit: false),
                 FontButtons(
                     clearAll: false, superscript: false, subscript: false),
@@ -69,6 +65,8 @@ class CustomHtmlEditor extends StatelessWidget {
                     caseConverter: false),
                 InsertButtons(
                   otherFile: false,
+                  video: false,
+                  audio: false,
                 ),
               ]),
         ),

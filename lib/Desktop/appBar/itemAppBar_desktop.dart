@@ -26,7 +26,8 @@ class ItemAppBar extends StatelessWidget {
           ),
         ),
         onpressed: () {
-          VxNavigator.of(context).replace(Uri.parse(path));
+          Navigator.of(context).pop();
+          VxNavigator.of(context).push(Uri.parse(path));
         });
   }
 }

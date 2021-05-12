@@ -48,6 +48,13 @@ mixin _$SupportStore on _SupportStoreBase, Store {
       (_$pathImageComputed ??= Computed<PickedFile?>(() => super.pathImage,
               name: '_SupportStoreBase.pathImage'))
           .value;
+  Computed<PlatformFile?>? _$audioFileComputed;
+
+  @override
+  PlatformFile? get audioFile =>
+      (_$audioFileComputed ??= Computed<PlatformFile?>(() => super.audioFile,
+              name: '_SupportStoreBase.audioFile'))
+          .value;
   Computed<String?>? _$htmlContentComputed;
 
   @override
@@ -82,6 +89,13 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   String get msgErrorImage =>
       (_$msgErrorImageComputed ??= Computed<String>(() => super.msgErrorImage,
               name: '_SupportStoreBase.msgErrorImage'))
+          .value;
+  Computed<String>? _$msgErrorAudioComputed;
+
+  @override
+  String get msgErrorAudio =>
+      (_$msgErrorAudioComputed ??= Computed<String>(() => super.msgErrorAudio,
+              name: '_SupportStoreBase.msgErrorAudio'))
           .value;
   Computed<String>? _$msgErrorContentComputed;
 
@@ -184,6 +198,21 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   set _isTopHeader(bool value) {
     _$_isTopHeaderAtom.reportWrite(value, super._isTopHeader, () {
       super._isTopHeader = value;
+    });
+  }
+
+  final _$_audioFileAtom = Atom(name: '_SupportStoreBase._audioFile');
+
+  @override
+  PlatformFile get _audioFile {
+    _$_audioFileAtom.reportRead();
+    return super._audioFile;
+  }
+
+  @override
+  set _audioFile(PlatformFile value) {
+    _$_audioFileAtom.reportWrite(value, super._audioFile, () {
+      super._audioFile = value;
     });
   }
 
@@ -310,6 +339,21 @@ mixin _$SupportStore on _SupportStoreBase, Store {
     });
   }
 
+  final _$_msgErrorAudioAtom = Atom(name: '_SupportStoreBase._msgErrorAudio');
+
+  @override
+  String get _msgErrorAudio {
+    _$_msgErrorAudioAtom.reportRead();
+    return super._msgErrorAudio;
+  }
+
+  @override
+  set _msgErrorAudio(String value) {
+    _$_msgErrorAudioAtom.reportWrite(value, super._msgErrorAudio, () {
+      super._msgErrorAudio = value;
+    });
+  }
+
   final _$_msgErrorContentAtom =
       Atom(name: '_SupportStoreBase._msgErrorContent');
 
@@ -391,6 +435,14 @@ mixin _$SupportStore on _SupportStoreBase, Store {
     });
   }
 
+  final _$updateContentAsyncAction =
+      AsyncAction('_SupportStoreBase.updateContent');
+
+  @override
+  Future updateContent(String? value) {
+    return _$updateContentAsyncAction.run(() => super.updateContent(value));
+  }
+
   final _$_SupportStoreBaseActionController =
       ActionController(name: '_SupportStoreBase');
 
@@ -450,22 +502,22 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   }
 
   @override
-  dynamic updatePath(PickedFile? newPath) {
+  dynamic updateAudio(PlatformFile? newAudio) {
     final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
-        name: '_SupportStoreBase.updatePath');
+        name: '_SupportStoreBase.updateAudio');
     try {
-      return super.updatePath(newPath);
+      return super.updateAudio(newAudio);
     } finally {
       _$_SupportStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic updateContent(String? value) {
+  dynamic updatePath(PickedFile? newPath) {
     final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
-        name: '_SupportStoreBase.updateContent');
+        name: '_SupportStoreBase.updatePath');
     try {
-      return super.updateContent(value);
+      return super.updatePath(newPath);
     } finally {
       _$_SupportStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -527,17 +579,6 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   }
 
   @override
-  dynamic loadInitialData(Project project) {
-    final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
-        name: '_SupportStoreBase.loadInitialData');
-    try {
-      return super.loadInitialData(project);
-    } finally {
-      _$_SupportStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 teacherLocal: ${teacherLocal},
@@ -549,11 +590,13 @@ type: ${type},
 tag: ${tag},
 isTopHeader: ${isTopHeader},
 pathImage: ${pathImage},
+audioFile: ${audioFile},
 htmlContent: ${htmlContent},
 msgErrorTitle: ${msgErrorTitle},
 msgErrorSubTitle: ${msgErrorSubTitle},
 msgErrorTopHeader: ${msgErrorTopHeader},
 msgErrorImage: ${msgErrorImage},
+msgErrorAudio: ${msgErrorAudio},
 msgErrorContent: ${msgErrorContent},
 msgErrorTeacher: ${msgErrorTeacher},
 msgErrorParticipants: ${msgErrorParticipants},

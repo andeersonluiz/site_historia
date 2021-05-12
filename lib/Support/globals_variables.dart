@@ -17,4 +17,10 @@ class GlobalsVariables {
     'Podcast',
     'Estudo',
   ];
+
+  static List<String> filters = [
+    'Tudo',
+    'Podcast',
+    'Estudo',
+  ];
 }

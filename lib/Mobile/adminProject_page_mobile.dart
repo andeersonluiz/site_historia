@@ -31,12 +31,19 @@ class AdminProjectPageMobile extends StatelessWidget {
                 projectStore.listProjects!.value as List<Project>;
             return ListView(
               children: [
-                ListTile(
-                  leading: Icon(Icons.add_circle_rounded),
-                  title: CustomText("Adicionar Projeto",
-                      style: Theme.of(context).textTheme.bodyText1),
-                  onTap: () => VxNavigator.of(context)
-                      .push(Uri.parse(RouteNames.ADD_PROJECT)),
+                Container(
+                  margin: EdgeInsets.all(16.0),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      border: Border.all(
+                          width: 1.0, color: Theme.of(context).primaryColor)),
+                  child: ListTile(
+                    leading: Icon(Icons.add_circle_rounded),
+                    title: CustomText("Adicionar Projeto",
+                        style: Theme.of(context).textTheme.bodyText1),
+                    onTap: () => VxNavigator.of(context)
+                        .push(Uri.parse(RouteNames.ADD_PROJECT)),
+                  ),
                 ),
                 for (var project in listProjects)
                   AdminProjectCardMobile(project),

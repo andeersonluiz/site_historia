@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:site_historia/Components/customLoading_component.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/notice_store.dart';
+import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 import '../../Model/notice_model.dart';
 import '../tile/postTile_desktop.dart';
@@ -40,7 +42,14 @@ class LatestPosts extends StatelessWidget {
                         .copyWith(color: Theme.of(context).primaryColor),
                   ),
                 ),
-                for (var notice in listNotices) PostTile(notice),
+                for (var notice in listNotices)
+                  InkWell(
+                      onTap: () {
+                        VxNavigator.of(context).push(Uri(
+                            path: RouteNames.NOTICES,
+                            queryParameters: {"id": notice.id.toString()}));
+                      },
+                      child: PostTile(notice)),
               ],
             );
         }

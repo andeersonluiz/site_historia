@@ -45,7 +45,7 @@ class AdminNoticePageMobile extends StatelessWidget {
                     title: CustomText("Adicionar Noticia",
                         style: Theme.of(context).textTheme.bodyText1),
                     onTap: () => VxNavigator.of(context)
-                        .push(Uri.parse(RouteNames.ADD_PROJECT)),
+                        .push(Uri.parse(RouteNames.ADD_NOTICE)),
                   ),
                 ),
                 Observer(

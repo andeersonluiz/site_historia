@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:site_historia/Components/customLoading_component.dart';
 import 'package:site_historia/Desktop/appBar/custtomAppBar_desktop.dart';
 import 'package:site_historia/Desktop/project_page_desktop.dart';
 import 'package:site_historia/Mobile/project_page_mobile.dart';
+import 'package:site_historia/Screens/errorLoad_screen.dart';
+import 'package:site_historia/Screens/loading_screen.dart';
+import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Support/IconsData_support.dart';
 import 'package:site_historia/Model/project_model.dart';
+import 'package:site_historia/Support/RoutesName_support.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import '../Mobile/drawer/navigation_drawer_component.dart';
 
 class ProjectScreen extends StatefulWidget {
-  final Project project;
-  ProjectScreen(this.project);
+  final String idProject;
+  ProjectScreen(this.idProject);
   @override
   _ProjectScreenState createState() => _ProjectScreenState();
 }
@@ -18,6 +26,8 @@ class ProjectScreen extends StatefulWidget {
 class _ProjectScreenState extends State<ProjectScreen> {
   @override
   Widget build(BuildContext context) {
+    final projectStore = Provider.of<ProjectStore>(context);
+
     final width = MediaQuery.of(context).size.width;
     return ResponsiveBuilder(
       builder: (ctx, sizingInformation) => Scaffold(
@@ -41,17 +51,48 @@ class _ProjectScreenState extends State<ProjectScreen> {
                   ),
                 ),
               ]),
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: ScreenTypeLayout(
-              mobile: width > 600
-                  ? ProjectPageDesktop(widget.project)
-                  : ProjectPageMobile(widget.project),
-              desktop: StickyHeader(
-                  header: CustomAppBar(),
-                  content: ProjectPageDesktop(widget.project))),
-        ),
+        body: Observer(builder: (_) {
+          projectStore.listProjects ?? projectStore.getProjects();
+          switch (projectStore.listProjects!.status) {
+            case FutureStatus.pending:
+              return Loading();
+            case FutureStatus.rejected:
+              return ErrorLoad(
+                color: Theme.of(context).primaryColor,
+              );
+            case FutureStatus.fulfilled:
+              return FutureBuilder(
+                  future: loadData(),
+                  builder: (ctx, snp) {
+                    if (snp.hasData) {
+                      Project project = snp.data as Project;
+                      return SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: ScreenTypeLayout(
+                            mobile: width > 600
+                                ? ProjectPageDesktop(project)
+                                : ProjectPageMobile(project),
+                            desktop: StickyHeader(
+                                header: CustomAppBar(),
+                                content: ProjectPageDesktop(project))),
+                      );
+                    } else if (snp.hasError) {
+                      return Loading(
+                        redirect: true,
+                        to: RouteNames.HOME,
+                      );
+                    } else {
+                      return CustomLoading();
+                    }
+                  });
+          }
+        }),
       ),
     );
+  }
+
+  loadData() async {
+    final projectStore = Provider.of<ProjectStore>(context);
+    return await projectStore.getProjectById(widget.idProject);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:flutter/material.dart';
+import 'package:site_historia/Components/author_component.dart';
 import 'package:site_historia/Components/customImage_component.dart';
 import 'package:site_historia/Components/htmlViewer_component.dart';
 import 'package:site_historia/Desktop/footer/footer_desktop.dart';
@@ -106,31 +107,7 @@ class ProjectPageDesktop extends StatelessWidget {
         Divider(
           thickness: 1.0,
         ),
-        Row(
-          children: [
-            Padding(
-              padding:
-                  const EdgeInsets.only(right: 20.0, left: 20.0, bottom: 20.0),
-              child: Text(
-                "Autor: ${project.author}",
-                style: Theme.of(context).textTheme.caption!.copyWith(
-                    color: Theme.of(context).primaryColor,
-                    fontStyle: FontStyle.italic),
-              ),
-            ),
-            Spacer(),
-            Padding(
-              padding:
-                  const EdgeInsets.only(right: 20.0, left: 20.0, bottom: 20.0),
-              child: Text(
-                "Data publicação: ${project.datePost}",
-                style: Theme.of(context).textTheme.caption!.copyWith(
-                    color: Theme.of(context).primaryColor,
-                    fontStyle: FontStyle.italic),
-              ),
-            ),
-          ],
-        ),
+        AuthorInfo(author: project.author, datePost: project.datePost),
         FooterDesktop(),
       ],
     );

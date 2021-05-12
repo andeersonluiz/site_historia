@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:site_historia/Components/customButton_component.dart';
 import 'package:site_historia/Components/customTextFormField_component.dart';
 import 'package:site_historia/Components/erroMsg_component.dart';
+import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Support/RoutesName_support.dart';
 import 'package:site_historia/Support/preferences_support.dart';
 import 'package:site_historia/firebase/login_auth.dart';
@@ -29,6 +31,8 @@ class _AdminScreenState extends State<AdminScreen> {
   bool _buttonDisabled = false;
   @override
   Widget build(BuildContext context) {
+    final projectStore = Provider.of<ProjectStore>(context);
+
     return ResponsiveBuilder(
       builder: (ctx, sizingInformation) => Scaffold(
         body: Center(
@@ -132,6 +136,10 @@ class _AdminScreenState extends State<AdminScreen> {
                                               } else {
                                                 await Prefs.saveLogin(
                                                     controllerEmail.text);
+                                                await projectStore
+                                                    .getUsernameByUid(
+                                                        LoginAuth.getUser()!
+                                                            .uid);
                                                 VxNavigator.of(context)
                                                     .clearAndPush(
                                                   Uri.parse(RouteNames

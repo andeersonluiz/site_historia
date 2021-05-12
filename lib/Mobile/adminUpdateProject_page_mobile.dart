@@ -39,7 +39,7 @@ class _AdminUpdateProjectPageMobileState
     /*CODE PBP*/
     supportStore.clearData();
     teacherStore.getTeachers();
-    supportStore.loadInitialData(widget.project);
+    supportStore.loadInitialDataProject(widget.project);
   }
 
   @override

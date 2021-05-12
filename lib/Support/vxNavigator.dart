@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:site_historia/Screens/noticeInfo_screen.dart';
 import 'package:site_historia/Screens/adminAddNotice_screen.dart';
 import 'package:site_historia/Screens/adminAddProject_screen.dart';
 import 'package:site_historia/Screens/adminNotices_screen.dart';
 import 'package:site_historia/Screens/adminProjects_screen.dart';
+import 'package:site_historia/Screens/adminUpdateNotice_screen.dart';
 import 'package:site_historia/Screens/adminUpdateProject_screen.dart';
 import 'package:site_historia/Screens/admin_screen.dart';
 import 'package:site_historia/Screens/home_screen.dart';
 import 'package:site_historia/Screens/loading_screen.dart';
+import 'package:site_historia/Screens/notice_screen.dart';
 import 'package:site_historia/Screens/project_screen.dart';
-import 'package:site_historia/Store/notice_store.dart';
-import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Support/RoutesName_support.dart';
 import 'package:site_historia/firebase/login_auth.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -19,9 +19,6 @@ import 'package:firebase/firebase.dart';
 
 class VelocityxNavigator {
   static RouterDelegate<Object> getRoutes(BuildContext context) {
-    ProjectStore projectStore = Provider.of<ProjectStore>(context);
-    NoticeStore noticeStore = Provider.of<NoticeStore>(context);
-
     return VxNavigator(
       notFoundPage: (_, __) {
         return MaterialPage(
@@ -59,17 +56,16 @@ class VelocityxNavigator {
             ));
           }
 
-          final project = projectStore
-              .getProjectById(id.toString()); //Pega a referencia do projeto
-          if (project == null) {
-            return MaterialPage(
-                child: Loading(
-              redirect: true,
-            ));
-          }
-          return MaterialPage(child: ProjectScreen(project));
+          return MaterialPage(child: ProjectScreen(id));
         },
-        RouteNames.NOTICES: (_, __) => MaterialPage(child: HomeScreen()),
+        RouteNames.NOTICES: (uri, __) {
+          final id = uri.queryParameters['id'];
+          if (id == null || int.tryParse(id) == null || id == "") {
+            return MaterialPage(child: NoticeScreen());
+          }
+
+          return MaterialPage(child: NoticeInfoScreen(id));
+        },
         RouteNames.FRAMES: (_, __) => MaterialPage(child: HomeScreen()),
         RouteNames.EXAM: (_, __) => MaterialPage(child: HomeScreen()),
         RouteNames.RECOMENDATIONS: (_, __) => MaterialPage(child: HomeScreen()),
@@ -90,7 +86,7 @@ class VelocityxNavigator {
             return MaterialPage(
                 child: Loading(redirect: true, to: RouteNames.ADMIN));
           } else {
-            return MaterialPage(child: AdminProjectsScreen(user.uid));
+            return MaterialPage(child: AdminProjectsScreen());
           }
         },
         RouteNames.ADD_PROJECT: (uri, __) {
@@ -100,7 +96,7 @@ class VelocityxNavigator {
                 child: Loading(redirect: true, to: RouteNames.ADMIN));
           } else {
             return MaterialPage(
-              child: AdminAddProjectScreen(user.uid),
+              child: AdminAddProjectScreen(),
             );
           }
         },
@@ -120,17 +116,7 @@ class VelocityxNavigator {
               ));
             }
 
-            final project = projectStore.getProjectById(id);
-            if (project == null) {
-              return MaterialPage(
-                  child: Loading(
-                redirect: true,
-                to: RouteNames.ADMIN_PROJECTS,
-              ));
-            }
-
-            return MaterialPage(
-                child: AdminUpdateProjectScreen(project, user.uid));
+            return MaterialPage(child: AdminUpdateProjectScreen(id));
           }
         },
         RouteNames.ADMIN_NOTICES: (uri, params) {
@@ -139,7 +125,7 @@ class VelocityxNavigator {
             return MaterialPage(
                 child: Loading(redirect: true, to: RouteNames.ADMIN));
           } else {
-            return MaterialPage(child: AdminNoticesScreen(user.uid));
+            return MaterialPage(child: AdminNoticesScreen());
           }
         },
         RouteNames.ADD_NOTICE: (uri, __) {
@@ -149,7 +135,7 @@ class VelocityxNavigator {
                 child: Loading(redirect: true, to: RouteNames.ADMIN));
           } else {
             return MaterialPage(
-              child: AdminAddNoticeScreen(user.uid),
+              child: AdminAddNoticeScreen(),
             );
           }
         },
@@ -165,24 +151,11 @@ class VelocityxNavigator {
               return MaterialPage(
                   child: Loading(
                 redirect: true,
-                to: RouteNames.ADMIN_PROJECTS,
+                to: RouteNames.ADMIN_NOTICES,
               ));
             }
 
-            final notice = noticeStore.getNoticeById(id);
-            if (notice == null) {
-              return MaterialPage(
-                  child: Loading(
-                redirect: true,
-                to: RouteNames.ADMIN_PROJECTS,
-              ));
-            }
-
-            return MaterialPage(
-                child: Loading(
-              redirect: true,
-              to: RouteNames.ADMIN_PROJECTS,
-            ));
+            return MaterialPage(child: AdminUpdateNoticeScreen(id));
           }
         },
       },

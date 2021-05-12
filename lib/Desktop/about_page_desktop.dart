@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:site_historia/Components/customImage_component.dart';
+import 'package:site_historia/Components/customText_component.dart';
 import 'package:site_historia/Desktop/footer/footer_desktop.dart';
 import 'package:site_historia/Components/listTeachers_component.dart';
 
@@ -17,19 +18,15 @@ class _AboutPageDesktopState extends State<AboutPageDesktop> {
       children: [
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Text(
-            "Coordenação de História",
-            textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .headline4!
-                .copyWith(color: Theme.of(context).primaryColor),
-          ),
+          child: CustomText("Coordenação de História",
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headline4!),
         ),
         Divider(
           height: 1,
         ),
         Container(
+          margin: EdgeInsets.all(16),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -37,7 +34,9 @@ class _AboutPageDesktopState extends State<AboutPageDesktop> {
                 child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CustomImage(
-                      image: "assets/test.jpg",
+                      width: MediaQuery.of(context).size.width,
+                      image:
+                          "https://blog.unp.br/wp-content/uploads/2020/10/curso-de-historia.jpg",
                     )),
               ),
               Expanded(
@@ -56,8 +55,10 @@ class _AboutPageDesktopState extends State<AboutPageDesktop> {
             ],
           ),
         ),
-        Divider(),
-        ListTeachers(),
+        Divider(
+          thickness: 1.0,
+        ),
+        Container(margin: EdgeInsets.all(16.0), child: ListTeachers()),
         FooterDesktop()
       ],
     );

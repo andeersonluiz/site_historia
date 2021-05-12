@@ -67,7 +67,7 @@ class AdminNoticeCard extends StatelessWidget {
                           color: Theme.of(context).primaryColor,
                         ),
                         onPressed: () => VxNavigator.of(context).push(Uri(
-                            path: RouteNames.UPDATE_PROJECT,
+                            path: RouteNames.UPDATE_NOTICE,
                             queryParameters: {
                               "id": noticeStore.listNotices!.value[index].id
                                   .toString()

@@ -29,7 +29,12 @@ class _AboutPageMobileState extends State<AboutPageMobile> {
         Divider(
           thickness: 1.0,
         ),
-        Center(child: CustomImage(height: 200, image: "assets/test.jpg")),
+        Center(
+            child: CustomImage(
+                width: MediaQuery.of(context).size.width,
+                height: 200,
+                image:
+                    "https://blog.unp.br/wp-content/uploads/2020/10/curso-de-historia.jpg")),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(

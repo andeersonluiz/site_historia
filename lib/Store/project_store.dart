@@ -74,9 +74,11 @@ abstract class _ProjectStoreBase with Store {
   }
 
   getUsernameByUid(String uid) async {
-    String name = await ProjectFirestore.getUsernameByUid(uid);
-    GlobalsVariables.username = name;
-    return name;
+    if (GlobalsVariables.username == "") {
+      String name = await ProjectFirestore.getUsernameByUid(uid);
+      GlobalsVariables.username = name;
+    }
+    return GlobalsVariables.username;
   }
 
   getProjectByName() async {

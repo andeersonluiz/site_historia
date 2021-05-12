@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
@@ -81,6 +82,7 @@ class NoticeFirestore {
     String subtitle,
     String type,
     String tag,
+    PlatformFile audio,
     PickedFile? thumb,
     bool isTopHeader,
     String? content,
@@ -91,20 +93,34 @@ class NoticeFirestore {
       int nextId = values.docs.length + 1;
 
       var metadata = await thumb!.readAsBytes();
+
       var task = await storage()
           .ref()
           .child("notices/$nextId.png")
           .put(metadata, UploadMetadata(contentType: 'image/jpg'))
           .future;
-      Uri url = await task.ref.getDownloadURL();
+      Uri urlImage = await task.ref.getDownloadURL();
 
+      Uri urlAudio = Uri.parse("");
+      String nameAudio = "";
+      if (audio.name != null && type == "Podcast") {
+        metadata = audio.bytes!;
+        nameAudio = audio.name!;
+        task = await storage()
+            .ref()
+            .child("notices/$nextId(audio).mp3")
+            .put(metadata, UploadMetadata(contentType: 'audio/mp3'))
+            .future;
+        urlAudio = await task.ref.getDownloadURL();
+      }
       Notice notice = Notice(
           id: nextId,
           title: title,
           subtitle: subtitle,
           tag: tag,
           type: type,
-          thumb: url.toString(),
+          audio: [nameAudio, urlAudio.toString()],
+          thumb: urlImage.toString(),
           datePost: DateFormat("dd-MM-yyyy hh:mm").format(DateTime.now()),
           content: content.toString(),
           views: 0,
@@ -114,6 +130,65 @@ class NoticeFirestore {
           .collection("notices")
           .doc(nextId.toString())
           .set(notice.toJson());
+    } catch (e) {
+      return false;
+    }
+    return true;
+  }
+
+  static updateNotice(
+    int id,
+    String title,
+    String subtitle,
+    String type,
+    String tag,
+    PlatformFile audio,
+    PickedFile? thumb,
+    bool isTopHeader,
+    String? content,
+    int views,
+    String author,
+  ) async {
+    try {
+      Uri urlImage = Uri.parse(thumb!.path.toString());
+      if (!thumb.path.contains("firebasestorage")) {
+        var metadata = await thumb.readAsBytes();
+        UploadTaskSnapshot task = await storage()
+            .ref()
+            .child("notices/$id.png")
+            .put(metadata, UploadMetadata(contentType: 'image/jpg'))
+            .future;
+        urlImage = await task.ref.getDownloadURL();
+      }
+      Uri urlAudio = Uri.parse("");
+
+      if (audio.name != "") {
+        var metadata = audio.bytes;
+        UploadTaskSnapshot task = await storage()
+            .ref()
+            .child("notices/$id(audio).mp3")
+            .put(metadata, UploadMetadata(contentType: 'audio/mp3'))
+            .future;
+        urlAudio = await task.ref.getDownloadURL();
+      }
+
+      Notice notice = Notice(
+          id: id,
+          title: title,
+          subtitle: subtitle,
+          tag: tag,
+          audio: [audio.name!, urlAudio.toString()],
+          type: type,
+          thumb: urlImage.toString(),
+          datePost: DateFormat("dd-MM-yyyy hh:mm").format(DateTime.now()),
+          content: content.toString(),
+          views: views,
+          isTopHeader: isTopHeader,
+          author: author);
+      await firestore()
+          .collection("notices")
+          .doc(id.toString())
+          .update(data: notice.toJson());
     } catch (e) {
       return false;
     }

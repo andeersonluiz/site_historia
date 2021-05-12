@@ -1,3 +1,4 @@
+import 'package:firebase/firebase.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +8,7 @@ import 'package:site_historia/Store/notice_store.dart';
 import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Store/teacher_store.dart';
 import 'package:site_historia/Support/vxNavigator.dart';
+import 'package:site_historia/firebase/login_auth.dart';
 import 'package:site_historia/firebase/teacher_firestore.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -85,9 +87,12 @@ class _MyAppState extends State<MyApp> {
   _loadInitialData(BuildContext context) async {
     ProjectStore projectStore = Provider.of<ProjectStore>(context);
     FrameFirestore frameFirestore = Provider.of<FrameFirestore>(context);
-    await projectStore.getProjects();
     await projectStore.getProjectByName();
     await frameFirestore.getFramesName();
+    User? user = LoginAuth.getUser();
+    if (user != null) {
+      await projectStore.getUsernameByUid(user.uid);
+    }
     return [];
   }
 }

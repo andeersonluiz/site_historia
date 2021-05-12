@@ -67,7 +67,7 @@ class AdminNoticeCardMobile extends StatelessWidget {
                           color: Theme.of(context).primaryColor,
                         ),
                         onPressed: () => VxNavigator.of(context).push(Uri(
-                            path: RouteNames.UPDATE_PROJECT,
+                            path: RouteNames.UPDATE_NOTICE,
                             queryParameters: {
                               "id": noticeStore.listNotices!.value[index].id
                                   .toString()
@@ -113,7 +113,7 @@ class AdminNoticeCardMobile extends StatelessWidget {
                           ),
                         ),
                         Spacer(),
-                        Row(
+                        Column(
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -130,7 +130,6 @@ class AdminNoticeCardMobile extends StatelessWidget {
                                           color:
                                               Theme.of(context).primaryColor)),
                             ),
-                            Spacer(),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(

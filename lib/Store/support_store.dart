@@ -1,5 +1,7 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
+import 'package:site_historia/Model/notice_model.dart';
 import 'package:site_historia/Support/errorHander_support.dart';
 import 'package:site_historia/Model/project_model.dart';
 import 'package:site_historia/Model/teacher_model.dart';
@@ -22,6 +24,9 @@ abstract class _SupportStoreBase with Store {
 
   @observable
   bool _isTopHeader = false;
+
+  @observable
+  PlatformFile _audioFile = PlatformFile();
 
   @observable
   PickedFile? _pathImage = PickedFile("");
@@ -54,6 +59,9 @@ abstract class _SupportStoreBase with Store {
   PickedFile? get pathImage => this._pathImage;
 
   @computed
+  PlatformFile? get audioFile => this._audioFile;
+
+  @computed
   String? get htmlContent => this._htmlContent;
 
   @observable
@@ -67,6 +75,9 @@ abstract class _SupportStoreBase with Store {
 
   @observable
   String _msgErrorImage = "";
+
+  @observable
+  String _msgErrorAudio = "";
 
   @observable
   String _msgErrorContent = "";
@@ -91,6 +102,9 @@ abstract class _SupportStoreBase with Store {
 
   @computed
   String get msgErrorImage => this._msgErrorImage;
+
+  @computed
+  String get msgErrorAudio => this._msgErrorAudio;
 
   @computed
   String get msgErrorContent => this._msgErrorContent;
@@ -139,6 +153,14 @@ abstract class _SupportStoreBase with Store {
   }
 
   @action
+  updateAudio(PlatformFile? newAudio) {
+    if (newAudio!.name != "") {
+      clearError(ErrorForm.Audio);
+    }
+    this._audioFile = newAudio;
+  }
+
+  @action
   updatePath(PickedFile? newPath) {
     if (newPath!.path != "") {
       clearError(ErrorForm.Image);
@@ -147,11 +169,10 @@ abstract class _SupportStoreBase with Store {
   }
 
   @action
-  updateContent(String? value) {
+  updateContent(String? value) async {
     if (htmlContent != value) {
-      this._htmlContent = value;
+      this._htmlContent = value!.replaceAll("video", "iframe");
     }
-
     if (htmlContent != "" && msgErrorContent != "") {
       clearError(ErrorForm.Content);
     }
@@ -268,6 +289,9 @@ abstract class _SupportStoreBase with Store {
       case ErrorForm.SubTitle:
         this._msgErrorSubtitle = msg;
         break;
+      case ErrorForm.Audio:
+        this._msgErrorAudio = msg;
+        break;
     }
   }
 
@@ -294,11 +318,13 @@ abstract class _SupportStoreBase with Store {
       case ErrorForm.SubTitle:
         this._msgErrorSubtitle = "";
         break;
+      case ErrorForm.Audio:
+        this._msgErrorAudio = "";
+        break;
     }
   }
 
-  @action
-  loadInitialData(Project project) {
+  loadInitialDataProject(Project project) {
     updatePath(PickedFile(project.imageHeader));
     updateTitle(project.name);
     updateContent(project.content);
@@ -307,6 +333,16 @@ abstract class _SupportStoreBase with Store {
     for (int i = 0; i < project.participants.length; i++) {
       updateParticipants(project.participants[i].name, i);
     }
+  }
+
+  loadInitialDataNotice(Notice notice) {
+    updateTitle(notice.title);
+    updateSubTitle(notice.subtitle);
+    updateType(notice.type);
+    updateTag(notice.tag);
+    updateAudio(PlatformFile(name: notice.audio[0]));
+    updatePath(PickedFile(notice.thumb));
+    updateContent(notice.content);
   }
 
   validateProjectMobileTab1() {
@@ -448,6 +484,15 @@ abstract class _SupportStoreBase with Store {
       clearError(ErrorForm.Content);
     }
 
+    if (type == "Podcast") {
+      if (audioFile!.name == "") {
+        generateMsgError(ErrorForm.Audio, "Insira o audio do podcast.");
+        err += "err7";
+      } else {
+        clearError(ErrorForm.Audio);
+      }
+    }
+
     if (err == "") {
       return true;
     } else {
@@ -477,6 +522,7 @@ abstract class _SupportStoreBase with Store {
     _subtitle = "";
     _tag = "Podcast";
     _type = "Podcast";
+    _audioFile = PlatformFile();
     teacherLocal = ObservableList<Teacher>();
     participantsLocal = ObservableList<String>();
     _msgErrorParticipants = "";

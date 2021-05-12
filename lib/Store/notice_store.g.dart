@@ -24,6 +24,22 @@ mixin _$NoticeStore on _NoticeStoreBase, Store {
     });
   }
 
+  final _$listNoticesFilteredAtom =
+      Atom(name: '_NoticeStoreBase.listNoticesFiltered');
+
+  @override
+  ObservableFuture<dynamic>? get listNoticesFiltered {
+    _$listNoticesFilteredAtom.reportRead();
+    return super.listNoticesFiltered;
+  }
+
+  @override
+  set listNoticesFiltered(ObservableFuture<dynamic>? value) {
+    _$listNoticesFilteredAtom.reportWrite(value, super.listNoticesFiltered, () {
+      super.listNoticesFiltered = value;
+    });
+  }
+
   final _$listRecentPodcastAtom =
       Atom(name: '_NoticeStoreBase.listRecentPodcast');
 
@@ -86,19 +102,26 @@ mixin _$NoticeStore on _NoticeStoreBase, Store {
     });
   }
 
+  final _$barSelectedAtom = Atom(name: '_NoticeStoreBase.barSelected');
+
+  @override
+  String get barSelected {
+    _$barSelectedAtom.reportRead();
+    return super.barSelected;
+  }
+
+  @override
+  set barSelected(String value) {
+    _$barSelectedAtom.reportWrite(value, super.barSelected, () {
+      super.barSelected = value;
+    });
+  }
+
   final _$getNoticesAsyncAction = AsyncAction('_NoticeStoreBase.getNotices');
 
   @override
   Future getNotices() {
     return _$getNoticesAsyncAction.run(() => super.getNotices());
-  }
-
-  final _$getNoticeByIdAsyncAction =
-      AsyncAction('_NoticeStoreBase.getNoticeById');
-
-  @override
-  Future getNoticeById(String id) {
-    return _$getNoticeByIdAsyncAction.run(() => super.getNoticeById(id));
   }
 
   final _$getRecentNoticesAsyncAction =
@@ -121,6 +144,17 @@ mixin _$NoticeStore on _NoticeStoreBase, Store {
       ActionController(name: '_NoticeStoreBase');
 
   @override
+  dynamic getNoticeById(String id) {
+    final _$actionInfo = _$_NoticeStoreBaseActionController.startAction(
+        name: '_NoticeStoreBase.getNoticeById');
+    try {
+      return super.getNoticeById(id);
+    } finally {
+      _$_NoticeStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic changeEddting() {
     final _$actionInfo = _$_NoticeStoreBaseActionController.startAction(
         name: '_NoticeStoreBase.changeEddting');
@@ -132,13 +166,37 @@ mixin _$NoticeStore on _NoticeStoreBase, Store {
   }
 
   @override
+  dynamic updateMenuBar(String newItem) {
+    final _$actionInfo = _$_NoticeStoreBaseActionController.startAction(
+        name: '_NoticeStoreBase.updateMenuBar');
+    try {
+      return super.updateMenuBar(newItem);
+    } finally {
+      _$_NoticeStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic filterListNotices(String value) {
+    final _$actionInfo = _$_NoticeStoreBaseActionController.startAction(
+        name: '_NoticeStoreBase.filterListNotices');
+    try {
+      return super.filterListNotices(value);
+    } finally {
+      _$_NoticeStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 listNotices: ${listNotices},
+listNoticesFiltered: ${listNoticesFiltered},
 listRecentPodcast: ${listRecentPodcast},
 listRecentNotices: ${listRecentNotices},
 listSliders: ${listSliders},
-isEditting: ${isEditting}
+isEditting: ${isEditting},
+barSelected: ${barSelected}
     ''';
   }
 }

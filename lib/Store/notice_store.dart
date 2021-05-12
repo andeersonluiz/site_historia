@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:site_historia/Model/notice_model.dart';
@@ -13,6 +14,9 @@ abstract class _NoticeStoreBase with Store {
   ObservableFuture? listNotices;
 
   @observable
+  ObservableFuture? listNoticesFiltered;
+
+  @observable
   ObservableFuture? listRecentPodcast;
 
   @observable
@@ -24,13 +28,17 @@ abstract class _NoticeStoreBase with Store {
   @observable
   bool isEditting = false;
 
+  @observable
+  String barSelected = "Tudo";
+
   @action
   getNotices() async {
     listNotices = ObservableFuture(NoticeFirestore.getNotices());
+    listNoticesFiltered = listNotices;
   }
 
   @action
-  getNoticeById(String id) async {
+  getNoticeById(String id) {
     var result = listNotices!.value.where((element) {
       return element.id.toString() == id;
     }).toList();
@@ -56,13 +64,14 @@ abstract class _NoticeStoreBase with Store {
     String subtitle,
     String type,
     String tag,
+    PlatformFile audio,
     PickedFile? thumb,
     bool isTopHeader,
     String? content,
     String author,
   ) async {
     bool result = await NoticeFirestore.addNotice(
-        title, subtitle, type, tag, thumb, isTopHeader, content, author);
+        title, subtitle, type, tag, audio, thumb, isTopHeader, content, author);
     if (result) {
       await getNotices();
       return true;
@@ -73,6 +82,29 @@ abstract class _NoticeStoreBase with Store {
 
   deleteNotice(int id) {
     NoticeFirestore.deleteNotice(id);
+  }
+
+  updateNotice(
+    int id,
+    String title,
+    String subtitle,
+    String type,
+    String tag,
+    PlatformFile audio,
+    PickedFile? thumb,
+    bool isTopHeader,
+    String? content,
+    int views,
+    String author,
+  ) async {
+    var result = await NoticeFirestore.updateNotice(id, title, subtitle, type,
+        tag, audio, thumb, isTopHeader, content, views, author);
+    if (result) {
+      await getNotices();
+      return true;
+    } else {
+      return false;
+    }
   }
 
   updateNotices(List<Notice> notices) {
@@ -104,5 +136,48 @@ abstract class _NoticeStoreBase with Store {
   @action
   changeEddting() {
     this.isEditting = !isEditting;
+  }
+
+  @action
+  updateMenuBar(String newItem) {
+    this.barSelected = newItem;
+  }
+
+  @action
+  filterListNotices(String value) {
+    if (value == "Tudo") {
+      listNoticesFiltered =
+          ObservableFuture(Future.delayed(Duration(milliseconds: 300), () {
+        return listNotices!.value;
+      }));
+    } else {
+      List<Notice> listNoticesTemp = listNotices!.value;
+
+      var values =
+          listNoticesTemp.where((element) => element.tag == value).toList();
+
+      List<Notice> l = values.toList();
+
+      listNoticesFiltered =
+          ObservableFuture(Future.delayed(Duration(milliseconds: 300), () {
+        return l;
+      }));
+    }
+  }
+
+  search(String searchText) {
+    List<Notice> listNoticesTemp = listNotices!.value;
+
+    var values = listNoticesTemp
+        .where((element) =>
+            element.title.toLowerCase().contains(searchText.toLowerCase()))
+        .toList();
+
+    List<Notice> l = values.toList();
+
+    listNoticesFiltered =
+        ObservableFuture(Future.delayed(Duration(milliseconds: 300), () {
+      return l;
+    }));
   }
 }

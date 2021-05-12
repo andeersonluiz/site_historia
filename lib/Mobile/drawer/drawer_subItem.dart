@@ -15,13 +15,13 @@ class DrawerSubItem extends StatelessWidget {
       shape: BeveledRectangleBorder(),
       padding: EdgeInsets.zero,
       hoverPadding: EdgeInsets.zero,
-      onpressed: () {
+      onpressed: () async {
+        Scaffold.of(context).openEndDrawer();
+        Navigator.of(context).pop();
         VxNavigator.of(context).replace(
           Uri(path: path, queryParameters: {"id": object.id.toString()}),
           params: object,
         );
-        Scaffold.of(context).openEndDrawer();
-
       },
       child: Padding(
         padding: const EdgeInsets.only(left: 8.0),

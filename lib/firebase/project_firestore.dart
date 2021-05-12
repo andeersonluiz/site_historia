@@ -116,10 +116,8 @@ class ProjectFirestore {
         listParticipants.add(Participant(name: element, status: "Aluno"));
       });
       Uri url = Uri.parse(imageHeader!.path.toString());
-      var urlPattern =
-          r"(https?|http)://([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?";
-      if (!RegExp(urlPattern, caseSensitive: false)
-          .hasMatch(imageHeader.path)) {
+
+      if (!imageHeader.path.contains("firebasestorage")) {
         var metadata = await imageHeader.readAsBytes();
         UploadTaskSnapshot task = await storage()
             .ref()

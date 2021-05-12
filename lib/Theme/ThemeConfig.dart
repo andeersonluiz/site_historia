@@ -28,7 +28,6 @@ class ThemeConfig {
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all<Color>(brown),
-
     )),
     iconTheme: IconThemeData(
       color: textColor,
@@ -62,7 +61,7 @@ class ThemeConfig {
     ).apply(
       bodyColor: textColor,
       displayColor: textColor,
-      decorationColor: textColor,
+      decorationColor: brown,
     ),
   );
 }

@@ -17,8 +17,9 @@ class DrawerItem extends StatelessWidget {
         padding: EdgeInsets.zero,
         hoverPadding: EdgeInsets.zero,
         onpressed: () async {
-          VxNavigator.of(context).replace(Uri.parse(path));
           Scaffold.of(context).openEndDrawer();
+          Navigator.of(context).pop();
+          await VxNavigator.of(context).clearAndPush(Uri.parse(path));
         },
         child: ListTile(
           leading: Icon(icon, color: Theme.of(context).backgroundColor),

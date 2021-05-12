@@ -11,7 +11,7 @@ class CustomButton extends StatelessWidget {
   CustomButton({
     required this.text,
     required this.onPressed,
-    this.paddingButton = const EdgeInsets.all(8.0),
+    this.paddingButton = const EdgeInsets.all(16.0),
     this.paddingText = const EdgeInsets.all(4.0),
     this.expandButton = false,
     this.focusNode,
