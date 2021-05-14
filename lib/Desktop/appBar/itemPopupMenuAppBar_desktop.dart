@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
+import 'package:site_historia/Model/project_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ItemPopUpMenuAppBar extends StatefulWidget {
@@ -49,7 +50,7 @@ class _ItemPopUpMenuAppBarState extends State<ItemPopUpMenuAppBar>
             }
             return PopupMenuItem(
                 value: item.id,
-                child: Text(item.name,
+                child: Text(item is Project ? item.name : item.title,
                     style: Theme.of(context).textTheme.bodyText1));
           }).toList(),
           onCanceled: () {

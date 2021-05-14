@@ -30,7 +30,7 @@ class _NoticePageDesktopState extends State<NoticePageDesktop> {
     return Column(children: [
       Padding(
         padding: const EdgeInsets.all(16.0),
-        child: CustomText("Noticias",
+        child: CustomText("Notícias",
             style: Theme.of(context).textTheme.headline4),
       ),
       Divider(

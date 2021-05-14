@@ -8,6 +8,9 @@ class CustomButton extends StatelessWidget {
   final bool expandButton;
   final FocusNode? focusNode;
   final ButtonStyle? style;
+  final String loadingText;
+  final bool isLoading;
+
   CustomButton({
     required this.text,
     required this.onPressed,
@@ -16,6 +19,8 @@ class CustomButton extends StatelessWidget {
     this.expandButton = false,
     this.focusNode,
     this.style,
+    this.loadingText = "",
+    this.isLoading = false,
   });
 
   @override
@@ -23,18 +28,27 @@ class CustomButton extends StatelessWidget {
     return Padding(
         padding: paddingButton,
         child: ElevatedButton(
-          onPressed: onPressed,
-          style: style == null
-              ? Theme.of(context).elevatedButtonTheme.style
-              : style,
+          onPressed: isLoading ? null : onPressed,
+          style: isLoading
+              ? ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Theme.of(context).primaryColor.withAlpha(170)),
+                )
+              : style == null
+                  ? Theme.of(context).elevatedButtonTheme.style
+                  : style,
           child: Padding(
             padding: paddingText,
             child: expandButton
                 ? Center(
-                    child: Text(text.toUpperCase(),
+                    child: Text(
+                        isLoading
+                            ? loadingText.toUpperCase()
+                            : text.toUpperCase(),
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.button!))
-                : Text(text.toUpperCase(),
+                : Text(
+                    isLoading ? loadingText.toUpperCase() : text.toUpperCase(),
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.button!),
           ),

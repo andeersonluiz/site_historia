@@ -4,29 +4,28 @@ import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:site_historia/Components/customLoading_component.dart';
-import 'package:site_historia/Desktop/adminUpdateNotice_page_desktop.dart';
+import 'package:site_historia/Desktop/adminUpdateFrame_page_desktop.dart';
 import 'package:site_historia/Desktop/appBar/verticalAppBar_desktop.dart';
 import 'package:site_historia/Mobile/drawer/adminNavigation_drawer_component.dart';
-import 'package:site_historia/Model/notice_model.dart';
+import 'package:site_historia/Model/frame_model.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Screens/loading_screen.dart';
-import 'package:site_historia/Store/notice_store.dart';
+import 'package:site_historia/Store/frame_store.dart';
 import 'package:site_historia/Support/RoutesName_support.dart';
 
-class AdminUpdateNoticeScreen extends StatefulWidget {
-  final String idNotice;
+class AdminUpdateFrameScreen extends StatefulWidget {
+  final String idFrame;
 
-  AdminUpdateNoticeScreen(this.idNotice);
+  AdminUpdateFrameScreen(this.idFrame);
 
   @override
-  _AdminUpdateNoticeScreenState createState() =>
-      _AdminUpdateNoticeScreenState();
+  _AdminUpdateFrameScreenState createState() => _AdminUpdateFrameScreenState();
 }
 
-class _AdminUpdateNoticeScreenState extends State<AdminUpdateNoticeScreen> {
+class _AdminUpdateFrameScreenState extends State<AdminUpdateFrameScreen> {
   @override
   Widget build(BuildContext context) {
-    final noticeStore = Provider.of<NoticeStore>(context);
+    final frameStore = Provider.of<FrameStore>(context);
 
     return ResponsiveBuilder(
       builder: (ctx, sizingInformation) => Scaffold(
@@ -35,12 +34,12 @@ class _AdminUpdateNoticeScreenState extends State<AdminUpdateNoticeScreen> {
               ? null
               : AppBar(
                   centerTitle: true,
-                  title: Text("Editar Notícia"),
+                  title: Text("Editar Quadro"),
                 ),
           body: Observer(
             builder: (_) {
-              noticeStore.listNotices ?? noticeStore.getNotices();
-              switch (noticeStore.listNotices!.status) {
+              frameStore.listFrames ?? frameStore.getFrames();
+              switch (frameStore.listFrames!.status) {
                 case FutureStatus.pending:
                   return Loading();
                 case FutureStatus.rejected:
@@ -50,11 +49,11 @@ class _AdminUpdateNoticeScreenState extends State<AdminUpdateNoticeScreen> {
                     future: loadData(),
                     builder: (ctx, snp) {
                       if (snp.hasData) {
-                        Notice notice = snp.data as Notice;
+                        Frame frame = snp.data as Frame;
                         return SingleChildScrollView(
                           scrollDirection: Axis.vertical,
                           child: ScreenTypeLayout(
-                              mobile: AdminUpdateNoticePageDesktop(notice),
+                              mobile: AdminUpdateFramePageDesktop(frame),
                               desktop: Container(
                                 width: MediaQuery.of(context).size.width,
                                 height: MediaQuery.of(context).size.height,
@@ -62,7 +61,7 @@ class _AdminUpdateNoticeScreenState extends State<AdminUpdateNoticeScreen> {
                                   VerticalAppBar(),
                                   Expanded(
                                       child:
-                                          AdminUpdateNoticePageDesktop(notice)),
+                                          AdminUpdateFramePageDesktop(frame)),
                                 ]),
                               )),
                         );
@@ -83,7 +82,7 @@ class _AdminUpdateNoticeScreenState extends State<AdminUpdateNoticeScreen> {
   }
 
   loadData() async {
-    final noticeStore = Provider.of<NoticeStore>(context);
-    return await noticeStore.getNoticeById(widget.idNotice);
+    final frameStore = Provider.of<FrameStore>(context);
+    return await frameStore.getFrameById(widget.idFrame);
   }
 }

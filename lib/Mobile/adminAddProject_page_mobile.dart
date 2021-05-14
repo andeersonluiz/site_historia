@@ -1,8 +1,6 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/CustomText_component.dart';
@@ -12,6 +10,7 @@ import 'package:site_historia/Components/customHtmlEditor_component.dart';
 import 'package:site_historia/Components/customTextFormField_component.dart';
 import 'package:site_historia/Components/customLoading_component.dart';
 import 'package:site_historia/Components/erroMsg_component.dart';
+import 'package:site_historia/Desktop/widget/image_desktop.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/support_store.dart';
 import 'package:site_historia/Model/teacher_model.dart';
@@ -39,7 +38,6 @@ class _AdminAddProjectPageMobileState extends State<AdminAddProjectPageMobile> {
   @override
   Widget build(BuildContext context) {
     final supportStore = Provider.of<SupportStore>(context);
-    final _picker = ImagePicker();
     final HtmlEditorController contentController = HtmlEditorController();
     final teacherStore = Provider.of<TeacherStore>(context);
 
@@ -81,48 +79,10 @@ class _AdminAddProjectPageMobileState extends State<AdminAddProjectPageMobile> {
                         child: CustomText("Imagem titulo",
                             style: Theme.of(context).textTheme.headline6)),
                     Observer(
-                      builder: (ctx) => Container(
-                        decoration: supportStore.pathImage!.path != ""
-                            ? BoxDecoration(
-                                image: DecorationImage(
-                                image:
-                                    NetworkImage(supportStore.pathImage!.path),
-                                fit: BoxFit.fill,
-                              ))
-                            : BoxDecoration(color: Colors.grey),
-                        child: Row(children: [
-                          supportStore.pathImage!.path != ""
-                              ? Expanded(
-                                  flex: 95,
-                                  child: Align(
-                                    alignment: Alignment.bottomLeft,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: AutoSizeText(
-                                        supportStore.title,
-                                        minFontSize: 10,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline3!
-                                            .copyWith(fontSize: 30),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              : Expanded(flex: 85, child: Container()),
-                          Spacer(),
-                          Expanded(
-                            flex: 5,
-                            child: InkWell(
-                                child: Icon(Icons.folder),
-                                onTap: () async {
-                                  PickedFile? image = await _picker.getImage(
-                                      source: ImageSource.camera);
-                                  supportStore.updatePath(image);
-                                }),
-                          ),
-                        ]),
-                        height: supportStore.pathImage!.path == "" ? 40 : 300,
+                      builder: (ctx) => ImageWidget(
+                        image: supportStore.pathImage,
+                        isProject: true,
+                        titleProject: supportStore.title,
                       ),
                     ),
                     Observer(builder: (_) {

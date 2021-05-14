@@ -512,7 +512,7 @@ packages:
       name: html_editor_enhanced
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1"
+    version: "2.1.0+1"
   http:
     dependency: transitive
     description:

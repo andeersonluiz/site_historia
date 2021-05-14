@@ -123,7 +123,6 @@ class AdminProjectCardMobile extends StatelessWidget {
                     onPressed: () async {
                       await projectStore.deleteProject(project.id);
                       projectStore.getProjects();
-                      /*** TRANSFORMAR LISTA DE PROJETOS EM MOBX PARA ATUALIZAR DINAMICAMENTE OS VALORES*/
                       Navigator.of(context).pop();
                     }),
                 CustomButton(

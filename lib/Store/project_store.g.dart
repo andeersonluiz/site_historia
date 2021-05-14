@@ -24,19 +24,19 @@ mixin _$ProjectStore on _ProjectStoreBase, Store {
     });
   }
 
-  final _$listProjectsOrdenedAtom =
-      Atom(name: '_ProjectStoreBase.listProjectsOrdened');
+  final _$listProjectsOrderedAtom =
+      Atom(name: '_ProjectStoreBase.listProjectsOrdered');
 
   @override
-  ObservableList<dynamic> get listProjectsOrdened {
-    _$listProjectsOrdenedAtom.reportRead();
-    return super.listProjectsOrdened;
+  ObservableList<dynamic> get listProjectsOrdered {
+    _$listProjectsOrderedAtom.reportRead();
+    return super.listProjectsOrdered;
   }
 
   @override
-  set listProjectsOrdened(ObservableList<dynamic> value) {
-    _$listProjectsOrdenedAtom.reportWrite(value, super.listProjectsOrdened, () {
-      super.listProjectsOrdened = value;
+  set listProjectsOrdered(ObservableList<dynamic> value) {
+    _$listProjectsOrderedAtom.reportWrite(value, super.listProjectsOrdered, () {
+      super.listProjectsOrdered = value;
     });
   }
 
@@ -90,7 +90,7 @@ mixin _$ProjectStore on _ProjectStoreBase, Store {
   String toString() {
     return '''
 listProjects: ${listProjects},
-listProjectsOrdened: ${listProjectsOrdened}
+listProjectsOrdered: ${listProjectsOrdered}
     ''';
   }
 }

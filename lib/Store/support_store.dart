@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
+import 'package:site_historia/Model/frame_model.dart';
 import 'package:site_historia/Model/notice_model.dart';
 import 'package:site_historia/Support/errorHander_support.dart';
 import 'package:site_historia/Model/project_model.dart';
@@ -29,10 +30,19 @@ abstract class _SupportStoreBase with Store {
   PlatformFile _audioFile = PlatformFile();
 
   @observable
+  PlatformFile _videoFile = PlatformFile();
+
+  @observable
   PickedFile? _pathImage = PickedFile("");
 
   @observable
   String? _htmlContent = "";
+
+  @observable
+  String? _urlPopUp = "";
+
+  @observable
+  bool? _isLoading = false;
 
   @observable
   ObservableList<Teacher> teacherLocal = ObservableList<Teacher>();
@@ -62,7 +72,16 @@ abstract class _SupportStoreBase with Store {
   PlatformFile? get audioFile => this._audioFile;
 
   @computed
+  PlatformFile? get videoFile => this._videoFile;
+
+  @computed
   String? get htmlContent => this._htmlContent;
+
+  @computed
+  String? get urlPopUp => this._urlPopUp;
+
+  @computed
+  bool? get isLoading => this._isLoading;
 
   @observable
   String _msgErrorTitle = "";
@@ -91,6 +110,9 @@ abstract class _SupportStoreBase with Store {
   @observable
   String _msgErrorParticipantsSize = "";
 
+  @observable
+  String _msgErrorPopUp = "";
+
   @computed
   String get msgErrorTitle => this._msgErrorTitle;
 
@@ -117,6 +139,9 @@ abstract class _SupportStoreBase with Store {
 
   @computed
   String get msgErrorParticipantsSize => this._msgErrorParticipantsSize;
+
+  @computed
+  String get msgErrorPopUp => this._msgErrorPopUp;
 
   @observable
   bool verticalIsMax = true;
@@ -154,10 +179,18 @@ abstract class _SupportStoreBase with Store {
 
   @action
   updateAudio(PlatformFile? newAudio) {
-    if (newAudio!.name != "") {
+    if (newAudio!.name != null) {
       clearError(ErrorForm.Audio);
     }
     this._audioFile = newAudio;
+  }
+
+  @action
+  updateVideo(PlatformFile? newVideo) {
+    if (newVideo!.name != null) {
+      this._msgErrorPopUp = "";
+    }
+    this._videoFile = newVideo;
   }
 
   @action
@@ -176,6 +209,19 @@ abstract class _SupportStoreBase with Store {
     if (htmlContent != "" && msgErrorContent != "") {
       clearError(ErrorForm.Content);
     }
+  }
+
+  @action
+  updateUrlPopUp(String newUrl) {
+    if (newUrl != "") {
+      this._msgErrorPopUp = "";
+    }
+    this._urlPopUp = newUrl;
+  }
+
+  @action
+  setLoading(bool value) {
+    this._isLoading = value;
   }
 
   @action
@@ -345,6 +391,15 @@ abstract class _SupportStoreBase with Store {
     updateContent(notice.content);
   }
 
+  loadInitialDataFrame(Frame frame) {
+    updateTitle(frame.title);
+    updateSubTitle(frame.subtitle);
+    updatePath(PickedFile(frame.imageHeader));
+    updateAudio(PlatformFile(name: frame.urlAudio[0]));
+    updateVideo(PlatformFile(name: frame.urlVideo[0]));
+    updateContent(frame.content);
+  }
+
   validateProjectMobileTab1() {
     String err = "";
     if (title == "") {
@@ -462,7 +517,7 @@ abstract class _SupportStoreBase with Store {
     if (subtitle == "") {
       generateMsgError(ErrorForm.SubTitle, "O subtítulo não pode ser vazio.");
       err += "err3";
-    } else if (subtitle.length > 50) {
+    } else if (subtitle.length > 100) {
       generateMsgError(
           ErrorForm.SubTitle, "O subtítulo não ter mais de 50 caracteres.");
       err += "err4";
@@ -485,7 +540,7 @@ abstract class _SupportStoreBase with Store {
     }
 
     if (type == "Podcast") {
-      if (audioFile!.name == "") {
+      if (audioFile!.name == null) {
         generateMsgError(ErrorForm.Audio, "Insira o audio do podcast.");
         err += "err7";
       } else {
@@ -516,6 +571,61 @@ abstract class _SupportStoreBase with Store {
     }
   }
 
+  validateFrame() {
+    String err = "";
+    if (title == "") {
+      generateMsgError(ErrorForm.Title, "O titulo não pode ser vazio.");
+      err += "err1";
+    } else if (title.length > 40) {
+      generateMsgError(
+          ErrorForm.Title, "O titulo não ter mais de 40 caracteres.");
+      err += "err2";
+    } else {
+      clearError(ErrorForm.Title);
+    }
+
+    if (subtitle == "") {
+      generateMsgError(ErrorForm.SubTitle, "O subtítulo não pode ser vazio.");
+      err += "err3";
+    } else if (subtitle.length > 100) {
+      generateMsgError(
+          ErrorForm.SubTitle, "O subtítulo não ter mais de 50 caracteres.");
+      err += "err4";
+    } else {
+      clearError(ErrorForm.SubTitle);
+    }
+
+    if (pathImage!.path == "") {
+      generateMsgError(ErrorForm.Image, "Selecione uma imagem titulo.");
+      err += "err5";
+    } else {
+      clearError(ErrorForm.Image);
+    }
+
+    if (htmlContent == "") {
+      generateMsgError(ErrorForm.Content, "O conteudo não pode estar vazio.");
+      err += "err6";
+    } else {
+      clearError(ErrorForm.Content);
+    }
+
+    if (err == "") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  validatePopUp() {
+    if (urlPopUp == "" && videoFile!.name == null) {
+      this._msgErrorPopUp = "Selecione um tipo.";
+    } else if (urlPopUp != "" && videoFile!.name != null) {
+      this._msgErrorPopUp = "Selecione apenas um tipo.";
+    } else {
+      return "";
+    }
+  }
+
   clearData() {
     _pathImage = PickedFile("");
     _title = "";
@@ -523,6 +633,9 @@ abstract class _SupportStoreBase with Store {
     _tag = "Podcast";
     _type = "Podcast";
     _audioFile = PlatformFile();
+    _videoFile = PlatformFile();
+    _urlPopUp = "";
+
     teacherLocal = ObservableList<Teacher>();
     participantsLocal = ObservableList<String>();
     _msgErrorParticipants = "";

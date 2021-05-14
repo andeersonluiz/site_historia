@@ -13,7 +13,7 @@ abstract class _ProjectStoreBase with Store {
   ObservableFuture? listProjects;
 
   @observable
-  ObservableList listProjectsOrdened = ObservableList.of([]);
+  ObservableList listProjectsOrdered = ObservableList.of([]);
 
   @action
   getProjects() async {
@@ -25,11 +25,7 @@ abstract class _ProjectStoreBase with Store {
     var result = listProjects!.value
         .where((element) => element.id.toString() == id)
         .toList();
-    if (result.isNotEmpty) {
-      return result[0];
-    } else {
-      return null;
-    }
+    return result[0];
   }
 
   @action
@@ -81,8 +77,8 @@ abstract class _ProjectStoreBase with Store {
     return GlobalsVariables.username;
   }
 
-  getProjectByName() async {
-    var result = await ProjectFirestore.getProjectsName();
-    listProjectsOrdened = ObservableList.of(result);
+  getProjectSortedByTitle() async {
+    var result = await ProjectFirestore.getProjectSortedByTitle();
+    listProjectsOrdered = ObservableList.of(result);
   }
 }

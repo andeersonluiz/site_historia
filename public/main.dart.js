@@ -57021,7 +57021,7 @@ L.nx.prototype={
 al:function(){return new L.HK(C.m)}}
 L.HK.prototype={
 B:function(a,b){var s=null,r=b.U(t.w).f,q=Y.me(b,t.Hv),p=Y.me(b,t.kU),o=K.G(b),n=H.a([new O.jw(0,K.G(b).b,new P.p(0,0.5),3)],t.sq)
-return M.aA(s,T.cU(H.a([new T.aw(C.cx,L.ec(C.jv,s,30),s),new R.pm(s),new B.il("Inicio","/inicio",s),new B.il("Coordena\xe7\xe3o de Hist\xf3ria","/coordenacao",s),new D.oa("Projetos","/projetos",q.grD(),s),new B.il("Noticias","/noticias",s),new D.oa("Quadros","/quadros",p.gyq(),s),new B.il("Vestibular","/vestibular",s),new B.il("Recomenda\xe7\xf5es","/recomendacoes",s),new B.il("Acervo","/acervo",s)],t.p),C.u,C.S,C.o),s,s,new S.c2(o.b,s,s,s,n,s,C.N),70,s,s,r.a.a)}}
+return M.aA(s,T.cU(H.a([new T.aw(C.cx,L.ec(C.jv,s,30),s),new R.pm(s),new B.il("Inicio","/inicio",s),new B.il("Coordena\xe7\xe3o de Hist\xf3ria","/coordenacao",s),new D.oa("Projetos","/projetos",q.grD(),s),new B.il("Notícias","/noticias",s),new D.oa("Quadros","/quadros",p.gyq(),s),new B.il("Vestibular","/vestibular",s),new B.il("Recomenda\xe7\xf5es","/recomendacoes",s),new B.il("Acervo","/acervo",s)],t.p),C.u,C.S,C.o),s,s,new S.c2(o.b,s,s,s,n,s,C.N),70,s,s,r.a.a)}}
 B.il.prototype={
 B:function(a,b){var s=null,r=K.G(b)
 return K.SS(T.i3(new T.aw(C.q,L.b_(this.c,s,s,s,s,s,s,s,K.G(b).R.y,s,s,s),s),s,s),r.db,new V.ap(0,0,0,0),new B.TF(this,b),new V.ap(0,0,0,0),new T.e3(C.aP,C.p))}}
@@ -57224,7 +57224,7 @@ B:function(a,b){var s,r=null,q="Coordena\xe7\xe3o de Hist\xf3ria",p=Y.me(b,t.Hv)
 j=P.al(new H.ad(k,new M.V1(),j),!0,j.j("aI.E"))
 k=o.gyq()
 s=H.a9(k).j("ad<1,ft>")
-m=G.af9(H.a([new T.aw(C.q,l,r),new V.ia(C.xn,"/inicio","Inicio",r),new V.ia(C.xi,"/coordenacao",q,r),new Y.t2("Projetos",C.mh,j,r),new V.ia(C.xl,"/noticias","Noticias",r),new Y.t2("Quadros",C.xh,P.al(new H.ad(k,new M.V2(),s),!0,s.j("aI.E")),r),new V.ia(C.xk,"/vestibular","Vestibular",r),new V.ia(C.xo,"/recomendacoes","Recomenda\xe7\xf5es",r),new V.ia(C.xj,"/acervo","Acervo",r)],m),!0,!0,!0)
+m=G.af9(H.a([new T.aw(C.q,l,r),new V.ia(C.xn,"/inicio","Inicio",r),new V.ia(C.xi,"/coordenacao",q,r),new Y.t2("Projetos",C.mh,j,r),new V.ia(C.xl,"/noticias","Notícias",r),new Y.t2("Quadros",C.xh,P.al(new H.ad(k,new M.V2(),s),!0,s.j("aI.E")),r),new V.ia(C.xk,"/vestibular","Vestibular",r),new V.ia(C.xo,"/recomendacoes","Recomenda\xe7\xf5es",r),new V.ia(C.xj,"/acervo","Acervo",r)],m),!0,!0,!0)
 return new Z.Br(M.aA(r,new B.CJ(m,r,C.k,!1,r,!0,C.oS,!1,r,9,C.ad,C.rU,r,C.aL,r),n.b,r,r,r,r,r,r),r)}}
 M.V1.prototype={
 $1:function(a){return new U.ft(a,C.mh,"/projetos",null)},

@@ -30,7 +30,7 @@ class VerticalAppBarMin extends StatelessWidget {
             color: Theme.of(context).iconTheme.color,
           ),
           VerticalItem(
-            "Noticias",
+            "Notícias",
             RouteNames.ADMIN_NOTICES,
             IconsData.NOTICE_ICON,
             isMini: true,

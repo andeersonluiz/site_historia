@@ -42,11 +42,7 @@ abstract class _NoticeStoreBase with Store {
     var result = listNotices!.value.where((element) {
       return element.id.toString() == id;
     }).toList();
-    if (result.isNotEmpty) {
-      return result[0];
-    } else {
-      return null;
-    }
+    return result[0];
   }
 
   @action
@@ -85,7 +81,7 @@ abstract class _NoticeStoreBase with Store {
   }
 
   updateNotice(
-    int id,
+    Notice notice,
     String title,
     String subtitle,
     String type,
@@ -97,8 +93,8 @@ abstract class _NoticeStoreBase with Store {
     int views,
     String author,
   ) async {
-    var result = await NoticeFirestore.updateNotice(id, title, subtitle, type,
-        tag, audio, thumb, isTopHeader, content, views, author);
+    var result = await NoticeFirestore.updateNotice(notice, title, subtitle,
+        type, tag, audio, thumb, isTopHeader, content, views, author);
     if (result) {
       await getNotices();
       return true;

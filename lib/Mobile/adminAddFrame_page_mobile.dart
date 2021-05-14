@@ -4,32 +4,30 @@ import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/CustomText_component.dart';
 import 'package:site_historia/Components/customButton_component.dart';
-import 'package:site_historia/Components/customDropdown_component.dart';
 import 'package:site_historia/Components/customHtmlEditor_component.dart';
 import 'package:site_historia/Components/customTextFormField_component.dart';
 import 'package:site_historia/Components/customToast_component.dart';
 import 'package:site_historia/Components/erroMsg_component.dart';
 import 'package:site_historia/Desktop/widget/audio_desktop.dart';
 import 'package:site_historia/Desktop/widget/image_desktop.dart';
-import 'package:site_historia/Store/notice_store.dart';
+import 'package:site_historia/Mobile/widget/video_mobile.dart';
+import 'package:site_historia/Store/frame_store.dart';
 import 'package:site_historia/Store/support_store.dart';
 import 'package:site_historia/Support/RoutesName_support.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class AdminAddNoticePageDesktop extends StatefulWidget {
+class AdminAddFramePageMobile extends StatefulWidget {
   @override
-  _AdminAddNoticePageDesktopState createState() =>
-      _AdminAddNoticePageDesktopState();
+  _AdminAddFramePageMobileState createState() =>
+      _AdminAddFramePageMobileState();
 }
 
-class _AdminAddNoticePageDesktopState extends State<AdminAddNoticePageDesktop> {
-  NoticeStore? noticeStore;
+class _AdminAddFramePageMobileState extends State<AdminAddFramePageMobile> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    noticeStore = Provider.of<NoticeStore>(context);
     final supportStore = Provider.of<SupportStore>(context);
     /*CODE PBP*/
     supportStore.clearData();
@@ -38,6 +36,7 @@ class _AdminAddNoticePageDesktopState extends State<AdminAddNoticePageDesktop> {
   @override
   Widget build(BuildContext context) {
     final supportStore = Provider.of<SupportStore>(context);
+    final frameStore = Provider.of<FrameStore>(context);
     final HtmlEditorController contentController = HtmlEditorController();
     return SingleChildScrollView(
       child: Container(
@@ -45,7 +44,7 @@ class _AdminAddNoticePageDesktopState extends State<AdminAddNoticePageDesktop> {
         child: Column(
           children: [
             CustomTextFormField(
-              hintText: "Insira o titulo da Noticia",
+              hintText: "Insira o titulo do Quadro",
               labelText: "Titulo",
               maxCharacters: 30,
               initialValue: supportStore.title,
@@ -61,7 +60,7 @@ class _AdminAddNoticePageDesktopState extends State<AdminAddNoticePageDesktop> {
                   : ErrorMsg(supportStore.msgErrorTitle);
             }),
             CustomTextFormField(
-              hintText: "Insira o subtítulo da Noticia",
+              hintText: "Insira o subtítulo do Quadro",
               labelText: "Subtítulo",
               maxCharacters: 100,
               initialValue: supportStore.subtitle,
@@ -76,70 +75,6 @@ class _AdminAddNoticePageDesktopState extends State<AdminAddNoticePageDesktop> {
                   ? Container()
                   : ErrorMsg(supportStore.msgErrorSubTitle);
             }),
-            Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(
-                        child: CustomText(
-                      "Tipo de noticia",
-                      style: Theme.of(context).textTheme.subtitle1,
-                    )),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(
-                        child: CustomText(
-                      "Tag da noticia\n(visivel no site)",
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.subtitle1,
-                    )),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Observer(
-                    builder: (_) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: CustomDropdown(
-                        onChanged: (newType) {
-                          supportStore.updateType(newType.toString());
-                        },
-                        value: supportStore.type,
-                        items: GlobalsVariables.types,
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Observer(
-                    builder: (_) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: CustomDropdown(
-                        onChanged: (newTag) {
-                          supportStore.updateTag(newTag.toString());
-                        },
-                        value: supportStore.tag,
-                        items: GlobalsVariables.tags,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Observer(
-              builder: (_) => supportStore.type == "Podcast"
-                  ? AudioWidget(
-                      title: "Audio Podcast",
-                    )
-                  : Container(),
-            ),
             Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CustomText("Imagem titulo",
@@ -154,6 +89,12 @@ class _AdminAddNoticePageDesktopState extends State<AdminAddNoticePageDesktop> {
                   ? Container()
                   : ErrorMsg(supportStore.msgErrorImage);
             }),
+            AudioWidget(
+              title: "Audio (Opcional)",
+            ),
+            VideoWidgetMobile(
+              title: "Video (Opcional)",
+            ),
             CustomHtmlEditor(
               padding: EdgeInsets.symmetric(vertical: 16.0),
               controller: contentController,
@@ -167,31 +108,33 @@ class _AdminAddNoticePageDesktopState extends State<AdminAddNoticePageDesktop> {
             }),
             Observer(
               builder: (_) => CustomButton(
-                text: "Criar Notícia",
-                loadingText: "Criando notícia...",
+                text: "Criar Quadro",
+                loadingText: "Criando Quadro...",
                 isLoading: supportStore.isLoading!,
                 onPressed: () async {
-                  if (supportStore.validateNotice()) {
+                  if (supportStore.validateFrame()) {
                     supportStore.setLoading(true);
-                    var result = await noticeStore!.addNotice(
+                    var result = await frameStore.addFrame(
                         supportStore.title,
                         supportStore.subtitle,
-                        supportStore.type,
-                        supportStore.tag,
-                        supportStore.audioFile!,
                         supportStore.pathImage,
-                        supportStore.isTopHeader,
                         supportStore.htmlContent,
+                        supportStore.audioFile!,
+                        supportStore.videoFile!.name != null
+                            ? supportStore.videoFile!
+                            : supportStore.urlPopUp != ""
+                                ? supportStore.urlPopUp
+                                : "",
                         GlobalsVariables.username);
                     supportStore.setLoading(false);
                     if (result) {
                       CustomToast.showToast(
-                          "Notícia cadastrada com sucesso!!", Colors.green);
+                          "Quadro cadastrada com sucesso!!", Colors.green);
                       VxNavigator.of(context)
-                          .push(Uri.parse(RouteNames.ADMIN_NOTICES));
+                          .push(Uri.parse(RouteNames.ADMIN_FRAMES));
                     } else {
                       CustomToast.showToast(
-                        "Não foi possivel cadastrar sua notícia, tente novamente mais tarde.",
+                        "Não foi possivel cadastrar seu quadro, tente novamente mais tarde.",
                         Colors.red,
                       );
                     }

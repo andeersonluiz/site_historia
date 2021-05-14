@@ -55,12 +55,33 @@ mixin _$SupportStore on _SupportStoreBase, Store {
       (_$audioFileComputed ??= Computed<PlatformFile?>(() => super.audioFile,
               name: '_SupportStoreBase.audioFile'))
           .value;
+  Computed<PlatformFile?>? _$videoFileComputed;
+
+  @override
+  PlatformFile? get videoFile =>
+      (_$videoFileComputed ??= Computed<PlatformFile?>(() => super.videoFile,
+              name: '_SupportStoreBase.videoFile'))
+          .value;
   Computed<String?>? _$htmlContentComputed;
 
   @override
   String? get htmlContent =>
       (_$htmlContentComputed ??= Computed<String?>(() => super.htmlContent,
               name: '_SupportStoreBase.htmlContent'))
+          .value;
+  Computed<String?>? _$urlPopUpComputed;
+
+  @override
+  String? get urlPopUp =>
+      (_$urlPopUpComputed ??= Computed<String?>(() => super.urlPopUp,
+              name: '_SupportStoreBase.urlPopUp'))
+          .value;
+  Computed<bool?>? _$isLoadingComputed;
+
+  @override
+  bool? get isLoading =>
+      (_$isLoadingComputed ??= Computed<bool?>(() => super.isLoading,
+              name: '_SupportStoreBase.isLoading'))
           .value;
   Computed<String>? _$msgErrorTitleComputed;
 
@@ -125,6 +146,13 @@ mixin _$SupportStore on _SupportStoreBase, Store {
           Computed<String>(() => super.msgErrorParticipantsSize,
               name: '_SupportStoreBase.msgErrorParticipantsSize'))
       .value;
+  Computed<String>? _$msgErrorPopUpComputed;
+
+  @override
+  String get msgErrorPopUp =>
+      (_$msgErrorPopUpComputed ??= Computed<String>(() => super.msgErrorPopUp,
+              name: '_SupportStoreBase.msgErrorPopUp'))
+          .value;
 
   final _$_titleAtom = Atom(name: '_SupportStoreBase._title');
 
@@ -216,6 +244,21 @@ mixin _$SupportStore on _SupportStoreBase, Store {
     });
   }
 
+  final _$_videoFileAtom = Atom(name: '_SupportStoreBase._videoFile');
+
+  @override
+  PlatformFile get _videoFile {
+    _$_videoFileAtom.reportRead();
+    return super._videoFile;
+  }
+
+  @override
+  set _videoFile(PlatformFile value) {
+    _$_videoFileAtom.reportWrite(value, super._videoFile, () {
+      super._videoFile = value;
+    });
+  }
+
   final _$_pathImageAtom = Atom(name: '_SupportStoreBase._pathImage');
 
   @override
@@ -243,6 +286,36 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   set _htmlContent(String? value) {
     _$_htmlContentAtom.reportWrite(value, super._htmlContent, () {
       super._htmlContent = value;
+    });
+  }
+
+  final _$_urlPopUpAtom = Atom(name: '_SupportStoreBase._urlPopUp');
+
+  @override
+  String? get _urlPopUp {
+    _$_urlPopUpAtom.reportRead();
+    return super._urlPopUp;
+  }
+
+  @override
+  set _urlPopUp(String? value) {
+    _$_urlPopUpAtom.reportWrite(value, super._urlPopUp, () {
+      super._urlPopUp = value;
+    });
+  }
+
+  final _$_isLoadingAtom = Atom(name: '_SupportStoreBase._isLoading');
+
+  @override
+  bool? get _isLoading {
+    _$_isLoadingAtom.reportRead();
+    return super._isLoading;
+  }
+
+  @override
+  set _isLoading(bool? value) {
+    _$_isLoadingAtom.reportWrite(value, super._isLoading, () {
+      super._isLoading = value;
     });
   }
 
@@ -420,6 +493,21 @@ mixin _$SupportStore on _SupportStoreBase, Store {
     });
   }
 
+  final _$_msgErrorPopUpAtom = Atom(name: '_SupportStoreBase._msgErrorPopUp');
+
+  @override
+  String get _msgErrorPopUp {
+    _$_msgErrorPopUpAtom.reportRead();
+    return super._msgErrorPopUp;
+  }
+
+  @override
+  set _msgErrorPopUp(String value) {
+    _$_msgErrorPopUpAtom.reportWrite(value, super._msgErrorPopUp, () {
+      super._msgErrorPopUp = value;
+    });
+  }
+
   final _$verticalIsMaxAtom = Atom(name: '_SupportStoreBase.verticalIsMax');
 
   @override
@@ -513,11 +601,44 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   }
 
   @override
+  dynamic updateVideo(PlatformFile? newVideo) {
+    final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
+        name: '_SupportStoreBase.updateVideo');
+    try {
+      return super.updateVideo(newVideo);
+    } finally {
+      _$_SupportStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic updatePath(PickedFile? newPath) {
     final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
         name: '_SupportStoreBase.updatePath');
     try {
       return super.updatePath(newPath);
+    } finally {
+      _$_SupportStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic updateUrlPopUp(String newUrl) {
+    final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
+        name: '_SupportStoreBase.updateUrlPopUp');
+    try {
+      return super.updateUrlPopUp(newUrl);
+    } finally {
+      _$_SupportStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setLoading(bool value) {
+    final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
+        name: '_SupportStoreBase.setLoading');
+    try {
+      return super.setLoading(value);
     } finally {
       _$_SupportStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -591,7 +712,10 @@ tag: ${tag},
 isTopHeader: ${isTopHeader},
 pathImage: ${pathImage},
 audioFile: ${audioFile},
+videoFile: ${videoFile},
 htmlContent: ${htmlContent},
+urlPopUp: ${urlPopUp},
+isLoading: ${isLoading},
 msgErrorTitle: ${msgErrorTitle},
 msgErrorSubTitle: ${msgErrorSubTitle},
 msgErrorTopHeader: ${msgErrorTopHeader},
@@ -600,7 +724,8 @@ msgErrorAudio: ${msgErrorAudio},
 msgErrorContent: ${msgErrorContent},
 msgErrorTeacher: ${msgErrorTeacher},
 msgErrorParticipants: ${msgErrorParticipants},
-msgErrorParticipantsSize: ${msgErrorParticipantsSize}
+msgErrorParticipantsSize: ${msgErrorParticipantsSize},
+msgErrorPopUp: ${msgErrorPopUp}
     ''';
   }
 }

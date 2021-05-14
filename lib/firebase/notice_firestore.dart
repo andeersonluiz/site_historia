@@ -54,6 +54,8 @@ class NoticeFirestore {
 
   static deleteNotice(int id) async {
     await firestore().collection("notices").doc(id.toString()).delete();
+    await storage().ref().child("notices/$id.png").delete();
+    await storage().ref().child("notices/$id(audio).mp3").delete();
     return;
   }
 
@@ -137,7 +139,7 @@ class NoticeFirestore {
   }
 
   static updateNotice(
-    int id,
+    Notice notice,
     String title,
     String subtitle,
     String type,
@@ -155,29 +157,30 @@ class NoticeFirestore {
         var metadata = await thumb.readAsBytes();
         UploadTaskSnapshot task = await storage()
             .ref()
-            .child("notices/$id.png")
+            .child("notices/${notice.id}.png")
             .put(metadata, UploadMetadata(contentType: 'image/jpg'))
             .future;
         urlImage = await task.ref.getDownloadURL();
       }
-      Uri urlAudio = Uri.parse("");
 
-      if (audio.name != "") {
+      if (audio.name != "" && audio.bytes != null) {
         var metadata = audio.bytes;
         UploadTaskSnapshot task = await storage()
             .ref()
-            .child("notices/$id(audio).mp3")
+            .child("notices/${notice.id}(audio).mp3")
             .put(metadata, UploadMetadata(contentType: 'audio/mp3'))
             .future;
-        urlAudio = await task.ref.getDownloadURL();
+        var result = await task.ref.getDownloadURL();
+        notice.audio[0] = result.toString();
+        notice.audio[0] = audio.name!;
       }
 
-      Notice notice = Notice(
-          id: id,
+      Notice newNotice = Notice(
+          id: notice.id,
           title: title,
           subtitle: subtitle,
           tag: tag,
-          audio: [audio.name!, urlAudio.toString()],
+          audio: [notice.audio[0], notice.audio[1]],
           type: type,
           thumb: urlImage.toString(),
           datePost: DateFormat("dd-MM-yyyy hh:mm").format(DateTime.now()),
@@ -187,8 +190,8 @@ class NoticeFirestore {
           author: author);
       await firestore()
           .collection("notices")
-          .doc(id.toString())
-          .update(data: notice.toJson());
+          .doc(newNotice.id.toString())
+          .update(data: newNotice.toJson());
     } catch (e) {
       return false;
     }
@@ -206,16 +209,5 @@ class NoticeFirestore {
       topheaders.add(Notice.fromJson(item.data()));
     });
     return topheaders;
-  }
-
-  Future<String> getHeadNotice(String idNotice) async {
-    ListResult result = await storage()
-        .ref()
-        .child("notices")
-        .child(idNotice)
-        .child("head")
-        .listAll();
-    Uri url = await result.items.first.getDownloadURL();
-    return url.toString();
   }
 }

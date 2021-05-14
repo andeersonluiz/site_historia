@@ -77,8 +77,11 @@ class AdminAddProjectParticipantPageMobile extends StatelessWidget {
               ),
               CustomButton(
                 text: "Criar Projeto",
+                loadingText: "Criando projeto...",
+                isLoading: supportStore.isLoading!,
                 onPressed: () async {
                   if (supportStore.validateProjectMobileTab2()) {
+                    supportStore.setLoading(true);
                     var result = await projectStore.addProject(
                         supportStore.title,
                         supportStore.pathImage,
@@ -86,6 +89,7 @@ class AdminAddProjectParticipantPageMobile extends StatelessWidget {
                         supportStore.getTeachers(),
                         supportStore.getParticipantsLocalFilled(),
                         GlobalsVariables.username);
+                    supportStore.setLoading(false);
 
                     if (result) {
                       CustomToast.showToast(

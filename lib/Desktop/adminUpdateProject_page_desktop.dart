@@ -1,18 +1,18 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/CustomText_component.dart';
 import 'package:site_historia/Components/customButton_component.dart';
-import 'package:site_historia/Components/customCheckBox_component.dart';
 import 'package:site_historia/Components/customHtmlEditor_component.dart';
 import 'package:site_historia/Components/customTextFormField_component.dart';
 import 'package:site_historia/Components/customLoading_component.dart';
 import 'package:site_historia/Components/customToast_component.dart';
 import 'package:site_historia/Components/erroMsg_component.dart';
+import 'package:site_historia/Desktop/widget/image_desktop.dart';
+import 'package:site_historia/Desktop/widget/participant_desktop.dart';
+import 'package:site_historia/Desktop/widget/teacher_desktop.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Store/support_store.dart';
@@ -51,10 +51,7 @@ class _AdminUpdateProjectPageDesktopState
     final projectStore = Provider.of<ProjectStore>(context);
     final supportStore = Provider.of<SupportStore>(context);
     final teacherStore = Provider.of<TeacherStore>(context);
-    final _picker = ImagePicker();
     final HtmlEditorController contentController = HtmlEditorController();
-    final TextEditingController controllerParticipants =
-        TextEditingController();
     return SingleChildScrollView(child: Observer(
       builder: (ctx) {
         teacherStore.listTeachers ?? teacherStore.getTeachers();
@@ -89,51 +86,10 @@ class _AdminUpdateProjectPageDesktopState
                       child: CustomText("Imagem titulo",
                           style: Theme.of(context).textTheme.headline6)),
                   Observer(
-                    builder: (ctx) => Container(
-                      decoration: supportStore.pathImage!.path != ""
-                          ? BoxDecoration(
-                              image: DecorationImage(
-                              image: NetworkImage(supportStore.pathImage!.path),
-                              fit: BoxFit.fill,
-                            ))
-                          : BoxDecoration(color: Colors.grey),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            supportStore.pathImage!.path != ""
-                                ? Align(
-                                    alignment: Alignment.bottomLeft,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        supportStore.title,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline3!,
-                                      ),
-                                    ),
-                                  )
-                                : Container(),
-                            Spacer(),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: GestureDetector(
-                                  child: Icon(Icons.folder),
-                                  onTap: () async {
-                                    PickedFile? image;
-                                    if (!kIsWeb) {
-                                      image = await _picker.getImage(
-                                          source: ImageSource.gallery);
-                                    } else {
-                                      image = await _picker.getImage(
-                                          source: ImageSource.camera);
-                                    }
-
-                                    supportStore.updatePath(image);
-                                  }),
-                            ),
-                          ]),
-                      height: supportStore.pathImage!.path == "" ? 40 : 300,
+                    builder: (ctx) => ImageWidget(
+                      image: supportStore.pathImage,
+                      isProject: true,
+                      titleProject: supportStore.title,
                     ),
                   ),
                   Observer(builder: (_) {
@@ -189,89 +145,20 @@ class _AdminUpdateProjectPageDesktopState
                   Row(
                     children: [
                       Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Observer(
-                              builder: (context) => ListView.builder(
-                                  itemCount: supportStore.teacherLocal.length,
-                                  shrinkWrap: true,
-                                  itemBuilder: (ctx, index) {
-                                    return CustomCheckBox(
-                                        title: supportStore
-                                            .teacherLocal[index].name,
-                                        value: supportStore
-                                            .teacherLocal[index].checked,
-                                        onChanged: (_) {
-                                          supportStore.updateTeacherLocal(
-                                              supportStore.teacherLocal[index],
-                                              index);
-                                        });
-                                  })),
-                        ),
+                        child: TeacherWidget(),
                       ),
                       Expanded(
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    flex: 5,
-                                    child: CustomTextFormField(
-                                      controller: controllerParticipants,
-                                      textInputType: TextInputType.number,
-                                      hintText:
-                                          "Digite o numero de participantes (Max. 10)",
-                                      labelText: "Numero de participantes",
-                                      textInputAction: TextInputAction.next,
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 5,
-                                    child: CustomButton(
-                                      text: "Gerar participantes",
-                                      onPressed: () =>
-                                          supportStore.validateParticipant(
-                                              controllerParticipants.text),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Observer(builder: (_) {
-                              return supportStore.msgErrorParticipantsSize == ""
-                                  ? Container()
-                                  : ErrorMsg(
-                                      supportStore.msgErrorParticipantsSize);
-                            }),
-                            Observer(
-                              builder: (context) => ListView.builder(
-                                shrinkWrap: true,
-                                itemCount:
-                                    supportStore.participantsLocal.length,
-                                itemBuilder: (ctx, index) {
-                                  return CustomTextFormField(
-                                    textInputType: TextInputType.name,
-                                    onChanged: (value) => supportStore
-                                        .updateParticipants(value, index),
-                                    initialValue:
-                                        supportStore.participantsLocal[index],
-                                    hintText: "Nome Participante ${index + 1}",
-                                    labelText: 'Participante  ${index + 1}',
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
+                        child: ParticipantWidget(),
                       )
                     ],
                   ),
                   CustomButton(
                     text: "Salvar Alterações",
+                    loadingText: "Salvango...",
+                    isLoading: supportStore.isLoading!,
                     onPressed: () async {
                       if (supportStore.validateProjectDesktop()) {
+                        supportStore.setLoading(true);
                         var result = await projectStore.updateProject(
                             widget.project.id,
                             supportStore.title,
@@ -280,6 +167,8 @@ class _AdminUpdateProjectPageDesktopState
                             supportStore.getTeachers(),
                             supportStore.getParticipantsLocalFilled(),
                             GlobalsVariables.username);
+                        supportStore.setLoading(false);
+
                         if (result) {
                           CustomToast.showToast(
                               "Projeto alterado com sucesso!!", Colors.green);

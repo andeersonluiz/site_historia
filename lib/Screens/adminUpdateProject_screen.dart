@@ -31,7 +31,12 @@ class _AdminUpdateProjectScreenState extends State<AdminUpdateProjectScreen> {
     return ResponsiveBuilder(
       builder: (ctx, sizingInformation) => Scaffold(
           drawer: sizingInformation.isDesktop ? null : AdminNavigatorDrawer(),
-          appBar: sizingInformation.isDesktop ? null : AppBar(),
+          appBar: sizingInformation.isDesktop
+              ? null
+              : AppBar(
+                  centerTitle: true,
+                  title: Text("Editar Projeto"),
+                ),
           body: Observer(builder: (_) {
             projectStore.listProjects ?? projectStore.getProjects();
             switch (projectStore.listProjects!.status) {

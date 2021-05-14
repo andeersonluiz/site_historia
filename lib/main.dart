@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Screens/loading_screen.dart';
+import 'package:site_historia/Store/frame_store.dart';
 import 'package:site_historia/Store/notice_store.dart';
 import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Store/teacher_store.dart';
@@ -37,6 +38,9 @@ Future<void> main() async {
     ),
     Provider<NoticeStore>(
       create: (_) => NoticeStore(),
+    ),
+    Provider<FrameStore>(
+      create: (_) => FrameStore(),
     ),
   ], child: MyApp()));
 }
@@ -86,9 +90,9 @@ class _MyAppState extends State<MyApp> {
 
   _loadInitialData(BuildContext context) async {
     ProjectStore projectStore = Provider.of<ProjectStore>(context);
-    FrameFirestore frameFirestore = Provider.of<FrameFirestore>(context);
-    await projectStore.getProjectByName();
-    await frameFirestore.getFramesName();
+    FrameStore frameStore = Provider.of<FrameStore>(context);
+    await projectStore.getProjectSortedByTitle();
+    await frameStore.getFramesSortedByTitle();
     User? user = LoginAuth.getUser();
     if (user != null) {
       await projectStore.getUsernameByUid(user.uid);

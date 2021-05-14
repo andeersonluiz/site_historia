@@ -1,9 +1,6 @@
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/CustomText_component.dart';
 import 'package:site_historia/Components/customButton_component.dart';
@@ -12,6 +9,8 @@ import 'package:site_historia/Components/customHtmlEditor_component.dart';
 import 'package:site_historia/Components/customTextFormField_component.dart';
 import 'package:site_historia/Components/customToast_component.dart';
 import 'package:site_historia/Components/erroMsg_component.dart';
+import 'package:site_historia/Desktop/widget/audio_desktop.dart';
+import 'package:site_historia/Desktop/widget/image_desktop.dart';
 import 'package:site_historia/Model/notice_model.dart';
 import 'package:site_historia/Store/notice_store.dart';
 import 'package:site_historia/Store/support_store.dart';
@@ -44,7 +43,6 @@ class _AdminUpdateNoticePageDesktopState
   @override
   Widget build(BuildContext context) {
     final supportStore = Provider.of<SupportStore>(context);
-    final _picker = ImagePicker();
     final HtmlEditorController contentController = HtmlEditorController();
     return SingleChildScrollView(
       child: Container(
@@ -140,72 +138,8 @@ class _AdminUpdateNoticePageDesktopState
           ),
           Observer(
             builder: (_) => supportStore.type == "Podcast"
-                ? Column(
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CustomText("Audio podcast",
-                              style: Theme.of(context).textTheme.headline6)),
-                      Observer(builder: (ctx) {
-                        return Container(
-                          color: Colors.white,
-                          child: supportStore.audioFile!.name == null
-                              ? Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                      Spacer(),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: InkWell(
-                                            child: Icon(Icons.folder),
-                                            onTap: () async {
-                                              FilePickerResult? result;
-
-                                              result = await FilePicker.platform
-                                                  .pickFiles(
-                                                type: FileType.audio,
-                                              );
-
-                                              supportStore.updateAudio(
-                                                  result!.files.first);
-                                            }),
-                                      ),
-                                    ])
-                              : Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                      Spacer(),
-                                      CustomText(
-                                          "Arquvio selecionado: ${supportStore.audioFile!.name.toString()}"),
-                                      Spacer(),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: InkWell(
-                                            child: Icon(Icons.folder),
-                                            onTap: () async {
-                                              FilePickerResult? result;
-                                              if (!kIsWeb) {
-                                                result = await FilePicker
-                                                    .platform
-                                                    .pickFiles(
-                                                  type: FileType.audio,
-                                                );
-                                              } else {
-                                                result = await FilePicker
-                                                    .platform
-                                                    .pickFiles(
-                                                  type: FileType.audio,
-                                                );
-                                              }
-                                              supportStore.updateAudio(
-                                                  result!.files.first);
-                                            }),
-                                      ),
-                                    ]),
-                          height: 40,
-                        );
-                      }),
-                    ],
+                ? AudioWidget(
+                    title: "Audio Podcast",
                   )
                 : Container(),
           ),
@@ -214,35 +148,8 @@ class _AdminUpdateNoticePageDesktopState
               child: CustomText("Imagem titulo",
                   style: Theme.of(context).textTheme.headline6)),
           Observer(
-            builder: (ctx) => Container(
-              decoration: supportStore.pathImage!.path != ""
-                  ? BoxDecoration(
-                      image: DecorationImage(
-                      image: NetworkImage(supportStore.pathImage!.path),
-                      fit: BoxFit.fill,
-                    ))
-                  : BoxDecoration(color: Colors.grey),
-              child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                Spacer(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                      child: Icon(Icons.folder),
-                      onTap: () async {
-                        PickedFile? image;
-                        if (!kIsWeb) {
-                          image = await _picker.getImage(
-                              source: ImageSource.gallery);
-                        } else {
-                          image = await _picker.getImage(
-                              source: ImageSource.camera);
-                        }
-
-                        supportStore.updatePath(image);
-                      }),
-                ),
-              ]),
-              height: supportStore.pathImage!.path == "" ? 40 : 300,
+            builder: (ctx) => ImageWidget(
+              image: supportStore.pathImage,
             ),
           ),
           Observer(builder: (_) {
@@ -261,35 +168,41 @@ class _AdminUpdateNoticePageDesktopState
                 ? Container()
                 : ErrorMsg(supportStore.msgErrorContent);
           }),
-          CustomButton(
-            text: "Salvar alterações",
-            onPressed: () async {
-              if (supportStore.validateNotice()) {
-                var result = await noticeStore!.updateNotice(
-                    widget.notice.id,
-                    supportStore.title,
-                    supportStore.subtitle,
-                    supportStore.type,
-                    supportStore.tag,
-                    supportStore.audioFile!,
-                    supportStore.pathImage,
-                    supportStore.isTopHeader,
-                    supportStore.htmlContent,
-                    widget.notice.views,
-                    GlobalsVariables.username);
-                if (result) {
-                  CustomToast.showToast(
-                      "Notícia alterada com sucesso!!", Colors.green);
-                  VxNavigator.of(context)
-                      .push(Uri.parse(RouteNames.ADMIN_NOTICES));
-                } else {
-                  CustomToast.showToast(
-                    "Não foi possivel alterar sua notícia, tente novamente mais tarde.",
-                    Colors.red,
-                  );
+          Observer(
+            builder: (_) => CustomButton(
+              text: "Salvar alterações",
+              loadingText: "Salvango...",
+              isLoading: supportStore.isLoading!,
+              onPressed: () async {
+                if (supportStore.validateNotice()) {
+                  supportStore.setLoading(true);
+                  var result = await noticeStore!.updateNotice(
+                      widget.notice,
+                      supportStore.title,
+                      supportStore.subtitle,
+                      supportStore.type,
+                      supportStore.tag,
+                      supportStore.audioFile!,
+                      supportStore.pathImage,
+                      supportStore.isTopHeader,
+                      supportStore.htmlContent,
+                      widget.notice.views,
+                      GlobalsVariables.username);
+                  supportStore.setLoading(false);
+                  if (result) {
+                    CustomToast.showToast(
+                        "Notícia alterada com sucesso!!", Colors.green);
+                    VxNavigator.of(context)
+                        .push(Uri.parse(RouteNames.ADMIN_NOTICES));
+                  } else {
+                    CustomToast.showToast(
+                      "Não foi possivel alterar sua notícia, tente novamente mais tarde.",
+                      Colors.red,
+                    );
+                  }
                 }
-              }
-            },
+              },
+            ),
           ),
         ]),
       ),

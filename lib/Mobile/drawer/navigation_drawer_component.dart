@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:site_historia/Store/frame_store.dart';
 import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Support/IconsData_support.dart';
-import 'package:site_historia/firebase/frame_firestore.dart';
 
 import '../../Support/RoutesName_support.dart';
 import 'drawerTitle_subItem.dart';
@@ -13,7 +13,7 @@ class NavigationDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ProjectStore projectStore = Provider.of<ProjectStore>(context);
-    FrameFirestore frameFirestore = Provider.of<FrameFirestore>(context);
+    FrameStore frameStore = Provider.of<FrameStore>(context);
 
     return Drawer(
       child: Container(
@@ -55,16 +55,16 @@ class NavigationDrawer extends StatelessWidget {
               DrawerItemWithSubItem(
                 title: "Projetos",
                 icon: IconsData.PROJECT_ICON,
-                children: projectStore.listProjectsOrdened
+                children: projectStore.listProjectsOrdered
                     .map((item) => DrawerSubItem(
                         item, RouteNames.PROJECTS, IconsData.PROJECT_ICON))
                     .toList(),
               ),
-              DrawerItem("Noticias", RouteNames.NOTICES, IconsData.NOTICE_ICON),
+              DrawerItem("Notícias", RouteNames.NOTICES, IconsData.NOTICE_ICON),
               DrawerItemWithSubItem(
                 title: "Quadros",
                 icon: IconsData.FRAMES_ICON,
-                children: frameFirestore.listFramesOrdenedByName
+                children: frameStore.listFramesOrdered
                     .map((item) => DrawerSubItem(
                         item, RouteNames.FRAMES, IconsData.FRAMES_ICON))
                     .toList(),

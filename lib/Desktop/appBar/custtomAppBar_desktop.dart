@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:site_historia/Store/frame_store.dart';
 import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Support/IconsData_support.dart';
 
 import '../../Support/RoutesName_support.dart';
-import '../../firebase/frame_firestore.dart';
 import 'itemAppBar_desktop.dart';
 import 'itemPopupMenuAppBar_desktop.dart';
 
@@ -18,7 +18,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     ProjectStore projectStore = Provider.of<ProjectStore>(context);
-    FrameFirestore frameFirestore = Provider.of<FrameFirestore>(context);
+    FrameStore frameStore = Provider.of<FrameStore>(context);
 
     return Container(
       height: 60.0,
@@ -42,11 +42,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
           ItemPopUpMenuAppBar(
             "Projetos",
             RouteNames.PROJECTS,
-            projectStore.listProjectsOrdened,
+            projectStore.listProjectsOrdered,
           ),
-          ItemAppBar("Noticias", RouteNames.NOTICES),
-          ItemPopUpMenuAppBar("Quadros", RouteNames.FRAMES,
-              frameFirestore.listFramesOrdenedByName),
+          ItemAppBar("Notícias", RouteNames.NOTICES),
+          ItemPopUpMenuAppBar(
+              "Quadros", RouteNames.FRAMES, frameStore.listFramesOrdered),
           ItemAppBar("Vestibular", RouteNames.EXAM),
           ItemAppBar("Recomendações", RouteNames.RECOMENDATIONS),
           ItemAppBar("Acervo", RouteNames.COLLECTION),

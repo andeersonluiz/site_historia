@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:site_historia/Screens/adminAddFrame_screen.dart';
+import 'package:site_historia/Screens/adminFrames_screen.dart';
+import 'package:site_historia/Screens/adminUpdateFrame_screen.dart';
 import 'package:site_historia/Screens/noticeInfo_screen.dart';
 import 'package:site_historia/Screens/adminAddNotice_screen.dart';
 import 'package:site_historia/Screens/adminAddProject_screen.dart';
@@ -156,6 +159,45 @@ class VelocityxNavigator {
             }
 
             return MaterialPage(child: AdminUpdateNoticeScreen(id));
+          }
+        },
+        RouteNames.ADMIN_FRAMES: (uri, params) {
+          User? user = LoginAuth.getUser();
+          if (user == null) {
+            return MaterialPage(
+                child: Loading(redirect: true, to: RouteNames.ADMIN));
+          } else {
+            return MaterialPage(child: AdminFramesScreen());
+          }
+        },
+        RouteNames.ADD_FRAME: (uri, __) {
+          User? user = LoginAuth.getUser();
+          if (user == null) {
+            return MaterialPage(
+                child: Loading(redirect: true, to: RouteNames.ADMIN));
+          } else {
+            return MaterialPage(
+              child: AdminAddFrameScreen(),
+            );
+          }
+        },
+        RouteNames.UPDATE_FRAME: (uri, params) {
+          User? user = LoginAuth.getUser();
+          if (user == null) {
+            return MaterialPage(
+                child: Loading(redirect: true, to: RouteNames.ADMIN));
+          } else {
+            String? id = uri.queryParameters["id"];
+
+            if (id == null || int.tryParse(id) == null || id == "") {
+              return MaterialPage(
+                  child: Loading(
+                redirect: true,
+                to: RouteNames.ADMIN_FRAMES,
+              ));
+            }
+
+            return MaterialPage(child: AdminUpdateFrameScreen(id));
           }
         },
       },

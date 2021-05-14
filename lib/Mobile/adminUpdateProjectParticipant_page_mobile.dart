@@ -79,8 +79,11 @@ class AdminUpdateProjectParticipantPageMobile extends StatelessWidget {
               ),
               CustomButton(
                 text: "Salvar Alterações",
+                loadingText: "Salvango...",
+                isLoading: supportStore.isLoading!,
                 onPressed: () async {
                   if (supportStore.validateProjectMobileTab2()) {
+                    supportStore.setLoading(true);
                     var result = await projectStore.updateProject(
                         id,
                         supportStore.title,
@@ -89,6 +92,7 @@ class AdminUpdateProjectParticipantPageMobile extends StatelessWidget {
                         supportStore.getTeachers(),
                         supportStore.getParticipantsLocalFilled(),
                         GlobalsVariables.username);
+                    supportStore.setLoading(false);
 
                     if (result) {
                       CustomToast.showToast(

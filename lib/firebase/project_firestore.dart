@@ -6,7 +6,7 @@ import 'package:site_historia/Model/teacher_model.dart';
 import 'package:firebase/firebase.dart';
 
 class ProjectFirestore {
-  late List<Project> listProjectsOrdenedByName = [];
+  late List<Project> listProjectsOrderedByName = [];
   String username = "";
 
   static getProjects() async {
@@ -22,7 +22,7 @@ class ProjectFirestore {
     return projects;
   }
 
-  static getProjectsName() async {
+  static getProjectSortedByTitle() async {
     var query = firestore().collection("projects").orderBy('name');
     var result = await query.get();
     List<Project> projectByName = [];
@@ -30,17 +30,6 @@ class ProjectFirestore {
       projectByName.add(Project.fromJson(item.data()));
     });
     return projectByName;
-  }
-
-  Future<String> getHeadProject(String idProject) async {
-    ListResult result = await storage()
-        .ref()
-        .child("projects")
-        .child("0")
-        .child("head")
-        .listAll();
-    Uri url = await result.items.first.getDownloadURL();
-    return url.toString();
   }
 
   Future<List<Map<String, dynamic>>> getTeacherByNameProject(
