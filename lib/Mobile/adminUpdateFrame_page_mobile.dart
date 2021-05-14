@@ -89,6 +89,14 @@ class _AdminUpdateFramePageMobileState
                 image: supportStore.pathImage,
               ),
             ),
+            CustomTextFormField(
+              hintText: 'Digite a legenda da imagem (opcional)',
+              textInputType: TextInputType.name,
+              onChanged: (value) {
+                supportStore.updateSubtitleImage(value);
+              },
+              initialValue: supportStore.subtitleImage,
+            ),
             Observer(builder: (_) {
               return supportStore.msgErrorImage == ""
                   ? Container()
@@ -124,6 +132,7 @@ class _AdminUpdateFramePageMobileState
                         supportStore.title,
                         supportStore.subtitle,
                         supportStore.pathImage,
+                        supportStore.subtitleImage!,
                         supportStore.htmlContent,
                         supportStore.audioFile!,
                         supportStore.videoFile!.name != null

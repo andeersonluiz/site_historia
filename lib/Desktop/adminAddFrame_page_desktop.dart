@@ -89,6 +89,14 @@ class _AdminAddFramePageDesktopState extends State<AdminAddFramePageDesktop> {
                   ? Container()
                   : ErrorMsg(supportStore.msgErrorImage);
             }),
+            CustomTextFormField(
+              hintText: 'Digite a legenda da imagem (opcional)',
+              textInputType: TextInputType.name,
+              onChanged: (value) {
+                supportStore.updateSubtitleImage(value);
+              },
+              initialValue: supportStore.subtitleImage,
+            ),
             AudioWidget(
               title: "Audio (Opcional)",
             ),
@@ -118,7 +126,8 @@ class _AdminAddFramePageDesktopState extends State<AdminAddFramePageDesktop> {
                         supportStore.title,
                         supportStore.subtitle,
                         supportStore.pathImage,
-                        supportStore.htmlContent,
+                        supportStore.subtitleImage!,
+                        supportStore.htmlContent!,
                         supportStore.audioFile!,
                         supportStore.videoFile!.name != null
                             ? supportStore.videoFile!

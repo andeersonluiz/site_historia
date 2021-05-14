@@ -4,6 +4,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:site_historia/Components/customLoading_component.dart';
+import 'package:site_historia/Components/customText_component.dart';
 
 class AudioViewer extends StatefulWidget {
   final urlAudio;
@@ -38,6 +39,14 @@ class _AudioViewerState extends State<AudioViewer> {
       margin: EdgeInsets.symmetric(horizontal: 128.0),
       padding: EdgeInsets.all(8.0),
       child: Column(children: [
+        Padding(
+          padding: const EdgeInsets.only(
+              left: 8.0, right: 8.0, top: 8.0, bottom: 40.0),
+          child: CustomText(
+            "Ouça o audio:",
+            style: Theme.of(context).textTheme.headline5!,
+          ),
+        ),
         StreamBuilder<DurationState>(
           stream: _durationState,
           builder: (context, snapshot) {

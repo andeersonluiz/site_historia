@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
+import 'package:site_historia/Model/project_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class DrawerSubItem extends StatelessWidget {
@@ -27,7 +28,7 @@ class DrawerSubItem extends StatelessWidget {
         padding: const EdgeInsets.only(left: 8.0),
         child: ListTile(
           leading: Icon(icon, color: Theme.of(context).backgroundColor),
-          title: Text(object.name),
+          title: Text(object is Project ? object.name : object.title),
         ),
       ),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:site_historia/Screens/adminAddFrame_screen.dart';
 import 'package:site_historia/Screens/adminFrames_screen.dart';
 import 'package:site_historia/Screens/adminUpdateFrame_screen.dart';
+import 'package:site_historia/Screens/frame_screen.dart';
 import 'package:site_historia/Screens/noticeInfo_screen.dart';
 import 'package:site_historia/Screens/adminAddNotice_screen.dart';
 import 'package:site_historia/Screens/adminAddProject_screen.dart';
@@ -69,7 +70,16 @@ class VelocityxNavigator {
 
           return MaterialPage(child: NoticeInfoScreen(id));
         },
-        RouteNames.FRAMES: (_, __) => MaterialPage(child: HomeScreen()),
+        RouteNames.FRAMES: (uri, __) {
+          String? id = uri.queryParameters["id"];
+          if (id == null || int.tryParse(id) == null || id == "") {
+            return MaterialPage(
+                child: Loading(
+              redirect: true,
+            ));
+          }
+          return MaterialPage(child: FrameScreen(id));
+        },
         RouteNames.EXAM: (_, __) => MaterialPage(child: HomeScreen()),
         RouteNames.RECOMENDATIONS: (_, __) => MaterialPage(child: HomeScreen()),
         RouteNames.COLLECTION: (_, __) => MaterialPage(child: HomeScreen()),

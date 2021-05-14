@@ -48,6 +48,13 @@ mixin _$SupportStore on _SupportStoreBase, Store {
       (_$pathImageComputed ??= Computed<PickedFile?>(() => super.pathImage,
               name: '_SupportStoreBase.pathImage'))
           .value;
+  Computed<String?>? _$subtitleImageComputed;
+
+  @override
+  String? get subtitleImage =>
+      (_$subtitleImageComputed ??= Computed<String?>(() => super.subtitleImage,
+              name: '_SupportStoreBase.subtitleImage'))
+          .value;
   Computed<PlatformFile?>? _$audioFileComputed;
 
   @override
@@ -271,6 +278,21 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   set _pathImage(PickedFile? value) {
     _$_pathImageAtom.reportWrite(value, super._pathImage, () {
       super._pathImage = value;
+    });
+  }
+
+  final _$_subtitleImageAtom = Atom(name: '_SupportStoreBase._subtitleImage');
+
+  @override
+  String? get _subtitleImage {
+    _$_subtitleImageAtom.reportRead();
+    return super._subtitleImage;
+  }
+
+  @override
+  set _subtitleImage(String? value) {
+    _$_subtitleImageAtom.reportWrite(value, super._subtitleImage, () {
+      super._subtitleImage = value;
     });
   }
 
@@ -623,6 +645,17 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   }
 
   @override
+  dynamic updateSubtitleImage(String? newSubtitle) {
+    final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
+        name: '_SupportStoreBase.updateSubtitleImage');
+    try {
+      return super.updateSubtitleImage(newSubtitle);
+    } finally {
+      _$_SupportStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic updateUrlPopUp(String newUrl) {
     final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
         name: '_SupportStoreBase.updateUrlPopUp');
@@ -711,6 +744,7 @@ type: ${type},
 tag: ${tag},
 isTopHeader: ${isTopHeader},
 pathImage: ${pathImage},
+subtitleImage: ${subtitleImage},
 audioFile: ${audioFile},
 videoFile: ${videoFile},
 htmlContent: ${htmlContent},

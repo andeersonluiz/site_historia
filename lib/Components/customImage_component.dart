@@ -7,20 +7,23 @@ class CustomImage extends StatelessWidget {
   final BoxFit fit;
   final EdgeInsets padding;
   final double circularRadius;
-
-  CustomImage(
-      {this.height,
-      this.width,
-      required this.image,
-      this.fit = BoxFit.fill,
-      this.padding = const EdgeInsets.all(8.0),
-      this.circularRadius = 0.0});
+  final EdgeInsetsGeometry? marginContainer;
+  CustomImage({
+    this.height,
+    this.width,
+    required this.image,
+    this.fit = BoxFit.fill,
+    this.padding = const EdgeInsets.all(8.0),
+    this.circularRadius = 0.0,
+    this.marginContainer,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: height,
       width: width,
+      margin: marginContainer,
       child: Padding(
         padding: padding,
         child: ClipRRect(

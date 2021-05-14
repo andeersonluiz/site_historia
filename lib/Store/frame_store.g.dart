@@ -50,10 +50,44 @@ mixin _$FrameStore on _FrameStoreBase, Store {
   final _$addFrameAsyncAction = AsyncAction('_FrameStoreBase.addFrame');
 
   @override
-  Future addFrame(String title, String subtitle, PickedFile? imageHeader,
-      String? content, PlatformFile audio, dynamic video, String author) {
-    return _$addFrameAsyncAction.run(() => super
-        .addFrame(title, subtitle, imageHeader, content, audio, video, author));
+  Future addFrame(
+      String title,
+      String subtitle,
+      PickedFile? imageHeader,
+      String subtitleImage,
+      String? content,
+      PlatformFile audio,
+      dynamic video,
+      String author) {
+    return _$addFrameAsyncAction.run(() => super.addFrame(title, subtitle,
+        imageHeader, subtitleImage, content, audio, video, author));
+  }
+
+  final _$updateFrameAsyncAction = AsyncAction('_FrameStoreBase.updateFrame');
+
+  @override
+  Future updateFrame(
+      Frame frame,
+      String title,
+      String subtitle,
+      PickedFile? imageHeader,
+      String subtitleImage,
+      String? content,
+      PlatformFile audio,
+      dynamic video,
+      int views,
+      String author) {
+    return _$updateFrameAsyncAction.run(() => super.updateFrame(
+        frame,
+        title,
+        subtitle,
+        imageHeader,
+        subtitleImage,
+        content,
+        audio,
+        video,
+        views,
+        author));
   }
 
   final _$deleteFrameAsyncAction = AsyncAction('_FrameStoreBase.deleteFrame');
@@ -70,6 +104,20 @@ mixin _$FrameStore on _FrameStoreBase, Store {
   Future getFramesSortedByTitle() {
     return _$getFramesSortedByTitleAsyncAction
         .run(() => super.getFramesSortedByTitle());
+  }
+
+  final _$_FrameStoreBaseActionController =
+      ActionController(name: '_FrameStoreBase');
+
+  @override
+  dynamic getFrameById(String id) {
+    final _$actionInfo = _$_FrameStoreBaseActionController.startAction(
+        name: '_FrameStoreBase.getFrameById');
+    try {
+      return super.getFrameById(id);
+    } finally {
+      _$_FrameStoreBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override

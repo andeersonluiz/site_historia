@@ -94,6 +94,14 @@ class _AdminUpdateFramePageDesktopState
                   ? Container()
                   : ErrorMsg(supportStore.msgErrorImage);
             }),
+            CustomTextFormField(
+              hintText: 'Digite a legenda da imagem (opcional)',
+              textInputType: TextInputType.name,
+              onChanged: (value) {
+                supportStore.updateSubtitleImage(value);
+              },
+              initialValue: supportStore.subtitleImage,
+            ),
             AudioWidget(
               title: "Audio (Opcional)",
             ),
@@ -124,6 +132,7 @@ class _AdminUpdateFramePageDesktopState
                         supportStore.title,
                         supportStore.subtitle,
                         supportStore.pathImage,
+                        supportStore.subtitleImage!,
                         supportStore.htmlContent,
                         supportStore.audioFile!,
                         supportStore.videoFile!.name != null

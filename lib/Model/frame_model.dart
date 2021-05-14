@@ -3,17 +3,20 @@ class Frame {
   String title;
   String subtitle;
   String imageHeader;
+  String subtitleImage;
   String content;
   List<dynamic> urlVideo;
   List<dynamic> urlAudio;
   String datePost;
   String author;
   int views;
+
   Frame(
       {required this.id,
       required this.title,
       required this.subtitle,
       required this.imageHeader,
+      required this.subtitleImage,
       required this.content,
       required this.urlVideo,
       required this.urlAudio,
@@ -27,6 +30,7 @@ class Frame {
       title: json['title'],
       subtitle: json['subtitle'],
       imageHeader: json['imageHeader'],
+      subtitleImage: json['subtitleImage'],
       content: json['content'],
       urlVideo: json['urlVideo'],
       urlAudio: json['urlAudio'],
@@ -35,11 +39,13 @@ class Frame {
       views: json['views'],
     );
   }
+
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
         'subtitle': subtitle,
         'imageHeader': imageHeader,
+        'subtitleImage': subtitleImage,
         'content': content,
         'urlVideo': urlVideo,
         'urlAudio': urlAudio,

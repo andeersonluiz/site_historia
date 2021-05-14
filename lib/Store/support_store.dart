@@ -36,6 +36,9 @@ abstract class _SupportStoreBase with Store {
   PickedFile? _pathImage = PickedFile("");
 
   @observable
+  String? _subtitleImage = "";
+
+  @observable
   String? _htmlContent = "";
 
   @observable
@@ -67,6 +70,9 @@ abstract class _SupportStoreBase with Store {
 
   @computed
   PickedFile? get pathImage => this._pathImage;
+
+  @computed
+  String? get subtitleImage => this._subtitleImage;
 
   @computed
   PlatformFile? get audioFile => this._audioFile;
@@ -199,6 +205,11 @@ abstract class _SupportStoreBase with Store {
       clearError(ErrorForm.Image);
     }
     this._pathImage = newPath;
+  }
+
+  @action
+  updateSubtitleImage(String? newSubtitle) {
+    this._subtitleImage = newSubtitle;
   }
 
   @action
@@ -395,6 +406,7 @@ abstract class _SupportStoreBase with Store {
     updateTitle(frame.title);
     updateSubTitle(frame.subtitle);
     updatePath(PickedFile(frame.imageHeader));
+    updateSubtitleImage(frame.subtitleImage);
     updateAudio(PlatformFile(name: frame.urlAudio[0]));
     updateVideo(PlatformFile(name: frame.urlVideo[0]));
     updateContent(frame.content);
@@ -418,7 +430,6 @@ abstract class _SupportStoreBase with Store {
     } else {
       clearError(ErrorForm.Image);
     }
-
     if (htmlContent == "") {
       generateMsgError(ErrorForm.Content, "O conteudo não pode estar vazio.");
       err += "err4";
@@ -628,6 +639,7 @@ abstract class _SupportStoreBase with Store {
 
   clearData() {
     _pathImage = PickedFile("");
+    _subtitleImage = "";
     _title = "";
     _subtitle = "";
     _tag = "Podcast";
@@ -635,7 +647,6 @@ abstract class _SupportStoreBase with Store {
     _audioFile = PlatformFile();
     _videoFile = PlatformFile();
     _urlPopUp = "";
-
     teacherLocal = ObservableList<Teacher>();
     participantsLocal = ObservableList<String>();
     _msgErrorParticipants = "";

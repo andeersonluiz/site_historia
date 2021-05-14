@@ -25,13 +25,14 @@ abstract class _FrameStoreBase with Store {
     String title,
     String subtitle,
     PickedFile? imageHeader,
+    String subtitleImage,
     String? content,
     PlatformFile audio,
     dynamic video,
     String author,
   ) async {
-    bool result = await FrameFirestore.addFrame(
-        title, subtitle, imageHeader, content, audio, video, author);
+    bool result = await FrameFirestore.addFrame(title, subtitle, imageHeader,
+        subtitleImage, content, audio, video, author);
     if (result) {
       await getFrames();
       return true;
@@ -46,6 +47,7 @@ abstract class _FrameStoreBase with Store {
     String title,
     String subtitle,
     PickedFile? imageHeader,
+    String subtitleImage,
     String? content,
     PlatformFile audio,
     dynamic video,
@@ -53,7 +55,7 @@ abstract class _FrameStoreBase with Store {
     String author,
   ) async {
     bool result = await FrameFirestore.updateFrame(frame, title, subtitle,
-        imageHeader, content, audio, video, views, author);
+        imageHeader, subtitleImage, content, audio, video, views, author);
     if (result) {
       await getFrames();
       return true;
