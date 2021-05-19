@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:site_historia/Screens/adminAddFrame_screen.dart';
+import 'package:site_historia/Screens/adminAddTeacher_screen.dart';
 import 'package:site_historia/Screens/adminFrames_screen.dart';
+import 'package:site_historia/Screens/adminTeachers_screen.dart';
 import 'package:site_historia/Screens/adminUpdateFrame_screen.dart';
+import 'package:site_historia/Screens/adminUpdateTeacher_screen.dart';
 import 'package:site_historia/Screens/frame_screen.dart';
 import 'package:site_historia/Screens/noticeInfo_screen.dart';
 import 'package:site_historia/Screens/adminAddNotice_screen.dart';
@@ -81,7 +84,7 @@ class VelocityxNavigator {
           return MaterialPage(child: FrameScreen(id));
         },
         RouteNames.EXAM: (_, __) => MaterialPage(child: HomeScreen()),
-        RouteNames.RECOMENDATIONS: (_, __) => MaterialPage(child: HomeScreen()),
+        RouteNames.RECOMMENDATIONS: (_, __) => MaterialPage(child: HomeScreen()),
         RouteNames.COLLECTION: (_, __) => MaterialPage(child: HomeScreen()),
         RouteNames.ADMIN: (_, __) {
           User? user = LoginAuth.getUser();
@@ -208,6 +211,45 @@ class VelocityxNavigator {
             }
 
             return MaterialPage(child: AdminUpdateFrameScreen(id));
+          }
+        },
+        RouteNames.ADMIN_TEACHERS: (uri, params) {
+          User? user = LoginAuth.getUser();
+          if (user == null) {
+            return MaterialPage(
+                child: Loading(redirect: true, to: RouteNames.ADMIN));
+          } else {
+            return MaterialPage(child: AdminTeachersScreen());
+          }
+        },
+        RouteNames.ADD_TEACHER: (uri, __) {
+          User? user = LoginAuth.getUser();
+          if (user == null) {
+            return MaterialPage(
+                child: Loading(redirect: true, to: RouteNames.ADMIN));
+          } else {
+            return MaterialPage(
+              child: AdminAddTeacherScreen(),
+            );
+          }
+        },
+        RouteNames.UPDATE_TEACHER: (uri, params) {
+          User? user = LoginAuth.getUser();
+          if (user == null) {
+            return MaterialPage(
+                child: Loading(redirect: true, to: RouteNames.ADMIN));
+          } else {
+            String? id = uri.queryParameters["id"];
+
+            if (id == null || int.tryParse(id) == null || id == "") {
+              return MaterialPage(
+                  child: Loading(
+                    redirect: true,
+                    to: RouteNames.ADMIN_TEACHERS,
+                  ));
+            }
+
+            return MaterialPage(child: AdminUpdateTeacherScreen(id));
           }
         },
       },

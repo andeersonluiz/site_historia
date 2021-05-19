@@ -31,6 +31,47 @@ mixin _$TeacherStore on _TeacherStoreBase, Store {
     return _$getTeachersAsyncAction.run(() => super.getTeachers());
   }
 
+  final _$addTeacherAsyncAction = AsyncAction('_TeacherStoreBase.addTeacher');
+
+  @override
+  Future addTeacher(
+      String name, PickedFile image, List<Project> projects, String link) {
+    return _$addTeacherAsyncAction
+        .run(() => super.addTeacher(name, image, projects, link));
+  }
+
+  final _$updateTeacherAsyncAction =
+      AsyncAction('_TeacherStoreBase.updateTeacher');
+
+  @override
+  Future updateTeacher(Teacher teacher, String name, PickedFile image,
+      List<Project> projects, String link) {
+    return _$updateTeacherAsyncAction
+        .run(() => super.updateTeacher(teacher, name, image, projects, link));
+  }
+
+  final _$deleteTeacherAsyncAction =
+      AsyncAction('_TeacherStoreBase.deleteTeacher');
+
+  @override
+  Future deleteTeacher(int id) {
+    return _$deleteTeacherAsyncAction.run(() => super.deleteTeacher(id));
+  }
+
+  final _$_TeacherStoreBaseActionController =
+      ActionController(name: '_TeacherStoreBase');
+
+  @override
+  dynamic getTeacherById(String id) {
+    final _$actionInfo = _$_TeacherStoreBaseActionController.startAction(
+        name: '_TeacherStoreBase.getTeacherById');
+    try {
+      return super.getTeacherById(id);
+    } finally {
+      _$_TeacherStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

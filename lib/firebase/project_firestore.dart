@@ -72,6 +72,22 @@ class ProjectFirestore {
           .put(metadata, UploadMetadata(contentType: 'image/jpg'))
           .future;
       Uri url = await task.ref.getDownloadURL();
+
+      await firestore().collection("teachers").get().then((listTeachers) =>
+          listTeachers.docs.forEach((teacher) =>
+              listTeacher.forEach((element) async{
+                if(teacher.data()['id']==element.id){
+                  var query = await firestore().collection("teachers").doc(teacher.data()['id'].toString()).get();
+                  Teacher teacherResult = Teacher.fromJson(query.data());
+                  teacherResult.projects.add(Project.fromJsonSimple({
+                    'id':nextId,'name':title,}
+                  ));
+                  await firestore().collection("projects").doc(teacher.data()['id'].toString()).update(data: teacherResult.toJson());
+                }
+              })
+          )
+      );
+
       Project project = Project(
           id: nextId,
           author: author,
@@ -106,6 +122,38 @@ class ProjectFirestore {
       });
       Uri url = Uri.parse(imageHeader!.path.toString());
 
+      await firestore().collection("teachers").get().then((listTeachers) =>
+          listTeachers.docs.forEach((teacher) async {
+            Teacher teach = Teacher.fromJson(teacher.data());
+            if (!teach.projects.any((element) => id == element.id) &&
+                listTeacher.any((element) => id == element.id)) {
+              var query = await firestore().collection("teachers").doc(
+                  teach.id.toString()).get();
+              Teacher teacherTemp = Teacher.fromJson(query.data());
+              teacherTemp.projects.add(Project.fromJsonSimple({
+                'id': teacher.id, 'name': title,}
+              ));
+              await firestore().collection("teachers")
+                  .doc(teach.id.toString())
+                  .update(data: teacherTemp.toJson());
+            } else
+            if (teach.projects.any((element) => id == element.id) &&
+                !listTeacher.any((element) => teach.id == element.id)){
+
+              var query = await firestore().collection("teachers").doc(
+                  teach.id.toString()).get();
+              Teacher teacherRes = Teacher.fromJson(query.data());
+              teacherRes.projects.removeWhere((element) =>
+              element.id == id);
+              await firestore().collection("teachers").doc(
+                  teach.id.toString()).update(data: teacherRes.toJson());
+            }
+
+          }
+          )
+
+      );
+
       if (!imageHeader.path.contains("firebasestorage")) {
         var metadata = await imageHeader.readAsBytes();
         UploadTaskSnapshot task = await storage()
@@ -115,6 +163,8 @@ class ProjectFirestore {
             .future;
         url = await task.ref.getDownloadURL();
       }
+
+
 
       Project project = Project(
           id: id,

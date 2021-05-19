@@ -66,7 +66,7 @@ abstract class _FrameStoreBase with Store {
 
   @action
   deleteFrame(int id) async {
-    FrameFirestore.deleteFrame(id);
+    await FrameFirestore.deleteFrame(id);
   }
 
   @action

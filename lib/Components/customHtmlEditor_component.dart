@@ -40,7 +40,12 @@ class CustomHtmlEditor extends StatelessWidget {
           ),
           callbacks: Callbacks(
             onChange: onChange,
+            onImageUpload: (file)async{
+              //print("Upload");
+              //controller.insertNetworkImage("aaa");
+            }
           ),
+
           htmlToolbarOptions: HtmlToolbarOptions(
               buttonFocusColor: Theme.of(context).primaryColor,
               buttonColor: Theme.of(context).primaryColor,
@@ -54,7 +59,10 @@ class CustomHtmlEditor extends StatelessWidget {
                   .copyWith(color: Theme.of(context).primaryColor),
               toolbarType: ToolbarType.nativeGrid,
               defaultToolbarButtons: [
-                FontSettingButtons(fontSizeUnit: false),
+                FontSettingButtons(
+
+                    fontName: false,
+                    fontSizeUnit: false),
                 FontButtons(
                     clearAll: false, superscript: false, subscript: false),
                 ParagraphButtons(

@@ -18,7 +18,7 @@ class RouteNames {
   static const String NOTICES = "/noticias";
   static const String FRAMES = "/quadros";
   static const String EXAM = "/vestibular";
-  static const String RECOMENDATIONS = "/recomendacoes";
+  static const String RECOMMENDATIONS = "/recomendacoes";
   static const String COLLECTION = "/acervo";
   static const String ADMIN = "/admin";
   static const String ADMIN_PROJECTS = "/admin/projetos";
@@ -30,4 +30,7 @@ class RouteNames {
   static const String ADMIN_FRAMES = "/admin/quadros";
   static const String ADD_FRAME = "/admin/quadros/adicionarQuadro";
   static const String UPDATE_FRAME = "/admin/quadros/editarQuadro";
+  static const String ADMIN_TEACHERS = "/admin/professores";
+  static const String ADD_TEACHER = "/admin/professores/adicionarProfessor";
+  static const String UPDATE_TEACHER = "/admin/professores/editarProfessor";
 }

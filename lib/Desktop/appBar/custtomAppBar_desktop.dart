@@ -48,7 +48,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           ItemPopUpMenuAppBar(
               "Quadros", RouteNames.FRAMES, frameStore.listFramesOrdered),
           ItemAppBar("Vestibular", RouteNames.EXAM),
-          ItemAppBar("Recomendações", RouteNames.RECOMENDATIONS),
+          ItemAppBar("Recomendações", RouteNames.RECOMMENDATIONS),
           ItemAppBar("Acervo", RouteNames.COLLECTION),
         ],
       ),

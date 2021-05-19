@@ -25,8 +25,7 @@ class ParticipantWidget extends StatelessWidget {
                   textInputType: TextInputType.number,
                   hintText: "Digite o numero de participantes (Max. 10)",
                   labelText: "Numero de participantes",
-                  textInputAction: TextInputAction.next,
-                ),
+                  ),
               ),
               Expanded(
                 flex: 5,

@@ -56,7 +56,6 @@ class _AdminUpdateNoticePageDesktopState
             onChanged: (text) {
               supportStore.updateTitle(text);
             },
-            textInputAction: TextInputAction.next,
             textInputType: TextInputType.name,
           ),
           Observer(builder: (_) {
@@ -72,7 +71,6 @@ class _AdminUpdateNoticePageDesktopState
             onChanged: (text) {
               supportStore.updateSubTitle(text);
             },
-            textInputAction: TextInputAction.next,
             textInputType: TextInputType.name,
           ),
           Observer(builder: (_) {

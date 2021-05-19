@@ -41,7 +41,7 @@ class VerticalAppBarMin extends StatelessWidget {
           ),
           VerticalItem(
             "Professores",
-            "",
+            RouteNames.ADMIN_TEACHERS,
             IconsData.TEACHER_ICON,
             isMini: true,
           ),

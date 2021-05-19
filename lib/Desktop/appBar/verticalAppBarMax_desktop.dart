@@ -38,7 +38,7 @@ class VerticalAppBarMax extends StatelessWidget {
           height: 0,
           color: Theme.of(context).iconTheme.color,
         ),
-        VerticalItem("Professores", "", IconsData.TEACHER_ICON),
+        VerticalItem("Professores", RouteNames.ADMIN_TEACHERS, IconsData.TEACHER_ICON),
         Divider(
           height: 0,
           color: Theme.of(context).iconTheme.color,

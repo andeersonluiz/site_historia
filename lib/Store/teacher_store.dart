@@ -1,4 +1,7 @@
+import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
+import 'package:site_historia/Model/project_model.dart';
+import 'package:site_historia/Model/teacher_model.dart';
 import 'package:site_historia/firebase/teacher_firestore.dart';
 
 part 'teacher_store.g.dart';
@@ -11,8 +14,53 @@ abstract class _TeacherStoreBase with Store {
 
   @action
   getTeachers() async {
-    final teacherFirestore = TeacherFirestore();
+    listTeachers = ObservableFuture(TeacherFirestore.getTeachers());
+  }
 
-    listTeachers = ObservableFuture(teacherFirestore.getTeachers());
+  @action
+  addTeacher(
+      String name,
+      PickedFile image,
+      List<Project> projects,
+      String link,
+      ) async {
+
+    var result = await TeacherFirestore.addTeacher(name, image, projects, link);
+    if(result){
+      await getTeachers();
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  @action
+  updateTeacher(
+      Teacher teacher,
+      String name,
+      PickedFile image,
+      List<Project> projects,
+      String link,
+      ) async {
+    var result = await TeacherFirestore.updateTeacher(teacher,name, image, projects, link);
+    if(result){
+      await getTeachers();
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  @action
+  deleteTeacher(int id) async {
+    await TeacherFirestore.deleteTeacher(id);
+  }
+
+  @action
+  getTeacherById(String id) {
+    var result = listTeachers!.value
+        .where((element) => element.id.toString() == id)
+        .toList();
+    return result[0];
   }
 }

@@ -17,14 +17,17 @@ class CustomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      maxLines: maxLines,
-      overflow: overflow,
-      textAlign: textAlign,
-      style: style == null
-          ? Theme.of(context).textTheme.caption!.copyWith(color: colorText)
-          : style!.copyWith(color: colorText),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        text,
+        maxLines: maxLines,
+        overflow: overflow,
+        textAlign: textAlign,
+        style: style == null
+            ? Theme.of(context).textTheme.caption!.copyWith(color: colorText)
+            : style!.copyWith(color: colorText),
+      ),
     );
   }
 }

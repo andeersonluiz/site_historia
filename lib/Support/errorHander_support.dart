@@ -5,6 +5,7 @@ enum ErrorForm {
   Image,
   Content,
   Teacher,
+  Project,
   Participant,
   ParticipantSize,
 }

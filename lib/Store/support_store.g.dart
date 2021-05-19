@@ -41,6 +41,12 @@ mixin _$SupportStore on _SupportStoreBase, Store {
       (_$isTopHeaderComputed ??= Computed<bool>(() => super.isTopHeader,
               name: '_SupportStoreBase.isTopHeader'))
           .value;
+  Computed<String>? _$linkComputed;
+
+  @override
+  String get link => (_$linkComputed ??=
+          Computed<String>(() => super.link, name: '_SupportStoreBase.link'))
+      .value;
   Computed<PickedFile?>? _$pathImageComputed;
 
   @override
@@ -139,6 +145,13 @@ mixin _$SupportStore on _SupportStoreBase, Store {
           () => super.msgErrorTeacher,
           name: '_SupportStoreBase.msgErrorTeacher'))
       .value;
+  Computed<String>? _$msgErrorProjectComputed;
+
+  @override
+  String get msgErrorProject => (_$msgErrorProjectComputed ??= Computed<String>(
+          () => super.msgErrorProject,
+          name: '_SupportStoreBase.msgErrorProject'))
+      .value;
   Computed<String>? _$msgErrorParticipantsComputed;
 
   @override
@@ -233,6 +246,21 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   set _isTopHeader(bool value) {
     _$_isTopHeaderAtom.reportWrite(value, super._isTopHeader, () {
       super._isTopHeader = value;
+    });
+  }
+
+  final _$_linkAtom = Atom(name: '_SupportStoreBase._link');
+
+  @override
+  String get _link {
+    _$_linkAtom.reportRead();
+    return super._link;
+  }
+
+  @override
+  set _link(String value) {
+    _$_linkAtom.reportWrite(value, super._link, () {
+      super._link = value;
     });
   }
 
@@ -353,6 +381,21 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   set teacherLocal(ObservableList<Teacher> value) {
     _$teacherLocalAtom.reportWrite(value, super.teacherLocal, () {
       super.teacherLocal = value;
+    });
+  }
+
+  final _$projectLocalAtom = Atom(name: '_SupportStoreBase.projectLocal');
+
+  @override
+  ObservableList<Project> get projectLocal {
+    _$projectLocalAtom.reportRead();
+    return super.projectLocal;
+  }
+
+  @override
+  set projectLocal(ObservableList<Project> value) {
+    _$projectLocalAtom.reportWrite(value, super.projectLocal, () {
+      super.projectLocal = value;
     });
   }
 
@@ -478,6 +521,22 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   set _msgErrorTeacher(String value) {
     _$_msgErrorTeacherAtom.reportWrite(value, super._msgErrorTeacher, () {
       super._msgErrorTeacher = value;
+    });
+  }
+
+  final _$_msgErrorProjectAtom =
+      Atom(name: '_SupportStoreBase._msgErrorProject');
+
+  @override
+  String get _msgErrorProject {
+    _$_msgErrorProjectAtom.reportRead();
+    return super._msgErrorProject;
+  }
+
+  @override
+  set _msgErrorProject(String value) {
+    _$_msgErrorProjectAtom.reportWrite(value, super._msgErrorProject, () {
+      super._msgErrorProject = value;
     });
   }
 
@@ -612,6 +671,17 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   }
 
   @override
+  dynamic updateLink(String newLink) {
+    final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
+        name: '_SupportStoreBase.updateLink');
+    try {
+      return super.updateLink(newLink);
+    } finally {
+      _$_SupportStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic updateAudio(PlatformFile? newAudio) {
     final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
         name: '_SupportStoreBase.updateAudio');
@@ -700,11 +770,33 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   }
 
   @override
+  dynamic createProjectLocal(List<Project> projects, Teacher? teacher) {
+    final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
+        name: '_SupportStoreBase.createProjectLocal');
+    try {
+      return super.createProjectLocal(projects, teacher);
+    } finally {
+      _$_SupportStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic updateTeacherLocal(Teacher teacher, int index) {
     final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
         name: '_SupportStoreBase.updateTeacherLocal');
     try {
       return super.updateTeacherLocal(teacher, index);
+    } finally {
+      _$_SupportStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic updateProjectLocal(Project project, int index) {
+    final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
+        name: '_SupportStoreBase.updateProjectLocal');
+    try {
+      return super.updateProjectLocal(project, index);
     } finally {
       _$_SupportStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -736,6 +828,7 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   String toString() {
     return '''
 teacherLocal: ${teacherLocal},
+projectLocal: ${projectLocal},
 participantsLocal: ${participantsLocal},
 verticalIsMax: ${verticalIsMax},
 title: ${title},
@@ -743,6 +836,7 @@ subtitle: ${subtitle},
 type: ${type},
 tag: ${tag},
 isTopHeader: ${isTopHeader},
+link: ${link},
 pathImage: ${pathImage},
 subtitleImage: ${subtitleImage},
 audioFile: ${audioFile},
@@ -757,6 +851,7 @@ msgErrorImage: ${msgErrorImage},
 msgErrorAudio: ${msgErrorAudio},
 msgErrorContent: ${msgErrorContent},
 msgErrorTeacher: ${msgErrorTeacher},
+msgErrorProject: ${msgErrorProject},
 msgErrorParticipants: ${msgErrorParticipants},
 msgErrorParticipantsSize: ${msgErrorParticipantsSize},
 msgErrorPopUp: ${msgErrorPopUp}

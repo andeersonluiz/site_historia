@@ -27,6 +27,9 @@ abstract class _SupportStoreBase with Store {
   bool _isTopHeader = false;
 
   @observable
+  String _link = "";
+
+  @observable
   PlatformFile _audioFile = PlatformFile();
 
   @observable
@@ -51,6 +54,9 @@ abstract class _SupportStoreBase with Store {
   ObservableList<Teacher> teacherLocal = ObservableList<Teacher>();
 
   @observable
+  ObservableList<Project> projectLocal = ObservableList<Project>();
+
+  @observable
   ObservableList<String> participantsLocal = ObservableList<String>();
 
   @computed
@@ -67,6 +73,9 @@ abstract class _SupportStoreBase with Store {
 
   @computed
   bool get isTopHeader => this._isTopHeader;
+
+  @computed
+  String get link => this._link;
 
   @computed
   PickedFile? get pathImage => this._pathImage;
@@ -111,6 +120,9 @@ abstract class _SupportStoreBase with Store {
   String _msgErrorTeacher = "";
 
   @observable
+  String _msgErrorProject = "";
+
+  @observable
   String _msgErrorParticipants = "";
 
   @observable
@@ -139,6 +151,9 @@ abstract class _SupportStoreBase with Store {
 
   @computed
   String get msgErrorTeacher => this._msgErrorTeacher;
+
+  @computed
+  String get msgErrorProject => this._msgErrorProject;
 
   @computed
   String get msgErrorParticipants => this._msgErrorParticipants;
@@ -181,6 +196,11 @@ abstract class _SupportStoreBase with Store {
   @action
   updateTopHeader(bool newTopHeader) {
     this._isTopHeader = newTopHeader;
+  }
+
+  @action
+  updateLink(String newLink) {
+    this._link = newLink;
   }
 
   @action
@@ -264,13 +284,41 @@ abstract class _SupportStoreBase with Store {
           }
         });
         if (!contains) {
+          teacher.checked = false;
           this.teacherLocal.add(teacher);
         }
       });
     } else if (teacherLocal.isEmpty) {
+      teachers.forEach((teachers)=>teachers.checked=false);
+
       this.teacherLocal = ObservableList.of(teachers);
     }
   }
+
+  @action
+  createProjectLocal(List<Project> projects, Teacher? teacher) {
+    if (teacher != null && projectLocal.isEmpty) {
+      projects.forEach((project) {
+        bool contains = false;
+        project.teachers.forEach((projTeacher) {
+          if (teacher.id == projTeacher.id) {
+            project.checked = true;
+            this.projectLocal.add(project);
+            contains = true;
+            return;
+          }
+        });
+        if (!contains) {
+          project.checked = false;
+          this.projectLocal.add(project);
+        }
+      });
+    } else if (projectLocal.isEmpty) {
+      projects.forEach((project)=>project.checked=false);
+      this.projectLocal = ObservableList.of(projects);
+    }
+  }
+
 
   @action
   updateTeacherLocal(Teacher teacher, int index) {
@@ -282,8 +330,30 @@ abstract class _SupportStoreBase with Store {
         id: teacher.id,
         checked: !teacher.checked,
         image: teacher.image,
-        links: teacher.links,
+        link: teacher.link,
         projects: teacher.projects);
+  }
+
+  @action
+  updateProjectLocal(Project project, int index) {
+    if (msgErrorProject != "") {
+      clearError(ErrorForm.Project);
+    }
+    projectLocal[index] = Project(id: project.id,
+        datePost:  project.datePost, imageHeader: project.imageHeader,
+        teachers:  project.teachers, name:  project.name, author:  project.author,
+        content:  project.content, participants:  project.participants,
+    checked: !project.checked);
+  }
+
+  List<Project> getProjects() {
+    List<Project> projects = [];
+    for (int i = 0; i < projectLocal.length; i++) {
+      if (projectLocal[i].checked) {
+        projects.add(projectLocal[i]);
+      }
+    }
+    return projects;
   }
 
   @action
@@ -349,6 +419,9 @@ abstract class _SupportStoreBase with Store {
       case ErrorForm.Audio:
         this._msgErrorAudio = msg;
         break;
+      case ErrorForm.Project:
+        this._msgErrorProject = msg;
+        break;
     }
   }
 
@@ -377,6 +450,9 @@ abstract class _SupportStoreBase with Store {
         break;
       case ErrorForm.Audio:
         this._msgErrorAudio = "";
+        break;
+      case ErrorForm.Project:
+        this._msgErrorProject="";
         break;
     }
   }
@@ -412,6 +488,13 @@ abstract class _SupportStoreBase with Store {
     updateContent(frame.content);
   }
 
+  loadInitialDataTeacher(Teacher teacher) {
+    updateTitle(teacher.name);
+    updateLink(teacher.link);
+    updatePath(PickedFile(teacher.image));
+  }
+
+
   validateProjectMobileTab1() {
     String err = "";
     if (title == "") {
@@ -434,6 +517,8 @@ abstract class _SupportStoreBase with Store {
       generateMsgError(ErrorForm.Content, "O conteudo não pode estar vazio.");
       err += "err4";
     } else {
+
+      this._htmlContent = htmlContent!.replaceAll("font-family", "");
       clearError(ErrorForm.Content);
     }
     if (getTeachers().length == 0) {
@@ -489,6 +574,7 @@ abstract class _SupportStoreBase with Store {
       generateMsgError(ErrorForm.Content, "O conteudo não pode estar vazio.");
       err += "err4";
     } else {
+      this._htmlContent = htmlContent!.replaceAll("font-family", "");
       clearError(ErrorForm.Content);
     }
     if (getTeachers().length == 0) {
@@ -547,6 +633,8 @@ abstract class _SupportStoreBase with Store {
       generateMsgError(ErrorForm.Content, "O conteudo não pode estar vazio.");
       err += "err6";
     } else {
+      this._htmlContent = htmlContent!.replaceAll("font-family", "");
+
       clearError(ErrorForm.Content);
     }
 
@@ -617,6 +705,8 @@ abstract class _SupportStoreBase with Store {
       generateMsgError(ErrorForm.Content, "O conteudo não pode estar vazio.");
       err += "err6";
     } else {
+      this._htmlContent = htmlContent!.replaceAll("font-family", "");
+
       clearError(ErrorForm.Content);
     }
 
@@ -635,6 +725,41 @@ abstract class _SupportStoreBase with Store {
     } else {
       return "";
     }
+
+  }
+
+  validateTeacher(){
+    String err = "";
+    if (title == "") {
+      generateMsgError(ErrorForm.Title, "O Nome do professor não pode ser vazio.");
+      err += "err1";
+    } else if (title.length > 40) {
+      generateMsgError(
+          ErrorForm.Title, "O nome do professor não ter mais de 40 caracteres.");
+      err += "err2";
+    } else {
+      clearError(ErrorForm.Title);
+    }
+
+    if (pathImage!.path == "") {
+      generateMsgError(ErrorForm.Image, "Selecione uma imagem para o professor.");
+      err += "err5";
+    } else {
+      clearError(ErrorForm.Image);
+    }
+    if (getProjects().length == 0) {
+      generateMsgError(
+          ErrorForm.Project, "Você deve selecionar pelo menos um projeto.");
+      err += "err5";
+    } else {
+      clearError(ErrorForm.Project);
+    }
+
+    if (err == "") {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   clearData() {
@@ -644,10 +769,12 @@ abstract class _SupportStoreBase with Store {
     _subtitle = "";
     _tag = "Podcast";
     _type = "Podcast";
+    _link = "";
     _audioFile = PlatformFile();
     _videoFile = PlatformFile();
     _urlPopUp = "";
     teacherLocal = ObservableList<Teacher>();
+    projectLocal = ObservableList<Project>();
     participantsLocal = ObservableList<String>();
     _msgErrorParticipants = "";
     _msgErrorParticipantsSize = "";

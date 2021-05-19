@@ -70,7 +70,7 @@ class NavigationDrawer extends StatelessWidget {
                     .toList(),
               ),
               DrawerItem("Vestibular", RouteNames.EXAM, IconsData.EXAM_ICON),
-              DrawerItem("Recomendações", RouteNames.RECOMENDATIONS,
+              DrawerItem("Recomendações", RouteNames.RECOMMENDATIONS,
                   IconsData.RECOMENDATION_ICON),
               DrawerItem(
                   "Acervo", RouteNames.COLLECTION, IconsData.COLLECTION_ICON),

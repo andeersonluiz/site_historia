@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/customButton_component.dart';
+import 'package:site_historia/Components/customImage_component.dart';
 import 'package:site_historia/Components/customText_component.dart';
 import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Support/RoutesName_support.dart';
@@ -50,8 +51,9 @@ class AdminProjectCardDesktop extends StatelessWidget {
               children: [
                 Expanded(
                     flex: 3,
-                    child: Image.network(project.imageHeader,
-                        fit: BoxFit.fill, height: sizeCard)),
+                    child:CustomImage(
+                        height: sizeCard,
+                        image:project.imageHeader),),
                 Expanded(
                   flex: 7,
                   child: Container(

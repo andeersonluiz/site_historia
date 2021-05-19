@@ -51,7 +51,6 @@ class _AdminAddFramePageMobileState extends State<AdminAddFramePageMobile> {
               onChanged: (text) {
                 supportStore.updateTitle(text);
               },
-              textInputAction: TextInputAction.next,
               textInputType: TextInputType.name,
             ),
             Observer(builder: (_) {
@@ -67,7 +66,6 @@ class _AdminAddFramePageMobileState extends State<AdminAddFramePageMobile> {
               onChanged: (text) {
                 supportStore.updateSubTitle(text);
               },
-              textInputAction: TextInputAction.next,
               textInputType: TextInputType.name,
             ),
             Observer(builder: (_) {

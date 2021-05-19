@@ -4,30 +4,29 @@ import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:site_historia/Components/customLoading_component.dart';
-import 'package:site_historia/Desktop/adminUpdateProject_page_desktop.dart';
+import 'package:site_historia/Desktop/adminUpdateTeacher_page_desktop.dart';
 import 'package:site_historia/Desktop/appBar/verticalAppBar_desktop.dart';
-import 'package:site_historia/Mobile/adminUpdateProject_page_mobile.dart';
 import 'package:site_historia/Mobile/drawer/adminNavigation_drawer_component.dart';
+import 'package:site_historia/Model/teacher_model.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Screens/loading_screen.dart';
-import 'package:site_historia/Store/project_store.dart';
-import 'package:site_historia/Model/project_model.dart';
+import 'package:site_historia/Store/teacher_store.dart';
 import 'package:site_historia/Support/RoutesName_support.dart';
 
-class AdminUpdateProjectScreen extends StatefulWidget {
-  final String idProject;
+class AdminUpdateTeacherScreen extends StatefulWidget {
+  final String idTeacher;
 
-  AdminUpdateProjectScreen(this.idProject);
+  AdminUpdateTeacherScreen(this.idTeacher);
 
   @override
-  _AdminUpdateProjectScreenState createState() =>
-      _AdminUpdateProjectScreenState();
+  _AdminUpdateTeacherScreenState createState() =>
+      _AdminUpdateTeacherScreenState();
 }
 
-class _AdminUpdateProjectScreenState extends State<AdminUpdateProjectScreen> {
+class _AdminUpdateTeacherScreenState extends State<AdminUpdateTeacherScreen> {
   @override
   Widget build(BuildContext context) {
-    final projectStore = Provider.of<ProjectStore>(context);
+    final teacherStore = Provider.of<TeacherStore>(context);
     return ResponsiveBuilder(
       builder: (ctx, sizingInformation) => Scaffold(
           drawer: sizingInformation.isDesktop ? null : AdminNavigatorDrawer(),
@@ -35,11 +34,11 @@ class _AdminUpdateProjectScreenState extends State<AdminUpdateProjectScreen> {
               ? null
               : AppBar(
                   centerTitle: true,
-                  title: Text("Editar Projeto"),
+                  title: Text("Editar Professor"),
                 ),
           body: Observer(builder: (_) {
-            projectStore.listProjects ?? projectStore.getProjects();
-            switch (projectStore.listProjects!.status) {
+            teacherStore.listTeachers ?? teacherStore.getTeachers();
+            switch (teacherStore.listTeachers!.status) {
               case FutureStatus.pending:
                 return Loading();
               case FutureStatus.rejected:
@@ -49,24 +48,23 @@ class _AdminUpdateProjectScreenState extends State<AdminUpdateProjectScreen> {
                   future: loadData(),
                   builder: (ctx, snp) {
                     if (snp.hasData) {
-                      Project project = snp.data as Project;
+                      Teacher teacher = snp.data as Teacher;
 
                       return SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         child: ScreenTypeLayout(
-                            mobile: AdminUpdateProjectPageMobile(project),
+                            mobile: AdminUpdateTeacherPageDesktop(teacher),
                             desktop: Container(
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height,
                               child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-
                                   children: [
-                                VerticalAppBar(),
-                                Expanded(
-                                    child:
-                                        AdminUpdateProjectPageDesktop(project)),
-                              ]),
+                                    VerticalAppBar(),
+                                    Expanded(
+                                        child: AdminUpdateTeacherPageDesktop(
+                                            teacher)),
+                                  ]),
                             )),
                       );
                     } else if (snp.hasError) {
@@ -85,7 +83,7 @@ class _AdminUpdateProjectScreenState extends State<AdminUpdateProjectScreen> {
   }
 
   loadData() async {
-    final projectStore = Provider.of<ProjectStore>(context);
-    return await projectStore.getProjectById(widget.idProject);
+    final teacherStore = Provider.of<TeacherStore>(context);
+    return await teacherStore.getTeacherById(widget.idTeacher);
   }
 }

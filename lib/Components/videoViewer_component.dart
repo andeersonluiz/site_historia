@@ -20,7 +20,6 @@ class _VideoViewerState extends State<VideoViewer> {
   @override
   void initState() {
     super.initState();
-    print("init");
     if (widget.urlVideo.contains("youtube")) {
       _youtubePlayerController = YoutubePlayerController(
         initialVideoId:
@@ -76,12 +75,9 @@ class _VideoViewerState extends State<VideoViewer> {
           : Container(
               margin: EdgeInsets.only(
                   left: 70.0, right: 70.0, top: 8.0, bottom: 8.0),
-              child: AspectRatio(
-                aspectRatio: 16 / 9,
-                child: YoutubePlayerControllerProvider(
+              child: YoutubePlayerControllerProvider(
                   controller: _youtubePlayerController!,
                   child: YoutubePlayerIFrame(),
-                ),
               ),
             )
     ]);

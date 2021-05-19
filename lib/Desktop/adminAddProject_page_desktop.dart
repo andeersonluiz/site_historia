@@ -58,6 +58,7 @@ class _AdminAddProjectPageDesktopState
             case FutureStatus.fulfilled:
               List<Teacher> listTeachers =
                   teacherStore.listTeachers!.value as List<Teacher>;
+
               supportStore.createTeacherLocal(listTeachers, null);
               return Container(
                 padding: EdgeInsets.all(16.0),
@@ -71,7 +72,6 @@ class _AdminAddProjectPageDesktopState
                       onChanged: (text) {
                         supportStore.updateTitle(text);
                       },
-                      textInputAction: TextInputAction.next,
                       textInputType: TextInputType.name,
                     ),
                     Observer(builder: (_) {

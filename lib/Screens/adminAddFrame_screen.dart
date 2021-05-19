@@ -28,7 +28,10 @@ class _AdminAddFrameScreenState extends State<AdminAddFrameScreen> {
                   desktop: Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
-                    child: Row(children: [
+                    child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+
+                        children: [
                       VerticalAppBar(),
                       Expanded(child: AdminAddFramePageDesktop()),
                     ]),

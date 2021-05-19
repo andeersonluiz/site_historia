@@ -38,11 +38,9 @@ class _AdminUpdateProjectPageDesktopState
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final teacherStore = Provider.of<TeacherStore>(context);
     final supportStore = Provider.of<SupportStore>(context);
     /*CODE PBP*/
     supportStore.clearData();
-    teacherStore.getTeachers();
     supportStore.loadInitialDataProject(widget.project);
   }
 

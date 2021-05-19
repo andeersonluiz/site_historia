@@ -10,6 +10,8 @@ class Project {
   List<Teacher> teachers;
   List<Participant> participants;
   String author;
+  bool checked;
+
   Project(
       {required this.id,
       required this.name,
@@ -18,7 +20,9 @@ class Project {
       required this.datePost,
       required this.teachers,
       required this.participants,
-      required this.author});
+      required this.author,
+      this.checked=false,
+      });
 
   factory Project.fromJson(Map<String, dynamic> json) {
     List<Participant> listParticipants =
@@ -27,7 +31,7 @@ class Project {
     }).toList();
 
     List<Teacher> listTeacher = json['teachers']
-        .map<Teacher>((item) => Teacher.fromJson(item))
+        .map<Teacher>((item) => Teacher.fromJsonSimple(item))
         .toList();
 
     return Project(
@@ -40,14 +44,34 @@ class Project {
         participants: listParticipants,
         author: json['author']);
   }
+
+  factory Project.fromJsonSimple(Map<String, dynamic> json) {
+    return Project(
+        id: json['id'],
+        name: json['name'],
+        imageHeader: "",
+        content: "",
+        datePost: "",
+        teachers: [],
+        participants: [],
+        author:"");
+  }
+
+
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,
         'imageHeader': imageHeader,
         'content': content,
         'datePost': datePost,
-        'teachers': teachers.map((e) => e.toJson()).toList(),
+        'teachers': teachers.map((e) => e.toJsonSimple()).toList(),
         'participants': participants.map((e) => e.toJson()).toList(),
         'author': author,
       };
+  Map<String, dynamic> toJsonSimple() {
+    return {
+      'id': id,
+    'name': name,
+    };
+  }
 }

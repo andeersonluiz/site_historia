@@ -13,7 +13,6 @@ class NoticeInfoPageDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -33,8 +32,7 @@ class NoticeInfoPageDesktop extends StatelessWidget {
             ),
             child: HtmlViewer(
               notice.content,
-              margin: EdgeInsets.only(
-                  left: 100.0, right: 100.0, top: 16.0, bottom: 16.0),
+
             )),
         notice.type == "Podcast"
             ? Divider(
