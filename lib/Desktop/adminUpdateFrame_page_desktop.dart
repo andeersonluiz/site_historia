@@ -17,6 +17,8 @@ import 'package:site_historia/Store/support_store.dart';
 import 'package:site_historia/Support/RoutesName_support.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 import 'package:velocity_x/velocity_x.dart';
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html' as html;
 
 class AdminUpdateFramePageDesktop extends StatefulWidget {
   final Frame frame;
@@ -28,14 +30,21 @@ class AdminUpdateFramePageDesktop extends StatefulWidget {
 
 class _AdminUpdateFramePageDesktopState
     extends State<AdminUpdateFramePageDesktop> {
+  final DateTime timeOpen = DateTime.now();
+  bool updated = false;
+  FrameStore? frameStore;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
     final supportStore = Provider.of<SupportStore>(context);
+    frameStore = Provider.of<FrameStore>(context);
     /*CODE PBP*/
     supportStore.clearData();
     supportStore.loadInitialDataFrame(widget.frame);
+    html.window.onBeforeUnload.listen((event) async {
+      /*Listen reload (not delete image when reload)*/
+    });
   }
 
   @override
@@ -51,7 +60,7 @@ class _AdminUpdateFramePageDesktopState
             CustomTextFormField(
               hintText: "Insira o titulo do Quadro",
               labelText: "Titulo",
-              maxCharacters: 30,
+              maxCharacters: GlobalsVariables.maxCharactersTitle,
               initialValue: supportStore.title,
               onChanged: (text) {
                 supportStore.updateTitle(text);
@@ -66,7 +75,7 @@ class _AdminUpdateFramePageDesktopState
             CustomTextFormField(
               hintText: "Insira o subtítulo do Quadro",
               labelText: "Subtítulo",
-              maxCharacters: 100,
+              maxCharacters: GlobalsVariables.maxCharactersSubTitle,
               initialValue: supportStore.subtitle,
               onChanged: (text) {
                 supportStore.updateSubTitle(text);
@@ -109,8 +118,16 @@ class _AdminUpdateFramePageDesktopState
             CustomHtmlEditor(
               padding: EdgeInsets.symmetric(vertical: 16.0),
               controller: contentController,
-              onChange: supportStore.updateContent,
+              onChange: (text) => supportStore.updateContent(frameStore, text,
+                  contentController, widget.frame.id.toString()),
+              onBeforeCommand: supportStore.updateAfterContent,
               initialText: supportStore.htmlContent,
+              mediaUploadInterceptor: (file, type) async {
+                var url = await frameStore.convertBase64ToUrl(
+                    file.name!, file.bytes!, widget.frame.id.toString());
+                contentController.insertNetworkImage(url, filename: file.name!);
+                return false;
+              },
             ),
             Observer(builder: (_) {
               return supportStore.msgErrorContent == ""
@@ -142,6 +159,7 @@ class _AdminUpdateFramePageDesktopState
                         GlobalsVariables.username);
                     supportStore.setLoading(false);
                     if (result) {
+                      updated = true;
                       CustomToast.showToast(
                           "Quadro cadastrada com sucesso!!", Colors.green);
                       VxNavigator.of(context)
@@ -160,5 +178,13 @@ class _AdminUpdateFramePageDesktopState
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    if (!updated) {
+      frameStore!.clearContent(widget.frame.id.toString(), time: timeOpen);
+    }
+    super.dispose();
   }
 }

@@ -98,6 +98,7 @@ class AdminUpdateProjectParticipantPageMobile extends StatelessWidget {
                       CustomToast.showToast(
                           "Projeto alterado com sucesso!!", Colors.green);
                       supportStore.clearData();
+                      supportStore.updated = true;
                       VxNavigator.of(context)
                           .clearAndPush(Uri.parse(RouteNames.ADMIN_PROJECTS));
                     } else {

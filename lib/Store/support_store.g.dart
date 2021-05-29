@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'support_store.dart';
+part of dmp;
 
 // **************************************************************************
 // StoreGenerator
@@ -608,8 +608,10 @@ mixin _$SupportStore on _SupportStoreBase, Store {
       AsyncAction('_SupportStoreBase.updateContent');
 
   @override
-  Future updateContent(String? value) {
-    return _$updateContentAsyncAction.run(() => super.updateContent(value));
+  Future updateContent(dynamic store, String? value,
+      HtmlEditorController? controller, String? id) {
+    return _$updateContentAsyncAction
+        .run(() => super.updateContent(store, value, controller, id));
   }
 
   final _$_SupportStoreBaseActionController =

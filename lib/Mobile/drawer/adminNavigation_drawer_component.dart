@@ -44,6 +44,8 @@ class AdminNavigatorDrawer extends StatelessWidget {
                   "Quadros", RouteNames.ADMIN_FRAMES, IconsData.NOTICE_ICON),
               AdminDrawerItem("Professores", RouteNames.ADMIN_TEACHERS,
                   IconsData.TEACHER_ICON),
+              AdminDrawerItem("Recomendações", RouteNames.ADMIN_RECOMMENDATIONS,
+                  IconsData.RECOMENDATION_ICON),
               AdminDrawerItem("Acervo", RouteNames.ADMIN_PROJECTS,
                   IconsData.COLLECTION_ICON),
               AdminDrawerItem("Sair", RouteNames.ADMIN, IconsData.LOGOUT_ICON),

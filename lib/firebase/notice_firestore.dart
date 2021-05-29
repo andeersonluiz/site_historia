@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -209,5 +211,47 @@ class NoticeFirestore {
       topheaders.add(Notice.fromJson(item.data()));
     });
     return topheaders;
+  }
+
+  static convertBase64ToUrl(
+      String fileName, Uint8List base64, String id) async {
+    UploadTaskSnapshot task = await storage()
+        .ref()
+        .child("notices/$id(content)/$fileName")
+        .put(base64, UploadMetadata(contentType: 'image/jpg'))
+        .future;
+    var url = await task.ref.getDownloadURL();
+    return url.toString();
+  }
+
+  static removeFilename(String fileName, String id) async {
+    await storage().ref("notices/$id(content)/$fileName").delete();
+  }
+
+  static getNextId() async {
+    var result = await firestore().collection("notices").get();
+    return result.docs.length + 1;
+  }
+
+  static clearContent(String id, {DateTime? time}) async {
+    var result = await storage().ref().child("notices/$id(content)").listAll();
+    if (time != null) {
+      for (int i = 0; i < result.items.length; i++) {
+        FullMetadata metadata = await result.items[i].getMetadata();
+        if (metadata.timeCreated.isAfter(time)) {
+          storage()
+              .ref()
+              .child("notices/$id(content)/${result.items[i].name}")
+              .delete();
+        }
+      }
+    } else {
+      for (int i = 0; i < result.items.length; i++) {
+        storage()
+            .ref()
+            .child("notices/$id(content)/${result.items[i].name}")
+            .delete();
+      }
+    }
   }
 }

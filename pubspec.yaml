@@ -66,8 +66,9 @@ dependencies:
   video_player: ^2.1.1
   video_player_web: ^2.0.0
   chewie: ^1.0.0
-  youtube_player_iframe: ^2.0.0
+  youtube_plyr_iframe: ^2.0.5+1
   flutter_html: ^2.0.0
+  http: ^0.13.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

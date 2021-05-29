@@ -24,11 +24,15 @@ class AdminAddFramePageDesktop extends StatefulWidget {
 }
 
 class _AdminAddFramePageDesktopState extends State<AdminAddFramePageDesktop> {
+  int? nextId;
+  FrameStore? frameStore;
+  bool created = false;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
     final supportStore = Provider.of<SupportStore>(context);
+    frameStore = Provider.of<FrameStore>(context);
     /*CODE PBP*/
     supportStore.clearData();
   }
@@ -36,8 +40,8 @@ class _AdminAddFramePageDesktopState extends State<AdminAddFramePageDesktop> {
   @override
   Widget build(BuildContext context) {
     final supportStore = Provider.of<SupportStore>(context);
-    final frameStore = Provider.of<FrameStore>(context);
     final HtmlEditorController contentController = HtmlEditorController();
+    final frameStore = Provider.of<FrameStore>(context);
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.all(16.0),
@@ -46,7 +50,7 @@ class _AdminAddFramePageDesktopState extends State<AdminAddFramePageDesktop> {
             CustomTextFormField(
               hintText: "Insira o titulo do Quadro",
               labelText: "Titulo",
-              maxCharacters: 30,
+              maxCharacters: GlobalsVariables.maxCharactersTitle,
               initialValue: supportStore.title,
               onChanged: (text) {
                 supportStore.updateTitle(text);
@@ -61,7 +65,7 @@ class _AdminAddFramePageDesktopState extends State<AdminAddFramePageDesktop> {
             CustomTextFormField(
               hintText: "Insira o subtítulo do Quadro",
               labelText: "Subtítulo",
-              maxCharacters: 100,
+              maxCharacters: GlobalsVariables.maxCharactersSubTitle,
               initialValue: supportStore.subtitle,
               onChanged: (text) {
                 supportStore.updateSubTitle(text);
@@ -104,7 +108,16 @@ class _AdminAddFramePageDesktopState extends State<AdminAddFramePageDesktop> {
             CustomHtmlEditor(
               padding: EdgeInsets.symmetric(vertical: 16.0),
               controller: contentController,
-              onChange: supportStore.updateContent,
+              onChange: (text) => supportStore.updateContent(frameStore, text,
+                  contentController, nextId == null ? null : nextId.toString()),
+              onBeforeCommand: supportStore.updateAfterContent,
+              mediaUploadInterceptor: (file, type) async {
+                nextId ??= await frameStore.getNextId();
+                var url = await frameStore.convertBase64ToUrl(
+                    file.name!, file.bytes!, nextId.toString());
+                contentController.insertNetworkImage(url, filename: file.name!);
+                return false;
+              },
               initialText: supportStore.htmlContent,
             ),
             Observer(builder: (_) {
@@ -135,6 +148,7 @@ class _AdminAddFramePageDesktopState extends State<AdminAddFramePageDesktop> {
                         GlobalsVariables.username);
                     supportStore.setLoading(false);
                     if (result) {
+                      created = true;
                       CustomToast.showToast(
                           "Quadro cadastrada com sucesso!!", Colors.green);
                       VxNavigator.of(context)
@@ -153,5 +167,13 @@ class _AdminAddFramePageDesktopState extends State<AdminAddFramePageDesktop> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    if (!created && nextId != null) {
+      frameStore!.clearContent(nextId.toString());
+    }
+    super.dispose();
   }
 }

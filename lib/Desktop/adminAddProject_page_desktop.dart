@@ -30,12 +30,17 @@ class AdminAddProjectPageDesktop extends StatefulWidget {
 
 class _AdminAddProjectPageDesktopState
     extends State<AdminAddProjectPageDesktop> {
+  int? nextId;
+  bool created = false;
+  ProjectStore? projectStore;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
     final teacherStore = Provider.of<TeacherStore>(context);
     final supportStore = Provider.of<SupportStore>(context);
+    projectStore = Provider.of<ProjectStore>(context);
 /*CODE PBP*/
     supportStore.clearData();
     teacherStore.getTeachers();
@@ -67,7 +72,7 @@ class _AdminAddProjectPageDesktopState
                     CustomTextFormField(
                       hintText: "Insira o titulo",
                       labelText: "Titulo",
-                      maxCharacters: 30,
+                      maxCharacters: GlobalsVariables.maxCharactersTitle,
                       initialValue: supportStore.title,
                       onChanged: (text) {
                         supportStore.updateTitle(text);
@@ -98,7 +103,20 @@ class _AdminAddProjectPageDesktopState
                     CustomHtmlEditor(
                       padding: EdgeInsets.symmetric(vertical: 16.0),
                       controller: contentController,
-                      onChange: supportStore.updateContent,
+                      onChange: (text) => supportStore.updateContent(
+                          projectStore,
+                          text,
+                          contentController,
+                          nextId == null ? null : nextId.toString()),
+                      onBeforeCommand: supportStore.updateAfterContent,
+                      mediaUploadInterceptor: (file, type) async {
+                        nextId ??= await projectStore.getNextId();
+                        var url = await projectStore.convertBase64ToUrl(
+                            file.name!, file.bytes!, nextId.toString());
+                        contentController.insertNetworkImage(url,
+                            filename: file.name!);
+                        return false;
+                      },
                       initialText: supportStore.htmlContent,
                     ),
                     Observer(builder: (_) {
@@ -167,6 +185,7 @@ class _AdminAddProjectPageDesktopState
                                 GlobalsVariables.username);
                             supportStore.setLoading(false);
                             if (result) {
+                              created = true;
                               CustomToast.showToast(
                                   "Projeto cadastro com sucesso!!",
                                   Colors.green);
@@ -193,5 +212,13 @@ class _AdminAddProjectPageDesktopState
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    if (!created && nextId != null) {
+      projectStore!.clearContent(nextId.toString());
+    }
+    super.dispose();
   }
 }

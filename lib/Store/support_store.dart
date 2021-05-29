@@ -1,4 +1,7 @@
+library dmp;
+
 import 'package:file_picker/file_picker.dart';
+import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:site_historia/Model/frame_model.dart';
@@ -6,6 +9,13 @@ import 'package:site_historia/Model/notice_model.dart';
 import 'package:site_historia/Support/errorHander_support.dart';
 import 'package:site_historia/Model/project_model.dart';
 import 'package:site_historia/Model/teacher_model.dart';
+import 'dart:math';
+import 'dart:collection';
+import 'package:html/parser.dart';
+part 'package:site_historia/Support/DiffPackage/dmp_class.dart';
+part 'package:site_historia/Support/DiffPackage/diff_class.dart';
+part 'package:site_historia/Support/DiffPackage/patch_class.dart';
+
 part 'support_store.g.dart';
 
 class SupportStore = _SupportStoreBase with _$SupportStore;
@@ -167,6 +177,12 @@ abstract class _SupportStoreBase with Store {
   @observable
   bool verticalIsMax = true;
 
+  String afterContent = "";
+
+  bool created = false;
+
+  bool updated = false;
+
   @action
   updateTitle(String newTitle) {
     if (newTitle != "") {
@@ -233,13 +249,37 @@ abstract class _SupportStoreBase with Store {
   }
 
   @action
-  updateContent(String? value) async {
+  updateContent(dynamic store, String? value, HtmlEditorController? controller,
+      String? id) async {
     if (htmlContent != value) {
+      List<Diff> difference =
+          DiffMatchPatch().diff_main(this.afterContent, value);
+      difference.forEach((Diff e) async {
+        if (e.operation == Operation.delete && e.text!.contains("img")) {
+          if (e.text!.substring(e.text!.length - 1) == "<") {
+            var sub = e.text!.substring(0, e.text!.length - 1);
+            String result = "<" + sub;
+            var document = parse(result);
+            var element = document.getElementsByTagName("img")[0];
+            await store.removeFilename(
+                element.attributes['data-filename']!, id);
+          } else {
+            var document = parse(e.text!);
+            var element = document.getElementsByTagName("img")[0];
+            await store.removeFilename(
+                element.attributes['data-filename']!, id);
+          }
+        }
+      });
       this._htmlContent = value!.replaceAll("video", "iframe");
     }
     if (htmlContent != "" && msgErrorContent != "") {
       clearError(ErrorForm.Content);
     }
+  }
+
+  updateAfterContent(String? content) {
+    this.afterContent = content!;
   }
 
   @action
@@ -289,7 +329,7 @@ abstract class _SupportStoreBase with Store {
         }
       });
     } else if (teacherLocal.isEmpty) {
-      teachers.forEach((teachers)=>teachers.checked=false);
+      teachers.forEach((teachers) => teachers.checked = false);
 
       this.teacherLocal = ObservableList.of(teachers);
     }
@@ -314,11 +354,10 @@ abstract class _SupportStoreBase with Store {
         }
       });
     } else if (projectLocal.isEmpty) {
-      projects.forEach((project)=>project.checked=false);
+      projects.forEach((project) => project.checked = false);
       this.projectLocal = ObservableList.of(projects);
     }
   }
-
 
   @action
   updateTeacherLocal(Teacher teacher, int index) {
@@ -339,11 +378,16 @@ abstract class _SupportStoreBase with Store {
     if (msgErrorProject != "") {
       clearError(ErrorForm.Project);
     }
-    projectLocal[index] = Project(id: project.id,
-        datePost:  project.datePost, imageHeader: project.imageHeader,
-        teachers:  project.teachers, name:  project.name, author:  project.author,
-        content:  project.content, participants:  project.participants,
-    checked: !project.checked);
+    projectLocal[index] = Project(
+        id: project.id,
+        datePost: project.datePost,
+        imageHeader: project.imageHeader,
+        teachers: project.teachers,
+        name: project.name,
+        author: project.author,
+        content: project.content,
+        participants: project.participants,
+        checked: !project.checked);
   }
 
   List<Project> getProjects() {
@@ -452,7 +496,7 @@ abstract class _SupportStoreBase with Store {
         this._msgErrorAudio = "";
         break;
       case ErrorForm.Project:
-        this._msgErrorProject="";
+        this._msgErrorProject = "";
         break;
     }
   }
@@ -460,7 +504,7 @@ abstract class _SupportStoreBase with Store {
   loadInitialDataProject(Project project) {
     updatePath(PickedFile(project.imageHeader));
     updateTitle(project.name);
-    updateContent(project.content);
+    updateContent(null, project.content, null, project.id.toString());
     participantsLocal = ObservableList.of(
         List.generate(project.participants.length, (index) => ""));
     for (int i = 0; i < project.participants.length; i++) {
@@ -473,9 +517,10 @@ abstract class _SupportStoreBase with Store {
     updateSubTitle(notice.subtitle);
     updateType(notice.type);
     updateTag(notice.tag);
+    updateTopHeader(notice.isTopHeader);
     updateAudio(PlatformFile(name: notice.audio[0]));
     updatePath(PickedFile(notice.thumb));
-    updateContent(notice.content);
+    updateContent(null, notice.content, null, notice.id.toString());
   }
 
   loadInitialDataFrame(Frame frame) {
@@ -485,7 +530,7 @@ abstract class _SupportStoreBase with Store {
     updateSubtitleImage(frame.subtitleImage);
     updateAudio(PlatformFile(name: frame.urlAudio[0]));
     updateVideo(PlatformFile(name: frame.urlVideo[0]));
-    updateContent(frame.content);
+    updateContent(null, frame.content, null, frame.id.toString());
   }
 
   loadInitialDataTeacher(Teacher teacher) {
@@ -493,7 +538,6 @@ abstract class _SupportStoreBase with Store {
     updateLink(teacher.link);
     updatePath(PickedFile(teacher.image));
   }
-
 
   validateProjectMobileTab1() {
     String err = "";
@@ -517,7 +561,6 @@ abstract class _SupportStoreBase with Store {
       generateMsgError(ErrorForm.Content, "O conteudo não pode estar vazio.");
       err += "err4";
     } else {
-
       this._htmlContent = htmlContent!.replaceAll("font-family", "");
       clearError(ErrorForm.Content);
     }
@@ -725,24 +768,25 @@ abstract class _SupportStoreBase with Store {
     } else {
       return "";
     }
-
   }
 
-  validateTeacher(){
+  validateTeacher() {
     String err = "";
     if (title == "") {
-      generateMsgError(ErrorForm.Title, "O Nome do professor não pode ser vazio.");
+      generateMsgError(
+          ErrorForm.Title, "O Nome do professor não pode ser vazio.");
       err += "err1";
     } else if (title.length > 40) {
-      generateMsgError(
-          ErrorForm.Title, "O nome do professor não ter mais de 40 caracteres.");
+      generateMsgError(ErrorForm.Title,
+          "O nome do professor não ter mais de 40 caracteres.");
       err += "err2";
     } else {
       clearError(ErrorForm.Title);
     }
 
     if (pathImage!.path == "") {
-      generateMsgError(ErrorForm.Image, "Selecione uma imagem para o professor.");
+      generateMsgError(
+          ErrorForm.Image, "Selecione uma imagem para o professor.");
       err += "err5";
     } else {
       clearError(ErrorForm.Image);
@@ -783,5 +827,6 @@ abstract class _SupportStoreBase with Store {
     _msgErrorContent = "";
     _msgErrorTeacher = "";
     _htmlContent = "";
+    created = false;
   }
 }

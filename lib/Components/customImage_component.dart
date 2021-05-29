@@ -17,36 +17,39 @@ class CustomImage extends StatelessWidget {
     this.padding = const EdgeInsets.all(8.0),
     this.circularRadius = 0.0,
     this.marginContainer,
-    this.isOval=false,
+    this.isOval = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return !isOval? Container(
-      height: height,
-      width: width,
-      margin: marginContainer,
-      child: Padding(
-        padding: padding,
-        child: circularRadius==0.0?ClipRRect(
-          borderRadius: BorderRadius.circular(circularRadius),
-          child: FadeInImage.assetNetwork(
+    return !isOval
+        ? Container(
+            height: height,
+            width: width,
+            margin: marginContainer,
+            child: Padding(
+              padding: padding,
+              child: circularRadius == 0.0
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(circularRadius),
+                      child: FadeInImage.assetNetwork(
+                        image: image,
+                        fit: fit,
+                        placeholder: "placeholder.gif",
+                      ),
+                    )
+                  : FadeInImage.assetNetwork(
+                      image: image,
+                      fit: fit,
+                      placeholder: "placeholder.gif",
+                    ),
+            ),
+          )
+        : ClipOval(
+            child: FadeInImage.assetNetwork(
             image: image,
-            fit: fit,
+            fit: BoxFit.fill,
             placeholder: "placeholder.gif",
-          ),
-        ):FadeInImage.assetNetwork(
-          image: image,
-          fit: fit,
-          placeholder: "placeholder.gif",
-        ),
-      ),
-    ):ClipOval(
-        child: FadeInImage.assetNetwork(
-        image: image,
-        fit: BoxFit.fill,
-        placeholder: "placeholder.gif",
-    )
-    );
+          ));
   }
 }

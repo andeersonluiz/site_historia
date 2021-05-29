@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
@@ -175,5 +177,28 @@ abstract class _NoticeStoreBase with Store {
         ObservableFuture(Future.delayed(Duration(milliseconds: 300), () {
       return l;
     }));
+  }
+
+  convertBase64ToUrl(
+    String filename,
+    Uint8List base64,
+    String id,
+  ) async {
+    return await NoticeFirestore.convertBase64ToUrl(filename, base64, id);
+  }
+
+  removeFilename(
+    String filename,
+    String id,
+  ) async {
+    return await NoticeFirestore.removeFilename(filename, id);
+  }
+
+  getNextId() async {
+    return await NoticeFirestore.getNextId();
+  }
+
+  clearContent(String id, {DateTime? time}) {
+    return NoticeFirestore.clearContent(id, time: time);
   }
 }

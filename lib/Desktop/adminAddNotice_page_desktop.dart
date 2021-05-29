@@ -25,6 +25,8 @@ class AdminAddNoticePageDesktop extends StatefulWidget {
 
 class _AdminAddNoticePageDesktopState extends State<AdminAddNoticePageDesktop> {
   NoticeStore? noticeStore;
+  int? nextId;
+  bool created = false;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -47,7 +49,7 @@ class _AdminAddNoticePageDesktopState extends State<AdminAddNoticePageDesktop> {
             CustomTextFormField(
               hintText: "Insira o titulo da Noticia",
               labelText: "Titulo",
-              maxCharacters: 30,
+              maxCharacters: GlobalsVariables.maxCharactersTitle,
               initialValue: supportStore.title,
               onChanged: (text) {
                 supportStore.updateTitle(text);
@@ -62,7 +64,7 @@ class _AdminAddNoticePageDesktopState extends State<AdminAddNoticePageDesktop> {
             CustomTextFormField(
               hintText: "Insira o subtítulo da Noticia",
               labelText: "Subtítulo",
-              maxCharacters: 100,
+              maxCharacters: GlobalsVariables.maxCharactersSubTitle,
               initialValue: supportStore.subtitle,
               onChanged: (text) {
                 supportStore.updateSubTitle(text);
@@ -155,7 +157,16 @@ class _AdminAddNoticePageDesktopState extends State<AdminAddNoticePageDesktop> {
             CustomHtmlEditor(
               padding: EdgeInsets.symmetric(vertical: 16.0),
               controller: contentController,
-              onChange: supportStore.updateContent,
+              onChange: (text) => supportStore.updateContent(noticeStore, text,
+                  contentController, nextId == null ? null : nextId.toString()),
+              onBeforeCommand: supportStore.updateAfterContent,
+              mediaUploadInterceptor: (file, type) async {
+                nextId ??= await noticeStore!.getNextId();
+                var url = await noticeStore!.convertBase64ToUrl(
+                    file.name!, file.bytes!, nextId.toString());
+                contentController.insertNetworkImage(url, filename: file.name!);
+                return false;
+              },
               initialText: supportStore.htmlContent,
             ),
             Observer(builder: (_) {
@@ -183,6 +194,7 @@ class _AdminAddNoticePageDesktopState extends State<AdminAddNoticePageDesktop> {
                         GlobalsVariables.username);
                     supportStore.setLoading(false);
                     if (result) {
+                      created = true;
                       CustomToast.showToast(
                           "Notícia cadastrada com sucesso!!", Colors.green);
                       VxNavigator.of(context)
@@ -201,5 +213,13 @@ class _AdminAddNoticePageDesktopState extends State<AdminAddNoticePageDesktop> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    if (!created && nextId != null) {
+      noticeStore!.clearContent(nextId.toString());
+    }
+    super.dispose();
   }
 }

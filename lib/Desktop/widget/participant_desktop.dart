@@ -25,7 +25,7 @@ class ParticipantWidget extends StatelessWidget {
                   textInputType: TextInputType.number,
                   hintText: "Digite o numero de participantes (Max. 10)",
                   labelText: "Numero de participantes",
-                  ),
+                ),
               ),
               Expanded(
                 flex: 5,
@@ -50,6 +50,7 @@ class ParticipantWidget extends StatelessWidget {
             itemBuilder: (ctx, index) {
               return CustomTextFormField(
                 textInputType: TextInputType.name,
+                initialValue: supportStore.participantsLocal[index],
                 onChanged: (value) =>
                     supportStore.updateParticipants(value, index),
                 hintText: "Nome Participante ${index + 1}",

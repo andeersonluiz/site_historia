@@ -17,6 +17,8 @@ import 'package:site_historia/Store/support_store.dart';
 import 'package:site_historia/Support/RoutesName_support.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 import 'package:velocity_x/velocity_x.dart';
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html' as html;
 
 class AdminUpdateNoticePageDesktop extends StatefulWidget {
   final Notice notice;
@@ -29,6 +31,9 @@ class AdminUpdateNoticePageDesktop extends StatefulWidget {
 class _AdminUpdateNoticePageDesktopState
     extends State<AdminUpdateNoticePageDesktop> {
   NoticeStore? noticeStore;
+  final DateTime timeOpen = DateTime.now();
+  bool updated = false;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -38,6 +43,9 @@ class _AdminUpdateNoticePageDesktopState
     /*CODE PBP*/
     supportStore.clearData();
     supportStore.loadInitialDataNotice(widget.notice);
+    html.window.onBeforeUnload.listen((event) async {
+      /*Listen reload (not delete image when reload)*/
+    });
   }
 
   @override
@@ -51,7 +59,7 @@ class _AdminUpdateNoticePageDesktopState
           CustomTextFormField(
             hintText: "Insira o titulo da Noticia",
             labelText: "Titulo",
-            maxCharacters: 30,
+            maxCharacters: GlobalsVariables.maxCharactersTitle,
             initialValue: supportStore.title,
             onChanged: (text) {
               supportStore.updateTitle(text);
@@ -66,7 +74,7 @@ class _AdminUpdateNoticePageDesktopState
           CustomTextFormField(
             hintText: "Insira o subtítulo da Noticia",
             labelText: "Subtítulo",
-            maxCharacters: 50,
+            maxCharacters: GlobalsVariables.maxCharactersSubTitle,
             initialValue: supportStore.subtitle,
             onChanged: (text) {
               supportStore.updateSubTitle(text);
@@ -158,8 +166,16 @@ class _AdminUpdateNoticePageDesktopState
           CustomHtmlEditor(
             padding: EdgeInsets.symmetric(vertical: 16.0),
             controller: contentController,
-            onChange: supportStore.updateContent,
+            onChange: (text) => supportStore.updateContent(noticeStore, text,
+                contentController, widget.notice.id.toString()),
+            onBeforeCommand: supportStore.updateAfterContent,
             initialText: supportStore.htmlContent,
+            mediaUploadInterceptor: (file, type) async {
+              var url = await noticeStore!.convertBase64ToUrl(
+                  file.name!, file.bytes!, widget.notice.id.toString());
+              contentController.insertNetworkImage(url, filename: file.name!);
+              return false;
+            },
           ),
           Observer(builder: (_) {
             return supportStore.msgErrorContent == ""
@@ -188,6 +204,7 @@ class _AdminUpdateNoticePageDesktopState
                       GlobalsVariables.username);
                   supportStore.setLoading(false);
                   if (result) {
+                    updated = true;
                     CustomToast.showToast(
                         "Notícia alterada com sucesso!!", Colors.green);
                     VxNavigator.of(context)
@@ -205,5 +222,13 @@ class _AdminUpdateNoticePageDesktopState
         ]),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    if (!updated) {
+      noticeStore!.clearContent(widget.notice.id.toString(), time: timeOpen);
+    }
+    super.dispose();
   }
 }

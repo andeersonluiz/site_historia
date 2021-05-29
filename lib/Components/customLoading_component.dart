@@ -8,6 +8,8 @@ class CustomLoading extends StatelessWidget {
       child: Container(
           child: Center(
               child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).backgroundColor),
                   backgroundColor: Theme.of(context).primaryColor))),
     );
   }

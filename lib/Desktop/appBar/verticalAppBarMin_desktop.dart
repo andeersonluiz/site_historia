@@ -50,6 +50,16 @@ class VerticalAppBarMin extends StatelessWidget {
             color: Theme.of(context).iconTheme.color,
           ),
           VerticalItem(
+            "Recomendations",
+            RouteNames.ADMIN_RECOMMENDATIONS,
+            IconsData.COLLECTION_ICON,
+            isMini: true,
+          ),
+          Divider(
+            height: 0,
+            color: Theme.of(context).iconTheme.color,
+          ),
+          VerticalItem(
             "Acervo",
             "",
             IconsData.COLLECTION_ICON,

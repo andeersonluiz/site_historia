@@ -22,6 +22,8 @@ import 'package:site_historia/Model/project_model.dart';
 import 'package:site_historia/Model/teacher_model.dart';
 import 'package:site_historia/Store/teacher_store.dart';
 import 'package:velocity_x/velocity_x.dart';
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html' as html;
 
 class AdminUpdateProjectPageDesktop extends StatefulWidget {
   final Project project;
@@ -34,14 +36,23 @@ class AdminUpdateProjectPageDesktop extends StatefulWidget {
 
 class _AdminUpdateProjectPageDesktopState
     extends State<AdminUpdateProjectPageDesktop> {
+  final DateTime timeOpen = DateTime.now();
+  bool updated = false;
+  ProjectStore? projectStore;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
     final supportStore = Provider.of<SupportStore>(context);
+    projectStore = Provider.of<ProjectStore>(context);
     /*CODE PBP*/
     supportStore.clearData();
     supportStore.loadInitialDataProject(widget.project);
+
+    html.window.onBeforeUnload.listen((event) async {
+      /*Listen reload (not delete image when reload)*/
+    });
   }
 
   @override
@@ -72,6 +83,7 @@ class _AdminUpdateProjectPageDesktopState
                     onChanged: (text) {
                       supportStore.updateTitle(text);
                     },
+                    maxCharacters: GlobalsVariables.maxCharactersTitle,
                     textInputType: TextInputType.name,
                   ),
                   Observer(builder: (_) {
@@ -98,7 +110,18 @@ class _AdminUpdateProjectPageDesktopState
                   CustomHtmlEditor(
                     padding: EdgeInsets.symmetric(vertical: 16.0),
                     controller: contentController,
-                    onChange: supportStore.updateContent,
+                    onChange: (text) => supportStore.updateContent(projectStore,
+                        text, contentController, widget.project.id.toString()),
+                    onBeforeCommand: supportStore.updateAfterContent,
+                    mediaUploadInterceptor: (file, type) async {
+                      var url = await projectStore.convertBase64ToUrl(
+                          file.name!,
+                          file.bytes!,
+                          widget.project.id.toString());
+                      contentController.insertNetworkImage(url,
+                          filename: file.name!);
+                      return false;
+                    },
                     initialText: supportStore.htmlContent,
                   ),
                   Observer(builder: (_) {
@@ -166,8 +189,8 @@ class _AdminUpdateProjectPageDesktopState
                             supportStore.getParticipantsLocalFilled(),
                             GlobalsVariables.username);
                         supportStore.setLoading(false);
-
                         if (result) {
+                          updated = true;
                           CustomToast.showToast(
                               "Projeto alterado com sucesso!!", Colors.green);
                           VxNavigator.of(context)
@@ -191,5 +214,13 @@ class _AdminUpdateProjectPageDesktopState
         }
       },
     ));
+  }
+
+  @override
+  void dispose() {
+    if (!updated) {
+      projectStore!.clearContent(widget.project.id.toString(), time: timeOpen);
+    }
+    super.dispose();
   }
 }

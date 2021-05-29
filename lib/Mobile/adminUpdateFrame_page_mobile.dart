@@ -28,11 +28,15 @@ class AdminUpdateFramePageMobile extends StatefulWidget {
 
 class _AdminUpdateFramePageMobileState
     extends State<AdminUpdateFramePageMobile> {
+  final DateTime timeOpen = DateTime.now();
+  bool updated = false;
+  FrameStore? frameStore;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
     final supportStore = Provider.of<SupportStore>(context);
+    frameStore = Provider.of<FrameStore>(context);
     /*CODE PBP*/
     supportStore.clearData();
     supportStore.loadInitialDataFrame(widget.frame);
@@ -51,7 +55,7 @@ class _AdminUpdateFramePageMobileState
             CustomTextFormField(
               hintText: "Insira o titulo do Quadro",
               labelText: "Titulo",
-              maxCharacters: 30,
+              maxCharacters: GlobalsVariables.maxCharactersTitle,
               initialValue: supportStore.title,
               onChanged: (text) {
                 supportStore.updateTitle(text);
@@ -66,7 +70,7 @@ class _AdminUpdateFramePageMobileState
             CustomTextFormField(
               hintText: "Insira o subtítulo do Quadro",
               labelText: "Subtítulo",
-              maxCharacters: 100,
+              maxCharacters: GlobalsVariables.maxCharactersSubTitle,
               initialValue: supportStore.subtitle,
               onChanged: (text) {
                 supportStore.updateSubTitle(text);
@@ -94,6 +98,7 @@ class _AdminUpdateFramePageMobileState
                 supportStore.updateSubtitleImage(value);
               },
               initialValue: supportStore.subtitleImage,
+              maxCharacters: GlobalsVariables.maxCharactersSubTitle,
             ),
             Observer(builder: (_) {
               return supportStore.msgErrorImage == ""
@@ -109,8 +114,16 @@ class _AdminUpdateFramePageMobileState
             CustomHtmlEditor(
               padding: EdgeInsets.symmetric(vertical: 16.0),
               controller: contentController,
-              onChange: supportStore.updateContent,
+              onChange: (text) => supportStore.updateContent(frameStore, text,
+                  contentController, widget.frame.id.toString()),
+              onBeforeCommand: supportStore.updateAfterContent,
               initialText: supportStore.htmlContent,
+              mediaUploadInterceptor: (file, type) async {
+                var url = await frameStore.convertBase64ToUrl(
+                    file.name!, file.bytes!, widget.frame.id.toString());
+                contentController.insertNetworkImage(url, filename: file.name!);
+                return false;
+              },
             ),
             Observer(builder: (_) {
               return supportStore.msgErrorContent == ""
@@ -142,6 +155,7 @@ class _AdminUpdateFramePageMobileState
                         GlobalsVariables.username);
                     supportStore.setLoading(false);
                     if (result) {
+                      updated = true;
                       CustomToast.showToast(
                           "Quadro cadastrada com sucesso!!", Colors.green);
                       VxNavigator.of(context)
@@ -160,5 +174,13 @@ class _AdminUpdateFramePageMobileState
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    if (!updated) {
+      frameStore!.clearContent(widget.frame.id.toString(), time: timeOpen);
+    }
+    super.dispose();
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
@@ -81,5 +83,28 @@ abstract class _FrameStoreBase with Store {
   getFramesSortedByTitle() async {
     var result = await FrameFirestore.getFramesSortedByTitle();
     listFramesOrdered = ObservableList.of(result);
+  }
+
+  convertBase64ToUrl(
+    String filename,
+    Uint8List base64,
+    String id,
+  ) async {
+    return await FrameFirestore.convertBase64ToUrl(filename, base64, id);
+  }
+
+  removeFilename(
+    String filename,
+    String id,
+  ) async {
+    return await FrameFirestore.removeFilename(filename, id);
+  }
+
+  getNextId() async {
+    return await FrameFirestore.getNextId();
+  }
+
+  clearContent(String id, {DateTime? time}) {
+    return FrameFirestore.clearContent(id, time: time);
   }
 }

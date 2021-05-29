@@ -12,9 +12,11 @@ import 'package:site_historia/Components/customLoading_component.dart';
 import 'package:site_historia/Components/erroMsg_component.dart';
 import 'package:site_historia/Desktop/widget/image_desktop.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
+import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Store/support_store.dart';
 import 'package:site_historia/Model/teacher_model.dart';
 import 'package:site_historia/Store/teacher_store.dart';
+import 'package:site_historia/Support/globals_variables.dart';
 import 'adminAddProjectParticipants_page_mobile.dart';
 
 class AdminAddProjectPageMobile extends StatefulWidget {
@@ -24,14 +26,18 @@ class AdminAddProjectPageMobile extends StatefulWidget {
 }
 
 class _AdminAddProjectPageMobileState extends State<AdminAddProjectPageMobile> {
+  int? nextId;
+  ProjectStore? projectStore;
+  SupportStore? supportStore;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
     final teacherStore = Provider.of<TeacherStore>(context);
-    final supportStore = Provider.of<SupportStore>(context);
+    supportStore = Provider.of<SupportStore>(context);
+    projectStore = Provider.of<ProjectStore>(context);
+
     /*CODE PBP*/
-    supportStore.clearData();
+    supportStore!.clearData();
     teacherStore.getTeachers();
   }
 
@@ -40,7 +46,7 @@ class _AdminAddProjectPageMobileState extends State<AdminAddProjectPageMobile> {
     final supportStore = Provider.of<SupportStore>(context);
     final HtmlEditorController contentController = HtmlEditorController();
     final teacherStore = Provider.of<TeacherStore>(context);
-
+    final projectStore = Provider.of<ProjectStore>(context);
     return Observer(
       builder: (ctx) {
         teacherStore.listTeachers ?? teacherStore.getTeachers();
@@ -62,7 +68,7 @@ class _AdminAddProjectPageMobileState extends State<AdminAddProjectPageMobile> {
                     CustomTextFormField(
                       hintText: "Insira o titulo",
                       labelText: "Titulo",
-                      maxCharacters: 30,
+                      maxCharacters: GlobalsVariables.maxCharactersTitle,
                       initialValue: supportStore.title,
                       onChanged: (text) {
                         supportStore.updateTitle(text);
@@ -93,7 +99,20 @@ class _AdminAddProjectPageMobileState extends State<AdminAddProjectPageMobile> {
                     CustomHtmlEditor(
                       padding: EdgeInsets.symmetric(vertical: 16.0),
                       controller: contentController,
-                      onChange: supportStore.updateContent,
+                      onChange: (text) => supportStore.updateContent(
+                          projectStore,
+                          text,
+                          contentController,
+                          nextId.toString()),
+                      onBeforeCommand: supportStore.updateAfterContent,
+                      mediaUploadInterceptor: (file, type) async {
+                        nextId ??= await projectStore.getNextId();
+                        var url = await projectStore.convertBase64ToUrl(
+                            file.name!, file.bytes!, nextId.toString());
+                        contentController.insertNetworkImage(url,
+                            filename: file.name!);
+                        return false;
+                      },
                       initialText: supportStore.htmlContent,
                     ),
                     Observer(builder: (_) {
@@ -150,5 +169,13 @@ class _AdminAddProjectPageMobileState extends State<AdminAddProjectPageMobile> {
         }
       },
     );
+  }
+
+  @override
+  void dispose() {
+    if (!supportStore!.created && nextId != null) {
+      projectStore!.clearContent(nextId.toString());
+    }
+    super.dispose();
   }
 }

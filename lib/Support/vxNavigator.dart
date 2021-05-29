@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:site_historia/Screens/adminAddFrame_screen.dart';
 import 'package:site_historia/Screens/adminAddTeacher_screen.dart';
 import 'package:site_historia/Screens/adminFrames_screen.dart';
+import 'package:site_historia/Screens/adminRecommendation_screen.dart';
 import 'package:site_historia/Screens/adminTeachers_screen.dart';
 import 'package:site_historia/Screens/adminUpdateFrame_screen.dart';
 import 'package:site_historia/Screens/adminUpdateTeacher_screen.dart';
@@ -18,6 +19,7 @@ import 'package:site_historia/Screens/home_screen.dart';
 import 'package:site_historia/Screens/loading_screen.dart';
 import 'package:site_historia/Screens/notice_screen.dart';
 import 'package:site_historia/Screens/project_screen.dart';
+import 'package:site_historia/Screens/recommendations_screen.dart';
 import 'package:site_historia/Support/RoutesName_support.dart';
 import 'package:site_historia/firebase/login_auth.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -84,7 +86,8 @@ class VelocityxNavigator {
           return MaterialPage(child: FrameScreen(id));
         },
         RouteNames.EXAM: (_, __) => MaterialPage(child: HomeScreen()),
-        RouteNames.RECOMMENDATIONS: (_, __) => MaterialPage(child: HomeScreen()),
+        RouteNames.RECOMMENDATIONS: (_, __) =>
+            MaterialPage(child: RecommendationScreen()),
         RouteNames.COLLECTION: (_, __) => MaterialPage(child: HomeScreen()),
         RouteNames.ADMIN: (_, __) {
           User? user = LoginAuth.getUser();
@@ -244,12 +247,21 @@ class VelocityxNavigator {
             if (id == null || int.tryParse(id) == null || id == "") {
               return MaterialPage(
                   child: Loading(
-                    redirect: true,
-                    to: RouteNames.ADMIN_TEACHERS,
-                  ));
+                redirect: true,
+                to: RouteNames.ADMIN_TEACHERS,
+              ));
             }
 
             return MaterialPage(child: AdminUpdateTeacherScreen(id));
+          }
+        },
+        RouteNames.ADMIN_RECOMMENDATIONS: (uri, params) {
+          User? user = LoginAuth.getUser();
+          if (user == null) {
+            return MaterialPage(
+                child: Loading(redirect: true, to: RouteNames.ADMIN));
+          } else {
+            return MaterialPage(child: AdminRecommendationScreen());
           }
         },
       },

@@ -56,7 +56,6 @@ class VerticalItem extends StatelessWidget {
             await LoginAuth.signOut();
             CustomToast.showToast("Você saiu com sucesso!", Colors.green);
           }
-
           VxNavigator.of(context).pop();
           VxNavigator.of(context).push(Uri.parse(path));
         });

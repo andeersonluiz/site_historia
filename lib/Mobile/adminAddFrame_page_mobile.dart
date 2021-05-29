@@ -24,11 +24,16 @@ class AdminAddFramePageMobile extends StatefulWidget {
 }
 
 class _AdminAddFramePageMobileState extends State<AdminAddFramePageMobile> {
+  int? nextId;
+  FrameStore? frameStore;
+  bool created = false;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
     final supportStore = Provider.of<SupportStore>(context);
+    frameStore = Provider.of<FrameStore>(context);
+
     /*CODE PBP*/
     supportStore.clearData();
   }
@@ -46,7 +51,7 @@ class _AdminAddFramePageMobileState extends State<AdminAddFramePageMobile> {
             CustomTextFormField(
               hintText: "Insira o titulo do Quadro",
               labelText: "Titulo",
-              maxCharacters: 30,
+              maxCharacters: GlobalsVariables.maxCharactersTitle,
               initialValue: supportStore.title,
               onChanged: (text) {
                 supportStore.updateTitle(text);
@@ -61,7 +66,7 @@ class _AdminAddFramePageMobileState extends State<AdminAddFramePageMobile> {
             CustomTextFormField(
               hintText: "Insira o subtítulo do Quadro",
               labelText: "Subtítulo",
-              maxCharacters: 100,
+              maxCharacters: GlobalsVariables.maxCharactersSubTitle,
               initialValue: supportStore.subtitle,
               onChanged: (text) {
                 supportStore.updateSubTitle(text);
@@ -93,6 +98,7 @@ class _AdminAddFramePageMobileState extends State<AdminAddFramePageMobile> {
               onChanged: (value) {
                 supportStore.updateSubtitleImage(value);
               },
+              maxCharacters: GlobalsVariables.maxCharactersSubTitle,
               initialValue: supportStore.subtitleImage,
             ),
             AudioWidget(
@@ -104,8 +110,17 @@ class _AdminAddFramePageMobileState extends State<AdminAddFramePageMobile> {
             CustomHtmlEditor(
               padding: EdgeInsets.symmetric(vertical: 16.0),
               controller: contentController,
-              onChange: supportStore.updateContent,
+              onChange: (text) => supportStore.updateContent(frameStore, text,
+                  contentController, nextId == null ? null : nextId.toString()),
+              onBeforeCommand: supportStore.updateAfterContent,
               initialText: supportStore.htmlContent,
+              mediaUploadInterceptor: (file, type) async {
+                nextId ??= await frameStore.getNextId();
+                var url = await frameStore.convertBase64ToUrl(
+                    file.name!, file.bytes!, nextId.toString());
+                contentController.insertNetworkImage(url, filename: file.name!);
+                return false;
+              },
             ),
             Observer(builder: (_) {
               return supportStore.msgErrorContent == ""
@@ -135,6 +150,7 @@ class _AdminAddFramePageMobileState extends State<AdminAddFramePageMobile> {
                         GlobalsVariables.username);
                     supportStore.setLoading(false);
                     if (result) {
+                      created = true;
                       CustomToast.showToast(
                           "Quadro cadastrada com sucesso!!", Colors.green);
                       VxNavigator.of(context)
@@ -153,5 +169,13 @@ class _AdminAddFramePageMobileState extends State<AdminAddFramePageMobile> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    if (!created && nextId != null) {
+      frameStore!.clearContent(nextId.toString());
+    }
+    super.dispose();
   }
 }

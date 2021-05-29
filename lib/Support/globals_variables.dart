@@ -23,4 +23,7 @@ class GlobalsVariables {
     'Podcast',
     'Estudo',
   ];
+
+  static int maxCharactersTitle = 50;
+  static int maxCharactersSubTitle = 100;
 }

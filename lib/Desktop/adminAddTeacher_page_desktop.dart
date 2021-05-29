@@ -16,6 +16,7 @@ import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Store/support_store.dart';
 import 'package:site_historia/Store/teacher_store.dart';
 import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/globals_variables.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class AdminAddTeacherPageDesktop extends StatefulWidget {
@@ -50,7 +51,7 @@ class _AdminAddTeacherPageDesktopState
             CustomTextFormField(
               hintText: "Insira o nome do Professor",
               labelText: "Nome",
-              maxCharacters: 40,
+              maxCharacters: GlobalsVariables.maxCharactersTitle,
               initialValue: supportStore.title,
               onChanged: (text) {
                 supportStore.updateTitle(text);
@@ -67,6 +68,7 @@ class _AdminAddTeacherPageDesktopState
                   "Insira o link de informações sobre professor (opcional)",
               labelText: "Link",
               initialValue: supportStore.link,
+              maxCharacters: GlobalsVariables.maxCharactersSubTitle,
               onChanged: (text) {
                 supportStore.updateLink(text);
               },

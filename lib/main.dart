@@ -7,6 +7,7 @@ import 'package:site_historia/Screens/loading_screen.dart';
 import 'package:site_historia/Store/frame_store.dart';
 import 'package:site_historia/Store/notice_store.dart';
 import 'package:site_historia/Store/project_store.dart';
+import 'package:site_historia/Store/recommendation_store.dart';
 import 'package:site_historia/Store/teacher_store.dart';
 import 'package:site_historia/Support/vxNavigator.dart';
 import 'package:site_historia/firebase/login_auth.dart';
@@ -42,6 +43,9 @@ Future<void> main() async {
     Provider<FrameStore>(
       create: (_) => FrameStore(),
     ),
+    Provider<RecommendationStore>(
+      create: (_) => RecommendationStore(),
+    )
   ], child: MyApp()));
 }
 

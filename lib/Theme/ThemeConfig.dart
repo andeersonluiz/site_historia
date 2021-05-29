@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 //Paleta Cores
 
 //#572a1e (marrom escuro)
 //#f3cfb8 (rosa claro)
-
 //#ffffff (branco)
 //#e07d5e (barro)
 
@@ -25,6 +25,7 @@ class ThemeConfig {
     unselectedWidgetColor: brownLight,
     hoverColor: hoverColor,
     selectedRowColor: brownOpacity,
+    indicatorColor: Colors.red,
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all<Color>(brown),

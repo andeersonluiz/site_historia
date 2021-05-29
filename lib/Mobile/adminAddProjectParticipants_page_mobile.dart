@@ -95,6 +95,7 @@ class AdminAddProjectParticipantPageMobile extends StatelessWidget {
                       CustomToast.showToast(
                           "Projeto cadastro com sucesso!!", Colors.green);
                       supportStore.clearData();
+                      supportStore.created = true;
                       VxNavigator.of(context)
                           .push(Uri.parse(RouteNames.ADMIN_PROJECTS));
                     } else {

@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:site_historia/Support/globals_variables.dart';
@@ -80,5 +82,28 @@ abstract class _ProjectStoreBase with Store {
   getProjectSortedByTitle() async {
     var result = await ProjectFirestore.getProjectSortedByTitle();
     listProjectsOrdered = ObservableList.of(result);
+  }
+
+  convertBase64ToUrl(
+    String filename,
+    Uint8List base64,
+    String id,
+  ) async {
+    return await ProjectFirestore.convertBase64ToUrl(filename, base64, id);
+  }
+
+  removeFilename(
+    String filename,
+    String id,
+  ) async {
+    return await ProjectFirestore.removeFilename(filename, id);
+  }
+
+  getNextId() async {
+    return await ProjectFirestore.getNextId();
+  }
+
+  clearContent(String id, {DateTime? time}) {
+    return ProjectFirestore.clearContent(id, time: time);
   }
 }

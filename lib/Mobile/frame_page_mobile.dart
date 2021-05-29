@@ -5,7 +5,6 @@ import 'package:site_historia/Components/customImage_component.dart';
 import 'package:site_historia/Components/customText_component.dart';
 import 'package:site_historia/Components/htmlViewer_component.dart';
 import 'package:site_historia/Components/videoViewer_component.dart';
-import 'package:site_historia/Desktop/footer/footer_desktop.dart';
 import 'package:site_historia/Mobile/footer/footer_mobile.dart';
 import 'package:site_historia/Model/frame_model.dart';
 

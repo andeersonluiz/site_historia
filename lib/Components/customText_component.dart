@@ -7,18 +7,22 @@ class CustomText extends StatelessWidget {
   final TextAlign? textAlign;
   final int? maxLines;
   final TextOverflow? overflow;
+  final EdgeInsets padding;
   /*cor brown(primaryColor) */
-  CustomText(this.text,
-      {this.style,
-      this.colorText = const Color.fromRGBO(87, 42, 30, 1),
-      this.textAlign = TextAlign.center,
-      this.maxLines,
-      this.overflow});
+  CustomText(
+    this.text, {
+    this.style,
+    this.colorText = const Color.fromRGBO(87, 42, 30, 1),
+    this.textAlign = TextAlign.center,
+    this.maxLines,
+    this.overflow,
+    this.padding = const EdgeInsets.all(8.0),
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: padding,
       child: Text(
         text,
         maxLines: maxLines,
