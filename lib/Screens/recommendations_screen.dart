@@ -18,7 +18,6 @@ class RecommendationScreen extends StatefulWidget {
 class _RecommendationScreenState extends State<RecommendationScreen> {
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
     return ResponsiveBuilder(
         builder: (ctx, sizingInformation) => Scaffold(
             endDrawer: sizingInformation.isDesktop ? null : NavigationDrawer(),
@@ -49,11 +48,10 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                     return SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: ScreenTypeLayout(
-                          mobile:RecommendationPage(recommendation),
+                          mobile: RecommendationPage(recommendation),
                           desktop: StickyHeader(
                               header: CustomAppBarDesktop(),
-                              content:
-                                  RecommendationPage(recommendation))),
+                              content: RecommendationPage(recommendation))),
                     );
                   } else if (snp.hasError) {
                     return ErrorLoad(color: Theme.of(context).primaryColor);

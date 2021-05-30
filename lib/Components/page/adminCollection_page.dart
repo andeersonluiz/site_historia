@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:site_historia/Components/CustomText_component.dart';
 import 'package:site_historia/Components/widget/customButton_component.dart';
 import 'package:site_historia/Components/widget/customLoading_component.dart';
+import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Components/widget/customToast_component.dart';
 import 'package:site_historia/Components/widget/articleCollection_component.dart';
 import 'package:site_historia/Components/widget/booksCollection_component.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:site_historia/Components/CustomText_component.dart';
+import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Components/widget/customLoading_component.dart';
 import 'package:site_historia/Desktop/widget/adminFrameCard_desktop.dart';
 import 'package:site_historia/Model/frame_model.dart';

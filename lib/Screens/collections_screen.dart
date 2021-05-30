@@ -18,7 +18,6 @@ class CollectionScreen extends StatefulWidget {
 class _CollectionScreenState extends State<CollectionScreen> {
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
     return ResponsiveBuilder(
         builder: (ctx, sizingInformation) => Scaffold(
             endDrawer: sizingInformation.isDesktop ? null : NavigationDrawer(),

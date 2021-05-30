@@ -1,11 +1,9 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:site_historia/Components/CustomText_component.dart';
+import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Components/widget/customButton_component.dart';
 import 'package:site_historia/Components/widget/customCheckBox_component.dart';
 import 'package:site_historia/Components/widget/customHtmlEditor_component.dart';
@@ -54,7 +52,6 @@ class _AdminUpdateProjectPageMobileState
   Widget build(BuildContext context) {
     final supportStore = Provider.of<SupportStore>(context);
     final teacherStore = Provider.of<TeacherStore>(context);
-    final _picker = ImagePicker();
     final HtmlEditorController contentController = HtmlEditorController();
     final projectStore = Provider.of<ProjectStore>(context);
 
