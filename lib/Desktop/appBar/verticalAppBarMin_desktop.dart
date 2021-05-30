@@ -61,7 +61,7 @@ class VerticalAppBarMin extends StatelessWidget {
           ),
           VerticalItem(
             "Acervo",
-            "",
+            RouteNames.ADMIN_COLLECTIONS,
             IconsData.COLLECTION_ICON,
             isMini: true,
           ),

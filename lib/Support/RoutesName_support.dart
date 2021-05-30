@@ -34,4 +34,5 @@ class RouteNames {
   static const String ADD_TEACHER = "/admin/professores/adicionarProfessor";
   static const String UPDATE_TEACHER = "/admin/professores/editarProfessor";
   static const String ADMIN_RECOMMENDATIONS = "/admin/recomendacoes";
+  static const String ADMIN_COLLECTIONS = "/admin/acervo";
 }

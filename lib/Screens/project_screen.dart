@@ -68,13 +68,17 @@ class _ProjectScreenState extends State<ProjectScreen> {
                       Project project = snp.data as Project;
                       return SingleChildScrollView(
                         scrollDirection: Axis.vertical,
-                        child: ScreenTypeLayout(
-                            mobile: width > 600
-                                ? ProjectPageDesktop(project)
-                                : ProjectPageMobile(project),
-                            desktop: StickyHeader(
-                                header: CustomAppBar(),
-                                content: ProjectPageDesktop(project))),
+                        child: Title(
+                          title: project.name,
+                          color: Colors.black,
+                          child: ScreenTypeLayout(
+                              mobile: width > 600
+                                  ? ProjectPageDesktop(project)
+                                  : ProjectPageMobile(project),
+                              desktop: StickyHeader(
+                                  header: CustomAppBar(),
+                                  content: ProjectPageDesktop(project))),
+                        ),
                       );
                     } else if (snp.hasError) {
                       return Loading(

@@ -82,11 +82,15 @@ class _NoticeInfoScreenState extends State<NoticeInfoScreen> {
                                   ]),
                         body: SingleChildScrollView(
                           scrollDirection: Axis.vertical,
-                          child: ScreenTypeLayout(
-                              mobile: NoticeInfoPageMobile(notice),
-                              desktop: StickyHeader(
-                                  header: CustomAppBar(),
-                                  content: NoticeInfoPageDesktop(notice))),
+                          child: Title(
+                            title: notice.title,
+                            color: Colors.black,
+                            child: ScreenTypeLayout(
+                                mobile: NoticeInfoPageMobile(notice),
+                                desktop: StickyHeader(
+                                    header: CustomAppBar(),
+                                    content: NoticeInfoPageDesktop(notice))),
+                          ),
                         ),
                       ),
                     );

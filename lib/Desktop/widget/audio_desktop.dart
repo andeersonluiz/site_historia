@@ -36,8 +36,9 @@ class AudioWidget extends StatelessWidget {
                             result = await FilePicker.platform.pickFiles(
                               type: FileType.audio,
                             );
-
-                            supportStore.updateAudio(result!.files.first);
+                            if (result != null) {
+                              supportStore.updateAudio(result.files.first);
+                            }
                           }),
                     ),
                   ])
@@ -66,7 +67,9 @@ class AudioWidget extends StatelessWidget {
                                 type: FileType.audio,
                               );
                             }
-                            supportStore.updateAudio(result!.files.first);
+                            if (result != null) {
+                              supportStore.updateAudio(result.files.first);
+                            }
                           }),
                     ),
                   ]),

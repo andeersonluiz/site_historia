@@ -2,7 +2,6 @@ import 'package:firebase/firebase.dart';
 import 'package:site_historia/Model/recommendation_model.dart';
 
 class RecommendationFirestore {
-  late Recommendation recommendations;
   static getRecommendations() async {
     var query = firestore().collection("recommendations");
 

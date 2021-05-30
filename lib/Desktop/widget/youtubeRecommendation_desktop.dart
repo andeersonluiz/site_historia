@@ -75,7 +75,7 @@ class YoutubeRecommendationWidget extends StatelessWidget {
                           } else {
                             recommendationStore.removeYoutube(
                                 recommendationStore
-                                    .recommendation!.podcastList[index]);
+                                    .recommendation!.youtubeList[index]);
                           }
                         },
                         icon: Icon(

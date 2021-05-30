@@ -14,7 +14,11 @@ abstract class _RecommendationStoreBase with Store {
   @action
   addYoutube() {
     recommendation!.youtubeList.add(new RecommendationItem(
-        id: recommendation!.youtubeList.last.id + 1, name: "", url: ""));
+        id: recommendation!.youtubeList.length == 0
+            ? 0
+            : recommendation!.youtubeList.last.id + 1,
+        name: "",
+        url: ""));
     var newRecommendation = new Recommendation(
         youtubeList: recommendation!.youtubeList,
         blogList: recommendation!.blogList,
@@ -47,7 +51,11 @@ abstract class _RecommendationStoreBase with Store {
   @action
   addBlog() {
     recommendation!.blogList.add(new RecommendationItem(
-        id: recommendation!.blogList.last.id + 1, name: "", url: ""));
+        id: recommendation!.blogList.length == 0
+            ? 0
+            : recommendation!.blogList.last.id + 1,
+        name: "",
+        url: ""));
     var newRecommendation = new Recommendation(
         youtubeList: recommendation!.youtubeList,
         blogList: recommendation!.blogList,
@@ -80,7 +88,11 @@ abstract class _RecommendationStoreBase with Store {
   @action
   addPodcast() {
     recommendation!.podcastList.add(new RecommendationItem(
-        id: recommendation!.podcastList.last.id + 1, name: "", url: ""));
+        id: recommendation!.podcastList.length == 0
+            ? 0
+            : recommendation!.podcastList.last.id + 1,
+        name: "",
+        url: ""));
     var newRecommendation = new Recommendation(
         youtubeList: recommendation!.youtubeList,
         blogList: recommendation!.blogList,
@@ -113,7 +125,11 @@ abstract class _RecommendationStoreBase with Store {
   @action
   addOther() {
     recommendation!.othersList.add(new RecommendationItem(
-        id: recommendation!.othersList.last.id + 1, name: "", url: ""));
+        id: recommendation!.othersList.length == 0
+            ? 0
+            : recommendation!.othersList.last.id + 1,
+        name: "",
+        url: ""));
     var newRecommendation = new Recommendation(
         youtubeList: recommendation!.youtubeList,
         blogList: recommendation!.blogList,

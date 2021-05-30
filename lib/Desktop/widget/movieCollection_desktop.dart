@@ -4,26 +4,24 @@ import 'package:provider/provider.dart';
 import 'package:site_historia/Components/customButton_component.dart';
 import 'package:site_historia/Components/customTextFormField_component.dart';
 import 'package:site_historia/Components/customText_component.dart';
-import 'package:site_historia/Model/recommendationItem_model.dart';
-import 'package:site_historia/Store/recommendation_store.dart';
+import 'package:site_historia/Model/collection_item.dart';
+import 'package:site_historia/Store/collection_store.dart';
 
-class OtherRecommendationWidget extends StatelessWidget {
+class MovieCollectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final recommendationStore = Provider.of<RecommendationStore>(context);
+    final collectionStore = Provider.of<CollectionStore>(context);
     return Container(
       child: Column(children: [
         Observer(builder: (_) {
           return ListView.builder(
               shrinkWrap: true,
-              itemCount: recommendationStore.recommendation!.othersList.length,
+              itemCount: collectionStore.collection!.movies.length,
               itemBuilder: (ctx, index) {
                 var controllerName = TextEditingController(
-                    text: recommendationStore
-                        .recommendation!.othersList[index].name);
+                    text: collectionStore.collection!.movies[index].name);
                 var controllerUrl = TextEditingController(
-                    text: recommendationStore
-                        .recommendation!.othersList[index].url);
+                    text: collectionStore.collection!.movies[index].url);
 
                 return Row(
                   children: [
@@ -34,7 +32,7 @@ class OtherRecommendationWidget extends StatelessWidget {
                       controller: controllerName,
                       textInputType: TextInputType.name,
                       onChanged: (newName) {
-                        recommendationStore.updateRecommendationOtherName(
+                        collectionStore.updateRecommendationMovieName(
                             index, newName);
                       },
                       validator: (text) {
@@ -50,7 +48,7 @@ class OtherRecommendationWidget extends StatelessWidget {
                       controller: controllerUrl,
                       textInputType: TextInputType.url,
                       onChanged: (newUrl) {
-                        recommendationStore.updateRecommendationOtherUrl(
+                        collectionStore.updateRecommendationMovieUrl(
                             index, newUrl);
                       },
                       validator: (text) {
@@ -61,20 +59,19 @@ class OtherRecommendationWidget extends StatelessWidget {
                     )),
                     IconButton(
                         onPressed: () {
-                          if (recommendationStore
-                                      .recommendation!.othersList[index].name !=
+                          if (collectionStore.collection!.movies[index].name !=
                                   "" &&
-                              recommendationStore
-                                      .recommendation!.othersList[index].url !=
+                              collectionStore.collection!.movies[index].url !=
                                   "") {
                             _showMaterialDialog(
                                 context,
-                                recommendationStore
-                                    .recommendation!.othersList[index],
-                                recommendationStore);
+                                collectionStore.collection!.movies[index],
+                                collectionStore,
+                                index);
                           } else {
-                            recommendationStore.removeOther(recommendationStore
-                                .recommendation!.othersList[index]);
+                            collectionStore.removeMovie(
+                                collectionStore.collection!.movies[index],
+                                index);
                           }
                         },
                         icon: Icon(
@@ -86,18 +83,18 @@ class OtherRecommendationWidget extends StatelessWidget {
               });
         }),
         CustomButton(
-          text: "Adicionar outra recomendação",
+          text: "Adicionar novo filme",
           expandButton: true,
           onPressed: () {
-            recommendationStore.addOther();
+            collectionStore.addMovie();
           },
         ),
       ]),
     );
   }
 
-  _showMaterialDialog(BuildContext context, RecommendationItem item,
-      RecommendationStore recommendationStore) {
+  _showMaterialDialog(BuildContext context, CollectionItem item,
+      CollectionStore collectionStore, int index) {
     showDialog(
         context: context,
         builder: (_) => new AlertDialog(
@@ -106,14 +103,16 @@ class OtherRecommendationWidget extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline5,
               ),
               content: new CustomText(
-                "Tem certeza que deseja excluir a referência ${item.name} com url ${item.url}?",
+                "Tem certeza que deseja excluir o filme ${item.name} (A exclusão não pode ser desfeita)?",
                 style: Theme.of(context).textTheme.subtitle1,
               ),
               actions: <Widget>[
                 CustomButton(
                     text: "Sim",
                     onPressed: () async {
-                      await recommendationStore.removeOther(item);
+                      await collectionStore.removeMovie(item, index);
+                      await collectionStore
+                          .saveCollection(collectionStore.collection!);
                       Navigator.of(context).pop();
                     }),
                 CustomButton(

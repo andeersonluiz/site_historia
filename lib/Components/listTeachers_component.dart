@@ -9,11 +9,11 @@ import 'package:site_historia/Store/teacher_store.dart';
 import 'package:site_historia/Model/teacher_model.dart';
 
 class ListTeachers extends StatelessWidget {
-  final sizeImage = 250.0;
+  final sizeImage = 350.0;
 
   @override
   Widget build(BuildContext context) {
-    final _crossAxisSpacing=10.0;
+    final _crossAxisSpacing = 10.0;
     final _screenWidth = MediaQuery.of(context).size.width;
 
     TeacherStore teacherStore = Provider.of<TeacherStore>(context);
@@ -31,44 +31,50 @@ class ListTeachers extends StatelessWidget {
                 .copyWith(color: Theme.of(context).primaryColor),
           ),
         ),
-        Observer(
-            builder: (ctx) {
-              teacherStore.listTeachers??teacherStore.getTeachers();
-              switch(teacherStore.listTeachers!.status){
-                case FutureStatus.pending:
-                  return CustomLoading();
-                case FutureStatus.rejected:
-                  return ErrorLoad(
-                    color: Theme.of(context).primaryColor,
-                  );
-                case FutureStatus.fulfilled:
-                  List<Teacher> listTeachers = teacherStore.listTeachers!.value as List<Teacher>;
-                  final crossAxisCount = (MediaQuery.of(context).size.width ~/
-                      sizeImage) >
-                      listTeachers.length
+        Observer(builder: (ctx) {
+          teacherStore.listTeachers ?? teacherStore.getTeachers();
+          switch (teacherStore.listTeachers!.status) {
+            case FutureStatus.pending:
+              return CustomLoading();
+            case FutureStatus.rejected:
+              return ErrorLoad(
+                color: Theme.of(context).primaryColor,
+              );
+            case FutureStatus.fulfilled:
+              List<Teacher> listTeachers =
+                  teacherStore.listTeachers!.value as List<Teacher>;
+              final crossAxisCount =
+                  (MediaQuery.of(context).size.width ~/ sizeImage) >
+                          listTeachers.length
                       ? 5
-                      : (MediaQuery.of(context).size.width ~/ sizeImage);
-                  return SingleChildScrollView(
-                    child: GridView.count(
-                        physics: ScrollPhysics(),
-                        primary: true,
-                        shrinkWrap: true,
-                        crossAxisCount:crossAxisCount,
-
-                        childAspectRatio:((( _screenWidth - ((crossAxisCount - 1) * _crossAxisSpacing)) / crossAxisCount) /sizeImage),
-                        mainAxisSpacing: 20.0,
-                        crossAxisSpacing: _crossAxisSpacing,
-                        padding: EdgeInsets.all(8.0),
-                        children: listTeachers
-                            .map((item) => Container(
-                          height: sizeImage,
-                          width: sizeImage,
-                          child: TeacherTile(item,),
-                        ))
-                            .toList()),
-                  );
-              }
-            })
+                      : (MediaQuery.of(context).size.width ~/ sizeImage) <= 0
+                          ? 1
+                          : (MediaQuery.of(context).size.width ~/ sizeImage);
+              return SingleChildScrollView(
+                child: GridView.count(
+                    physics: ScrollPhysics(),
+                    primary: true,
+                    shrinkWrap: true,
+                    crossAxisCount: crossAxisCount,
+                    childAspectRatio: (((_screenWidth -
+                                ((crossAxisCount - 1) * _crossAxisSpacing)) /
+                            crossAxisCount) /
+                        sizeImage),
+                    mainAxisSpacing: 20.0,
+                    crossAxisSpacing: _crossAxisSpacing,
+                    padding: EdgeInsets.all(8.0),
+                    children: listTeachers
+                        .map((item) => Container(
+                              height: sizeImage,
+                              width: sizeImage,
+                              child: TeacherTile(
+                                item,
+                              ),
+                            ))
+                        .toList()),
+              );
+          }
+        })
       ],
     );
   }

@@ -43,8 +43,9 @@ class ImageWidget extends StatelessWidget {
                             image = await _picker.getImage(
                                 source: ImageSource.camera);
                           }
-
-                          supportStore.updatePath(image);
+                          if (image != null) {
+                            supportStore.updatePath(image);
+                          }
                         }),
                   ),
                 ]
@@ -81,8 +82,9 @@ class ImageWidget extends StatelessWidget {
                             image = await _picker.getImage(
                                 source: ImageSource.camera);
                           }
-
-                          supportStore.updatePath(image);
+                          if (image != null) {
+                            supportStore.updatePath(image);
+                          }
                         }),
                   ),
                 ]),

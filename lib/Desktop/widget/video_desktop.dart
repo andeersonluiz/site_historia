@@ -130,7 +130,9 @@ class VideoWidget extends StatelessWidget {
                                     type: FileType.video,
                                   );
                                 }
-                                supportStore.updateVideo(result!.files.first);
+                                if (result != null) {
+                                  supportStore.updateVideo(result.files.first);
+                                }
                               },
                             ),
                           ),

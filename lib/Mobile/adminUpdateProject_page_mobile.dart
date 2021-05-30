@@ -127,7 +127,9 @@ class _AdminUpdateProjectPageMobileState
                               onTap: () async {
                                 PickedFile? image = await _picker.getImage(
                                     source: ImageSource.camera);
-                                supportStore.updatePath(image);
+                                if (image != null) {
+                                  supportStore.updatePath(image);
+                                }
                               }),
                         ),
                       ]),

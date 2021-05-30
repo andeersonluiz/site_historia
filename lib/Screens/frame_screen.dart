@@ -64,13 +64,17 @@ class _FrameScreenState extends State<FrameScreen> {
                   builder: (ctx, snp) {
                     if (snp.hasData) {
                       Frame frame = snp.data as Frame;
-                      return SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child: ScreenTypeLayout(
-                            mobile: FramePageMobile(frame),
-                            desktop: StickyHeader(
-                                header: CustomAppBar(),
-                                content: FramePageDesktop(frame))),
+                      return Title(
+                        title: frame.title,
+                        color: Colors.black,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: ScreenTypeLayout(
+                              mobile: FramePageMobile(frame),
+                              desktop: StickyHeader(
+                                  header: CustomAppBar(),
+                                  content: FramePageDesktop(frame))),
+                        ),
                       );
                     } else if (snp.hasError) {
                       return Loading(

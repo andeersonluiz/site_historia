@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Screens/loading_screen.dart';
+import 'package:site_historia/Store/collection_store.dart';
 import 'package:site_historia/Store/frame_store.dart';
 import 'package:site_historia/Store/notice_store.dart';
 import 'package:site_historia/Store/project_store.dart';
@@ -45,6 +46,9 @@ Future<void> main() async {
     ),
     Provider<RecommendationStore>(
       create: (_) => RecommendationStore(),
+    ),
+    Provider<CollectionStore>(
+      create: (_) => CollectionStore(),
     )
   ], child: MyApp()));
 }

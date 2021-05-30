@@ -73,7 +73,7 @@ class BlogRecommendationWidget extends StatelessWidget {
                                 recommendationStore);
                           } else {
                             recommendationStore.removeBlog(recommendationStore
-                                .recommendation!.podcastList[index]);
+                                .recommendation!.blogList[index]);
                           }
                         },
                         icon: Icon(
