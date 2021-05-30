@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:site_historia/Components/customImage_component.dart';
+import 'package:site_historia/Components/widget/customImage_component.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 import '../../Model/notice_model.dart';
 
-class PodcastTile extends StatelessWidget {
+class PodcastTileDesktop extends StatelessWidget {
   final Notice podcast;
-  PodcastTile(this.podcast);
+  PodcastTileDesktop(this.podcast);
 
   @override
   Widget build(BuildContext context) {

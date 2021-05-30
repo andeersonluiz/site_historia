@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Theme/ThemeConfig.dart';
+import '../Theme/themeConfig.dart';
 import 'footer/footer_mobile.dart';
 import 'widget/latestPodcast_mobile.dart';
 import 'widget/latestPosts_mobile.dart';
@@ -25,7 +25,7 @@ class HomePageMobile extends StatelessWidget {
                     flex: 5,
                     child: Container(
                         color: ThemeConfig.brownPodcast,
-                        child: LatestPodcastMobile(widthPercentualSize: 0.45))),
+                        child: LatestPodcastMobile(widthPercentageSize: 0.45))),
               ])
             : Column(children: [
                 Container(
@@ -34,7 +34,7 @@ class HomePageMobile extends StatelessWidget {
                 Container(
                     width: MediaQuery.of(context).size.width,
                     color: ThemeConfig.brownPodcast,
-                    child: LatestPodcastMobile(widthPercentualSize: 1)),
+                    child: LatestPodcastMobile(widthPercentageSize: 1)),
               ]),
         Divider(
           thickness: 1.0,

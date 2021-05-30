@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: ScreenTypeLayout(
               mobile: HomePageMobile(),
               desktop: StickyHeader(
-                  header: CustomAppBar(), content: HomePageDesktop())),
+                  header: CustomAppBarDesktop(), content: HomePageDesktop())),
         ),
       ),
     );

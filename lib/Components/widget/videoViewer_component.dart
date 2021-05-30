@@ -1,8 +1,8 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
-import 'package:site_historia/Components/customText_component.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
+import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_plyr_iframe/youtube_plyr_iframe.dart';
 

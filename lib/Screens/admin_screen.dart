@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:site_historia/Components/customButton_component.dart';
-import 'package:site_historia/Components/customTextFormField_component.dart';
-import 'package:site_historia/Components/erroMsg_component.dart';
+import 'package:site_historia/Components/widget/customButton_component.dart';
+import 'package:site_historia/Components/widget/customTextFormField_component.dart';
+import 'package:site_historia/Components/widget/erroMsg_component.dart';
 import 'package:site_historia/Store/project_store.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 import 'package:site_historia/Support/preferences_support.dart';
 import 'package:site_historia/firebase/login_auth.dart';
 import 'package:velocity_x/velocity_x.dart';

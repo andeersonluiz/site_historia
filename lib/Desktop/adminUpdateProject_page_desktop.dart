@@ -4,19 +4,19 @@ import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/CustomText_component.dart';
-import 'package:site_historia/Components/customButton_component.dart';
-import 'package:site_historia/Components/customHtmlEditor_component.dart';
-import 'package:site_historia/Components/customTextFormField_component.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
-import 'package:site_historia/Components/customToast_component.dart';
-import 'package:site_historia/Components/erroMsg_component.dart';
-import 'package:site_historia/Desktop/widget/image_desktop.dart';
+import 'package:site_historia/Components/widget/customButton_component.dart';
+import 'package:site_historia/Components/widget/customHtmlEditor_component.dart';
+import 'package:site_historia/Components/widget/customTextFormField_component.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
+import 'package:site_historia/Components/widget/customToast_component.dart';
+import 'package:site_historia/Components/widget/erroMsg_component.dart';
+import 'package:site_historia/Components/widget/image_component.dart';
 import 'package:site_historia/Desktop/widget/participant_desktop.dart';
 import 'package:site_historia/Desktop/widget/teacher_desktop.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Store/support_store.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 import 'package:site_historia/Model/project_model.dart';
 import 'package:site_historia/Model/teacher_model.dart';
@@ -166,10 +166,10 @@ class _AdminUpdateProjectPageDesktopState
                   Row(
                     children: [
                       Expanded(
-                        child: TeacherWidget(),
+                        child: TeacherWidgetDesktop(),
                       ),
                       Expanded(
-                        child: ParticipantWidget(),
+                        child: ParticipantWidgetDesktop(),
                       )
                     ],
                   ),

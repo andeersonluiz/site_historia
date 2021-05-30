@@ -3,12 +3,12 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/CustomText_component.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
-import 'package:site_historia/Desktop/widget/adminTeacherCard_desktop.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
+import 'package:site_historia/Components/widget/adminTeacherCard_component.dart';
 import 'package:site_historia/Model/teacher_model.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/teacher_store.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class AdminTeacherPageMobile extends StatelessWidget {
@@ -48,7 +48,7 @@ class AdminTeacherPageMobile extends StatelessWidget {
                   ),
                 ),
                 for (var teacher in listTeachers)
-                  AdminTeacherCardDesktop(teacher),
+                  AdminTeacherCard(teacher),
               ],
             );
         }

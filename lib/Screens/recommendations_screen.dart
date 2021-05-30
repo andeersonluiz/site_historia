@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
 import 'package:site_historia/Desktop/appBar/custtomAppBar_desktop.dart';
-import 'package:site_historia/Desktop/recommendation_page_desktop.dart';
+import 'package:site_historia/Components/page/recommendation_page.dart';
 import 'package:site_historia/Model/recommendation_model.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Support/IconsData_support.dart';
@@ -49,13 +49,11 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                     return SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: ScreenTypeLayout(
-                          mobile: width > 600
-                              ? RecommendationPageDesktop(recommendation)
-                              : RecommendationPageDesktop(recommendation),
+                          mobile:RecommendationPage(recommendation),
                           desktop: StickyHeader(
-                              header: CustomAppBar(),
+                              header: CustomAppBarDesktop(),
                               content:
-                                  RecommendationPageDesktop(recommendation))),
+                                  RecommendationPage(recommendation))),
                     );
                   } else if (snp.hasError) {
                     return ErrorLoad(color: Theme.of(context).primaryColor);

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:site_historia/Support/IconsData_support.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 import 'package:site_historia/Mobile/drawer/admin_drawer_item.dart';
 
-class AdminNavigatorDrawer extends StatelessWidget {
+class AdminNavigatorDrawerMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PointerInterceptor(
@@ -36,19 +36,19 @@ class AdminNavigatorDrawer extends StatelessWidget {
                 )),
               ),
               Divider(height: 8, thickness: 1.0),
-              AdminDrawerItem("Projetos", RouteNames.ADMIN_PROJECTS,
+              AdminDrawerItemMobile("Projetos", RouteNames.ADMIN_PROJECTS,
                   IconsData.PROJECT_ICON),
-              AdminDrawerItem(
+              AdminDrawerItemMobile(
                   "Notícias", RouteNames.ADMIN_NOTICES, IconsData.NOTICE_ICON),
-              AdminDrawerItem(
+              AdminDrawerItemMobile(
                   "Quadros", RouteNames.ADMIN_FRAMES, IconsData.NOTICE_ICON),
-              AdminDrawerItem("Professores", RouteNames.ADMIN_TEACHERS,
+              AdminDrawerItemMobile("Professores", RouteNames.ADMIN_TEACHERS,
                   IconsData.TEACHER_ICON),
-              AdminDrawerItem("Recomendações", RouteNames.ADMIN_RECOMMENDATIONS,
+              AdminDrawerItemMobile("Recomendações", RouteNames.ADMIN_RECOMMENDATIONS,
                   IconsData.RECOMENDATION_ICON),
-              AdminDrawerItem("Acervo", RouteNames.ADMIN_COLLECTIONS,
+              AdminDrawerItemMobile("Acervo", RouteNames.ADMIN_COLLECTIONS,
                   IconsData.COLLECTION_ICON),
-              AdminDrawerItem("Sair", RouteNames.ADMIN, IconsData.LOGOUT_ICON),
+              AdminDrawerItemMobile("Sair", RouteNames.ADMIN, IconsData.LOGOUT_ICON),
             ],
           ),
         ),

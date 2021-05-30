@@ -3,15 +3,15 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
-import 'package:site_historia/Desktop/adminUpdateNotice_page_desktop.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
+import 'package:site_historia/Components/page/adminUpdateNotice_page.dart';
 import 'package:site_historia/Desktop/appBar/verticalAppBar_desktop.dart';
 import 'package:site_historia/Mobile/drawer/adminNavigation_drawer_component.dart';
 import 'package:site_historia/Model/notice_model.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Screens/loading_screen.dart';
 import 'package:site_historia/Store/notice_store.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 
 class AdminUpdateNoticeScreen extends StatefulWidget {
   final String idNotice;
@@ -30,7 +30,7 @@ class _AdminUpdateNoticeScreenState extends State<AdminUpdateNoticeScreen> {
 
     return ResponsiveBuilder(
       builder: (ctx, sizingInformation) => Scaffold(
-          drawer: sizingInformation.isDesktop ? null : AdminNavigatorDrawer(),
+          drawer: sizingInformation.isDesktop ? null : AdminNavigatorDrawerMobile(),
           appBar: sizingInformation.isDesktop
               ? null
               : AppBar(
@@ -54,18 +54,16 @@ class _AdminUpdateNoticeScreenState extends State<AdminUpdateNoticeScreen> {
                         return SingleChildScrollView(
                           scrollDirection: Axis.vertical,
                           child: ScreenTypeLayout(
-                              mobile: AdminUpdateNoticePageDesktop(notice),
+                              mobile: AdminUpdateNoticePage(notice),
                               desktop: Container(
                                 width: MediaQuery.of(context).size.width,
                                 height: MediaQuery.of(context).size.height,
                                 child: Row(
                                     crossAxisAlignment: CrossAxisAlignment.start,
-
                                     children: [
                                   VerticalAppBar(),
                                   Expanded(
-                                      child:
-                                          AdminUpdateNoticePageDesktop(notice)),
+                                      child: AdminUpdateNoticePage(notice)),
                                 ]),
                               )),
                         );

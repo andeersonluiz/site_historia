@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/notice_store.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../../Model/notice_model.dart';
 import '../tile/podcastTile_mobile.dart';
 
 class LatestPodcastMobile extends StatelessWidget {
-  final widthPercentualSize;
-  LatestPodcastMobile({required this.widthPercentualSize});
+  final widthPercentageSize;
+  LatestPodcastMobile({required this.widthPercentageSize});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class LatestPodcastMobile extends StatelessWidget {
                             path: RouteNames.NOTICES,
                             queryParameters: {"id": notice.id.toString()}));
                       },
-                      child: PodcastTileMobile(notice, widthPercentualSize)),
+                      child: PodcastTileMobile(notice, widthPercentageSize)),
               ],
             );
         }

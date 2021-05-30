@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:provider/provider.dart';
-import 'package:site_historia/Components/customButton_component.dart';
-import 'package:site_historia/Components/customImage_component.dart';
-import 'package:site_historia/Components/customText_component.dart';
+import 'package:site_historia/Components/widget/customButton_component.dart';
+import 'package:site_historia/Components/widget/customImage_component.dart';
+import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Model/notice_model.dart';
 import 'package:site_historia/Store/notice_store.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class AdminNoticeCardMobile extends StatelessWidget {

@@ -3,15 +3,15 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
-import 'package:site_historia/Desktop/adminUpdateFrame_page_desktop.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
+import 'package:site_historia/Components/page/adminUpdateFrame_page.dart';
 import 'package:site_historia/Desktop/appBar/verticalAppBar_desktop.dart';
 import 'package:site_historia/Mobile/drawer/adminNavigation_drawer_component.dart';
 import 'package:site_historia/Model/frame_model.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Screens/loading_screen.dart';
 import 'package:site_historia/Store/frame_store.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 
 class AdminUpdateFrameScreen extends StatefulWidget {
   final String idFrame;
@@ -29,7 +29,7 @@ class _AdminUpdateFrameScreenState extends State<AdminUpdateFrameScreen> {
 
     return ResponsiveBuilder(
       builder: (ctx, sizingInformation) => Scaffold(
-          drawer: sizingInformation.isDesktop ? null : AdminNavigatorDrawer(),
+          drawer: sizingInformation.isDesktop ? null : AdminNavigatorDrawerMobile(),
           appBar: sizingInformation.isDesktop
               ? null
               : AppBar(
@@ -53,7 +53,7 @@ class _AdminUpdateFrameScreenState extends State<AdminUpdateFrameScreen> {
                         return SingleChildScrollView(
                           scrollDirection: Axis.vertical,
                           child: ScreenTypeLayout(
-                              mobile: AdminUpdateFramePageDesktop(frame),
+                              mobile: AdminUpdateFramePage(frame),
                               desktop: Container(
                                 width: MediaQuery.of(context).size.width,
                                 height: MediaQuery.of(context).size.height,
@@ -64,7 +64,7 @@ class _AdminUpdateFrameScreenState extends State<AdminUpdateFrameScreen> {
                                   VerticalAppBar(),
                                   Expanded(
                                       child:
-                                          AdminUpdateFramePageDesktop(frame)),
+                                          AdminUpdateFramePage(frame)),
                                 ]),
                               )),
                         );

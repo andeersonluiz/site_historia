@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:site_historia/Desktop/appBar/verticalItem_desktop.dart';
 import 'package:site_historia/Support/IconsData_support.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 
-class VerticalAppBarMin extends StatelessWidget {
+class VerticalAppBarMinDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +19,7 @@ class VerticalAppBarMin extends StatelessWidget {
             height: 0,
             color: Theme.of(context).iconTheme.color,
           ),
-          VerticalItem(
+          VerticalItemDesktop(
             "Projetos",
             RouteNames.ADMIN_PROJECTS,
             IconsData.PROJECT_ICON,
@@ -29,7 +29,7 @@ class VerticalAppBarMin extends StatelessWidget {
             height: 0,
             color: Theme.of(context).iconTheme.color,
           ),
-          VerticalItem(
+          VerticalItemDesktop(
             "Notícias",
             RouteNames.ADMIN_NOTICES,
             IconsData.NOTICE_ICON,
@@ -39,7 +39,7 @@ class VerticalAppBarMin extends StatelessWidget {
             height: 0,
             color: Theme.of(context).iconTheme.color,
           ),
-          VerticalItem(
+          VerticalItemDesktop(
             "Professores",
             RouteNames.ADMIN_TEACHERS,
             IconsData.TEACHER_ICON,
@@ -49,7 +49,7 @@ class VerticalAppBarMin extends StatelessWidget {
             height: 0,
             color: Theme.of(context).iconTheme.color,
           ),
-          VerticalItem(
+          VerticalItemDesktop(
             "Recomendations",
             RouteNames.ADMIN_RECOMMENDATIONS,
             IconsData.COLLECTION_ICON,
@@ -59,7 +59,7 @@ class VerticalAppBarMin extends StatelessWidget {
             height: 0,
             color: Theme.of(context).iconTheme.color,
           ),
-          VerticalItem(
+          VerticalItemDesktop(
             "Acervo",
             RouteNames.ADMIN_COLLECTIONS,
             IconsData.COLLECTION_ICON,
@@ -69,7 +69,7 @@ class VerticalAppBarMin extends StatelessWidget {
             height: 0,
             color: Theme.of(context).iconTheme.color,
           ),
-          VerticalItem(
+          VerticalItemDesktop(
             "Sair",
             RouteNames.ADMIN,
             FontAwesomeIcons.signOutAlt,

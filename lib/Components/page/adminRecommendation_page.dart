@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/CustomText_component.dart';
-import 'package:site_historia/Components/customButton_component.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
-import 'package:site_historia/Components/customToast_component.dart';
-import 'package:site_historia/Desktop/widget/blogRecommendation_desktop.dart';
-import 'package:site_historia/Desktop/widget/otherRecommendation_desktop.dart';
-import 'package:site_historia/Desktop/widget/podcastRecommendation_desktop.dart';
-import 'package:site_historia/Desktop/widget/youtubeRecommendation_desktop.dart';
+import 'package:site_historia/Components/widget/customButton_component.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
+import 'package:site_historia/Components/widget/customToast_component.dart';
+import 'package:site_historia/Components/widget/blogRecommendation_component.dart';
+import 'package:site_historia/Components/widget/otherRecommendation_component.dart';
+import 'package:site_historia/Components/widget/podcastRecommendation_component.dart';
+import 'package:site_historia/Components/widget/youtubeRecommendation_component.dart';
 import 'package:site_historia/Model/recommendation_model.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/recommendation_store.dart';
 import 'package:site_historia/firebase/recommendation_firestore.dart';
 
-class AdminRecommendationPageDesktop extends StatefulWidget {
+class AdminRecommendationPage extends StatefulWidget {
   @override
-  _AdminRecommendationPageDesktopState createState() =>
-      _AdminRecommendationPageDesktopState();
+  _AdminRecommendationPageState createState() =>
+      _AdminRecommendationPageState();
 }
 
-class _AdminRecommendationPageDesktopState
-    extends State<AdminRecommendationPageDesktop> {
+class _AdminRecommendationPageState
+    extends State<AdminRecommendationPage> {
   RecommendationStore? recommendationStore;
 
   @override

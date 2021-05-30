@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
-import 'package:site_historia/Components/customText_component.dart';
-import 'package:site_historia/Desktop/widget/listNotices_desktop.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
+import 'package:site_historia/Components/widget/customText_component.dart';
+import 'package:site_historia/Components/widget/listNotices_component.dart';
 import 'package:site_historia/Desktop/widget/menuBarNotices_desktop.dart';
 import 'package:site_historia/Model/notice_model.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
@@ -36,7 +36,7 @@ class _NoticePageDesktopState extends State<NoticePageDesktop> {
       Divider(
         thickness: 1.0,
       ),
-      MenuBarNotices(),
+      MenuBarNoticesDesktop(),
       Observer(builder: (_) {
         switch (noticeStore!.listNoticesFiltered!.status) {
           case FutureStatus.pending:

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:site_historia/Components/customImage_component.dart';
+import 'package:site_historia/Components/widget/customImage_component.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 
 import '../../Model/notice_model.dart';
 
-class PostTile extends StatelessWidget {
+class PostTileDesktop extends StatelessWidget {
   final Notice notice;
-  PostTile(this.notice);
+  PostTileDesktop(this.notice);
 
   @override
   Widget build(BuildContext context) {

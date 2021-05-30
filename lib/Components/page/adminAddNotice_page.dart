@@ -3,27 +3,27 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/CustomText_component.dart';
-import 'package:site_historia/Components/customButton_component.dart';
-import 'package:site_historia/Components/customDropdown_component.dart';
-import 'package:site_historia/Components/customHtmlEditor_component.dart';
-import 'package:site_historia/Components/customTextFormField_component.dart';
-import 'package:site_historia/Components/customToast_component.dart';
-import 'package:site_historia/Components/erroMsg_component.dart';
-import 'package:site_historia/Desktop/widget/audio_desktop.dart';
-import 'package:site_historia/Desktop/widget/image_desktop.dart';
+import 'package:site_historia/Components/widget/customButton_component.dart';
+import 'package:site_historia/Components/widget/customDropdown_component.dart';
+import 'package:site_historia/Components/widget/customHtmlEditor_component.dart';
+import 'package:site_historia/Components/widget/customTextFormField_component.dart';
+import 'package:site_historia/Components/widget/customToast_component.dart';
+import 'package:site_historia/Components/widget/erroMsg_component.dart';
+import 'package:site_historia/Components/widget/audio_desktop_component.dart';
+import 'package:site_historia/Components/widget/image_component.dart';
 import 'package:site_historia/Store/notice_store.dart';
 import 'package:site_historia/Store/support_store.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class AdminAddNoticePageDesktop extends StatefulWidget {
+class AdminAddNoticePage extends StatefulWidget {
   @override
-  _AdminAddNoticePageDesktopState createState() =>
-      _AdminAddNoticePageDesktopState();
+  _AdminAddNoticePageState createState() =>
+      _AdminAddNoticePageState();
 }
 
-class _AdminAddNoticePageDesktopState extends State<AdminAddNoticePageDesktop> {
+class _AdminAddNoticePageState extends State<AdminAddNoticePage> {
   NoticeStore? noticeStore;
   int? nextId;
   bool created = false;

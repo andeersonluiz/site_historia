@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/notice_store.dart';
 
-import '../../Components/sliderContainer_component.dart';
+import '../../Components/widget/sliderContainer_component.dart';
 import '../../Model/notice_model.dart';
 
 class SliderImageMobile extends StatefulWidget {

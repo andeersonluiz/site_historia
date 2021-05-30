@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:site_historia/Components/customButton_component.dart';
-import 'package:site_historia/Components/customTextFormField_component.dart';
-import 'package:site_historia/Components/customText_component.dart';
-import 'package:site_historia/Model/collection_item.dart';
-import 'package:site_historia/Store/collection_store.dart';
+import 'package:site_historia/Components/widget/customButton_component.dart';
+import 'package:site_historia/Components/widget/customTextFormField_component.dart';
+import 'package:site_historia/Components/widget/customText_component.dart';
+import 'package:site_historia/Model/recommendationItem_model.dart';
+import 'package:site_historia/Store/recommendation_store.dart';
 
-class MovieCollectionWidget extends StatelessWidget {
+class PodcastRecommendationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final collectionStore = Provider.of<CollectionStore>(context);
+    final recommendationStore = Provider.of<RecommendationStore>(context);
     return Container(
       child: Column(children: [
         Observer(builder: (_) {
           return ListView.builder(
               shrinkWrap: true,
-              itemCount: collectionStore.collection!.movies.length,
+              itemCount: recommendationStore.recommendation!.podcastList.length,
               itemBuilder: (ctx, index) {
                 var controllerName = TextEditingController(
-                    text: collectionStore.collection!.movies[index].name);
+                    text: recommendationStore
+                        .recommendation!.podcastList[index].name);
                 var controllerUrl = TextEditingController(
-                    text: collectionStore.collection!.movies[index].url);
+                    text: recommendationStore
+                        .recommendation!.podcastList[index].url);
 
                 return Row(
                   children: [
@@ -32,7 +34,7 @@ class MovieCollectionWidget extends StatelessWidget {
                       controller: controllerName,
                       textInputType: TextInputType.name,
                       onChanged: (newName) {
-                        collectionStore.updateRecommendationMovieName(
+                        recommendationStore.updateRecommendationPodcastName(
                             index, newName);
                       },
                       validator: (text) {
@@ -48,7 +50,7 @@ class MovieCollectionWidget extends StatelessWidget {
                       controller: controllerUrl,
                       textInputType: TextInputType.url,
                       onChanged: (newUrl) {
-                        collectionStore.updateRecommendationMovieUrl(
+                        recommendationStore.updateRecommendationPodcastUrl(
                             index, newUrl);
                       },
                       validator: (text) {
@@ -59,19 +61,21 @@ class MovieCollectionWidget extends StatelessWidget {
                     )),
                     IconButton(
                         onPressed: () {
-                          if (collectionStore.collection!.movies[index].name !=
+                          if (recommendationStore.recommendation!
+                                      .podcastList[index].name !=
                                   "" &&
-                              collectionStore.collection!.movies[index].url !=
+                              recommendationStore
+                                      .recommendation!.podcastList[index].url !=
                                   "") {
                             _showMaterialDialog(
                                 context,
-                                collectionStore.collection!.movies[index],
-                                collectionStore,
-                                index);
+                                recommendationStore
+                                    .recommendation!.podcastList[index],
+                                recommendationStore);
                           } else {
-                            collectionStore.removeMovie(
-                                collectionStore.collection!.movies[index],
-                                index);
+                            recommendationStore.removePodcast(
+                                recommendationStore
+                                    .recommendation!.podcastList[index]);
                           }
                         },
                         icon: Icon(
@@ -83,18 +87,18 @@ class MovieCollectionWidget extends StatelessWidget {
               });
         }),
         CustomButton(
-          text: "Adicionar novo filme",
+          text: "Adicionar recomendação de podcast",
           expandButton: true,
           onPressed: () {
-            collectionStore.addMovie();
+            recommendationStore.addPodcast();
           },
         ),
       ]),
     );
   }
 
-  _showMaterialDialog(BuildContext context, CollectionItem item,
-      CollectionStore collectionStore, int index) {
+  _showMaterialDialog(BuildContext context, RecommendationItem item,
+      RecommendationStore recommendationStore) {
     showDialog(
         context: context,
         builder: (_) => new AlertDialog(
@@ -103,16 +107,14 @@ class MovieCollectionWidget extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline5,
               ),
               content: new CustomText(
-                "Tem certeza que deseja excluir o filme ${item.name} (A exclusão não pode ser desfeita)?",
+                "Tem certeza que deseja excluir a referência ${item.name} com url ${item.url}?",
                 style: Theme.of(context).textTheme.subtitle1,
               ),
               actions: <Widget>[
                 CustomButton(
                     text: "Sim",
                     onPressed: () async {
-                      await collectionStore.removeMovie(item, index);
-                      await collectionStore
-                          .saveCollection(collectionStore.collection!);
+                      recommendationStore.removePodcast(item);
                       Navigator.of(context).pop();
                     }),
                 CustomButton(

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:site_historia/Components/customImage_component.dart';
+import 'package:site_historia/Components/widget/customImage_component.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 import '../../Model/notice_model.dart';
 
 class PodcastTileMobile extends StatelessWidget {
   final Notice podcast;
-  final widthPercentual;
-  PodcastTileMobile(this.podcast, this.widthPercentual);
+  final widthPercentage;
+  PodcastTileMobile(this.podcast, this.widthPercentage);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(16.0),
-      width: MediaQuery.of(context).size.width * widthPercentual,
+      width: MediaQuery.of(context).size.width * widthPercentage,
       height: 120,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

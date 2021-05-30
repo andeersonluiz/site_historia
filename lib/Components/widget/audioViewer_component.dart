@@ -3,8 +3,8 @@ import 'package:flutter/rendering.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
-import 'package:site_historia/Components/customText_component.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
+import 'package:site_historia/Components/widget/customText_component.dart';
 
 class AudioViewer extends StatefulWidget {
   final urlAudio;

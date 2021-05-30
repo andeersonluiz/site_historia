@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
-import 'package:site_historia/Theme/ThemeConfig.dart';
+import 'package:site_historia/Support/routesName_support.dart';
+import 'package:site_historia/Theme/themeConfig.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class Loading extends StatelessWidget {

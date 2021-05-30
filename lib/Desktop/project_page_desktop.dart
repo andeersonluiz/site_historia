@@ -1,8 +1,8 @@
 import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:flutter/material.dart';
-import 'package:site_historia/Components/author_component.dart';
-import 'package:site_historia/Components/customImage_component.dart';
-import 'package:site_historia/Components/htmlViewer_component.dart';
+import 'package:site_historia/Components/widget/author_component.dart';
+import 'package:site_historia/Components/widget/customImage_component.dart';
+import 'package:site_historia/Components/widget/htmlViewer_component.dart';
 import 'package:site_historia/Desktop/footer/footer_desktop.dart';
 import 'package:site_historia/Model/project_model.dart';
 

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:site_historia/Components/customButton_component.dart';
-import 'package:site_historia/Components/customTextFormField_component.dart';
-import 'package:site_historia/Components/erroMsg_component.dart';
+import 'package:site_historia/Components/widget/customButton_component.dart';
+import 'package:site_historia/Components/widget/customTextFormField_component.dart';
+import 'package:site_historia/Components/widget/erroMsg_component.dart';
 import 'package:site_historia/Store/support_store.dart';
 
-class ParticipantWidget extends StatelessWidget {
+class ParticipantWidgetDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final supportStore = Provider.of<SupportStore>(context);

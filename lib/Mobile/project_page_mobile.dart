@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:site_historia/Components/customImage_component.dart';
-import 'package:site_historia/Components/htmlViewer_component.dart';
+import 'package:site_historia/Components/widget/customImage_component.dart';
+import 'package:site_historia/Components/widget/htmlViewer_component.dart';
 import 'package:site_historia/Mobile/footer/footer_mobile.dart';
 import 'package:site_historia/Model/project_model.dart';
 

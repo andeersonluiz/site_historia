@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:site_historia/Components/audioViewer_component.dart';
-import 'package:site_historia/Components/author_component.dart';
-import 'package:site_historia/Components/customImage_component.dart';
-import 'package:site_historia/Components/customText_component.dart';
-import 'package:site_historia/Components/htmlViewer_component.dart';
-import 'package:site_historia/Components/videoViewer_component.dart';
+import 'package:site_historia/Components/widget/audioViewer_component.dart';
+import 'package:site_historia/Components/widget/author_component.dart';
+import 'package:site_historia/Components/widget/customImage_component.dart';
+import 'package:site_historia/Components/widget/customText_component.dart';
+import 'package:site_historia/Components/widget/htmlViewer_component.dart';
+import 'package:site_historia/Components/widget/videoViewer_component.dart';
 import 'package:site_historia/Desktop/footer/footer_desktop.dart';
 import 'package:site_historia/Model/frame_model.dart';
 

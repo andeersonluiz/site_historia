@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../Components/footerContact_component.dart';
+import '../../Components/widget/footerContact_component.dart';
 import 'mini/footerMini_mobile.dart';
-import '../../Components/footerAbout_component.dart';
+import '../../Components/widget/footerAbout_component.dart';
 
 class FooterMobile extends StatelessWidget {
   @override

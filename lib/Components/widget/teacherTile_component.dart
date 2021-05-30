@@ -1,7 +1,7 @@
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:site_historia/Components/customImage_component.dart';
+import 'package:site_historia/Components/widget/customImage_component.dart';
 import 'package:site_historia/Model/project_model.dart';
 import 'package:site_historia/Model/teacher_model.dart';
 import 'package:url_launcher/url_launcher.dart';

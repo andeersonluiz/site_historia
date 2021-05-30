@@ -16,7 +16,7 @@ import 'package:site_historia/firebase/teacher_firestore.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'Store/support_store.dart';
-import 'Theme/ThemeConfig.dart';
+import 'Theme/themeConfig.dart';
 import 'firebase/frame_firestore.dart';
 import 'firebase/project_firestore.dart';
 
@@ -85,7 +85,7 @@ class _MyAppState extends State<MyApp> {
         } else if (snp.hasData) {
           return MaterialApp.router(
               debugShowCheckedModeBanner: false,
-              title: 'Site Historia',
+              title: 'Coordenação de História CEFET/RJ',
               theme: ThemeConfig.theme,
               routeInformationParser: VxInformationParser(),
               routerDelegate: routes);

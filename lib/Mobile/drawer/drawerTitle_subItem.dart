@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'drawer_subItem.dart';
 
-class DrawerItemWithSubItem extends StatelessWidget {
+class DrawerItemWithSubItemMobile extends StatelessWidget {
   final String title;
   final IconData icon;
-  final List<DrawerSubItem> children;
+  final List<DrawerSubItemMobile> children;
 
-  DrawerItemWithSubItem(
+  DrawerItemWithSubItemMobile(
       {required this.title, required this.icon, required this.children});
   @override
   Widget build(BuildContext context) {

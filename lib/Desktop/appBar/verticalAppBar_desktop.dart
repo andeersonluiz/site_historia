@@ -27,8 +27,8 @@ class _VerticalAppBarState extends State<VerticalAppBar> {
           child: Column(
             children: [
               supportStore.verticalIsMax
-                  ? VerticalAppBarMax()
-                  : VerticalAppBarMin(),
+                  ? VerticalAppBarMaxDesktop()
+                  : VerticalAppBarMinDesktop(),
               Spacer(),
               Padding(
                 padding: const EdgeInsets.all(8.0),

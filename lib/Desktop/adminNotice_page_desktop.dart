@@ -3,13 +3,13 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/CustomText_component.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
-import 'package:site_historia/Components/customToast_component.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
+import 'package:site_historia/Components/widget/customToast_component.dart';
 import 'package:site_historia/Desktop/widget/adminNoticeCard_desktop.dart';
 import 'package:site_historia/Model/notice_model.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/notice_store.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class AdminNoticePageDesktop extends StatelessWidget {
@@ -88,7 +88,7 @@ class AdminNoticePageDesktop extends StatelessWidget {
                     ),
                   ],
                 ),
-                for (int i = 0; i < listNotices.length; i++) AdminNoticeCard(i),
+                for (int i = 0; i < listNotices.length; i++) AdminNoticeCardDesktop(i),
               ],
             );
         }

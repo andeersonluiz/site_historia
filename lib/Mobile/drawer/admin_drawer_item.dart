@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
-import 'package:site_historia/Components/customToast_component.dart';
+import 'package:site_historia/Components/widget/customToast_component.dart';
 import 'package:site_historia/firebase/login_auth.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class AdminDrawerItem extends StatelessWidget {
+class AdminDrawerItemMobile extends StatelessWidget {
   final IconData icon;
   final String path;
   final String title;
   final bool clearData;
 
-  AdminDrawerItem(this.title, this.path, this.icon, {this.clearData = false});
+  AdminDrawerItemMobile(this.title, this.path, this.icon, {this.clearData = false});
   @override
   Widget build(BuildContext context) {
     return HoverButton(

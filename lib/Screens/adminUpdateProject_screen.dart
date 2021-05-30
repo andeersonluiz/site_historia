@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
 import 'package:site_historia/Desktop/adminUpdateProject_page_desktop.dart';
 import 'package:site_historia/Desktop/appBar/verticalAppBar_desktop.dart';
 import 'package:site_historia/Mobile/adminUpdateProject_page_mobile.dart';
@@ -12,7 +12,7 @@ import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Screens/loading_screen.dart';
 import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Model/project_model.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 
 class AdminUpdateProjectScreen extends StatefulWidget {
   final String idProject;
@@ -30,7 +30,7 @@ class _AdminUpdateProjectScreenState extends State<AdminUpdateProjectScreen> {
     final projectStore = Provider.of<ProjectStore>(context);
     return ResponsiveBuilder(
       builder: (ctx, sizingInformation) => Scaffold(
-          drawer: sizingInformation.isDesktop ? null : AdminNavigatorDrawer(),
+          drawer: sizingInformation.isDesktop ? null : AdminNavigatorDrawerMobile(),
           appBar: sizingInformation.isDesktop
               ? null
               : AppBar(

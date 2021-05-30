@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:site_historia/Components/customButton_component.dart';
-import 'package:site_historia/Components/customTextFormField_component.dart';
-import 'package:site_historia/Components/customText_component.dart';
+import 'package:site_historia/Components/widget/customButton_component.dart';
+import 'package:site_historia/Components/widget/customTextFormField_component.dart';
+import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Model/recommendationItem_model.dart';
 import 'package:site_historia/Store/recommendation_store.dart';
 
-class BlogRecommendationWidget extends StatelessWidget {
+class OtherRecommendationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final recommendationStore = Provider.of<RecommendationStore>(context);
@@ -16,14 +16,15 @@ class BlogRecommendationWidget extends StatelessWidget {
         Observer(builder: (_) {
           return ListView.builder(
               shrinkWrap: true,
-              itemCount: recommendationStore.recommendation!.blogList.length,
+              itemCount: recommendationStore.recommendation!.othersList.length,
               itemBuilder: (ctx, index) {
-                final controllerName = TextEditingController(
+                var controllerName = TextEditingController(
                     text: recommendationStore
-                        .recommendation!.blogList[index].name);
-                final controllerUrl = TextEditingController(
+                        .recommendation!.othersList[index].name);
+                var controllerUrl = TextEditingController(
                     text: recommendationStore
-                        .recommendation!.blogList[index].url);
+                        .recommendation!.othersList[index].url);
+
                 return Row(
                   children: [
                     Expanded(
@@ -33,7 +34,7 @@ class BlogRecommendationWidget extends StatelessWidget {
                       controller: controllerName,
                       textInputType: TextInputType.name,
                       onChanged: (newName) {
-                        recommendationStore.updateRecommendationBlogName(
+                        recommendationStore.updateRecommendationOtherName(
                             index, newName);
                       },
                       validator: (text) {
@@ -49,7 +50,7 @@ class BlogRecommendationWidget extends StatelessWidget {
                       controller: controllerUrl,
                       textInputType: TextInputType.url,
                       onChanged: (newUrl) {
-                        recommendationStore.updateRecommendationBlogUrl(
+                        recommendationStore.updateRecommendationOtherUrl(
                             index, newUrl);
                       },
                       validator: (text) {
@@ -61,19 +62,19 @@ class BlogRecommendationWidget extends StatelessWidget {
                     IconButton(
                         onPressed: () {
                           if (recommendationStore
-                                      .recommendation!.blogList[index].name !=
+                                      .recommendation!.othersList[index].name !=
                                   "" &&
                               recommendationStore
-                                      .recommendation!.blogList[index].url !=
+                                      .recommendation!.othersList[index].url !=
                                   "") {
                             _showMaterialDialog(
                                 context,
                                 recommendationStore
-                                    .recommendation!.blogList[index],
+                                    .recommendation!.othersList[index],
                                 recommendationStore);
                           } else {
-                            recommendationStore.removeBlog(recommendationStore
-                                .recommendation!.blogList[index]);
+                            recommendationStore.removeOther(recommendationStore
+                                .recommendation!.othersList[index]);
                           }
                         },
                         icon: Icon(
@@ -85,10 +86,10 @@ class BlogRecommendationWidget extends StatelessWidget {
               });
         }),
         CustomButton(
-          text: "Adicionar recomendação de blog",
+          text: "Adicionar outra recomendação",
           expandButton: true,
           onPressed: () {
-            recommendationStore.addBlog();
+            recommendationStore.addOther();
           },
         ),
       ]),
@@ -112,7 +113,7 @@ class BlogRecommendationWidget extends StatelessWidget {
                 CustomButton(
                     text: "Sim",
                     onPressed: () async {
-                      recommendationStore.removeBlog(item);
+                      await recommendationStore.removeOther(item);
                       Navigator.of(context).pop();
                     }),
                 CustomButton(

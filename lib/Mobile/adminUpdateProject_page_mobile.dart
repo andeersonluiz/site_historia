@@ -6,12 +6,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/CustomText_component.dart';
-import 'package:site_historia/Components/customButton_component.dart';
-import 'package:site_historia/Components/customCheckBox_component.dart';
-import 'package:site_historia/Components/customHtmlEditor_component.dart';
-import 'package:site_historia/Components/customTextFormField_component.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
-import 'package:site_historia/Components/erroMsg_component.dart';
+import 'package:site_historia/Components/widget/customButton_component.dart';
+import 'package:site_historia/Components/widget/customCheckBox_component.dart';
+import 'package:site_historia/Components/widget/customHtmlEditor_component.dart';
+import 'package:site_historia/Components/widget/customTextFormField_component.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
+import 'package:site_historia/Components/widget/erroMsg_component.dart';
+import 'package:site_historia/Components/widget/image_component.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Store/support_store.dart';
@@ -91,49 +92,10 @@ class _AdminUpdateProjectPageMobileState
                       child: CustomText("Imagem titulo",
                           style: Theme.of(context).textTheme.headline6)),
                   Observer(
-                    builder: (ctx) => Container(
-                      decoration: supportStore.pathImage!.path != ""
-                          ? BoxDecoration(
-                              image: DecorationImage(
-                              image: NetworkImage(supportStore.pathImage!.path),
-                              fit: BoxFit.fill,
-                            ))
-                          : BoxDecoration(color: Colors.grey),
-                      child: Row(children: [
-                        supportStore.pathImage!.path != ""
-                            ? Expanded(
-                                flex: 95,
-                                child: Align(
-                                  alignment: Alignment.bottomLeft,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: AutoSizeText(
-                                      supportStore.title,
-                                      minFontSize: 10,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline3!
-                                          .copyWith(fontSize: 30),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            : Container(),
-                        Spacer(),
-                        Expanded(
-                          flex: 5,
-                          child: InkWell(
-                              child: Icon(Icons.folder),
-                              onTap: () async {
-                                PickedFile? image = await _picker.getImage(
-                                    source: ImageSource.camera);
-                                if (image != null) {
-                                  supportStore.updatePath(image);
-                                }
-                              }),
-                        ),
-                      ]),
-                      height: supportStore.pathImage!.path == "" ? 40 : 300,
+                    builder: (ctx) => ImageWidget(
+                      image: supportStore.pathImage,
+                      isProject: true,
+                      titleProject: supportStore.title,
                     ),
                   ),
                   Observer(builder: (_) {

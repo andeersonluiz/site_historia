@@ -4,7 +4,7 @@ import 'package:site_historia/Store/frame_store.dart';
 import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Support/IconsData_support.dart';
 
-import '../../Support/RoutesName_support.dart';
+import '../../Support/routesName_support.dart';
 import 'drawerTitle_subItem.dart';
 import 'drawer_item.dart';
 import 'drawer_subItem.dart';
@@ -45,34 +45,34 @@ class NavigationDrawer extends StatelessWidget {
                 height: 8,
                 thickness: 1.0,
               ),
-              DrawerItem(
+              DrawerItemMobile(
                 "Inicio",
                 RouteNames.HOME,
                 IconsData.HOME_ICON,
               ),
-              DrawerItem("Coordenação de História", RouteNames.ABOUT,
+              DrawerItemMobile("Coordenação de História", RouteNames.ABOUT,
                   IconsData.COORD_ICON),
-              DrawerItemWithSubItem(
+              DrawerItemWithSubItemMobile(
                 title: "Projetos",
                 icon: IconsData.PROJECT_ICON,
                 children: projectStore.listProjectsOrdered
-                    .map((item) => DrawerSubItem(
+                    .map((item) => DrawerSubItemMobile(
                         item, RouteNames.PROJECTS, IconsData.PROJECT_ICON))
                     .toList(),
               ),
-              DrawerItem("Notícias", RouteNames.NOTICES, IconsData.NOTICE_ICON),
-              DrawerItemWithSubItem(
+              DrawerItemMobile("Notícias", RouteNames.NOTICES, IconsData.NOTICE_ICON),
+              DrawerItemWithSubItemMobile(
                 title: "Quadros",
                 icon: IconsData.FRAMES_ICON,
                 children: frameStore.listFramesOrdered
-                    .map((item) => DrawerSubItem(
+                    .map((item) => DrawerSubItemMobile(
                         item, RouteNames.FRAMES, IconsData.FRAMES_ICON))
                     .toList(),
               ),
-              DrawerItem("Vestibular", RouteNames.EXAM, IconsData.EXAM_ICON),
-              DrawerItem("Recomendações", RouteNames.RECOMMENDATIONS,
+              DrawerItemMobile("Vestibular", RouteNames.EXAM, IconsData.EXAM_ICON),
+              DrawerItemMobile("Recomendações", RouteNames.RECOMMENDATIONS,
                   IconsData.RECOMENDATION_ICON),
-              DrawerItem(
+              DrawerItemMobile(
                   "Acervo", RouteNames.COLLECTION, IconsData.COLLECTION_ICON),
             ],
           ),

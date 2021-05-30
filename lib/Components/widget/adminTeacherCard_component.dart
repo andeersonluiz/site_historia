@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:site_historia/Components/customButton_component.dart';
-import 'package:site_historia/Components/customImage_component.dart';
-import 'package:site_historia/Components/customText_component.dart';
+import 'package:site_historia/Components/widget/customButton_component.dart';
+import 'package:site_historia/Components/widget/customImage_component.dart';
+import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Model/teacher_model.dart';
 import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Store/teacher_store.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class AdminTeacherCardDesktop extends StatelessWidget {
+class AdminTeacherCard extends StatelessWidget {
   final Teacher teacher;
   final double sizeCard = 250;
-  AdminTeacherCardDesktop(this.teacher);
+  AdminTeacherCard(this.teacher);
 
   @override
   Widget build(BuildContext context) {

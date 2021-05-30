@@ -16,7 +16,7 @@ class _AdminProjectsScreenState extends State<AdminProjectsScreen> {
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (ctx, sizingInformation) => Scaffold(
-        drawer: sizingInformation.isDesktop ? null : AdminNavigatorDrawer(),
+        drawer: sizingInformation.isDesktop ? null : AdminNavigatorDrawerMobile(),
         appBar: sizingInformation.isDesktop
             ? null
             : AppBar(

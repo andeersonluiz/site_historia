@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:site_historia/Components/customImage_component.dart';
-import 'package:site_historia/Components/listTeachers_component.dart';
+import 'package:site_historia/Components/widget/customImage_component.dart';
+import 'package:site_historia/Components/widget/listTeachers_component.dart';
 import 'package:site_historia/Mobile/footer/footer_mobile.dart';
 
 class AboutPageMobile extends StatefulWidget {

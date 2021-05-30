@@ -42,7 +42,7 @@ class _AboutScreenState extends State<AboutScreen> {
           child: ScreenTypeLayout(
               mobile: AboutPageMobile(),
               desktop: StickyHeader(
-                  header: CustomAppBar(), content: AboutPageDesktop())),
+                  header: CustomAppBarDesktop(), content: AboutPageDesktop())),
         ),
       ),
     );

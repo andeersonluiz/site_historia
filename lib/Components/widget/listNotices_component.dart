@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:site_historia/Desktop/tile/noticeTile_desktop.dart';
+import 'package:site_historia/Components/tile/noticeTile_desktop.dart';
 import 'package:site_historia/Model/notice_model.dart';
 
 class ListNotices extends StatelessWidget {

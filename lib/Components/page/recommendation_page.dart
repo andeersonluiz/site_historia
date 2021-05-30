@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:site_historia/Components/customText_component.dart';
+import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Desktop/footer/footer_desktop.dart';
-import 'package:site_historia/Desktop/widget/recommendationItem_desktop.dart';
+import 'package:site_historia/Components/widget/recommendationItem_component.dart';
 import 'package:site_historia/Model/recommendationItem_model.dart';
 import 'package:site_historia/Model/recommendation_model.dart';
 
-class RecommendationPageDesktop extends StatelessWidget {
+class RecommendationPage extends StatelessWidget {
   final Recommendation recommendations;
-  RecommendationPageDesktop(this.recommendations);
+  RecommendationPage(this.recommendations);
   @override
   Widget build(BuildContext context) {
     return Column(children: [

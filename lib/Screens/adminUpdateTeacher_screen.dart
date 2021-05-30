@@ -3,15 +3,15 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
-import 'package:site_historia/Desktop/adminUpdateTeacher_page_desktop.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
+import 'package:site_historia/Components/page/adminUpdateTeacher_page.dart';
 import 'package:site_historia/Desktop/appBar/verticalAppBar_desktop.dart';
 import 'package:site_historia/Mobile/drawer/adminNavigation_drawer_component.dart';
 import 'package:site_historia/Model/teacher_model.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Screens/loading_screen.dart';
 import 'package:site_historia/Store/teacher_store.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 
 class AdminUpdateTeacherScreen extends StatefulWidget {
   final String idTeacher;
@@ -29,7 +29,7 @@ class _AdminUpdateTeacherScreenState extends State<AdminUpdateTeacherScreen> {
     final teacherStore = Provider.of<TeacherStore>(context);
     return ResponsiveBuilder(
       builder: (ctx, sizingInformation) => Scaffold(
-          drawer: sizingInformation.isDesktop ? null : AdminNavigatorDrawer(),
+          drawer: sizingInformation.isDesktop ? null : AdminNavigatorDrawerMobile(),
           appBar: sizingInformation.isDesktop
               ? null
               : AppBar(
@@ -53,7 +53,7 @@ class _AdminUpdateTeacherScreenState extends State<AdminUpdateTeacherScreen> {
                       return SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         child: ScreenTypeLayout(
-                            mobile: AdminUpdateTeacherPageDesktop(teacher),
+                            mobile: AdminUpdateTeacherPage(teacher),
                             desktop: Container(
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height,
@@ -62,7 +62,7 @@ class _AdminUpdateTeacherScreenState extends State<AdminUpdateTeacherScreen> {
                                   children: [
                                     VerticalAppBar(),
                                     Expanded(
-                                        child: AdminUpdateTeacherPageDesktop(
+                                        child: AdminUpdateTeacherPage(
                                             teacher)),
                                   ]),
                             )),

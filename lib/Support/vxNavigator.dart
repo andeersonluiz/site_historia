@@ -22,7 +22,7 @@ import 'package:site_historia/Screens/loading_screen.dart';
 import 'package:site_historia/Screens/notice_screen.dart';
 import 'package:site_historia/Screens/project_screen.dart';
 import 'package:site_historia/Screens/recommendations_screen.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 import 'package:site_historia/Support/titleNames_support.dart';
 import 'package:site_historia/firebase/login_auth.dart';
 import 'package:velocity_x/velocity_x.dart';

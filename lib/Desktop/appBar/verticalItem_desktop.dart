@@ -1,16 +1,16 @@
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
-import 'package:site_historia/Components/customToast_component.dart';
+import 'package:site_historia/Components/widget/customToast_component.dart';
 import 'package:site_historia/firebase/login_auth.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class VerticalItem extends StatelessWidget {
+class VerticalItemDesktop extends StatelessWidget {
   final String title;
   final String path;
   final IconData icon;
   final bool isMini;
-  VerticalItem(this.title, this.path, this.icon, {this.isMini = false});
+  VerticalItemDesktop(this.title, this.path, this.icon, {this.isMini = false});
   @override
   Widget build(BuildContext context) {
     return HoverButton(

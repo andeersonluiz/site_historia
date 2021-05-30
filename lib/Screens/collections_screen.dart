@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
 import 'package:site_historia/Desktop/appBar/custtomAppBar_desktop.dart';
-import 'package:site_historia/Desktop/collection_page_desktop.dart';
+import 'package:site_historia/Components/page/collection_page.dart';
 import 'package:site_historia/Model/collection_model.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Support/IconsData_support.dart';
@@ -49,12 +49,10 @@ class _CollectionScreenState extends State<CollectionScreen> {
                     return SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: ScreenTypeLayout(
-                          mobile: width > 600
-                              ? CollectionPageDesktop(collection)
-                              : CollectionPageDesktop(collection),
+                          mobile: CollectionPage(collection),
                           desktop: StickyHeader(
-                              header: CustomAppBar(),
-                              content: CollectionPageDesktop(collection))),
+                              header: CustomAppBarDesktop(),
+                              content: CollectionPage(collection))),
                     );
                   } else if (snp.hasError) {
                     return ErrorLoad(color: Theme.of(context).primaryColor);

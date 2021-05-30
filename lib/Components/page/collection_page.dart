@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:site_historia/Components/customText_component.dart';
+import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Desktop/footer/footer_desktop.dart';
-import 'package:site_historia/Desktop/widget/collectionItem_desktop.dart';
+import 'package:site_historia/Components/widget/collectionItem_component.dart';
 import 'package:site_historia/Mobile/footer/footer_mobile.dart';
 import 'package:site_historia/Model/collection_item.dart';
 import 'package:site_historia/Model/collection_model.dart';
 
-class CollectionPageDesktop extends StatelessWidget {
+class CollectionPage extends StatelessWidget {
   final Collection collection;
-  CollectionPageDesktop(this.collection);
+  CollectionPage(this.collection);
   @override
   Widget build(BuildContext context) {
     return Column(

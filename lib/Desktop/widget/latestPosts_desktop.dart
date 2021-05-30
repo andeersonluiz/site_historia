@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/notice_store.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../Model/notice_model.dart';
 import '../tile/postTile_desktop.dart';
 
-class LatestPosts extends StatelessWidget {
+class LatestPostsDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final noticeStore = Provider.of<NoticeStore>(context);
@@ -49,7 +49,7 @@ class LatestPosts extends StatelessWidget {
                             path: RouteNames.NOTICES,
                             queryParameters: {"id": notice.id.toString()}));
                       },
-                      child: PostTile(notice)),
+                      child: PostTileDesktop(notice)),
               ],
             );
         }

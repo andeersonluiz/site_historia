@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
 import 'package:site_historia/Desktop/appBar/custtomAppBar_desktop.dart';
 import 'package:site_historia/Desktop/frame_page_desktop.dart';
 import 'package:site_historia/Mobile/frame_page_mobile.dart';
@@ -12,7 +12,7 @@ import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Screens/loading_screen.dart';
 import 'package:site_historia/Store/frame_store.dart';
 import 'package:site_historia/Support/IconsData_support.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import '../Mobile/drawer/navigation_drawer_component.dart';
 
@@ -72,7 +72,7 @@ class _FrameScreenState extends State<FrameScreen> {
                           child: ScreenTypeLayout(
                               mobile: FramePageMobile(frame),
                               desktop: StickyHeader(
-                                  header: CustomAppBar(),
+                                  header: CustomAppBarDesktop(),
                                   content: FramePageDesktop(frame))),
                         ),
                       );

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 import 'package:provider/provider.dart';
-import 'package:site_historia/Components/searchBar_component.dart';
+import 'package:site_historia/Components/widget/searchBar_component.dart';
 import 'package:site_historia/Store/notice_store.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 

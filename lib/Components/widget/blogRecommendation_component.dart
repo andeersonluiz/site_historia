@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:site_historia/Components/customButton_component.dart';
-import 'package:site_historia/Components/customTextFormField_component.dart';
-import 'package:site_historia/Components/customText_component.dart';
+import 'package:site_historia/Components/widget/customButton_component.dart';
+import 'package:site_historia/Components/widget/customTextFormField_component.dart';
+import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Model/recommendationItem_model.dart';
 import 'package:site_historia/Store/recommendation_store.dart';
 
-class PodcastRecommendationWidget extends StatelessWidget {
+class BlogRecommendationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final recommendationStore = Provider.of<RecommendationStore>(context);
@@ -16,15 +16,14 @@ class PodcastRecommendationWidget extends StatelessWidget {
         Observer(builder: (_) {
           return ListView.builder(
               shrinkWrap: true,
-              itemCount: recommendationStore.recommendation!.podcastList.length,
+              itemCount: recommendationStore.recommendation!.blogList.length,
               itemBuilder: (ctx, index) {
-                var controllerName = TextEditingController(
+                final controllerName = TextEditingController(
                     text: recommendationStore
-                        .recommendation!.podcastList[index].name);
-                var controllerUrl = TextEditingController(
+                        .recommendation!.blogList[index].name);
+                final controllerUrl = TextEditingController(
                     text: recommendationStore
-                        .recommendation!.podcastList[index].url);
-
+                        .recommendation!.blogList[index].url);
                 return Row(
                   children: [
                     Expanded(
@@ -34,7 +33,7 @@ class PodcastRecommendationWidget extends StatelessWidget {
                       controller: controllerName,
                       textInputType: TextInputType.name,
                       onChanged: (newName) {
-                        recommendationStore.updateRecommendationPodcastName(
+                        recommendationStore.updateRecommendationBlogName(
                             index, newName);
                       },
                       validator: (text) {
@@ -50,7 +49,7 @@ class PodcastRecommendationWidget extends StatelessWidget {
                       controller: controllerUrl,
                       textInputType: TextInputType.url,
                       onChanged: (newUrl) {
-                        recommendationStore.updateRecommendationPodcastUrl(
+                        recommendationStore.updateRecommendationBlogUrl(
                             index, newUrl);
                       },
                       validator: (text) {
@@ -61,21 +60,20 @@ class PodcastRecommendationWidget extends StatelessWidget {
                     )),
                     IconButton(
                         onPressed: () {
-                          if (recommendationStore.recommendation!
-                                      .podcastList[index].name !=
+                          if (recommendationStore
+                                      .recommendation!.blogList[index].name !=
                                   "" &&
                               recommendationStore
-                                      .recommendation!.podcastList[index].url !=
+                                      .recommendation!.blogList[index].url !=
                                   "") {
                             _showMaterialDialog(
                                 context,
                                 recommendationStore
-                                    .recommendation!.podcastList[index],
+                                    .recommendation!.blogList[index],
                                 recommendationStore);
                           } else {
-                            recommendationStore.removePodcast(
-                                recommendationStore
-                                    .recommendation!.podcastList[index]);
+                            recommendationStore.removeBlog(recommendationStore
+                                .recommendation!.blogList[index]);
                           }
                         },
                         icon: Icon(
@@ -87,10 +85,10 @@ class PodcastRecommendationWidget extends StatelessWidget {
               });
         }),
         CustomButton(
-          text: "Adicionar recomendação de podcast",
+          text: "Adicionar recomendação de blog",
           expandButton: true,
           onPressed: () {
-            recommendationStore.addPodcast();
+            recommendationStore.addBlog();
           },
         ),
       ]),
@@ -114,7 +112,7 @@ class PodcastRecommendationWidget extends StatelessWidget {
                 CustomButton(
                     text: "Sim",
                     onPressed: () async {
-                      recommendationStore.removePodcast(item);
+                      recommendationStore.removeBlog(item);
                       Navigator.of(context).pop();
                     }),
                 CustomButton(

@@ -4,16 +4,16 @@ import 'package:site_historia/Store/frame_store.dart';
 import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Support/IconsData_support.dart';
 
-import '../../Support/RoutesName_support.dart';
+import '../../Support/routesName_support.dart';
 import 'itemAppBar_desktop.dart';
 import 'itemPopupMenuAppBar_desktop.dart';
 
-class CustomAppBar extends StatefulWidget {
+class CustomAppBarDesktop extends StatefulWidget {
   @override
-  _CustomAppBarState createState() => _CustomAppBarState();
+  _CustomAppBarDesktopState createState() => _CustomAppBarDesktopState();
 }
 
-class _CustomAppBarState extends State<CustomAppBar> {
+class _CustomAppBarDesktopState extends State<CustomAppBarDesktop> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -37,19 +37,19 @@ class _CustomAppBarState extends State<CustomAppBar> {
             child: Icon(IconsData.LOGO_ICON, size: 30),
           ),
           Spacer(),
-          ItemAppBar("Inicio", RouteNames.HOME),
-          ItemAppBar("Coordenação de História", RouteNames.ABOUT),
-          ItemPopUpMenuAppBar(
+          ItemAppBarDesktop("Inicio", RouteNames.HOME),
+          ItemAppBarDesktop("Coordenação de História", RouteNames.ABOUT),
+          ItemPopUpMenuAppBarDesktop(
             "Projetos",
             RouteNames.PROJECTS,
             projectStore.listProjectsOrdered,
           ),
-          ItemAppBar("Notícias", RouteNames.NOTICES),
-          ItemPopUpMenuAppBar(
+          ItemAppBarDesktop("Notícias", RouteNames.NOTICES),
+          ItemPopUpMenuAppBarDesktop(
               "Quadros", RouteNames.FRAMES, frameStore.listFramesOrdered),
-          ItemAppBar("Vestibular", RouteNames.EXAM),
-          ItemAppBar("Recomendações", RouteNames.RECOMMENDATIONS),
-          ItemAppBar("Acervo", RouteNames.COLLECTION),
+          ItemAppBarDesktop("Vestibular", RouteNames.EXAM),
+          ItemAppBarDesktop("Recomendações", RouteNames.RECOMMENDATIONS),
+          ItemAppBarDesktop("Acervo", RouteNames.COLLECTION),
         ],
       ),
     );

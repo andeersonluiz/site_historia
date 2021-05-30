@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class DrawerItem extends StatelessWidget {
+class DrawerItemMobile extends StatelessWidget {
   final IconData icon;
   final String path;
   final String title;
   final bool clearData;
 
-  DrawerItem(this.title, this.path, this.icon, {this.clearData = false});
+  DrawerItemMobile(this.title, this.path, this.icon, {this.clearData = false});
   @override
   Widget build(BuildContext context) {
     return HoverButton(

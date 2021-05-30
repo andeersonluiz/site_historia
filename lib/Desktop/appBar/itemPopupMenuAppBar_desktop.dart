@@ -3,17 +3,17 @@ import 'package:hovering/hovering.dart';
 import 'package:site_historia/Model/project_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class ItemPopUpMenuAppBar extends StatefulWidget {
+class ItemPopUpMenuAppBarDesktop extends StatefulWidget {
   final String name;
   final String path;
   final List<dynamic> listItems;
-  ItemPopUpMenuAppBar(this.name, this.path, this.listItems);
+  ItemPopUpMenuAppBarDesktop(this.name, this.path, this.listItems);
 
   @override
-  _ItemPopUpMenuAppBarState createState() => _ItemPopUpMenuAppBarState();
+  _ItemPopUpMenuAppBarDesktopState createState() => _ItemPopUpMenuAppBarDesktopState();
 }
 
-class _ItemPopUpMenuAppBarState extends State<ItemPopUpMenuAppBar>
+class _ItemPopUpMenuAppBarDesktopState extends State<ItemPopUpMenuAppBarDesktop>
     with SingleTickerProviderStateMixin {
   late AnimationController rotationController;
 

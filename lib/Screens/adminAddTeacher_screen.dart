@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:site_historia/Desktop/adminAddTeacher_page_desktop.dart';
+import 'package:site_historia/Components/page/adminAddTeacher_page.dart';
 import 'package:site_historia/Desktop/appBar/verticalAppBar_desktop.dart';
 import 'package:site_historia/Mobile/drawer/adminNavigation_drawer_component.dart';
 
@@ -16,7 +16,7 @@ class _AdminAddTeacherScreenState extends State<AdminAddTeacherScreen> {
     return ResponsiveBuilder(
         builder: (ctx, sizingInformation) => Scaffold(
               drawer:
-                  sizingInformation.isDesktop ? null : AdminNavigatorDrawer(),
+                  sizingInformation.isDesktop ? null : AdminNavigatorDrawerMobile(),
               appBar: sizingInformation.isDesktop
                   ? null
                   : AppBar(
@@ -24,7 +24,7 @@ class _AdminAddTeacherScreenState extends State<AdminAddTeacherScreen> {
                       title: Text("Adicionar Professor"),
                     ),
               body: ScreenTypeLayout(
-                  mobile: AdminAddTeacherPageDesktop(),
+                  mobile: AdminAddTeacherPage(),
                   desktop: Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
@@ -32,7 +32,7 @@ class _AdminAddTeacherScreenState extends State<AdminAddTeacherScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           VerticalAppBar(),
-                          Expanded(child: AdminAddTeacherPageDesktop()),
+                          Expanded(child: AdminAddTeacherPage()),
                         ]),
                   )),
             ));

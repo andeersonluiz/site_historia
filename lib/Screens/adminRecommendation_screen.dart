@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:site_historia/Desktop/adminRecommendation_page_desktop.dart';
+import 'package:site_historia/Components/page/adminRecommendation_page.dart';
 import 'package:site_historia/Desktop/appBar/verticalAppBar_desktop.dart';
 import 'package:site_historia/Mobile/drawer/adminNavigation_drawer_component.dart';
 
@@ -15,7 +15,7 @@ class _AdminRecommendationScreenState extends State<AdminRecommendationScreen> {
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (ctx, sizingInformation) => Scaffold(
-          drawer: sizingInformation.isDesktop ? null : AdminNavigatorDrawer(),
+          drawer: sizingInformation.isDesktop ? null : AdminNavigatorDrawerMobile(),
           appBar: sizingInformation.isDesktop
               ? null
               : AppBar(
@@ -25,7 +25,7 @@ class _AdminRecommendationScreenState extends State<AdminRecommendationScreen> {
           body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: ScreenTypeLayout(
-                mobile: AdminRecommendationPageDesktop(),
+                mobile: AdminRecommendationPage(),
                 desktop: Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
@@ -33,7 +33,7 @@ class _AdminRecommendationScreenState extends State<AdminRecommendationScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         VerticalAppBar(),
-                        Expanded(child: AdminRecommendationPageDesktop()),
+                        Expanded(child: AdminRecommendationPage()),
                       ]),
                 )),
           )),

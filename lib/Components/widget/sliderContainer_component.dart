@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Model/notice_model.dart';
+import '../../Model/notice_model.dart';
 import 'customImage_component.dart';
 
 class SliderContainer extends StatelessWidget {

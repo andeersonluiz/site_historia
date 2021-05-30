@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:provider/provider.dart';
-import 'package:site_historia/Components/customButton_component.dart';
-import 'package:site_historia/Components/customTextFormField_component.dart';
-import 'package:site_historia/Components/customText_component.dart';
-import 'package:site_historia/Components/erroMsg_component.dart';
+import 'package:site_historia/Components/widget/customButton_component.dart';
+import 'package:site_historia/Components/widget/customTextFormField_component.dart';
+import 'package:site_historia/Components/widget/customText_component.dart';
+import 'package:site_historia/Components/widget/erroMsg_component.dart';
 import 'package:site_historia/Store/support_store.dart';
 
 class VideoWidgetMobile extends StatelessWidget {

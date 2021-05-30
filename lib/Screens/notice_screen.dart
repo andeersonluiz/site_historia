@@ -42,7 +42,7 @@ class _NoticeScreenState extends State<NoticeScreen> {
           child: ScreenTypeLayout(
               mobile: NoticePageMobile(),
               desktop: StickyHeader(
-                  header: CustomAppBar(), content: NoticePageDesktop())),
+                  header: CustomAppBarDesktop(), content: NoticePageDesktop())),
         ),
       ),
     );

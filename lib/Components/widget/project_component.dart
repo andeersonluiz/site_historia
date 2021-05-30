@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:site_historia/Components/customCheckBox_component.dart';
+import 'package:site_historia/Components/widget/customCheckBox_component.dart';
 import 'package:site_historia/Store/support_store.dart';
 
 class ProjectWidget extends StatelessWidget {

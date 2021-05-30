@@ -3,12 +3,12 @@ import 'package:hovering/hovering.dart';
 import 'package:site_historia/Model/project_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class DrawerSubItem extends StatelessWidget {
+class DrawerSubItemMobile extends StatelessWidget {
   final dynamic object;
   final IconData icon;
   final String path;
 
-  DrawerSubItem(this.object, this.path, this.icon);
+  DrawerSubItemMobile(this.object, this.path, this.icon);
   @override
   Widget build(BuildContext context) {
     return HoverButton(

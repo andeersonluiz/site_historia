@@ -3,12 +3,12 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/CustomText_component.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
 import 'package:site_historia/Desktop/widget/adminFrameCard_desktop.dart';
 import 'package:site_historia/Model/frame_model.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/frame_store.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class AdminFramePageDesktop extends StatelessWidget {
@@ -47,7 +47,7 @@ class AdminFramePageDesktop extends StatelessWidget {
                           .push(Uri.parse(RouteNames.ADD_FRAME)),
                     ),
                   ),
-                  for (int i = 0; i < listFrames.length; i++) AdminFrameCard(i),
+                  for (int i = 0; i < listFrames.length; i++) AdminFrameCardDesktop(i),
                 ],
               );
           }

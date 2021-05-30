@@ -16,12 +16,12 @@ class _AdminAddFrameScreenState extends State<AdminAddFrameScreen> {
     return ResponsiveBuilder(
         builder: (ctx, sizingInformation) => Scaffold(
               drawer:
-                  sizingInformation.isDesktop ? null : AdminNavigatorDrawer(),
+                  sizingInformation.isDesktop ? null : AdminNavigatorDrawerMobile(),
               appBar: sizingInformation.isDesktop
                   ? null
                   : AppBar(
                       centerTitle: true,
-                      title: Text("Adicionar Frame"),
+                      title: Text("Adicionar Quadro"),
                     ),
               body: ScreenTypeLayout(
                   mobile: AdminAddFramePageMobile(),
@@ -30,7 +30,6 @@ class _AdminAddFrameScreenState extends State<AdminAddFrameScreen> {
                     height: MediaQuery.of(context).size.height,
                     child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
-
                         children: [
                       VerticalAppBar(),
                       Expanded(child: AdminAddFramePageDesktop()),

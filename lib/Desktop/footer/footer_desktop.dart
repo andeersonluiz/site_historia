@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../Components/footerContact_component.dart';
-import '../../Components/footerAbout_component.dart';
+import '../../Components/widget/footerContact_component.dart';
+import '../../Components/widget/footerAbout_component.dart';
 
 class FooterDesktop extends StatelessWidget {
   @override

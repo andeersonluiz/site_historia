@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Theme/ThemeConfig.dart';
+import '../Theme/themeConfig.dart';
 import 'footer/footer_desktop.dart';
 import 'widget/latestPodcast_desktop.dart';
 import 'widget/latestPosts_desktop.dart';
@@ -13,13 +13,13 @@ class HomePageDesktop extends StatelessWidget {
       SliderImageDesktop(),
       Divider(height: 1),
       Row(children: [
-        Expanded(flex: 5, child: Container(height: 525, child: LatestPosts())),
+        Expanded(flex: 5, child: Container(height: 525, child: LatestPostsDesktop())),
         Expanded(
             flex: 5,
             child: Container(
                 height: 525,
                 color: ThemeConfig.brownPodcast,
-                child: LatestPodcast())),
+                child: LatestPodcastDesktop())),
       ]),
       Divider(height: 1),
       FooterDesktop(),

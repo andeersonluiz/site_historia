@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/CustomText_component.dart';
-import 'package:site_historia/Components/customButton_component.dart';
-import 'package:site_historia/Components/customLoading_component.dart';
-import 'package:site_historia/Components/customToast_component.dart';
-import 'package:site_historia/Desktop/widget/articleCollection_desktop.dart';
-import 'package:site_historia/Desktop/widget/booksCollection_desktop.dart';
-import 'package:site_historia/Desktop/widget/movieCollection_desktop.dart';
-import 'package:site_historia/Desktop/widget/othersCollection_desktop.dart';
+import 'package:site_historia/Components/widget/customButton_component.dart';
+import 'package:site_historia/Components/widget/customLoading_component.dart';
+import 'package:site_historia/Components/widget/customToast_component.dart';
+import 'package:site_historia/Components/widget/articleCollection_component.dart';
+import 'package:site_historia/Components/widget/booksCollection_component.dart';
+import 'package:site_historia/Components/widget/movieCollection_component.dart';
+import 'package:site_historia/Components/widget/othersCollection_component.dart';
 import 'package:site_historia/Model/collection_model.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/collection_store.dart';
 import 'package:site_historia/firebase/collection_firestore.dart';
 
-class AdminCollectionPageDesktop extends StatefulWidget {
+class AdminCollectionPage extends StatefulWidget {
   @override
-  _AdminCollectionPageDesktopState createState() =>
-      _AdminCollectionPageDesktopState();
+  _AdminCollectionPageState createState() =>
+      _AdminCollectionPageState();
 }
 
-class _AdminCollectionPageDesktopState
-    extends State<AdminCollectionPageDesktop> {
+class _AdminCollectionPageState
+    extends State<AdminCollectionPage> {
   CollectionStore? collectionStore;
 
   @override

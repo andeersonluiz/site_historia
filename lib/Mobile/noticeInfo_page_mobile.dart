@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:site_historia/Components/audioViewer_component.dart';
-import 'package:site_historia/Components/author_component.dart';
-import 'package:site_historia/Components/customText_component.dart';
-import 'package:site_historia/Components/htmlViewer_component.dart';
+import 'package:site_historia/Components/widget/audioViewer_component.dart';
+import 'package:site_historia/Components/widget/author_component.dart';
+import 'package:site_historia/Components/widget/customText_component.dart';
+import 'package:site_historia/Components/widget/htmlViewer_component.dart';
 import 'package:site_historia/Mobile/footer/footer_mobile.dart';
 import 'package:site_historia/Model/notice_model.dart';
 

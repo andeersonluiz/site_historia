@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class ItemAppBar extends StatelessWidget {
+class ItemAppBarDesktop extends StatelessWidget {
   final String title;
   final String path;
-  ItemAppBar(
+  ItemAppBarDesktop(
     this.title,
     this.path,
   );

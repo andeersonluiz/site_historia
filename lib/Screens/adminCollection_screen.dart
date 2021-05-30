@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:site_historia/Desktop/adminCollection_page_desktop.dart';
+import 'package:site_historia/Components/page/adminCollection_page.dart';
 import 'package:site_historia/Desktop/appBar/verticalAppBar_desktop.dart';
 import 'package:site_historia/Mobile/drawer/adminNavigation_drawer_component.dart';
 
@@ -14,7 +14,7 @@ class _AdminCollectionScreenState extends State<AdminCollectionScreen> {
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (ctx, sizingInformation) => Scaffold(
-          drawer: sizingInformation.isDesktop ? null : AdminNavigatorDrawer(),
+          drawer: sizingInformation.isDesktop ? null : AdminNavigatorDrawerMobile(),
           appBar: sizingInformation.isDesktop
               ? null
               : AppBar(
@@ -24,7 +24,7 @@ class _AdminCollectionScreenState extends State<AdminCollectionScreen> {
           body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: ScreenTypeLayout(
-                mobile: AdminCollectionPageDesktop(),
+                mobile: AdminCollectionPage(),
                 desktop: Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
@@ -32,7 +32,7 @@ class _AdminCollectionScreenState extends State<AdminCollectionScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         VerticalAppBar(),
-                        Expanded(child: AdminCollectionPageDesktop()),
+                        Expanded(child: AdminCollectionPage()),
                       ]),
                 )),
           )),

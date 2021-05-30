@@ -3,17 +3,17 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/CustomText_component.dart';
-import 'package:site_historia/Components/customButton_component.dart';
-import 'package:site_historia/Components/customHtmlEditor_component.dart';
-import 'package:site_historia/Components/customTextFormField_component.dart';
-import 'package:site_historia/Components/customToast_component.dart';
-import 'package:site_historia/Components/erroMsg_component.dart';
-import 'package:site_historia/Desktop/widget/audio_desktop.dart';
-import 'package:site_historia/Desktop/widget/image_desktop.dart';
+import 'package:site_historia/Components/widget/customButton_component.dart';
+import 'package:site_historia/Components/widget/customHtmlEditor_component.dart';
+import 'package:site_historia/Components/widget/customTextFormField_component.dart';
+import 'package:site_historia/Components/widget/customToast_component.dart';
+import 'package:site_historia/Components/widget/erroMsg_component.dart';
+import 'package:site_historia/Components/widget/audio_desktop_component.dart';
+import 'package:site_historia/Components/widget/image_component.dart';
 import 'package:site_historia/Desktop/widget/video_desktop.dart';
 import 'package:site_historia/Store/frame_store.dart';
 import 'package:site_historia/Store/support_store.dart';
-import 'package:site_historia/Support/RoutesName_support.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -102,7 +102,7 @@ class _AdminAddFramePageDesktopState extends State<AdminAddFramePageDesktop> {
             AudioWidget(
               title: "Audio (Opcional)",
             ),
-            VideoWidget(
+            VideoWidgetDesktop(
               title: "Video (Opcional)",
             ),
             CustomHtmlEditor(
