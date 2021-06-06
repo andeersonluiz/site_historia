@@ -1,3 +1,9 @@
+  /// Classe que faz a padronização de nomes que aparecem no título da página.
+///
+/// {@category Support}
+// ignore: library_names
+library TitleNames;
+
 class TitleNames {
   static const String HOME = "Inicio";
   static const String ABOUT = "Coordenação de História";

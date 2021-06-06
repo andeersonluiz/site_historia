@@ -1,9 +1,18 @@
+/// Widget responsável exibir um item no menu do site.
+///
+/// {@category Desktop}
+/// {@subCategory Drawer}
+// ignore: library_names
+library ItemAppBarDesktop;
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+
 class ItemAppBarDesktop extends StatelessWidget {
+  /// Texto do item.
   final String title;
+  /// Rota que é redirecionado quando o item é clicado.
   final String path;
   ItemAppBarDesktop(
     this.title,

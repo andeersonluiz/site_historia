@@ -1,9 +1,19 @@
+/// Widget responsável por exibir informações da postagem na página inicial (versão desktop).
+///
+/// {@category Desktop}
+/// {@subCategory Tile}
+// ignore: library_names
+library PostTileDesktop;
+
 import 'package:flutter/material.dart';
 import 'package:site_historia/Components/widget/customImage_component.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 
 import '../../Model/notice_model.dart';
 
+/// É feita a montagem de informações do postagem, onde recebe o objeto `Notice` que contém informações como:
+/// título e subtítulo do postagem e imagem, também possui o parâmetro `widthPercentage` que define a largura
+/// do Container onde os dados estão inseridos.
 class PostTileDesktop extends StatelessWidget {
   final Notice notice;
   PostTileDesktop(this.notice);

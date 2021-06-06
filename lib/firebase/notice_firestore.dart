@@ -1,3 +1,8 @@
+/// Classe responsável realizar as operações do objeto `Notice` no banco de dados.
+///
+/// {@category Firebase}
+// ignore: library_names
+library NoticeFirestore;
 import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
@@ -8,6 +13,8 @@ import '../Model/notice_model.dart';
 import 'package:firebase/firebase.dart';
 
 class NoticeFirestore {
+
+  /// Retorna todos as notícias do banco de dados.
   static getNotices() async {
     var query = firestore().collection("notices");
     var result = await query.get();
@@ -22,6 +29,7 @@ class NoticeFirestore {
     return notices;
   }
 
+  /// Retorna as notícias que retornam verdadeiro a condição `type==Podcast`.
   static getRecentPodcasts() async {
     var query =
         firestore().collection("notices").where('type', "==", "Podcast");
@@ -38,6 +46,7 @@ class NoticeFirestore {
     return podcasts;
   }
 
+  /// Retorna as notícias que retornam verdadeiro a condição `type==Noticia`.
   static getRecentNotices() async {
     var query =
         firestore().collection("notices").where('type', "==", "Noticia");
@@ -54,13 +63,7 @@ class NoticeFirestore {
     return notices;
   }
 
-  static deleteNotice(int id) async {
-    await firestore().collection("notices").doc(id.toString()).delete();
-    await storage().ref().child("notices/$id.png").delete();
-    await storage().ref().child("notices/$id(audio).mp3").delete();
-    return;
-  }
-
+  /// Atualiza o valor `isTopHeader` às notícias.
   static updateNotices(List<Notice> notices) async {
     await firestore()
         .collection("notices")
@@ -81,6 +84,7 @@ class NoticeFirestore {
     return;
   }
 
+  /// Adiciona uma notícia no banco de dados.
   static addNotice(
     String title,
     String subtitle,
@@ -140,6 +144,7 @@ class NoticeFirestore {
     return true;
   }
 
+  /// Atualiza uma notícia no banco de dados.
   static updateNotice(
     Notice notice,
     String title,
@@ -200,6 +205,15 @@ class NoticeFirestore {
     return true;
   }
 
+  /// Exclui uma notícia do banco de dados.
+  static deleteNotice(int id) async {
+    await firestore().collection("notices").doc(id.toString()).delete();
+    await storage().ref().child("notices/$id.png").delete();
+    await storage().ref().child("notices/$id(audio).mp3").delete();
+    return;
+  }
+
+  /// Retorna as notícias com a condição `isTopHeader=true`.
   static getSliders() async {
     var query = firestore()
         .collection("notices")
@@ -213,6 +227,7 @@ class NoticeFirestore {
     return topheaders;
   }
 
+  /// Insere uma imagem no banco de dados, na seção de notícias, e retorna a url da mesma.
   static convertBase64ToUrl(
       String fileName, Uint8List base64, String id) async {
     UploadTaskSnapshot task = await storage()
@@ -224,15 +239,21 @@ class NoticeFirestore {
     return url.toString();
   }
 
+  /// Remove uma imagem da seção de notícias no banco de dados.
   static removeFilename(String fileName, String id) async {
     await storage().ref("notices/$id(content)/$fileName").delete();
   }
 
+  /// Recebe o próximo id que será utilizado na inserção de um notícia.
   static getNextId() async {
     var result = await firestore().collection("notices").get();
     return result.docs.length + 1;
   }
 
+  /// Validador para excluir a(s) imagem(s) caso o usuário não crie a notícia.
+  ///
+  /// A cada inserção de imagem do usuário durante a criação/edição de texto, as imagens são salvas dentro do banco de dados.
+  /// A função é executada se o usuário inserir imagens mas não criar a notícia.
   static clearContent(String id, {DateTime? time}) async {
     var result = await storage().ref().child("notices/$id(content)").listAll();
     if (time != null) {

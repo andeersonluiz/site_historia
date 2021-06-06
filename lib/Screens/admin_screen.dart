@@ -1,3 +1,8 @@
+/// Tela responsável  por exibir a tela de login para a Área do administrador.
+///
+/// {@category Screen}
+// ignore: library_names
+library AdminScreen;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -6,10 +11,11 @@ import 'package:site_historia/Components/widget/customTextFormField_component.da
 import 'package:site_historia/Components/widget/erroMsg_component.dart';
 import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Support/routesName_support.dart';
-import 'package:site_historia/Support/preferences_support.dart';
 import 'package:site_historia/firebase/login_auth.dart';
 import 'package:velocity_x/velocity_x.dart';
-
+/// Widget uqe exibe um formulário que necessita do email e senha, com os dados validados, a informação
+/// é enviada para o banco de dados que verifica se usuário é registrado no banco (A adição de novos usuários deve ser
+/// feito manualmente no banco de dados).
 class AdminScreen extends StatefulWidget {
   @override
   _AdminScreenState createState() => _AdminScreenState();
@@ -33,8 +39,7 @@ class _AdminScreenState extends State<AdminScreen> {
   Widget build(BuildContext context) {
     final projectStore = Provider.of<ProjectStore>(context);
 
-    return ResponsiveBuilder(
-      builder: (ctx, sizingInformation) => Scaffold(
+   return Scaffold(
         body: Center(
           child: FittedBox(
             child: Container(
@@ -49,7 +54,7 @@ class _AdminScreenState extends State<AdminScreen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "Area do Admin",
+                      "Área do Admin",
                       style: Theme.of(context)
                           .textTheme
                           .headline6!
@@ -134,8 +139,6 @@ class _AdminScreenState extends State<AdminScreen> {
                                                   msgError = msg;
                                                 });
                                               } else {
-                                                await Prefs.saveLogin(
-                                                    controllerEmail.text);
                                                 await projectStore
                                                     .getUsernameByUid(
                                                         LoginAuth.getUser()!
@@ -157,7 +160,7 @@ class _AdminScreenState extends State<AdminScreen> {
             ),
           ),
         ),
-      ),
-    );
+      );
+
   }
 }

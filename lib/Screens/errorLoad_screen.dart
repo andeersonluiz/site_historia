@@ -1,6 +1,12 @@
+/// Tela responsável por exibir a página de erro.
+///
+/// {@category Screen}
+// ignore: library_names
+library ErrorLoad;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+/// Exibe a tela de erro quando um carregamento de dados não ocorre com sucesso.
 class ErrorLoad extends StatelessWidget {
   final color;
   ErrorLoad({required this.color});

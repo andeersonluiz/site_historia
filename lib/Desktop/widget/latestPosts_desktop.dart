@@ -1,3 +1,9 @@
+/// Widget responsável por exibir os posts mais recentes na página inicial (versão desktop).
+///
+/// {@category Desktop}
+/// {@subCategory Widget}
+// ignore: library_names
+library LatestPostsDesktop;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -11,6 +17,8 @@ import 'package:velocity_x/velocity_x.dart';
 import '../../Model/notice_model.dart';
 import '../tile/postTile_desktop.dart';
 
+/// Carrega todas as notícias através do método `getRecentNotices()` que filtra as notícias com o valor `type=Noticia`.
+/// Utiliza o widget `PostTileDesktop()´ para montar um Container com as informações do post.
 class LatestPostsDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

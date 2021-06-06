@@ -1,3 +1,10 @@
+/// Widget responsável por exibir o drawer da página do site.
+///
+/// {@category Mobile}
+/// {@subCategory Drawer}
+// ignore: library_names
+library NavigationDrawer;
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Store/frame_store.dart';
@@ -9,6 +16,7 @@ import 'drawerTitle_subItem.dart';
 import 'drawer_item.dart';
 import 'drawer_subItem.dart';
 
+/// Exibe o drawer que é composto pelos widgets `DrawerItemMobile()`, `DrawerItemWithSubItemMobile()` e `DrawerSubItemMobile()`.
 class NavigationDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -71,7 +79,7 @@ class NavigationDrawer extends StatelessWidget {
               ),
               DrawerItemMobile("Vestibular", RouteNames.EXAM, IconsData.EXAM_ICON),
               DrawerItemMobile("Recomendações", RouteNames.RECOMMENDATIONS,
-                  IconsData.RECOMENDATION_ICON),
+                  IconsData.RECOMMENDATION_ICON),
               DrawerItemMobile(
                   "Acervo", RouteNames.COLLECTION, IconsData.COLLECTION_ICON),
             ],

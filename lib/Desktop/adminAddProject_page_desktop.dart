@@ -1,3 +1,9 @@
+/// Widget responsável por exibir a página de adição de projeto (Admin - versão desktop).
+///
+/// {@category Desktop}
+/// {@subCategory Page}
+// ignore: library_names
+library AdminAddProjectPageDesktop;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
@@ -22,6 +28,11 @@ import 'package:site_historia/Model/teacher_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:site_historia/Store/teacher_store.dart';
 
+///  A montagem do formulário é composta pelos widgets `CustomHtmlEditor()` que generaliza o widget de edição de texto,
+///  `ImageWidget()` que generaliza a exibição e seleção da imagem do projeto, `ParticipantWidgetDesktop()`
+///  que exibe o widget de seleção de participantes e o `TeacherWidgetDesktop()` que exibe
+///  os professores a serem selecionados para o projeto.Por fim, Valida os dados e caso retorno seja verdadeiro,
+///  é inserido no banco de dados.
 class AdminAddProjectPageDesktop extends StatefulWidget {
   @override
   _AdminAddProjectPageDesktopState createState() =>

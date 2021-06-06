@@ -1,10 +1,15 @@
+/// Classe responsável realizar as operações do objeto `Teacher` no banco de dados.
+///
+/// {@category Firebase}
+// ignore: library_names
+library TeacherFirestore;
 import 'package:image_picker/image_picker.dart';
 import 'package:site_historia/Model/project_model.dart';
 import 'package:site_historia/Model/teacher_model.dart';
 import 'package:firebase/firebase.dart';
 
 class TeacherFirestore {
-
+  /// Retorna todos os professores do banco de dados.
   static getTeachers() async {
     var query = firestore().collection("teachers").orderBy('name');
     var result = await query.get();
@@ -15,7 +20,7 @@ class TeacherFirestore {
     });
     return teachers;
   }
-
+  /// Adiciona um professor ao banco de dados.
   static addTeacher(
       String name,
       PickedFile image,
@@ -30,18 +35,18 @@ class TeacherFirestore {
       var imageUrl = await task.ref.getDownloadURL();
 
       await firestore().collection("projects").get().then((listProjects) =>
-        listProjects.docs.forEach((project) =>
-          projects.forEach((element) async{
-            if(project.data()['id']==element.id){
-             var query = await firestore().collection("projects").doc(project.data()['id'].toString()).get();
-             Project proj = Project.fromJson(query.data());
-             proj.teachers.add(Teacher.fromJsonSimple({
-             'id':nextId,'name':name,}
-             ));
-             await firestore().collection("projects").doc(project.data()['id'].toString()).update(data: proj.toJson());
-            }
-          })
-        )
+          listProjects.docs.forEach((project) =>
+              projects.forEach((element) async{
+                if(project.data()['id']==element.id){
+                  var query = await firestore().collection("projects").doc(project.data()['id'].toString()).get();
+                  Project proj = Project.fromJson(query.data());
+                  proj.teachers.add(Teacher.fromJsonSimple({
+                    'id':nextId,'name':name,}
+                  ));
+                  await firestore().collection("projects").doc(project.data()['id'].toString()).update(data: proj.toJson());
+                }
+              })
+          )
       );
       Teacher teacher = Teacher(
         id: nextId,
@@ -58,6 +63,7 @@ class TeacherFirestore {
     }
   }
 
+  /// Atualiza as informações de um professor no banco de dados.
   static updateTeacher(
       Teacher teacher,
       String name,
@@ -92,16 +98,14 @@ class TeacherFirestore {
 
               var query = await firestore().collection("projects").doc(
                   pj.id.toString()).get();
-            Project proj = Project.fromJson(query.data());
-            proj.teachers.removeWhere((element) =>
-            element.id == teacher.id);
-            await firestore().collection("projects").doc(
-                pj.id.toString()).update(data: proj.toJson());
-          }
-
-    }
-              )
-
+              Project proj = Project.fromJson(query.data());
+              proj.teachers.removeWhere((element) =>
+              element.id == teacher.id);
+              await firestore().collection("projects").doc(
+                  pj.id.toString()).update(data: proj.toJson());
+            }
+           }
+          )
       );
       Teacher teacherUpdated = Teacher(
         id: teacher.id,
@@ -119,10 +123,11 @@ class TeacherFirestore {
     }
   }
 
+  /// Exclui um professor do banco de dados.
   static deleteTeacher(int id) async {
     await firestore().collection("projects").get().then((listProjs){
-        listProjs.docs.forEach((project) {
-          project.data()['teachers'].forEach((item) async {
+      listProjs.docs.forEach((project) {
+        project.data()['teachers'].forEach((item) async {
           if(item['id']==id){
             var query = await firestore().collection("projects").doc(project.data()['id'].toString()).get();
             Project proj = Project.fromJson(query.data());
@@ -130,16 +135,9 @@ class TeacherFirestore {
             await firestore().collection("projects").doc(project.data()['id'].toString()).update(data: proj.toJson());
           }
         });}
-    );});
+      );});
     await firestore().collection("teachers").doc(id.toString()).delete();
     await storage().ref().child("teachers/$id.png").delete();
 
-  }
-
-
-  Future<String> getTeacherImage(int idTeacher) async {
-    var result = await storage().ref().child("teachers").listAll();
-    Uri url = await result.items[idTeacher].getDownloadURL();
-    return url.toString();
   }
 }

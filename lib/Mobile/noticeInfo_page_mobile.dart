@@ -1,3 +1,10 @@
+/// Widget responsável por exibir informações de notícias (versão mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Page}
+// ignore: library_names
+library NoticeInfoPageMobile;
+
 import 'package:flutter/material.dart';
 import 'package:site_historia/Components/widget/audioViewer_component.dart';
 import 'package:site_historia/Components/widget/author_component.dart';
@@ -6,6 +13,10 @@ import 'package:site_historia/Components/widget/htmlViewer_component.dart';
 import 'package:site_historia/Mobile/footer/footer_mobile.dart';
 import 'package:site_historia/Model/notice_model.dart';
 
+/// Widget que recebe um objeto `Notice`. Onde são organizadas as informações da notícia.
+/// Utiliza o widget `HtmlViewer(String conteudo)` para generalizar o visualizador de html,
+/// `AuthorInfo(String author, String datePost)` para generalizar a exibição
+/// de informações sobre o autor e o `AudioViewer(String url)` para exibir o áudio.
 class NoticeInfoPageMobile extends StatelessWidget {
   final Notice notice;
   NoticeInfoPageMobile(this.notice);

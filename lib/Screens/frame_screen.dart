@@ -1,3 +1,8 @@
+/// Tela responsável por exibir as informações de quadros.
+///
+/// {@category Screen}
+// ignore: library_names
+library FrameScreen;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -16,6 +21,10 @@ import 'package:site_historia/Support/routesName_support.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import '../Mobile/drawer/navigation_drawer_component.dart';
 
+/// O Widget redireciona para duas telas diferentes, o desktop conta com o `CustomAppBarDesktop` e a mobile
+/// possui `NavigationDrawer`. O método `getFrames()` é chamado para
+/// carregar as informações de quadros do banco de dados. Possui um Widget para
+/// desktop (`FramePageDesktop(Frame quadro)`) e outro para mobile (`FramePageMobile(Frame quadro)`).
 class FrameScreen extends StatefulWidget {
   final String idFrame;
   FrameScreen(this.idFrame);

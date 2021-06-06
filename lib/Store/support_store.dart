@@ -1,5 +1,8 @@
-library dmp;
-
+/// Store responsável pelo gerenciamento e validação dos formulários, usado em adicionar/atualizar Projetos, Notícias, Quadros e Professores.
+///
+/// {@category Store}
+// ignore: library_names
+library SupportStore;
 import 'package:file_picker/file_picker.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,180 +12,225 @@ import 'package:site_historia/Model/notice_model.dart';
 import 'package:site_historia/Support/errorHander_support.dart';
 import 'package:site_historia/Model/project_model.dart';
 import 'package:site_historia/Model/teacher_model.dart';
-import 'dart:math';
-import 'dart:collection';
 import 'package:html/parser.dart';
-part 'package:site_historia/Support/DiffPackage/dmp_class.dart';
-part 'package:site_historia/Support/DiffPackage/diff_class.dart';
-part 'package:site_historia/Support/DiffPackage/patch_class.dart';
+import 'package:site_historia/Support/DiffPackage/dmp_class.dart';
+import 'package:site_historia/Support/DiffPackage/diff_class.dart';
 
 part 'support_store.g.dart';
 
 class SupportStore = _SupportStoreBase with _$SupportStore;
 
 abstract class _SupportStoreBase with Store {
+  /// Usado em projetos, notícias e quadros e usado como nome em professor.
   @observable
   String _title = "";
 
+  /// Usado em notícias e quadros.
   @observable
   String _subtitle = "";
 
+  /// Usado em notícias para definir o tipo de notícia.
   @observable
   String _type = "Podcast";
 
+  /// Usado em notícias para definir a tag da notícia.
   @observable
   String _tag = "Podcast";
 
+  /// Usado em notícias para definir se a notícia aparece ou não na página principal.
   @observable
   bool _isTopHeader = false;
 
+  /// Usado em professores para gerenciar o link digitado.
   @observable
   String _link = "";
 
+  /// Usado em notícias e quadros para gerenciar o arquivo de áudio.
   @observable
   PlatformFile _audioFile = PlatformFile();
 
+  /// Usado em notícias e quadros para gerenciar o arquivo de vídeo.
   @observable
   PlatformFile _videoFile = PlatformFile();
 
+  /// Usado em projeto, notícias, quadros e professores para gerenciar a imagem.
   @observable
   PickedFile? _pathImage = PickedFile("");
 
+  /// Usado em quadros para gerenciar a subtítulo da imagem.
   @observable
   String? _subtitleImage = "";
 
+  /// Usado em projetos, notícias e quadros para gerenciar o conteúdo de texto.
   @observable
   String? _htmlContent = "";
 
+  /// Usado em quadros para gerenciar o texto de vídeo selecionado.
   @observable
   String? _urlPopUp = "";
 
+  /// Utilizada para fazer o controle quando um conteúdo é excluído.
   @observable
   bool? _isLoading = false;
 
+  /// Armazena os professores para ser utilizados nas checkboxes em projetos.
   @observable
   ObservableList<Teacher> teacherLocal = ObservableList<Teacher>();
 
+  /// Armazena os projetos para ser utilizados nas checkboxes em professores.
   @observable
   ObservableList<Project> projectLocal = ObservableList<Project>();
 
+  /// Armazena os participantes para ser utilizados nas checkboxes em projetos.
   @observable
   ObservableList<String> participantsLocal = ObservableList<String>();
 
+  ///getter title
   @computed
   String get title => this._title;
 
+  ///getter subtitle
   @computed
   String get subtitle => this._subtitle;
 
+  ///getter type
   @computed
   String get type => this._type;
 
+  ///getter tag
   @computed
   String get tag => this._tag;
 
+  ///getter isTopHeader
   @computed
   bool get isTopHeader => this._isTopHeader;
 
+  ///getter link
   @computed
   String get link => this._link;
 
+  ///getter pathImage
   @computed
   PickedFile? get pathImage => this._pathImage;
 
+  ///getter subtitleImage
   @computed
   String? get subtitleImage => this._subtitleImage;
 
+  ///getter audioFile
   @computed
   PlatformFile? get audioFile => this._audioFile;
 
+  ///getter videoFile
   @computed
   PlatformFile? get videoFile => this._videoFile;
 
+  ///getter htmlContent
   @computed
   String? get htmlContent => this._htmlContent;
 
+  ///getter urlPopUp
   @computed
   String? get urlPopUp => this._urlPopUp;
 
+  ///getter isLoading
   @computed
   bool? get isLoading => this._isLoading;
 
+  ///mensagem de erro de título
   @observable
   String _msgErrorTitle = "";
 
+  ///mensagem de erro de subtítulo
   @observable
   String _msgErrorSubtitle = "";
 
-  @observable
-  String _msgErrorTopHeader = "";
-
+  ///mensagem de erro de imagem
   @observable
   String _msgErrorImage = "";
 
+  ///mensagem de erro de áudio
   @observable
   String _msgErrorAudio = "";
 
+  ///mensagem de erro de conteúdo
   @observable
   String _msgErrorContent = "";
 
+  ///mensagem de erro de professor
   @observable
   String _msgErrorTeacher = "";
 
+  ///mensagem de erro de projeto
   @observable
   String _msgErrorProject = "";
 
+  ///mensagem de erro de participantes
   @observable
   String _msgErrorParticipants = "";
 
+  ///mensagem de erro de tamanho de participantes
   @observable
   String _msgErrorParticipantsSize = "";
 
+  ///mensagem de erro quando abre o pop up de inserir vídeo.
   @observable
   String _msgErrorPopUp = "";
 
+  ///getter msgErrorTitle
   @computed
   String get msgErrorTitle => this._msgErrorTitle;
 
+  ///getter msgErrorSubTitle
   @computed
   String get msgErrorSubTitle => this._msgErrorSubtitle;
 
-  @computed
-  String get msgErrorTopHeader => this._msgErrorTopHeader;
-
+  ///getter msgErrorImage
   @computed
   String get msgErrorImage => this._msgErrorImage;
 
+  ///getter msgErrorAudio
   @computed
   String get msgErrorAudio => this._msgErrorAudio;
 
+  ///getter msgErrorContent
   @computed
   String get msgErrorContent => this._msgErrorContent;
 
+  ///getter msgErrorTeacher
   @computed
   String get msgErrorTeacher => this._msgErrorTeacher;
 
+  ///getter msgErrorProject
   @computed
   String get msgErrorProject => this._msgErrorProject;
 
+  ///getter msgErrorParticipants
   @computed
   String get msgErrorParticipants => this._msgErrorParticipants;
 
+  ///getter msgErrorParticipantsSize
   @computed
   String get msgErrorParticipantsSize => this._msgErrorParticipantsSize;
 
+  ///getter msgErrorPopUp
   @computed
   String get msgErrorPopUp => this._msgErrorPopUp;
 
+  /// Controle para verificar se o menu vertical na página do admin está expandido.
   @observable
   bool verticalIsMax = true;
 
+  /// Controle para obter o conteúdo de texto antes de ser alterado.
   String afterContent = "";
 
+  /// Controle para validar as imagens que são inseridas no banco de dados durante a criação.
   bool created = false;
 
+  /// Controle para validar as imagens que são inseridas no banco de dados durante a atualização.
   bool updated = false;
 
+  /// Atualiza a variável title.
   @action
   updateTitle(String newTitle) {
     if (newTitle != "") {
@@ -191,6 +239,7 @@ abstract class _SupportStoreBase with Store {
     this._title = newTitle;
   }
 
+  /// Atualiza a variável subtitle.
   @action
   updateSubTitle(String newSubtitle) {
     if (newSubtitle != "") {
@@ -199,26 +248,31 @@ abstract class _SupportStoreBase with Store {
     this._subtitle = newSubtitle;
   }
 
+  /// Atualiza a variável type.
   @action
   updateType(String newType) {
     this._type = newType;
   }
 
+  /// Atualiza a variável tag.
   @action
   updateTag(String newTag) {
     this._tag = newTag;
   }
 
+  /// Atualiza a variável isTopHeader.
   @action
   updateTopHeader(bool newTopHeader) {
     this._isTopHeader = newTopHeader;
   }
 
+  /// Atualiza a variável link.
   @action
   updateLink(String newLink) {
     this._link = newLink;
   }
 
+  /// Atualiza a variável audioFile.
   @action
   updateAudio(PlatformFile? newAudio) {
     if (newAudio!.name != null) {
@@ -227,6 +281,7 @@ abstract class _SupportStoreBase with Store {
     this._audioFile = newAudio;
   }
 
+  /// Atualiza a variável videoFile.
   @action
   updateVideo(PlatformFile? newVideo) {
     if (newVideo!.name != null) {
@@ -235,6 +290,7 @@ abstract class _SupportStoreBase with Store {
     this._videoFile = newVideo;
   }
 
+  /// Atualiza a variável pathImage.
   @action
   updatePath(PickedFile? newPath) {
     if (newPath!.path != "") {
@@ -243,17 +299,19 @@ abstract class _SupportStoreBase with Store {
     this._pathImage = newPath;
   }
 
+  /// Atualiza a variável subtitleImage.
   @action
   updateSubtitleImage(String? newSubtitle) {
     this._subtitleImage = newSubtitle;
   }
 
+  /// Atualiza a variável htmlContent e remove a imagem do banco de dados caso ela seja removida do conteúdo.
   @action
   updateContent(dynamic store, String? value, HtmlEditorController? controller,
       String? id) async {
     if (htmlContent != value) {
       List<Diff> difference =
-          DiffMatchPatch().diff_main(this.afterContent, value);
+      DiffMatchPatch().diff_main(this.afterContent, value);
       difference.forEach((Diff e) async {
         if (e.operation == Operation.delete && e.text!.contains("img")) {
           if (e.text!.substring(e.text!.length - 1) == "<") {
@@ -278,10 +336,12 @@ abstract class _SupportStoreBase with Store {
     }
   }
 
+  /// Atualiza a variável afterContent.
   updateAfterContent(String? content) {
     this.afterContent = content!;
   }
 
+  /// Atualiza a variável urlPopUp.
   @action
   updateUrlPopUp(String newUrl) {
     if (newUrl != "") {
@@ -290,16 +350,19 @@ abstract class _SupportStoreBase with Store {
     this._urlPopUp = newUrl;
   }
 
+  /// Atualiza a variável isLoading.
   @action
   setLoading(bool value) {
     this._isLoading = value;
   }
 
+  /// Atualiza a variável verticalIsMax.
   @action
   changeVerticalBar() {
     this.verticalIsMax = !this.verticalIsMax;
   }
 
+  /// Obtém os professores localmente e verifica se eles estão com o checkbox selecionado através da variável booleana `checked`.
   List<Teacher> getTeachers() {
     List<Teacher> teachers = [];
     for (int i = 0; i < teacherLocal.length; i++) {
@@ -310,6 +373,7 @@ abstract class _SupportStoreBase with Store {
     return teachers;
   }
 
+  /// inicializa a variável teacherLocal, onde verifica se há algum professor selecionado para carregar os dados.
   @action
   createTeacherLocal(List<Teacher> teachers, Project? project) {
     if (project != null && teacherLocal.isEmpty) {
@@ -335,6 +399,7 @@ abstract class _SupportStoreBase with Store {
     }
   }
 
+  /// Inicializa a variável projectLocal, onde verifica se há algum projeto selecionado para carregar os dados.
   @action
   createProjectLocal(List<Project> projects, Teacher? teacher) {
     if (teacher != null && projectLocal.isEmpty) {
@@ -359,6 +424,7 @@ abstract class _SupportStoreBase with Store {
     }
   }
 
+  /// Atualiza a variável msgErrorTeachers.
   @action
   updateTeacherLocal(Teacher teacher, int index) {
     if (msgErrorTeacher != "") {
@@ -373,6 +439,7 @@ abstract class _SupportStoreBase with Store {
         projects: teacher.projects);
   }
 
+  /// Atualiza a variável msgErrorProject.
   @action
   updateProjectLocal(Project project, int index) {
     if (msgErrorProject != "") {
@@ -389,6 +456,7 @@ abstract class _SupportStoreBase with Store {
         participants: project.participants,
         checked: !project.checked);
   }
+  /// Obtém os projetos localmente e verifica se eles estão com o checkbox selecionado através da variável booleana `checked`.
 
   List<Project> getProjects() {
     List<Project> projects = [];
@@ -400,6 +468,7 @@ abstract class _SupportStoreBase with Store {
     return projects;
   }
 
+  /// gerencia a adição/remoção em participantsLocal de acordo com o tamanho do vetor escolhido pelo usuário
   @action
   addParticipants(int size) {
     int lengthParticipants = participantsLocal.length;
@@ -418,6 +487,7 @@ abstract class _SupportStoreBase with Store {
     }
   }
 
+  /// Obtém todos os participantes que não estão com o nome em branco.
   List<String> getParticipantsLocalFilled() {
     List<String> participants = [];
     for (int i = 0; i < participantsLocal.length; i++) {
@@ -428,6 +498,7 @@ abstract class _SupportStoreBase with Store {
     return participants;
   }
 
+  /// Atualiza um item do vetor participantsLocal.
   @action
   updateParticipants(String text, int index) {
     participantsLocal[index] = text;
@@ -437,6 +508,7 @@ abstract class _SupportStoreBase with Store {
     }
   }
 
+  /// Gera a mensagem de erro de acordo com o enum `ErrorForm`.
   generateMsgError(ErrorForm type, String msg) {
     switch (type) {
       case ErrorForm.Title:
@@ -469,6 +541,7 @@ abstract class _SupportStoreBase with Store {
     }
   }
 
+  /// Remove a mensagem de erro de acordo com o enum `ErrorForm`.
   clearError(ErrorForm type) {
     switch (type) {
       case ErrorForm.Title:
@@ -501,6 +574,7 @@ abstract class _SupportStoreBase with Store {
     }
   }
 
+  /// Carrega os dados anteriores para a atualização de um projeto.
   loadInitialDataProject(Project project) {
     updatePath(PickedFile(project.imageHeader));
     updateTitle(project.name);
@@ -512,6 +586,7 @@ abstract class _SupportStoreBase with Store {
     }
   }
 
+  /// Carrega os dados anteriores para a atualização de uma notícia.
   loadInitialDataNotice(Notice notice) {
     updateTitle(notice.title);
     updateSubTitle(notice.subtitle);
@@ -523,6 +598,7 @@ abstract class _SupportStoreBase with Store {
     updateContent(null, notice.content, null, notice.id.toString());
   }
 
+  /// Carrega os dados anteriores para a atualização de um quadro.
   loadInitialDataFrame(Frame frame) {
     updateTitle(frame.title);
     updateSubTitle(frame.subtitle);
@@ -533,12 +609,15 @@ abstract class _SupportStoreBase with Store {
     updateContent(null, frame.content, null, frame.id.toString());
   }
 
+  /// Carrega os dados anteriores para a atualização de um professor.
+
   loadInitialDataTeacher(Teacher teacher) {
     updateTitle(teacher.name);
     updateLink(teacher.link);
     updatePath(PickedFile(teacher.image));
   }
 
+  /// Valida a parte 1/2 da página de projeto versão celular.
   validateProjectMobileTab1() {
     String err = "";
     if (title == "") {
@@ -546,7 +625,7 @@ abstract class _SupportStoreBase with Store {
       err += "err1";
     } else if (title.length > 40) {
       generateMsgError(
-          ErrorForm.Title, "O titulo não ter mais de 40 caracteres.");
+          ErrorForm.Title, "O título não ter mais de 40 caracteres.");
       err += "err2";
     } else {
       clearError(ErrorForm.Title);
@@ -558,7 +637,7 @@ abstract class _SupportStoreBase with Store {
       clearError(ErrorForm.Image);
     }
     if (htmlContent == "") {
-      generateMsgError(ErrorForm.Content, "O conteudo não pode estar vazio.");
+      generateMsgError(ErrorForm.Content, "O conteúdo não pode estar vazio.");
       err += "err4";
     } else {
       this._htmlContent = htmlContent!.replaceAll("font-family", "");
@@ -579,6 +658,7 @@ abstract class _SupportStoreBase with Store {
     }
   }
 
+  /// Valida a parte 2/2 da página de projeto versão celular.
   validateProjectMobileTab2() {
     String err = "";
     if (getParticipantsLocalFilled().length == 0) {
@@ -595,6 +675,7 @@ abstract class _SupportStoreBase with Store {
     }
   }
 
+  /// Valida o projeto para versão computador.
   validateProjectDesktop() {
     String err = "";
     if (title == "") {
@@ -602,7 +683,7 @@ abstract class _SupportStoreBase with Store {
       err += "err1";
     } else if (title.length > 40) {
       generateMsgError(
-          ErrorForm.Title, "O titulo não ter mais de 40 caracteres.");
+          ErrorForm.Title, "O título não ter mais de 40 caracteres.");
       err += "err2";
     } else {
       clearError(ErrorForm.Title);
@@ -641,6 +722,7 @@ abstract class _SupportStoreBase with Store {
     }
   }
 
+  /// Valida a notícia.
   validateNotice() {
     String err = "";
     if (title == "") {
@@ -648,7 +730,7 @@ abstract class _SupportStoreBase with Store {
       err += "err1";
     } else if (title.length > 40) {
       generateMsgError(
-          ErrorForm.Title, "O titulo não ter mais de 40 caracteres.");
+          ErrorForm.Title, "O título não ter mais de 40 caracteres.");
       err += "err2";
     } else {
       clearError(ErrorForm.Title);
@@ -697,6 +779,7 @@ abstract class _SupportStoreBase with Store {
     }
   }
 
+  /// Valida o participante dentro da seção de adicionar/remover Projetos.
   validateParticipant(String? value) {
     if (int.tryParse(value!) != null) {
       int num = int.parse(value);
@@ -709,10 +792,11 @@ abstract class _SupportStoreBase with Store {
         clearError(ErrorForm.Participant);
       }
     } else {
-      generateMsgError(ErrorForm.ParticipantSize, "Digite um numero.");
+      generateMsgError(ErrorForm.ParticipantSize, "Digite um número.");
     }
   }
 
+  /// Valida o quadro.
   validateFrame() {
     String err = "";
     if (title == "") {
@@ -720,7 +804,7 @@ abstract class _SupportStoreBase with Store {
       err += "err1";
     } else if (title.length > 40) {
       generateMsgError(
-          ErrorForm.Title, "O titulo não ter mais de 40 caracteres.");
+          ErrorForm.Title, "O título não ter mais de 40 caracteres.");
       err += "err2";
     } else {
       clearError(ErrorForm.Title);
@@ -760,6 +844,7 @@ abstract class _SupportStoreBase with Store {
     }
   }
 
+  /// Valida o popUp para a inserção de vídeo.
   validatePopUp() {
     if (urlPopUp == "" && videoFile!.name == null) {
       this._msgErrorPopUp = "Selecione um tipo.";
@@ -770,6 +855,7 @@ abstract class _SupportStoreBase with Store {
     }
   }
 
+  /// Valida um professor.
   validateTeacher() {
     String err = "";
     if (title == "") {
@@ -806,6 +892,7 @@ abstract class _SupportStoreBase with Store {
     }
   }
 
+  /// Reseta os valores da classe para o valores padrão.
   clearData() {
     _pathImage = PickedFile("");
     _subtitleImage = "";
@@ -830,3 +917,5 @@ abstract class _SupportStoreBase with Store {
     created = false;
   }
 }
+
+

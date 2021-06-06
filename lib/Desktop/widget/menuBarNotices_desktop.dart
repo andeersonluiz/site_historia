@@ -1,3 +1,9 @@
+/// Widget responsável por exibir menu de seleção na página de noticias (versão desktop).
+///
+/// {@category Desktop}
+/// {@subCategory Widget}
+// ignore: library_names
+library MenuBarNoticesDesktop;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';

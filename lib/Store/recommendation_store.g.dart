@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'recommendation_store.dart';
+part of RecommendationStore;
 
 // **************************************************************************
 // StoreGenerator

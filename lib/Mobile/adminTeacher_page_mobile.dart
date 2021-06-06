@@ -1,3 +1,10 @@
+/// Widget responsável por exibir a lista de professores (Admin - versão mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Page}
+// ignore: library_names
+library AdminTeacherPageMobile;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -11,6 +18,8 @@ import 'package:site_historia/Store/teacher_store.dart';
 import 'package:site_historia/Support/routesName_support.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+/// Widget carrega todos os professores através do método `getTeachers()`. É composto pelo
+/// widget `AdminTeacherCard(Teacher professor)` que monta a exibição de cada professor.
 class AdminTeacherPageMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,10 @@
+/// Widget responsável por exibir a lista de quadros (Admin - versão mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Page}
+// ignore: library_names
+library AdminFramePageMobile;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -11,6 +18,8 @@ import 'package:site_historia/Store/frame_store.dart';
 import 'package:site_historia/Support/routesName_support.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+/// Widget carrega todos os quadros através do método `getFrames()`. É composto pelo
+/// widget `AdminFrameCardMobile(Frame quadro)` que monta a exibição de cada quadro.
 class AdminFramePageMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

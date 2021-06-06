@@ -1,8 +1,17 @@
+/// Widget responsável por exibir informações de podcast na página inicial (versão desktop).
+///
+/// {@category Desktop}
+/// {@subCategory Tile}
+// ignore: library_names
+library PodcastTileDesktop;
 import 'package:flutter/material.dart';
 import 'package:site_historia/Components/widget/customImage_component.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 import '../../Model/notice_model.dart';
 
+/// É feita a montagem de informações do podcast, onde recebe o objeto `Notice` que contém informações como:
+/// título e subtítulo do podcast e imagem, também possui o parâmetro `widthPercentage` que define a largura
+/// do Container onde os dados estão inseridos.
 class PodcastTileDesktop extends StatelessWidget {
   final Notice podcast;
   PodcastTileDesktop(this.podcast);

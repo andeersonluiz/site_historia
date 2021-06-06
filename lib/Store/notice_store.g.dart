@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'notice_store.dart';
+part of NoticeStore;
 
 // **************************************************************************
 // StoreGenerator
@@ -87,18 +87,18 @@ mixin _$NoticeStore on _NoticeStoreBase, Store {
     });
   }
 
-  final _$isEdittingAtom = Atom(name: '_NoticeStoreBase.isEditting');
+  final _$isEditingAtom = Atom(name: '_NoticeStoreBase.isEditing');
 
   @override
-  bool get isEditting {
-    _$isEdittingAtom.reportRead();
-    return super.isEditting;
+  bool get isEditing {
+    _$isEditingAtom.reportRead();
+    return super.isEditing;
   }
 
   @override
-  set isEditting(bool value) {
-    _$isEdittingAtom.reportWrite(value, super.isEditting, () {
-      super.isEditting = value;
+  set isEditing(bool value) {
+    _$isEditingAtom.reportWrite(value, super.isEditing, () {
+      super.isEditing = value;
     });
   }
 
@@ -155,11 +155,11 @@ mixin _$NoticeStore on _NoticeStoreBase, Store {
   }
 
   @override
-  dynamic changeEddting() {
+  dynamic changeEditing() {
     final _$actionInfo = _$_NoticeStoreBaseActionController.startAction(
-        name: '_NoticeStoreBase.changeEddting');
+        name: '_NoticeStoreBase.changeEditing');
     try {
-      return super.changeEddting();
+      return super.changeEditing();
     } finally {
       _$_NoticeStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -195,7 +195,7 @@ listNoticesFiltered: ${listNoticesFiltered},
 listRecentPodcast: ${listRecentPodcast},
 listRecentNotices: ${listRecentNotices},
 listSliders: ${listSliders},
-isEditting: ${isEditting},
+isEditing: ${isEditing},
 barSelected: ${barSelected}
     ''';
   }

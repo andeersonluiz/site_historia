@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of dmp;
+part of SupportStore;
 
 // **************************************************************************
 // StoreGenerator
@@ -109,13 +109,6 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   String get msgErrorSubTitle => (_$msgErrorSubTitleComputed ??=
           Computed<String>(() => super.msgErrorSubTitle,
               name: '_SupportStoreBase.msgErrorSubTitle'))
-      .value;
-  Computed<String>? _$msgErrorTopHeaderComputed;
-
-  @override
-  String get msgErrorTopHeader => (_$msgErrorTopHeaderComputed ??=
-          Computed<String>(() => super.msgErrorTopHeader,
-              name: '_SupportStoreBase.msgErrorTopHeader'))
       .value;
   Computed<String>? _$msgErrorImageComputed;
 
@@ -443,22 +436,6 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   set _msgErrorSubtitle(String value) {
     _$_msgErrorSubtitleAtom.reportWrite(value, super._msgErrorSubtitle, () {
       super._msgErrorSubtitle = value;
-    });
-  }
-
-  final _$_msgErrorTopHeaderAtom =
-      Atom(name: '_SupportStoreBase._msgErrorTopHeader');
-
-  @override
-  String get _msgErrorTopHeader {
-    _$_msgErrorTopHeaderAtom.reportRead();
-    return super._msgErrorTopHeader;
-  }
-
-  @override
-  set _msgErrorTopHeader(String value) {
-    _$_msgErrorTopHeaderAtom.reportWrite(value, super._msgErrorTopHeader, () {
-      super._msgErrorTopHeader = value;
     });
   }
 
@@ -848,7 +825,6 @@ urlPopUp: ${urlPopUp},
 isLoading: ${isLoading},
 msgErrorTitle: ${msgErrorTitle},
 msgErrorSubTitle: ${msgErrorSubTitle},
-msgErrorTopHeader: ${msgErrorTopHeader},
 msgErrorImage: ${msgErrorImage},
 msgErrorAudio: ${msgErrorAudio},
 msgErrorContent: ${msgErrorContent},

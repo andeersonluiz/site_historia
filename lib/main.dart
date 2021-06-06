@@ -20,10 +20,10 @@ import 'Theme/themeConfig.dart';
 import 'firebase/frame_firestore.dart';
 import 'firebase/project_firestore.dart';
 
+/// Método main, que inicializa o programa.
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   setPathUrlStrategy();
   runApp(MultiProvider(providers: [
     Provider<SupportStore>(
@@ -52,12 +52,13 @@ Future<void> main() async {
     )
   ], child: MyApp()));
 }
-
+/// Widget que inicializa o projeto.
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
 
+/// Widget que inicializa o projeto.
 class _MyAppState extends State<MyApp> {
   final username = "";
   var routes;
@@ -96,6 +97,7 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
+  /// Carrega os nomes de projetos e quadros para serem exibidos no dropdown do menu.
   _loadInitialData(BuildContext context) async {
     ProjectStore projectStore = Provider.of<ProjectStore>(context);
     FrameStore frameStore = Provider.of<FrameStore>(context);

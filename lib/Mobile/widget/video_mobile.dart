@@ -1,3 +1,10 @@
+/// Widget responsável por exibir o widget de seleção de vídeo (Admin - mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Widget}
+// ignore: library_names
+library VideoWidgetMobile;
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +17,8 @@ import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Components/widget/erroMsg_component.dart';
 import 'package:site_historia/Store/support_store.dart';
 
+///  O widget é composto por um método que exibe um pop up que pede para o usuário inserir
+///  um link ou arquivo de vídeo, os dados são validados com apenas um podendo ser escolhido.
 class VideoWidgetMobile extends StatelessWidget {
   final title;
   VideoWidgetMobile({required this.title});

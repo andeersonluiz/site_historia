@@ -1,9 +1,17 @@
+/// Widget responsável por exibir a página de Coordenação de história (versão desktop).
+///
+/// {@category Desktop}
+/// {@subCategory Page}
+// ignore: library_names
+library AboutPageDesktop;
 import 'package:flutter/material.dart';
 import 'package:site_historia/Components/widget/customImage_component.dart';
 import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Desktop/footer/footer_desktop.dart';
 import 'package:site_historia/Components/widget/listTeachers_component.dart';
 
+/// Widget exibe um texto sobre a coordenação de história e a lista de professores através do
+/// widget `ListTeachers()`.
 class AboutPageDesktop extends StatefulWidget {
   @override
   _AboutPageDesktopState createState() => _AboutPageDesktopState();

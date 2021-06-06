@@ -1,3 +1,9 @@
+/// Widget responsável por exibir informações de notícias (versão desktop).
+///
+/// {@category Desktop}
+/// {@subCategory Page}
+// ignore: library_names
+library NoticeInfoPageDesktop;
 import 'package:flutter/material.dart';
 import 'package:site_historia/Components/widget/audioViewer_component.dart';
 import 'package:site_historia/Components/widget/author_component.dart';
@@ -6,6 +12,10 @@ import 'package:site_historia/Components/widget/htmlViewer_component.dart';
 import 'package:site_historia/Desktop/footer/footer_desktop.dart';
 import 'package:site_historia/Model/notice_model.dart';
 
+/// Widget que recebe um objeto `Notice`. Onde são organizadas as informações da notícia.
+/// Utiliza o widget `HtmlViewer(String conteudo)` para generalizar o visualizador de html,
+/// `AuthorInfo(String author, String datePost)` para generalizar a exibição
+/// de informações sobre o autor e o `AudioViewer(String url)` para exibir o áudio.
 class NoticeInfoPageDesktop extends StatelessWidget {
   final Notice notice;
   NoticeInfoPageDesktop(this.notice);

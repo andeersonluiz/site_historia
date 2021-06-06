@@ -70,6 +70,7 @@ dependencies:
   flutter_html: ^2.0.0
   http: ^0.13.3
   units_converter: ^0.3.0+1
+  #dartdoc: ^0.44.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

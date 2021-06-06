@@ -1,3 +1,9 @@
+/// Widget responsável por exibir menu do site.
+///
+/// {@category Desktop}
+/// {@subCategory Drawer}
+// ignore: library_names
+library CustomAppBarDesktop;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Store/frame_store.dart';
@@ -8,6 +14,7 @@ import '../../Support/routesName_support.dart';
 import 'itemAppBar_desktop.dart';
 import 'itemPopupMenuAppBar_desktop.dart';
 
+/// Exibe o menu do site que é composto pelo widget `ItemAppBarDesktop()` e o `ItemPopUpMenuAppBarDesktop()`.
 class CustomAppBarDesktop extends StatefulWidget {
   @override
   _CustomAppBarDesktopState createState() => _CustomAppBarDesktopState();

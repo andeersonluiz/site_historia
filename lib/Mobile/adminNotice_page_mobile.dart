@@ -1,3 +1,10 @@
+/// Widget responsável por exibir a lista de notícias (Admin - versão mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Page}
+// ignore: library_names
+library AdminNoticePageMobile;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -12,6 +19,8 @@ import 'package:site_historia/Store/notice_store.dart';
 import 'package:site_historia/Support/routesName_support.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+/// Widget carrega todas as notícias através do método `getNotices()`. É composto pelo
+/// widget `AdminNoticeCardMobile(Notice noticia)` que monta a exibição de cada notícia.
 class AdminNoticePageMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -56,13 +65,13 @@ class AdminNoticePageMobile extends StatelessWidget {
                       border: Border.all(
                           width: 1.0, color: Theme.of(context).primaryColor),
                     ),
-                    child: noticeStore.isEditting
+                    child: noticeStore.isEditing
                         ? ListTile(
                             leading: Icon(Icons.check_circle),
                             title: CustomText("Salvar Alterações",
                                 style: Theme.of(context).textTheme.bodyText1),
                             onTap: () {
-                              noticeStore.changeEddting();
+                              noticeStore.changeEditing();
                               noticeStore.updateNotices(
                                   noticeStore.listNotices!.value);
                               CustomToast.showToast(
@@ -72,7 +81,7 @@ class AdminNoticePageMobile extends StatelessWidget {
                             leading: Icon(Icons.edit),
                             title: CustomText("Editar Menu Principal",
                                 style: Theme.of(context).textTheme.bodyText1),
-                            onTap: () => noticeStore.changeEddting()),
+                            onTap: () => noticeStore.changeEditing()),
                   ),
                 ),
                 for (int i = 0; i < listNotices.length; i++)

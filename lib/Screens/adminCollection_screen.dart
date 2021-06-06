@@ -1,9 +1,15 @@
+/// Tela responsável por exibir a página as informações de acervo (Admin).
+///
+/// {@category Screen}
+// ignore: library_names
+library AdminCollectionScreen;
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:site_historia/Components/page/adminCollection_page.dart';
 import 'package:site_historia/Desktop/appBar/verticalAppBar_desktop.dart';
 import 'package:site_historia/Mobile/drawer/adminNavigation_drawer_component.dart';
-
+/// O Widget redireciona para duas telas diferentes, o desktop conta com o `VerticalAppBar` e a mobile
+/// possui `AdminNavigatorDrawerMobile`.
 class AdminCollectionScreen extends StatefulWidget {
   @override
   _AdminCollectionScreenState createState() => _AdminCollectionScreenState();

@@ -1,3 +1,10 @@
+/// Widget responsável por exibir um card com informações do projeto (Admin - mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Widget}
+// ignore: library_names
+library AdminProjectCardMobile;
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/widget/customButton_component.dart';
@@ -7,6 +14,10 @@ import 'package:site_historia/Support/routesName_support.dart';
 import 'package:site_historia/Model/project_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+/// É feita a montagem do card, onde recebe um objeto `Project` que contém informações como:
+/// nome do projeto, data de postagem, autor, imagem, opções de excluir e editar projeto.
+/// Quando selecionada a opção de excluir é exibido um pop up confirmando a exclusão e no editar
+/// é redirecionado para rota `RouteNames.UPDATE_PROJECT`.
 class AdminProjectCardMobile extends StatelessWidget {
   final Project project;
   final double sizeCard = 130;

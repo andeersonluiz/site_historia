@@ -1,3 +1,10 @@
+/// Widget responsável por exibir os posts mais recentes na página inicial (versão mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Widget}
+// ignore: library_names
+library LatestPostsMobile;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -10,6 +17,8 @@ import 'package:velocity_x/velocity_x.dart';
 import '../../Model/notice_model.dart';
 import '../tile/postTile_mobile.dart';
 
+/// Carrega todas as notícias através do método `getRecentNotices()` que filtra as notícias com o valor `type=Noticia`.
+/// Utiliza o widget `PostTileMobile()´ para montar um Container com as informações do post.
 class LatestPostsMobile extends StatelessWidget {
   final widthPercentage;
   LatestPostsMobile(this.widthPercentage);
@@ -17,7 +26,6 @@ class LatestPostsMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     final noticeStore = Provider.of<NoticeStore>(context);
 
-    /**CONECTAR AO BD PARA CARREGAR ULTIMAS POSTAGENS DO SITE*/
     return Observer(
       builder: (ctx) {
         noticeStore.listRecentNotices ?? noticeStore.getRecentNotices();

@@ -1,3 +1,8 @@
+/// Tela responsável por exibir a página de atualizar Quadro (Admin).
+///
+/// {@category Screen}
+// ignore: library_names
+library AdminUpdateFrameScreen;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -13,6 +18,9 @@ import 'package:site_historia/Screens/loading_screen.dart';
 import 'package:site_historia/Store/frame_store.dart';
 import 'package:site_historia/Support/routesName_support.dart';
 
+/// O Widget redireciona para duas telas diferentes, o desktop conta com o `VerticalAppBar` e a mobile
+/// possui `AdminNavigatorDrawerMobile`. O método `getFrames()` é chamado  para
+/// carregar as informações de professor do banco de dados.
 class AdminUpdateFrameScreen extends StatefulWidget {
   final String idFrame;
 

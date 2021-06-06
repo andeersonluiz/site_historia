@@ -1,3 +1,9 @@
+/// Widget responsável por exibir um card com informações do notícia (Admin - desktop).
+///
+/// {@category Desktop}
+/// {@subCategory Widget}
+// ignore: library_names
+library AdminNoticeCardDesktop;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_switch/flutter_switch.dart';
@@ -10,6 +16,10 @@ import 'package:site_historia/Store/notice_store.dart';
 import 'package:site_historia/Support/routesName_support.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+/// É feita a montagem do card, onde recebe o index da Notícia que contém informações como:
+/// título da notícia, data de postagem, autor, imagem, opções de excluir e editar notícia.
+/// Quando selecionada a opção de excluir é exibido um pop up confirmando a exclusão e no editar
+/// é redirecionado para rota `RouteNames.UPDATE_NOTICE`.
 class AdminNoticeCardDesktop extends StatelessWidget {
   final int index;
   final double sizeCard = 200;
@@ -31,7 +41,7 @@ class AdminNoticeCardDesktop extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Observer(
-                        builder: (_) => noticeStore.isEditting
+                        builder: (_) => noticeStore.isEditing
                             ? Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: CustomText(
@@ -42,7 +52,7 @@ class AdminNoticeCardDesktop extends StatelessWidget {
                             : Container(),
                       ),
                       Observer(
-                        builder: (_) => noticeStore.isEditting
+                        builder: (_) => noticeStore.isEditing
                             ? FlutterSwitch(
                                 width: 70.0,
                                 height: 30.0,

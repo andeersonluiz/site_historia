@@ -1,3 +1,9 @@
+/// Widget responsável por exibir a lista de projetos (Admin - versão mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Page}
+// ignore: library_names
+library AdminProjectPageMobile;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -11,6 +17,8 @@ import 'package:site_historia/Support/routesName_support.dart';
 import 'package:site_historia/Model/project_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+/// Widget carrega todos os projetos através do método `getProjects()`. É composto pelo
+/// widget `AdminProjectCardMobile(Project projeto)` que monta a exibição de cada projeto.
 class AdminProjectPageMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

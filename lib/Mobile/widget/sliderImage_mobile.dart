@@ -1,3 +1,9 @@
+/// Widget responsável por exibir o Carousel na página inicial (versão mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Widget}
+// ignore: library_names
+library SliderImageMobile;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -10,19 +16,13 @@ import 'package:site_historia/Store/notice_store.dart';
 import '../../Components/widget/sliderContainer_component.dart';
 import '../../Model/notice_model.dart';
 
+/// Carrega todas as notícias através do método `getSliders()` que filtra as notícias com o valor `isTopHeader=true`.
 class SliderImageMobile extends StatefulWidget {
   @override
   _SliderImageMobileState createState() => _SliderImageMobileState();
 }
 
 class _SliderImageMobileState extends State<SliderImageMobile> {
-  final List<Color> colors = [
-    Colors.red,
-    Colors.green,
-    Colors.yellow,
-    Colors.blue,
-    Colors.orange
-  ];
   int _current = 0;
 
   @override

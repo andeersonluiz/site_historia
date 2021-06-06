@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'collection_store.dart';
+part of CollectionStore;
 
 // **************************************************************************
 // StoreGenerator

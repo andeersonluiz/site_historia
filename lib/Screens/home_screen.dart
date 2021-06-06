@@ -1,3 +1,8 @@
+/// Tela responsável por exibir a página de inicial.
+///
+/// {@category Screen}
+// ignore: library_names
+library HomeScreen;
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:site_historia/Desktop/appBar/custtomAppBar_desktop.dart';
@@ -7,6 +12,9 @@ import '../Desktop/home_page_desktop.dart';
 import '../Mobile/home_page_mobile.dart';
 import '../Mobile/drawer/navigation_drawer_component.dart';
 
+/// O Widget redireciona para duas telas diferentes, o desktop conta com o `CustomAppBarDesktop` e a mobile
+/// possui `NavigationDrawer`. Possui um Widget para
+/// desktop (`HomePageDesktop()`) e outro para mobile (`HomePageMobile()`).
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();

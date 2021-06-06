@@ -1,3 +1,8 @@
+/// Store responsável sobre as informações de acervo.
+///
+/// {@category Store}
+// ignore: library_names
+library CollectionStore;
 import 'package:file_picker/file_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:site_historia/Model/collection_item.dart';
@@ -9,12 +14,15 @@ part 'collection_store.g.dart';
 class CollectionStore = _CollectionStoreBase with _$CollectionStore;
 
 abstract class _CollectionStoreBase with Store {
+  ///Observável que guarda os dados dos acervos localmente.
   @observable
   Collection? collection;
 
+  ///Observável de controle que desabilita o botão enquando um acervo está sendo deletado.
   @observable
   bool isLoading = false;
 
+  /// Adiciona um acervo para a lista de filme.
   @action
   addMovie() {
     collection!.movies.add(new CollectionItem(
@@ -31,17 +39,20 @@ abstract class _CollectionStoreBase with Store {
     collection = newCollection;
   }
 
+  /// Atualiza o nome de um acervo de filme.
   @action
   updateRecommendationMovieName(int id, String name) {
     collection!.movies[id].name = name;
   }
 
+  /// Atualiza o link de um acervo de filme.
   @action
   updateRecommendationMovieUrl(int id, String url) async {
     collection!.movies[id].url = url;
     collection!.movies[id].urlName = url;
   }
 
+  /// Exclui um acervo de filme.
   @action
   removeMovie(CollectionItem collectionItem, int id) {
     collection!.movies.remove(collectionItem);
@@ -53,6 +64,7 @@ abstract class _CollectionStoreBase with Store {
     collection = newCollection;
   }
 
+  /// Adiciona um acervo para a lista de artigos.
   @action
   addArticle() {
     collection!.articles.add(new CollectionItem(
@@ -70,11 +82,13 @@ abstract class _CollectionStoreBase with Store {
     collection = newCollection;
   }
 
+  /// Atualiza o nome de um acervo de artigo.
   @action
   updateRecommendationArticleName(int id, String name) {
     collection!.articles[id].name = name;
   }
 
+  /// Atualiza o link de um acervo de artigo.
   @action
   updateRecommendationArticleUrl(int id, PlatformFile file) async {
     var url = await CollectionFirestore.insertFile("article", file, id);
@@ -89,6 +103,7 @@ abstract class _CollectionStoreBase with Store {
     saveCollection(collection!);
   }
 
+  /// Exclui um acervo de artigo.
   @action
   removeArticle(CollectionItem collectionItem, int id) {
     if (collectionItem.urlName != "") {
@@ -104,6 +119,7 @@ abstract class _CollectionStoreBase with Store {
     collection = newCollection;
   }
 
+  /// Adiciona um acervo para a lista de livros.
   @action
   addBook() {
     collection!.books.add(new CollectionItem(
@@ -119,11 +135,13 @@ abstract class _CollectionStoreBase with Store {
     collection = newCollection;
   }
 
+  /// Atualiza o nome de um acervo de livro.
   @action
   updateRecommendationBookName(int id, String name) {
     collection!.books[id].name = name;
   }
 
+  /// Atualiza o link de um acervo de livro.
   @action
   updateRecommendationBookUrl(int id, PlatformFile file) async {
     var url = await CollectionFirestore.insertFile(
@@ -140,6 +158,7 @@ abstract class _CollectionStoreBase with Store {
     saveCollection(collection!);
   }
 
+  /// Exclui um acervo de livro.
   @action
   removeBook(CollectionItem collectionItem, int id) {
     if (collectionItem.urlName != "") {
@@ -155,6 +174,7 @@ abstract class _CollectionStoreBase with Store {
     collection = newCollection;
   }
 
+  /// Adiciona um acervo para a lista de outros.
   @action
   addOther() {
     collection!.others.add(new CollectionItem(
@@ -170,11 +190,13 @@ abstract class _CollectionStoreBase with Store {
     collection = newCollection;
   }
 
+  /// Atualiza o nome de um acervo de outros.
   @action
   updateRecommendationOtherName(int id, String name) {
     collection!.others[id].name = name;
   }
 
+  /// Atualiza o link de um acervo de outros.
   @action
   updateRecommendationOtherUrl(int id, PlatformFile file) async {
     var url = await CollectionFirestore.insertFile(
@@ -191,6 +213,7 @@ abstract class _CollectionStoreBase with Store {
     saveCollection(collection!);
   }
 
+  /// Exclui um acervo de outros.
   @action
   removeOther(CollectionItem collectionItem, int id) {
     if (collectionItem.urlName != "") {
@@ -206,16 +229,20 @@ abstract class _CollectionStoreBase with Store {
     collection = newCollection;
   }
 
+  /// Atualiza o acervo no banco de dados.
   @action
   saveCollection(Collection collection) async {
     await CollectionFirestore.updateCollection(collection);
   }
 
+  /// Atualiza a variável isLoading.
   @action
   setLoading(bool value) {
     this.isLoading = value;
   }
 
+  /// Atualiza a variavel isLoading de um item da lista de artigos. Serve como controle para
+  /// utilizar o placeholder "Carregando..." quando um arquivo é inserido.
   @action
   setLoadingArticle(int index, bool value) {
     collection!.articles[index].isLoading = value;
@@ -227,6 +254,8 @@ abstract class _CollectionStoreBase with Store {
     collection = newCollection;
   }
 
+  /// Atualiza a variavel isLoading de um item da lista de livros. Serve como controle para
+  /// utilizar o placeholder "Carregando..." quando um arquivo é inserido.
   @action
   setLoadingBook(int index, bool value) {
     collection!.books[index].isLoading = value;
@@ -238,6 +267,8 @@ abstract class _CollectionStoreBase with Store {
     collection = newCollection;
   }
 
+  /// Atualiza a variavel isLoading de um item da lista de outros. Serve como controle para
+  /// utilizar o placeholder "Carregando..." quando um arquivo é inserido.
   @action
   setLoadingOther(int index, bool value) {
     collection!.others[index].isLoading = value;

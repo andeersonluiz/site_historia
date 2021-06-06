@@ -1,3 +1,8 @@
+/// Tela responsável por exibir as informações de notícias.
+///
+/// {@category Screen}
+// ignore: library_names
+library NoticeInfoScreen;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -16,6 +21,10 @@ import 'package:sticky_headers/sticky_headers.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../Mobile/drawer/navigation_drawer_component.dart';
 
+/// O Widget redireciona para duas telas diferentes, o desktop conta com o `CustomAppBarDesktop` e a mobile
+/// possui `NavigationDrawer`. O método `getNotices()` é chamado para
+/// carregar as informações de notícias do banco de dados. Possui um Widget para
+/// desktop (`NoticeInfoPageDesktop(Notice noticia)`) e outro para mobile (`NoticeInfoPageMobile(Notice noticia)`).
 class NoticeInfoScreen extends StatefulWidget {
   final id;
   NoticeInfoScreen(this.id);

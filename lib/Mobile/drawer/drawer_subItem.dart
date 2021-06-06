@@ -1,11 +1,22 @@
+/// Widget responsável por exibir um subitem no drawer da página do site.
+///
+/// {@category Mobile}
+/// {@subCategory Drawer}
+// ignore: library_names
+library DrawerItemMobile;
+
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
 import 'package:site_historia/Model/project_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+/// Padroniza a exibição de um subitem do drawer (Utilizado em projetos e quadros).
 class DrawerSubItemMobile extends StatelessWidget {
+  /// Objeto que é utilizado para o envio do id no redirecionamento e a exibição do título.
   final dynamic object;
+  /// Ícone que é exibido antes do texto.
   final IconData icon;
+  /// Rota que é redirecionado quando o item é clicado.
   final String path;
 
   DrawerSubItemMobile(this.object, this.path, this.icon);

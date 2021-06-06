@@ -1,3 +1,8 @@
+/// Store responsável pelas informações do professor.
+///
+/// {@category Store}
+// ignore: library_names
+library TeacherStore;
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:site_historia/Model/project_model.dart';
@@ -9,14 +14,17 @@ part 'teacher_store.g.dart';
 class TeacherStore = _TeacherStoreBase with _$TeacherStore;
 
 abstract class _TeacherStoreBase with Store {
+  /// Observável que salva a lista de professores localmente.
   @observable
   ObservableFuture? listTeachers;
 
+  /// Recupera a lista de professores do banco de dados.
   @action
   getTeachers() async {
     listTeachers = ObservableFuture(TeacherFirestore.getTeachers());
   }
 
+  /// Adiciona professor e valida se a operação do banco de dados foi feita corretamente.
   @action
   addTeacher(
       String name,
@@ -33,7 +41,7 @@ abstract class _TeacherStoreBase with Store {
       return false;
     }
   }
-
+  /// Atualiza professor e valida se a operação do banco de dados foi feita corretamente.
   @action
   updateTeacher(
       Teacher teacher,
@@ -51,11 +59,13 @@ abstract class _TeacherStoreBase with Store {
     }
   }
 
+  /// Deleta professor com base no identificador único.
   @action
   deleteTeacher(int id) async {
     await TeacherFirestore.deleteTeacher(id);
   }
 
+  /// Recupera professor com base no identificador único.
   @action
   getTeacherById(String id) {
     var result = listTeachers!.value

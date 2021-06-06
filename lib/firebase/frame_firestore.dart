@@ -1,3 +1,8 @@
+/// Classe responsável realizar as operações do objeto `Frame` no banco de dados.
+///
+/// {@category Firebase}
+// ignore: library_names
+library FrameFirestore;
 import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
@@ -8,6 +13,7 @@ import 'package:firebase/firebase.dart';
 import 'package:site_historia/Model/frame_model.dart';
 
 class FrameFirestore {
+  /// Retorna todos os quadros do banco de dados.
   static getFrames() async {
     var query = firestore().collection("frames").orderBy('id');
     var result = await query.get();
@@ -18,7 +24,7 @@ class FrameFirestore {
     });
     return listFrames;
   }
-
+  /// Retorna todos os quadros do banco de dados, ordenados por título.
   static getFramesSortedByTitle() async {
     var query = firestore().collection("frames").orderBy('title');
     var result = await query.get();
@@ -29,6 +35,7 @@ class FrameFirestore {
     return listFramesOrderedByName;
   }
 
+  /// Adiciona um quadro ao banco de dados.
   static Future<bool> addFrame(
     String title,
     String subtitle,
@@ -104,6 +111,7 @@ class FrameFirestore {
     return true;
   }
 
+  /// Atualiza um quadro no banco de dados.
   static Future<bool> updateFrame(
     Frame frame,
     String title,
@@ -184,6 +192,7 @@ class FrameFirestore {
     return true;
   }
 
+  /// Exclui um quadro do banco de dados.
   static deleteFrame(int id) async {
     await firestore().collection("frames").doc(id.toString()).delete();
     await storage().ref().child("frames/$id.png").delete();
@@ -192,6 +201,7 @@ class FrameFirestore {
     return;
   }
 
+  /// Insere uma imagem no banco de dados, na seção de quadros , e retorna a url da mesma.
   static convertBase64ToUrl(
       String fileName, Uint8List base64, String id) async {
     UploadTaskSnapshot task = await storage()
@@ -202,16 +212,21 @@ class FrameFirestore {
     var url = await task.ref.getDownloadURL();
     return url.toString();
   }
-
+  /// Remove uma imagem da seção de quadros no banco de dados.
   static removeFilename(String fileName, String id) async {
     await storage().ref("frames/$id(content)/$fileName").delete();
   }
 
+  /// Recebe o próximo id que será utilizado na inserção de um quadro.
   static getNextId() async {
     var result = await firestore().collection("frames").get();
     return result.docs.length + 1;
   }
 
+  /// Validador para excluir a(s) imagem(s) caso o usuário não crie o quadro.
+  ///
+  /// A cada inserção de imagem do usuário durante a criação/edição de texto, as imagens são salvas dentro do banco de dados.
+  /// A função é executada se o usuário inserir imagens mas não criar o quadro.
   static clearContent(String id, {DateTime? time}) async {
     var result = await storage().ref().child("frames/$id(content)").listAll();
     if (time != null) {

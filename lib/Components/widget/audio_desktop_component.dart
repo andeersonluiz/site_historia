@@ -7,6 +7,7 @@ import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Components/widget/erroMsg_component.dart';
 import 'package:site_historia/Store/support_store.dart';
 
+
 class AudioWidget extends StatelessWidget {
   final title;
   AudioWidget({required this.title});

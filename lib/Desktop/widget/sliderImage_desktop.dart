@@ -1,3 +1,9 @@
+/// Widget responsável por exibir o Carousel na página inicial (versão desktop).
+///
+/// {@category Desktop}
+/// {@subCategory Widget}
+// ignore: library_names
+library SliderImageDesktop;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -16,6 +22,7 @@ class SliderImageDesktop extends StatefulWidget {
   _SliderImageDesktopState createState() => _SliderImageDesktopState();
 }
 
+/// Carrega todas as notícias através do método `getSliders()` que filtra as notícias com o valor `isTopHeader=true`.
 class _SliderImageDesktopState extends State<SliderImageDesktop> {
   int _current = 0;
 

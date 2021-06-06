@@ -1,3 +1,10 @@
+/// Widget responsável por exibir a segunda parte da adição de projeto (Admin - versão mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Page}
+// ignore: library_names
+library AdminAddProjectParticipantPageMobile;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +19,8 @@ import 'package:site_historia/Support/routesName_support.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+/// Recebe o id do projeto e monta o formulário das informações de participantes. Também,
+/// valida os dados e caso retorno seja verdadeiro, é feita a inserção no banco de dados.
 class AdminAddProjectParticipantPageMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

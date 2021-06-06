@@ -1,3 +1,9 @@
+/// Widget responsável por exibir os podcasts mais recentes na página inicial (versão desktop).
+///
+/// {@category Desktop}
+/// {@subCategory Widget}
+// ignore: library_names
+library LatestPodcastDesktop;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -12,13 +18,13 @@ import '../../firebase/notice_firestore.dart';
 import '../../Model/notice_model.dart';
 import '../tile/podcastTile_desktop.dart';
 
+/// Carrega todas as notícias através do método `getRecentPodcasts()` que filtra as notícias com o valor `type=Podcast`.
+/// Utiliza o widget `PodcastTileDesktop()´ para montar um Container com as informações de podcast.
 class LatestPodcastDesktop extends StatelessWidget {
   final noticeFirestore = NoticeFirestore();
   @override
   Widget build(BuildContext context) {
-    /**CONECTAR AO BD PARA CARREGAR ULTIMOS PODCAST DO SITE*/
     final noticeStore = Provider.of<NoticeStore>(context);
-
     return Observer(
       builder: (ctx) {
         noticeStore.listRecentPodcast ?? noticeStore.getRecentPodcasts();

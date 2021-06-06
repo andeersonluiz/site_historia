@@ -1,7 +1,15 @@
+/// Widget responsável por exibir o footer (versão desktop).
+///
+/// {@category Desktop}
+/// {@subCategory Footer}
+// ignore: library_names
+library FooterDesktop;
+
 import 'package:flutter/material.dart';
 import '../../Components/widget/footerContact_component.dart';
 import '../../Components/widget/footerAbout_component.dart';
 
+/// Exibe o Footer da página com informações de contatos e texto sobre o site.
 class FooterDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

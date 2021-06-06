@@ -1,3 +1,10 @@
+/// Widget responsável por exibir o drawer da página de Admin.
+///
+/// {@category Mobile}
+/// {@subCategory Drawer}
+// ignore: library_names
+library AdminNavigatorDrawerMobile;
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
@@ -5,6 +12,7 @@ import 'package:site_historia/Support/IconsData_support.dart';
 import 'package:site_historia/Support/routesName_support.dart';
 import 'package:site_historia/Mobile/drawer/admin_drawer_item.dart';
 
+/// Exibe o drawer que é composto pelo widget `AdminDrawerItemMobile()`.
 class AdminNavigatorDrawerMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -45,7 +53,7 @@ class AdminNavigatorDrawerMobile extends StatelessWidget {
               AdminDrawerItemMobile("Professores", RouteNames.ADMIN_TEACHERS,
                   IconsData.TEACHER_ICON),
               AdminDrawerItemMobile("Recomendações", RouteNames.ADMIN_RECOMMENDATIONS,
-                  IconsData.RECOMENDATION_ICON),
+                  IconsData.RECOMMENDATION_ICON),
               AdminDrawerItemMobile("Acervo", RouteNames.ADMIN_COLLECTIONS,
                   IconsData.COLLECTION_ICON),
               AdminDrawerItemMobile("Sair", RouteNames.ADMIN, IconsData.LOGOUT_ICON),

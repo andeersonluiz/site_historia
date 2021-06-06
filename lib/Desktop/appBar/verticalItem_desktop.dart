@@ -1,3 +1,10 @@
+/// Widget responsável por um item do menu vertical na página do Admin.
+///
+/// {@category Desktop}
+/// {@subCategory Drawer}
+// ignore: library_names
+library VerticalItemDesktop;
+
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
@@ -5,10 +12,15 @@ import 'package:site_historia/Components/widget/customToast_component.dart';
 import 'package:site_historia/firebase/login_auth.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+/// Padroniza a exibição de um item do menu.
 class VerticalItemDesktop extends StatelessWidget {
+  /// Texto do item.
   final String title;
+  /// Rota que é redirecionado quando o item é clicado.
   final String path;
+  /// Icon que é exibido antes do texto.
   final IconData icon;
+  /// Controle para verificar se é exibido apenas o ícone.
   final bool isMini;
   VerticalItemDesktop(this.title, this.path, this.icon, {this.isMini = false});
   @override

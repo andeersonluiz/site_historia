@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-part of dmp;
+import 'package:site_historia/Support/DiffPackage/dmp_class.dart';
 
 /// Class representing one diff operation.
 class Diff {

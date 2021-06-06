@@ -1,3 +1,10 @@
+/// Widget responsável por exibir a primeira parte da adição de projeto (Admin - versão mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Page}
+// ignore: library_names
+library AdminAddProjectPageMobile;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
@@ -19,6 +26,10 @@ import 'package:site_historia/Store/teacher_store.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 import 'adminAddProjectParticipants_page_mobile.dart';
 
+///  A montagem do formulário é composta pelos widgets `CustomHtmlEditor()` que generaliza o widget de edição de texto,
+///  `ImageWidget()` que generaliza a exibição e seleção da imagem do projeto e o
+///  `AdminAddProjectParticipantPageMobile()` onde o usuário é redirecionado para segunda parte
+///  do formulário.
 class AdminAddProjectPageMobile extends StatefulWidget {
   @override
   _AdminAddProjectPageMobileState createState() =>

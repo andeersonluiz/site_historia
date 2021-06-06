@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'project_store.dart';
+part of ProjectStore;
 
 // **************************************************************************
 // StoreGenerator

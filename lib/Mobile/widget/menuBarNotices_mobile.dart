@@ -1,3 +1,10 @@
+/// Widget responsável por exibir menu de seleção na página de noticias (versão mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Widget}
+// ignore: library_names
+library MenuBarNoticesMobile;
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

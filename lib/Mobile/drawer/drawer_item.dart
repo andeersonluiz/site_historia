@@ -1,14 +1,24 @@
+/// Widget responsável por exibir o drawer da página do site.
+///
+/// {@category Mobile}
+/// {@subCategory Drawer}
+// ignore: library_names
+library DrawerItemMobile;
+
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+/// Padroniza a exibição de um item do drawer.
 class DrawerItemMobile extends StatelessWidget {
+  /// Ícone que é exibido antes do texto.
   final IconData icon;
+  /// Rota que é redirecionado quando o item é clicado.
   final String path;
+  /// Texto do item.
   final String title;
-  final bool clearData;
 
-  DrawerItemMobile(this.title, this.path, this.icon, {this.clearData = false});
+  DrawerItemMobile(this.title, this.path, this.icon);
   @override
   Widget build(BuildContext context) {
     return HoverButton(

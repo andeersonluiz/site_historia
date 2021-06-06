@@ -1,3 +1,9 @@
+/// Widget responsável controlar a exibição do menu vertical na página do Admin.
+///
+/// {@category Desktop}
+/// {@subCategory Drawer}
+// ignore: library_names
+library VerticalAppBar;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -5,6 +11,8 @@ import 'package:site_historia/Desktop/appBar/verticalAppBarMax_desktop.dart';
 import 'package:site_historia/Desktop/appBar/verticalAppBarMin_desktop.dart';
 import 'package:site_historia/Store/support_store.dart';
 
+/// Controla a exibição através da variável de controle `supportStore.verticalIsMax` se exibe
+/// o widget `VerticalAppBarMaxDesktop()` ou o `VerticalAppBarMinDesktop()`.
 class VerticalAppBar extends StatefulWidget {
   @override
   _VerticalAppBarState createState() => _VerticalAppBarState();

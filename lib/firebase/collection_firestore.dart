@@ -1,8 +1,14 @@
+/// Classe responsável realizar as operações do objeto `Collection` no banco de dados.
+///
+/// {@category Firebase}
+// ignore: library_names
+library CollectionFirestore;
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase/firebase.dart';
 import 'package:site_historia/Model/collection_model.dart';
 
 class CollectionFirestore {
+  /// Retorna o acervo do banco de dados.
   static getCollections() async {
     var query = firestore().collection("collections");
     var results = await query.get();
@@ -11,6 +17,7 @@ class CollectionFirestore {
     return collections;
   }
 
+  /// Atualiza o acervo no banco de dados.
   static updateCollection(Collection collection) async {
     await firestore()
         .collection("collections")

@@ -1,3 +1,8 @@
+/// Tela responsável por exibir as informações de acervo.
+///
+/// {@category Screen}
+// ignore: library_names
+library CollectionScreen;
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:site_historia/Components/widget/customLoading_component.dart';
@@ -10,6 +15,9 @@ import 'package:site_historia/firebase/collection_firestore.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import '../Mobile/drawer/navigation_drawer_component.dart';
 
+/// O Widget redireciona para duas telas diferentes, o desktop conta com o `CustomAppBarDesktop` e a mobile
+/// possui `NavigationDrawer`. O método `getCollections()` é chamado  para
+/// carregar as informações de acervo do banco de dados.
 class CollectionScreen extends StatefulWidget {
   @override
   _CollectionScreenState createState() => _CollectionScreenState();

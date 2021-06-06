@@ -1,3 +1,10 @@
+/// Widget responsável por exibir os podcasts mais recentes na página inicial (versão mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Widget}
+// ignore: library_names
+library LatestPodcastMobile;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -10,6 +17,8 @@ import 'package:velocity_x/velocity_x.dart';
 import '../../Model/notice_model.dart';
 import '../tile/podcastTile_mobile.dart';
 
+/// Carrega todas as notícias através do método `getRecentPodcasts()` que filtra as notícias com o valor `type=Podcast`.
+/// Utiliza o widget `PodcastTileMobile()´ para montar um Container com as informações de podcast.
 class LatestPodcastMobile extends StatelessWidget {
   final widthPercentageSize;
   LatestPodcastMobile({required this.widthPercentageSize});

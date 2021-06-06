@@ -1,8 +1,16 @@
+/// Widget responsável por exibir a página de Coordenação de história (versão mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Page}
+// ignore: library_names
+library AboutPageMobile;
 import 'package:flutter/material.dart';
 import 'package:site_historia/Components/widget/customImage_component.dart';
 import 'package:site_historia/Components/widget/listTeachers_component.dart';
 import 'package:site_historia/Mobile/footer/footer_mobile.dart';
 
+/// Widget exibe um texto sobre a coordenação de história e a lista de professores através do
+/// widget `ListTeachers()`.
 class AboutPageMobile extends StatefulWidget {
   @override
   _AboutPageMobileState createState() => _AboutPageMobileState();

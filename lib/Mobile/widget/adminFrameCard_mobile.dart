@@ -1,3 +1,10 @@
+/// Widget responsável por exibir um card com informações do quadro (Admin - mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Widget}
+// ignore: library_names
+library AdminFrameCardMobile;
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/widget/customButton_component.dart';
@@ -8,6 +15,10 @@ import 'package:site_historia/Store/frame_store.dart';
 import 'package:site_historia/Support/routesName_support.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+/// É feita a montagem do card, onde recebe o index do quadro que contém informações como:
+/// título do quadro, data de postagem, autor, imagem, opções de excluir e editar quadro.
+/// Quando selecionada a opção de excluir é exibido um pop up confirmando a exclusão e no editar
+/// é redirecionado para rota `RouteNames.UPDATE_FRAME`.
 class AdminFrameCardMobile extends StatelessWidget {
   final int index;
   final double sizeCard = 130;

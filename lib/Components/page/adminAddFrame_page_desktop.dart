@@ -1,3 +1,9 @@
+/// Widget responsável por exibir a  adição de quadro (Admin - versão desktop).
+///
+/// {@category Desktop}
+/// {@subCategory Page}
+// ignore: library_names
+library AdminAddFramePage;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
@@ -10,20 +16,24 @@ import 'package:site_historia/Components/widget/customToast_component.dart';
 import 'package:site_historia/Components/widget/erroMsg_component.dart';
 import 'package:site_historia/Components/widget/audio_desktop_component.dart';
 import 'package:site_historia/Components/widget/image_component.dart';
-import 'package:site_historia/Mobile/widget/video_mobile.dart';
+import 'package:site_historia/Desktop/widget/video_desktop.dart';
 import 'package:site_historia/Store/frame_store.dart';
 import 'package:site_historia/Store/support_store.dart';
 import 'package:site_historia/Support/routesName_support.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class AdminAddFramePageMobile extends StatefulWidget {
+///  A montagem do formulário é composta pelos widgets `CustomHtmlEditor()` que generaliza o widget de edição de texto,
+///  `ImageWidget()` que generaliza a exibição e seleção da imagem, `AudioWidget()` que exibe
+///  o widget de seleção de áudio e o `VideoWidgetMobile()` que exibe o widget para seleção de vídeo.
+///  Também é feita a validação e caso retorno seja verdadeiro os dados são inseridos no banco de dados.
+class AdminAddFramePage extends StatefulWidget {
   @override
-  _AdminAddFramePageMobileState createState() =>
-      _AdminAddFramePageMobileState();
+  _AdminAddFramePageState createState() =>
+      _AdminAddFramePageState();
 }
 
-class _AdminAddFramePageMobileState extends State<AdminAddFramePageMobile> {
+class _AdminAddFramePageState extends State<AdminAddFramePage> {
   int? nextId;
   FrameStore? frameStore;
   bool created = false;
@@ -33,7 +43,6 @@ class _AdminAddFramePageMobileState extends State<AdminAddFramePageMobile> {
 
     final supportStore = Provider.of<SupportStore>(context);
     frameStore = Provider.of<FrameStore>(context);
-
     /*CODE PBP*/
     supportStore.clearData();
   }
@@ -41,8 +50,8 @@ class _AdminAddFramePageMobileState extends State<AdminAddFramePageMobile> {
   @override
   Widget build(BuildContext context) {
     final supportStore = Provider.of<SupportStore>(context);
-    final frameStore = Provider.of<FrameStore>(context);
     final HtmlEditorController contentController = HtmlEditorController();
+    final frameStore = Provider.of<FrameStore>(context);
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.all(16.0),
@@ -98,13 +107,12 @@ class _AdminAddFramePageMobileState extends State<AdminAddFramePageMobile> {
               onChanged: (value) {
                 supportStore.updateSubtitleImage(value);
               },
-              maxCharacters: GlobalsVariables.maxCharactersSubTitle,
               initialValue: supportStore.subtitleImage,
             ),
             AudioWidget(
               title: "Audio (Opcional)",
             ),
-            VideoWidgetMobile(
+            VideoWidgetDesktop(
               title: "Video (Opcional)",
             ),
             CustomHtmlEditor(
@@ -113,7 +121,6 @@ class _AdminAddFramePageMobileState extends State<AdminAddFramePageMobile> {
               onChange: (text) => supportStore.updateContent(frameStore, text,
                   contentController, nextId == null ? null : nextId.toString()),
               onBeforeCommand: supportStore.updateAfterContent,
-              initialText: supportStore.htmlContent,
               mediaUploadInterceptor: (file, type) async {
                 nextId ??= await frameStore.getNextId();
                 var url = await frameStore.convertBase64ToUrl(
@@ -121,6 +128,7 @@ class _AdminAddFramePageMobileState extends State<AdminAddFramePageMobile> {
                 contentController.insertNetworkImage(url, filename: file.name!);
                 return false;
               },
+              initialText: supportStore.htmlContent,
             ),
             Observer(builder: (_) {
               return supportStore.msgErrorContent == ""
@@ -140,7 +148,7 @@ class _AdminAddFramePageMobileState extends State<AdminAddFramePageMobile> {
                         supportStore.subtitle,
                         supportStore.pathImage,
                         supportStore.subtitleImage!,
-                        supportStore.htmlContent,
+                        supportStore.htmlContent!,
                         supportStore.audioFile!,
                         supportStore.videoFile!.name != null
                             ? supportStore.videoFile!

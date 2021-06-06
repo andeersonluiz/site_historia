@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'frame_store.dart';
+part of FrameStore;
 
 // **************************************************************************
 // StoreGenerator

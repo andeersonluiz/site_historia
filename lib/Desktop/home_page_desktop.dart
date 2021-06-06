@@ -1,3 +1,9 @@
+/// Widget responsável por exibir a página inicial (versão desktop).
+///
+/// {@category Desktop}
+/// {@subCategory Page}
+// ignore: library_names
+library HomePageDesktop;
 import 'package:flutter/material.dart';
 
 import '../Theme/themeConfig.dart';
@@ -6,6 +12,9 @@ import 'widget/latestPodcast_desktop.dart';
 import 'widget/latestPosts_desktop.dart';
 import 'widget/sliderImage_desktop.dart';
 
+/// A tela inicial utiliza os widgets `SliderImageDesktop()` que exibe o Carousel com as notícias e
+/// usa os widgets `LatestPostsDesktop()` e `LatestPodcastDesktop()` para exibir, respectivamente, as postagens e podcasts
+/// mais recente.
 class HomePageDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

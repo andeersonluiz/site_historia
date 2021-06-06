@@ -1,3 +1,8 @@
+/// Tela responsável por exibir a página de notícias.
+///
+/// {@category Screen}
+// ignore: library_names
+library NoticeScreen;
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:site_historia/Desktop/appBar/custtomAppBar_desktop.dart';
@@ -7,6 +12,8 @@ import 'package:site_historia/Support/IconsData_support.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import '../Mobile/drawer/navigation_drawer_component.dart';
 
+/// O Widget redireciona para duas telas diferentes, o desktop conta com o `CustomAppBarDesktop` e a mobile
+/// possui `NavigationDrawer`. Possui um Widget para desktop (`NoticePageDesktop()`) e outro para mobile (`NoticePageMobile()`).
 class NoticeScreen extends StatefulWidget {
   @override
   _NoticeScreenState createState() => _NoticeScreenState();

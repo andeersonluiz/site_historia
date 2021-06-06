@@ -1,3 +1,9 @@
+/// Widget responsável por exibir a página de notícias (versão mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Page}
+// ignore: library_names
+library NoticePageMobile;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -10,6 +16,9 @@ import 'package:site_historia/Model/notice_model.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/notice_store.dart';
 
+/// Widget carrega todas as notícias através do método `getNotices()`.
+/// Usa o widget `MenuBarNoticesMobile()` que monta o menu de seleção de filtros e o `ListNotices()`
+/// que exibe a lista de notícias.
 class NoticePageMobile extends StatefulWidget {
   @override
   _NoticePageMobileState createState() => _NoticePageMobileState();

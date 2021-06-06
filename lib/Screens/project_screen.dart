@@ -1,3 +1,8 @@
+/// Tela responsável por exibir as informações de projetos.
+///
+/// {@category Screen}
+// ignore: library_names
+library ProjectScreen;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -16,6 +21,10 @@ import 'package:site_historia/Support/routesName_support.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import '../Mobile/drawer/navigation_drawer_component.dart';
 
+/// O Widget redireciona para duas telas diferentes, o desktop conta com o `CustomAppBarDesktop` e a mobile
+/// possui `NavigationDrawer`. O método `getProjects()` é chamado para
+/// carregar as informações de projetos do banco de dados. Possui um Widget para
+/// desktop (`ProjectPageDesktop(Project projeto)`) e outro para mobile (`ProjectPageMobile(Project projeto)`).
 class ProjectScreen extends StatefulWidget {
   final String idProject;
   ProjectScreen(this.idProject);

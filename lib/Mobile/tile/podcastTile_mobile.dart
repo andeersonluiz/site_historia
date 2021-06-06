@@ -1,8 +1,18 @@
+/// Widget responsável por exibir informações de podcast na página inicial (versão mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Tile}
+// ignore: library_names
+library PodcastTileMobile;
+
 import 'package:flutter/material.dart';
 import 'package:site_historia/Components/widget/customImage_component.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 import '../../Model/notice_model.dart';
 
+/// É feita a montagem de informações do podcast, onde recebe o objeto `Notice` que contém informações como:
+/// título e subtítulo do podcast e imagem, também possui o parâmetro `widthPercentage` que define a largura
+/// do Container onde os dados estão inseridos.
 class PodcastTileMobile extends StatelessWidget {
   final Notice podcast;
   final widthPercentage;

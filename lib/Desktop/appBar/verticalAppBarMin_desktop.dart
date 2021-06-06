@@ -1,9 +1,16 @@
+/// Widget responsável o menu vertical na página do Admin, versão reduzida (apenas ícones).
+///
+/// {@category Desktop}
+/// {@subCategory Drawer}
+// ignore: library_names
+library VerticalAppBarMinDesktop;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:site_historia/Desktop/appBar/verticalItem_desktop.dart';
 import 'package:site_historia/Support/IconsData_support.dart';
 import 'package:site_historia/Support/routesName_support.dart';
 
+/// Exibe o menu vertical que é composto pelo widget `VerticalItemDesktop()` com `isMini = true`.
 class VerticalAppBarMinDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

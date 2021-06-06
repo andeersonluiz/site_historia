@@ -1,15 +1,8 @@
-enum Pages {
-  Home,
-  About,
-  Projects,
-  Notices,
-  Frames,
-  Exam,
-  Recomendations,
-  Collection,
-}
-
-enum PageState { none, addPage, addAll, addWidget, pop, replace, replaceAll }
+/// Classe que faz a padronização das rotas de navegação.
+///
+/// {@category Support}
+// ignore: library_names
+library RouteNames;
 
 class RouteNames {
   static const String HOME = "/inicio";

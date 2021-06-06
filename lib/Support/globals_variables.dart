@@ -1,8 +1,14 @@
+/// Classe responsável pelas variáveis globais do projeto.
+///
+/// {@category Support}
+// ignore: library_names
+library GlobalsVariables;
+
 import 'package:flutter/material.dart';
 
 class GlobalsVariables {
   static String username = "";
-  static int sizeCaurosel = 5;
+  static int sizeCarousel = 5;
   static Map<String, Color> colorByTag = {
     'Podcast': Colors.green,
     'Estudo': Colors.red,

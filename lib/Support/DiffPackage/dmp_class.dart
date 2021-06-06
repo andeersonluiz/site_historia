@@ -24,7 +24,12 @@
  * @author fraser@google.com (Neil Fraser)
  */
 
-part of dmp;
+import 'dart:collection';
+import 'dart:math';
+
+import 'package:site_historia/Support/DiffPackage/diff_class.dart';
+import 'package:site_historia/Support/DiffPackage/patch_class.dart';
+
 
 /// The data structure representing a diff is a List of Diff objects:
 /// {Diff(Operation.delete, 'Hello'), Diff(Operation.insert, 'Goodbye'),

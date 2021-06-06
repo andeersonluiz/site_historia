@@ -1,17 +1,32 @@
+/// Modelo da classe Projeto.
+///
+/// {@category Model}
+// ignore: library_names
+library Project;
 import 'package:site_historia/Model/participant_model.dart';
 import 'package:site_historia/Model/teacher_model.dart';
 
 class Project {
+  /// Identificador único do projeto.
   int id;
+  /// Nome do projeto.
   String name;
+  /// Imagem de topo do projeto.
   String imageHeader;
+  /// Conteúdo do projeto em html.
   String content;
+  /// Data da postagem.
   String datePost;
+  /// Lista de professores no projeto.
   List<Teacher> teachers;
+  /// Lista de participantes no projeto.
   List<Participant> participants;
+  /// Autor que publicou o projeto.
   String author;
+  /// Variável de controle local para exibir os projetos que estão em um professor. Usado na adição/edição de professores.
   bool checked;
 
+  /// Construtor da classe `Project`.
   Project(
       {required this.id,
       required this.name,
@@ -24,6 +39,7 @@ class Project {
       this.checked=false,
       });
 
+  /// Converter as informações recebidas em `json` do banco de dados para a classe `Project`.
   factory Project.fromJson(Map<String, dynamic> json) {
     List<Participant> listParticipants =
         json['participants'].map<Participant>((item) {
@@ -44,7 +60,8 @@ class Project {
         participants: listParticipants,
         author: json['author']);
   }
-
+  /// Converter as informações recebidas em `json` do banco de dados para a classe `Project`.
+  /// Usado para adicionar como um item de `Teacher`.
   factory Project.fromJsonSimple(Map<String, dynamic> json) {
     return Project(
         id: json['id'],
@@ -57,7 +74,7 @@ class Project {
         author:"");
   }
 
-
+  /// Converter a classe `Project` em `json`.
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,
@@ -68,6 +85,8 @@ class Project {
         'participants': participants.map((e) => e.toJson()).toList(),
         'author': author,
       };
+
+  /// Converter a classe `Project` em `json`. Usado para adicionar como um item de `Teacher`.
   Map<String, dynamic> toJsonSimple() {
     return {
       'id': id,

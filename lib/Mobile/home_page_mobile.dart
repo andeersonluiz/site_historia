@@ -1,3 +1,9 @@
+/// Widget responsável por exibir a página inicial (versão mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Page}
+// ignore: library_names
+library HomePageMobile;
 import 'package:flutter/material.dart';
 
 import '../Theme/themeConfig.dart';
@@ -6,6 +12,9 @@ import 'widget/latestPodcast_mobile.dart';
 import 'widget/latestPosts_mobile.dart';
 import 'widget/sliderImage_mobile.dart';
 
+/// A tela inicial utiliza os widgets `SliderImageMobile()` que exibe o Carousel com as notícias e
+/// usa os widgets `LatestPostsMobile()` e `LatestPodcastMobile()` para exibir, respectivamente, as postagens e podcasts
+/// mais recente.
 class HomePageMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

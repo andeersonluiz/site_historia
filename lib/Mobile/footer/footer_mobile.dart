@@ -1,8 +1,16 @@
+/// Widget responsável por exibir o footer (versão mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Footer}
+// ignore: library_names
+library FooterMobile;
+
 import 'package:flutter/material.dart';
 import '../../Components/widget/footerContact_component.dart';
 import 'mini/footerMini_mobile.dart';
 import '../../Components/widget/footerAbout_component.dart';
 
+/// Exibe o Footer da página com informações de contatos e texto sobre o site.
 class FooterMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

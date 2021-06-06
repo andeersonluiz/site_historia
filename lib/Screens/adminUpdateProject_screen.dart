@@ -1,3 +1,8 @@
+/// Tela responsável por exibir a página de atualizar Projeto (Admin).
+///
+/// {@category Screen}
+// ignore: library_names
+library AdminUpdateProjectScreen;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -14,6 +19,9 @@ import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Model/project_model.dart';
 import 'package:site_historia/Support/routesName_support.dart';
 
+/// O Widget redireciona para duas telas diferentes, o desktop conta com o `VerticalAppBar` e a mobile
+/// possui `AdminNavigatorDrawerMobile`. O método `getProjects()` é chamado  para
+/// carregar as informações de projeto do banco de dados.
 class AdminUpdateProjectScreen extends StatefulWidget {
   final String idProject;
 

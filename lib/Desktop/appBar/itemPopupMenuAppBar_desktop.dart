@@ -1,11 +1,20 @@
+/// Widget responsável exibir o dropdown de projetos e quadros.
+///
+/// {@category Desktop}
+/// {@subCategory Drawer}
+// ignore: library_names
+library ItemPopUpMenuAppBarDesktop;
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
 import 'package:site_historia/Model/project_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ItemPopUpMenuAppBarDesktop extends StatefulWidget {
+  /// Texto exibido no dropdown.
   final String name;
+  /// Rota para onde é direcionado quando clidado.
   final String path;
+  /// Items do dropdown.
   final List<dynamic> listItems;
   ItemPopUpMenuAppBarDesktop(this.name, this.path, this.listItems);
 

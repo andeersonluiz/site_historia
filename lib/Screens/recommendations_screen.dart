@@ -1,3 +1,8 @@
+/// Tela responsável por exibir a página de Recomendações.
+///
+/// {@category Screen}
+// ignore: library_names
+library RecommendationScreen;
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:site_historia/Components/widget/customLoading_component.dart';
@@ -10,6 +15,9 @@ import 'package:site_historia/firebase/recommendation_firestore.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import '../Mobile/drawer/navigation_drawer_component.dart';
 
+/// O Widget redireciona para duas telas diferentes, o desktop conta com o `CustomAppBarDesktop` e a mobile
+/// possui `NavigationDrawer`. O método `getRecommendations()` é chamado  para
+/// carregar as informações de recomendações do banco de dados.
 class RecommendationScreen extends StatefulWidget {
   @override
   _RecommendationScreenState createState() => _RecommendationScreenState();

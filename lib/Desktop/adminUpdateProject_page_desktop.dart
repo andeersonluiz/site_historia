@@ -1,3 +1,9 @@
+/// Widget responsável por exibir a página de atualização de projeto (Admin - versão desktop).
+///
+/// {@category Desktop}
+/// {@subCategory Page}
+// ignore: library_names
+library AdminUpdateProjectPageDesktop;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
@@ -25,6 +31,12 @@ import 'package:velocity_x/velocity_x.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
 
+/// Widget que recebe um objeto `Project`. Onde são organizadas as informações para atualização
+/// do projeto. É composto pelos widgets `CustomHtmlEditor()` que generaliza o widget de edição de texto,
+///  `ImageWidget()` que generaliza a exibição e seleção da imagem do projeto, `ParticipantWidgetDesktop()`
+///  que exibe o widget de seleção de participantes e o `TeacherWidgetDesktop()` que exibe
+///  os professores a serem selecionados para o projeto.Por fim, Valida os dados e caso retorno seja verdadeiro,
+///  é atualizado no banco de dados.
 class AdminUpdateProjectPageDesktop extends StatefulWidget {
   final Project project;
   AdminUpdateProjectPageDesktop(this.project);

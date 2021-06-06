@@ -1,3 +1,10 @@
+/// Widget responsável por exibir a primeira parte da atualização de projeto (Admin - versão mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Page}
+// ignore: library_names
+library AdminUpdateProjectPageMobile;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
@@ -20,6 +27,11 @@ import 'package:site_historia/Store/teacher_store.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 import 'adminUpdateProjectParticipant_page_mobile.dart';
 
+/// Widget que recebe um objeto `Project`. Onde são organizadas as informações para atualização
+/// do projeto. É composto pelos widgets `CustomHtmlEditor()` que generaliza o widget de edição de texto,
+///  `ImageWidget()` que generaliza a exibição e seleção da imagem do projeto e o
+///  `AdminUpdateProjectParticipantPageMobile(int id)` onde o usuário é redirecionado para segunda parte
+///  do formulário.
 class AdminUpdateProjectPageMobile extends StatefulWidget {
   final Project project;
   AdminUpdateProjectPageMobile(this.project);

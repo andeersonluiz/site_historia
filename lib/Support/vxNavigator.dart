@@ -1,3 +1,9 @@
+/// Classe que faz a gerência de rotas de navegação.
+///
+/// {@category Support}
+// ignore: library_names
+library VelocityxNavigator;
+
 import 'package:flutter/material.dart';
 import 'package:site_historia/Screens/adminAddFrame_screen.dart';
 import 'package:site_historia/Screens/adminAddTeacher_screen.dart';
@@ -30,6 +36,7 @@ import 'package:site_historia/Screens/about_screen.dart';
 import 'package:firebase/firebase.dart';
 
 class VelocityxNavigator {
+  /// Toda vez que ocorre uma mudança de página esse método é chamado para carregar o widget de acordo com a rota.
   static RouterDelegate<Object> getRoutes(BuildContext context) {
     return VxNavigator(
       notFoundPage: (_, __) {

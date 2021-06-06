@@ -1,9 +1,18 @@
+/// Widget responsável por exibir informações de projetos (versão mobile).
+///
+/// {@category Mobile}
+/// {@subCategory Page}
+// ignore: library_names
+library ProjectPageMobile;
+
 import 'package:flutter/material.dart';
 import 'package:site_historia/Components/widget/customImage_component.dart';
 import 'package:site_historia/Components/widget/htmlViewer_component.dart';
 import 'package:site_historia/Mobile/footer/footer_mobile.dart';
 import 'package:site_historia/Model/project_model.dart';
 
+/// Widget que recebe um objeto `Project`. Onde são organizadas as informações do projeto.
+/// O widget `HtmlViewer(String conteudo)` é usado para generalizar o visualizador de html.
 class ProjectPageMobile extends StatelessWidget {
   final Project project;
   ProjectPageMobile(this.project);

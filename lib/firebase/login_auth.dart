@@ -1,6 +1,13 @@
+/// Classe responsável realizar as operações de autenticação de usuário.
+///
+/// {@category Firebase}
+// ignore: library_names
+library LoginAuth;
 import 'package:firebase/firebase.dart';
 
 class LoginAuth {
+
+  /// Valida o login com email e senha.
   static Future<String> loginWithEmailAndPassword(
       String email, String password) async {
     try {
@@ -24,11 +31,12 @@ class LoginAuth {
     }
     return "";
   }
-
+  /// Retorna o usuário atual.
   static User? getUser() {
     return auth().currentUser;
   }
 
+  /// Faz o logout.
   static signOut() async {
     await auth().signOut();
   }
