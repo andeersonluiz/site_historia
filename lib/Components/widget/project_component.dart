@@ -1,9 +1,19 @@
+/// Widget responsável por exibir os checkboxes de projetos em adicionar/remover professor.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library ProjectWidget;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/widget/customCheckBox_component.dart';
 import 'package:site_historia/Store/support_store.dart';
 
+/// Utiliza uma fórmula para padronizar o tamanho de acordo com o parâmetro `cellHeight`
+/// e também define o número de colunas a serem utilizadas, caso o tamanho seja menor que 500px
+/// é utilizado apenas uma coluna, caso contrário, duas.
 class ProjectWidget extends StatelessWidget {
   final _crossAxisCount;
   ProjectWidget(this._crossAxisCount);

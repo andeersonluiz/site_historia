@@ -1,3 +1,10 @@
+/// Widget responsável por padronizar a exibição do dropdown.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library CustomDropdown;
+
 import 'package:flutter/material.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:site_historia/Components/widget/customText_component.dart';

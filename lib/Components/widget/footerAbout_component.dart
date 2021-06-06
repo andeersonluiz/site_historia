@@ -1,3 +1,10 @@
+/// Widget responsável por exibir a seção "Sobre nós" no footer.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library About;
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

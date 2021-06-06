@@ -1,3 +1,10 @@
+/// Widget responsável por exibir a página de atualização de professores (Admin).
+///
+/// {@category Desktop}
+/// {@subCategory Page}
+// ignore: library_names
+library AdminUpdateTeacherPage;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -20,6 +27,10 @@ import 'package:site_historia/Support/routesName_support.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 
+/// Widget que recebe um objeto `Teacher`. Onde são organizadas as informações para atualização
+/// de professor. É composto pelos widgets `ImageWidget()` que generaliza a exibição e seleção da imagem do professor
+/// e o `ProjectWidget()` que exibe os projetos a serem selecionados para o professor.
+/// Por fim, valida os dados e caso retorno seja verdadeiro, é atualizado no banco de dados.
 class AdminUpdateTeacherPage extends StatefulWidget {
   final Teacher teacher;
   AdminUpdateTeacherPage(this.teacher);

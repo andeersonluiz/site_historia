@@ -1,3 +1,10 @@
+/// Widget responsável por exibir a lista de professores na página ´about_page`.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library ListTeachers;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -8,6 +15,7 @@ import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/teacher_store.dart';
 import 'package:site_historia/Model/teacher_model.dart';
 
+/// Exibe uma GridView com tamanho definido através do valor de `sizeImage`.
 class ListTeachers extends StatelessWidget {
   final sizeImage = 350.0;
 

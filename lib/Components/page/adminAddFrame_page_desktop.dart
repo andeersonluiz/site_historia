@@ -1,6 +1,6 @@
-/// Widget responsável por exibir a  adição de quadro (Admin - versão desktop).
+/// Widget responsável por exibir a página de adição de professor (Admin).
 ///
-/// {@category Desktop}
+/// {@category Component}
 /// {@subCategory Page}
 // ignore: library_names
 library AdminAddFramePage;
@@ -14,19 +14,19 @@ import 'package:site_historia/Components/widget/customHtmlEditor_component.dart'
 import 'package:site_historia/Components/widget/customTextFormField_component.dart';
 import 'package:site_historia/Components/widget/customToast_component.dart';
 import 'package:site_historia/Components/widget/erroMsg_component.dart';
-import 'package:site_historia/Components/widget/audio_desktop_component.dart';
+import 'package:site_historia/Components/widget/audio_component.dart';
 import 'package:site_historia/Components/widget/image_component.dart';
-import 'package:site_historia/Desktop/widget/video_desktop.dart';
+import 'package:site_historia/Components/widget/video_desktop.dart';
 import 'package:site_historia/Store/frame_store.dart';
 import 'package:site_historia/Store/support_store.dart';
 import 'package:site_historia/Support/routesName_support.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-///  A montagem do formulário é composta pelos widgets `CustomHtmlEditor()` que generaliza o widget de edição de texto,
-///  `ImageWidget()` que generaliza a exibição e seleção da imagem, `AudioWidget()` que exibe
-///  o widget de seleção de áudio e o `VideoWidgetMobile()` que exibe o widget para seleção de vídeo.
-///  Também é feita a validação e caso retorno seja verdadeiro os dados são inseridos no banco de dados.
+/// A montagem do formulário é composto pelos widgets `CustomHtmlEditor()` que generaliza o widget de edição de texto,
+/// `ImageWidget()` que generaliza a exibição e seleção da imagem do quadro, `AudioWidget()` que
+/// exibe a seleção de áudio e o `VideoWidget()` que exibe a seleção de vídeo. Por fim, valida os dados e caso retorno seja verdadeiro,
+/// é inserido no banco de dados.
 class AdminAddFramePage extends StatefulWidget {
   @override
   _AdminAddFramePageState createState() =>
@@ -112,7 +112,7 @@ class _AdminAddFramePageState extends State<AdminAddFramePage> {
             AudioWidget(
               title: "Audio (Opcional)",
             ),
-            VideoWidgetDesktop(
+            VideoWidget(
               title: "Video (Opcional)",
             ),
             CustomHtmlEditor(

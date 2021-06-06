@@ -1,10 +1,9 @@
-/// Widget responsável por exibir o widget de seleção de vídeo (Admin - mobile).
+/// Widget responsável por exibir o widget de seleção de vídeo.
 ///
-/// {@category Mobile}
+/// {@category Desktop}
 /// {@subCategory Widget}
 // ignore: library_names
 library VideoWidgetMobile;
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +18,9 @@ import 'package:site_historia/Store/support_store.dart';
 
 ///  O widget é composto por um método que exibe um pop up que pede para o usuário inserir
 ///  um link ou arquivo de vídeo, os dados são validados com apenas um podendo ser escolhido.
-class VideoWidgetMobile extends StatelessWidget {
+class VideoWidget extends StatelessWidget {
   final title;
-  VideoWidgetMobile({required this.title});
+  VideoWidget({required this.title});
   @override
   Widget build(BuildContext context) {
     final supportStore = Provider.of<SupportStore>(context);
@@ -64,7 +63,7 @@ class VideoWidgetMobile extends StatelessWidget {
                       child: GestureDetector(
                           child: Icon(Icons.folder),
                           onTap: () =>
-                              _showMaterialDialog(context, supportStore)),
+                          _showMaterialDialog(context, supportStore)),
                     ),
                   ]),
             height: 40,
@@ -79,28 +78,33 @@ class VideoWidgetMobile extends StatelessWidget {
     );
   }
 
+
   _showMaterialDialog(BuildContext context, SupportStore supportStore) {
     final controllerUrl = TextEditingController(text: supportStore.urlPopUp);
-
-    showDialog(
+    return showDialog(
         context: context,
+
         builder: (_) => new AlertDialog(
-              title: new CustomText(
-                "Carregar video",
-                style: Theme.of(context).textTheme.headline5,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              content: IntrinsicHeight(
-                child: Column(
-                  children: [
-                    CustomText("Url"),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        PointerInterceptor(
+          title: new CustomText(
+            "Carregar video",
+            style: Theme.of(context).textTheme.headline5,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          content: Container(
+            width: 500,
+
+            child: IntrinsicHeight(
+
+              child: Column(
+                children: [
+                  CustomText("Url"),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: PointerInterceptor(
                           child: Container(
-                            width: 150,
                             child: CustomTextFormField(
                                 onChanged: (value) {
                                   supportStore.updateUrlPopUp(value);
@@ -110,47 +114,47 @@ class VideoWidgetMobile extends StatelessWidget {
                                 textInputType: TextInputType.name),
                           ),
                         ),
-                        IconButton(
-                          padding: EdgeInsets.zero,
-                          icon: Icon(
-                            Icons.clear,
-                            color: Colors.red,
-                          ),
-                          onPressed: () {
-                            supportStore.updateUrlPopUp("");
-                            controllerUrl.clear();
-                          },
+                      ),
+                      IconButton(
+                        padding: EdgeInsets.zero,
+                        icon: Icon(
+                          Icons.clear,
+                          color: Colors.red,
                         ),
-                      ],
-                    ),
-                    CustomText("OU"),
-                    PointerInterceptor(
-                      child: CustomButton(
-                        text: "Carregar Arquivo",
-                        onPressed: () async {
-                          FilePickerResult? result;
-                          if (!kIsWeb) {
-                            result = await FilePicker.platform.pickFiles(
-                              type: FileType.video,
-                            );
-                          } else {
-                            result = await FilePicker.platform.pickFiles(
-                              type: FileType.video,
-                            );
-                          }
-                          if (result != null) {
-                            supportStore.updateVideo(result.files.first);
-                          }
+                        onPressed: () {
+                          supportStore.updateUrlPopUp("");
+                          controllerUrl.clear();
                         },
                       ),
+                    ],
+                  ),
+                  CustomText("OU"),
+                  PointerInterceptor(
+                    child: CustomButton(
+                      text: "Carregar Arquivo",
+                      onPressed: () async {
+                        FilePickerResult? result;
+                        if (!kIsWeb) {
+                          result = await FilePicker.platform.pickFiles(
+                            type: FileType.video,
+                          );
+                        } else {
+                          result = await FilePicker.platform.pickFiles(
+                            type: FileType.video,
+                          );
+                        }
+                        if (result != null) {
+                          supportStore.updateVideo(result.files.first);
+                        }
+                      },
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Observer(
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Observer(
                           builder: (_) => Container(
-                            width: 150,
-                            height: 40,
                             padding: EdgeInsets.all(8.0),
                             color: Colors.grey,
                             child: Center(
@@ -164,52 +168,57 @@ class VideoWidgetMobile extends StatelessWidget {
                             ),
                           ),
                         ),
-                        IconButton(
-                          padding: EdgeInsets.zero,
-                          icon: Icon(
-                            Icons.clear,
-                            color: Colors.red,
-                          ),
-                          onPressed: () {
-                            supportStore.updateVideo(PlatformFile());
-                          },
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Observer(
-                        builder: (_) => supportStore.msgErrorPopUp == ""
-                            ? Container()
-                            : ErrorMsg(supportStore.msgErrorPopUp),
                       ),
+                      IconButton(
+                        padding: EdgeInsets.zero,
+                        icon: Icon(
+                          Icons.clear,
+                          color: Colors.red,
+                        ),
+                        onPressed: () {
+                          supportStore.updateVideo(PlatformFile());
+                        },
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Observer(
+                      builder: (_) => supportStore.msgErrorPopUp == ""
+                          ? Container()
+                          : ErrorMsg(supportStore.msgErrorPopUp),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              actions: <Widget>[
-                PointerInterceptor(
-                  child: CustomButton(
-                      paddingButton: EdgeInsets.zero,
-                      text: "Salvar",
-                      onPressed: () async {
-                        if (supportStore.validatePopUp() == "") {
-                          Navigator.of(context).pop();
-                        }
-                      }),
-                ),
-                PointerInterceptor(
-                  child: CustomButton(
-                      paddingButton: EdgeInsets.zero,
-                      text: "Fechar",
-                      onPressed: () async {
-                        supportStore.updateVideo(PlatformFile());
-                        supportStore.updateUrlPopUp("");
-                        controllerUrl.clear();
-                        Navigator.of(context).pop();
-                      }),
-                ),
-              ],
-            ));
+            ),
+          ),
+          actions: <Widget>[
+            PointerInterceptor(
+              child: CustomButton(
+                  paddingButton: EdgeInsets.zero,
+                  text: "Salvar",
+                  onPressed: () async {
+                    if (supportStore.validatePopUp() == "") {
+                      Navigator.of(context).pop();
+                    }
+                  }),
+            ),
+            PointerInterceptor(
+              child: CustomButton(
+                  paddingButton: EdgeInsets.zero,
+                  text: "Fechar",
+                  onPressed: () async {
+                    supportStore.updateVideo(PlatformFile());
+                    supportStore.updateUrlPopUp("");
+                    controllerUrl.clear();
+                    Navigator.of(context).pop();
+                  }),
+            ),
+          ],
+        ));
   }
-}
+
+
+  }
+

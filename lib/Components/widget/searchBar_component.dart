@@ -1,7 +1,17 @@
+/// Widget responsável pela exibir o menu de pesquisa em `notice_page´.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library SearchBar;
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Store/notice_store.dart';
 
+/// Exibe um menu de pesquisa solicitando o texto a ser pesquisado, quando o usuário clica
+/// em pesquisar é enviada a informação para o banco de dados através do método `noticeStore.search(String text)`
+/// que devolve a lista filtrada de acordo com a busca.
 class SearchBar extends StatelessWidget {
   final width;
   SearchBar({required this.width});

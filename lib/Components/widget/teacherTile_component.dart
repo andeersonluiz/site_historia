@@ -1,3 +1,10 @@
+/// Widget responsável por exibir as informações de professores na `about_page`.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library TeacherTile;
+
 import 'package:auto_size_text_pk/auto_size_text_pk.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +13,7 @@ import 'package:site_historia/Model/project_model.dart';
 import 'package:site_historia/Model/teacher_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+/// Exibe uma imagem circular e informações referente ao professor.
 class TeacherTile extends StatelessWidget {
   final Teacher teacher;
   TeacherTile(this.teacher);

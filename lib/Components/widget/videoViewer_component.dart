@@ -1,3 +1,9 @@
+/// Widget responsável por exibir o conteúdo em quadros que possuam video.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library VideoViewer;
 import 'package:chewie/chewie.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +11,7 @@ import 'package:site_historia/Components/widget/customLoading_component.dart';
 import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_plyr_iframe/youtube_plyr_iframe.dart';
+
 
 class VideoViewer extends StatefulWidget {
   final String urlVideo;
@@ -14,6 +21,8 @@ class VideoViewer extends StatefulWidget {
   _VideoViewerState createState() => _VideoViewerState();
 }
 
+/// Caso seja um arquivo salvo ele utiliza o `chewieController` para capturar a url no banco de dados, caso
+/// seja um vídeo do youtube, é utilizado um outro widget para exibi-lo.
 class _VideoViewerState extends State<VideoViewer> {
   ChewieController? chewieController;
   bool playerIsNull = true;

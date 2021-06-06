@@ -1,3 +1,10 @@
+/// Widget responsável por padronizar a exibição do botão.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library CustomButton;
+
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {

@@ -1,8 +1,16 @@
+/// Widget responsável por exibir os acervos na página `collection_page´.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library CollectionItemWidget;
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:site_historia/Model/collection_item.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+/// Recebe um objeto `CollectionItemWidget`, onde exibe o nome do item e sua url.
 class CollectionItemWidget extends StatelessWidget {
   final CollectionItem collectionItem;
   final bool isMovie;

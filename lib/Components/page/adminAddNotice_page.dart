@@ -1,3 +1,9 @@
+/// Widget responsável por exibir a página de adição de professor (Admin).
+///
+/// {@category Component}
+/// {@subCategory Page}
+// ignore: library_names
+library AdminAddNoticePage;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
@@ -9,7 +15,7 @@ import 'package:site_historia/Components/widget/customTextFormField_component.da
 import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Components/widget/customToast_component.dart';
 import 'package:site_historia/Components/widget/erroMsg_component.dart';
-import 'package:site_historia/Components/widget/audio_desktop_component.dart';
+import 'package:site_historia/Components/widget/audio_component.dart';
 import 'package:site_historia/Components/widget/image_component.dart';
 import 'package:site_historia/Store/notice_store.dart';
 import 'package:site_historia/Store/support_store.dart';
@@ -17,6 +23,10 @@ import 'package:site_historia/Support/routesName_support.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+///  A montagem do formulário é composto pelos widgets `CustomHtmlEditor()` que generaliza o widget de edição de texto,
+///  `ImageWidget()` que generaliza a exibição e seleção da imagem da notícia e o `AudioWidget()` que
+///  exibe a seleção de áudio. Por fim, valida os dados e caso retorno seja verdadeiro,
+///  é inserido no banco de dados.
 class AdminAddNoticePage extends StatefulWidget {
   @override
   _AdminAddNoticePageState createState() =>

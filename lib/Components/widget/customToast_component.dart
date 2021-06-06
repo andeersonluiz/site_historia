@@ -1,3 +1,11 @@
+/// Widget responsável por padronizar a exibição do Toast.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library CustomToast;
+import 'package:flutter/material.dart';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

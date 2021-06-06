@@ -1,7 +1,15 @@
+/// Widget responsável por exibir a lista de notícias na página ´notice_page`.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library ListNotices;
+
 import 'package:flutter/material.dart';
 import 'package:site_historia/Components/tile/noticeTile_desktop.dart';
 import 'package:site_historia/Model/notice_model.dart';
 
+/// Exibe uma lista de notícias utilizando o widget `NoticeTile(Notice noticia)`.
 class ListNotices extends StatelessWidget {
   final List<Notice> notices;
   ListNotices(this.notices);

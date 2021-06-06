@@ -1,3 +1,10 @@
+/// Widget responsável por padronizar a exibição do carregamento.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library CustomLoading;
+
 import 'package:flutter/material.dart';
 
 class CustomLoading extends StatelessWidget {

@@ -1,3 +1,10 @@
+/// Widget responsável por exibir informações de notícia.
+///
+/// {@category Component}
+/// {@subCategory Tile}
+// ignore: library_names
+library NoticeTile;
+
 import 'package:flutter/material.dart';
 import 'package:site_historia/Components/widget/customImage_component.dart';
 import 'package:site_historia/Components/widget/customText_component.dart';
@@ -5,6 +12,7 @@ import 'package:site_historia/Model/notice_model.dart';
 import 'package:site_historia/Support/routesName_support.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+/// Recebe um objeto `Notice`, que exibe sua imagem, título, subtítulo e data de postagem.
 class NoticeTile extends StatelessWidget {
   final Notice notice;
   NoticeTile(this.notice);

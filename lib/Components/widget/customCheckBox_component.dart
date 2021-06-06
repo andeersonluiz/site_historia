@@ -1,3 +1,10 @@
+/// Widget responsável por padronizar a exibição do checkbox.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library CustomCheckBox;
+
 import 'package:flutter/material.dart';
 
 class CustomCheckBox extends StatelessWidget {

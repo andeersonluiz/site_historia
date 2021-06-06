@@ -1,8 +1,16 @@
+/// Widget responsável por exibir as recomendações na página `recommendation_page´.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library RecommendationItemWidget;
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:site_historia/Model/recommendationItem_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+/// Recebe um objeto `RecommendationItem`, onde exibe o nome do item e sua url.
 class RecommendationItemWidget extends StatelessWidget {
   final RecommendationItem recommendationItem;
   RecommendationItemWidget(this.recommendationItem);

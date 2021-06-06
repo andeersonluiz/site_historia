@@ -1,3 +1,9 @@
+/// Widget responsável por exibir um card com informações do professor.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library AdminTeacherCard;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/widget/customButton_component.dart';
@@ -9,6 +15,10 @@ import 'package:site_historia/Store/teacher_store.dart';
 import 'package:site_historia/Support/routesName_support.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+/// É feita a montagem do card, onde recebe o index do quadro que contém informações como:
+/// nome do professor e imagem, opções de excluir e editar professor.
+/// Quando selecionada a opção de excluir é exibido um pop up confirmando a exclusão e no editar
+/// é redirecionado para rota `RouteNames.UPDATE_TEACHER`.
 class AdminTeacherCard extends StatelessWidget {
   final Teacher teacher;
   final double sizeCard = 250;

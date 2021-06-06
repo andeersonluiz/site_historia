@@ -1,3 +1,9 @@
+/// Widget responsável por exibir a página de recomendações.
+///
+/// {@category Component}
+/// {@subCategory Page}
+// ignore: library_names
+library AdminRecommendationPage;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/widget/customButton_component.dart';

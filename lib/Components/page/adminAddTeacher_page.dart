@@ -1,3 +1,9 @@
+/// Widget responsável por exibir a página de adição de professor (Admin).
+///
+/// {@category Component}
+/// {@subCategory Page}
+// ignore: library_names
+library AdminAddTeacherPage;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -19,6 +25,9 @@ import 'package:site_historia/Support/routesName_support.dart';
 import 'package:site_historia/Support/globals_variables.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+/// A montagem do formulário é composto pelos widgets `ImageWidget()` que generaliza a exibição e seleção da imagem do professor
+/// e o `ProjectWidget()` que exibe os projetos a serem selecionados para o professor. Por fim, valida os dados e caso retorno seja verdadeiro,
+/// é inserido no banco de dados.
 class AdminAddTeacherPage extends StatefulWidget {
   @override
   _AdminAddTeacherPageState createState() =>

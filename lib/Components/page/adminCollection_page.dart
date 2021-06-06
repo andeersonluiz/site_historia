@@ -1,3 +1,9 @@
+/// Widget responsável por exibir a página de acervos.
+///
+/// {@category Component}
+/// {@subCategory Page}
+// ignore: library_names
+library AdminCollectionPage;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/widget/customButton_component.dart';
@@ -13,6 +19,9 @@ import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/collection_store.dart';
 import 'package:site_historia/firebase/collection_firestore.dart';
 
+/// A tela de acervo é carregado através do método `getCollections()` e
+/// utiliza os widgets `MovieCollectionWidget()`, `BookCollectionWidget()`, `ArticleCollectionWidget()`
+/// e `OthersCollectionWidget()` para dispor seus itens.
 class AdminCollectionPage extends StatefulWidget {
   @override
   _AdminCollectionPageState createState() =>

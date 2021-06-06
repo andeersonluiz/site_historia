@@ -1,3 +1,10 @@
+/// Widget responsável por padronizar a exibição do editor de html.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library CustomHtmlEditor;
+
 import 'dart:async';
 
 import 'package:file_picker/file_picker.dart';

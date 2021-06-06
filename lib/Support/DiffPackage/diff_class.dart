@@ -15,7 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+/// {@category Support}
+// ignore: library_names
+library Diff;
 import 'package:site_historia/Support/DiffPackage/dmp_class.dart';
 
 /// Class representing one diff operation.

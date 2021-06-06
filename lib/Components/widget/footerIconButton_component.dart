@@ -1,3 +1,11 @@
+/// Widget responsável por exibir o botão clicável no footer.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library IconButtonFooter;
+
+
 import 'package:flutter/material.dart';
 
 class IconButtonFooter extends StatelessWidget {

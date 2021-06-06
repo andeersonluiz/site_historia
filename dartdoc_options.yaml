@@ -24,9 +24,9 @@ dartdoc:
     "Desktop":
       markdown: doc/Desktop.md
       name: Desktop
-    "Components":
-      markdown: doc/Components.md
-      name: Components
+    "Component":
+      markdown: doc/Component.md
+      name: Component
   subcategories:
     "Page":
       markdown: doc/Page.md

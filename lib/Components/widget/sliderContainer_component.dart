@@ -1,8 +1,16 @@
+/// Widget responsável pela visualização do conteúdo em `SliderImage`.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library SliderContainer;
+
 import 'package:flutter/material.dart';
 
 import '../../Model/notice_model.dart';
 import 'customImage_component.dart';
 
+/// Exibe as informações de notícias através do objeto `Notice`.
 class SliderContainer extends StatelessWidget {
   final Notice notice;
   final double sizeContainer;
@@ -43,9 +51,10 @@ class SliderContainer extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(notice.subtitle,
+                      child: Text(
+                          notice.subtitle,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
+                          maxLines: maxLinesSubtitle,
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.subtitle1),
                     ),

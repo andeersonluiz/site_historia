@@ -1,3 +1,10 @@
+/// Widget responsável por exibir a página de atualização de notícia (Admin).
+///
+/// {@category Desktop}
+/// {@subCategory Page}
+// ignore: library_names
+library AdminUpdateNoticePage;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
@@ -9,7 +16,7 @@ import 'package:site_historia/Components/widget/customTextFormField_component.da
 import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Components/widget/customToast_component.dart';
 import 'package:site_historia/Components/widget/erroMsg_component.dart';
-import 'package:site_historia/Components/widget/audio_desktop_component.dart';
+import 'package:site_historia/Components/widget/audio_component.dart';
 import 'package:site_historia/Components/widget/image_component.dart';
 import 'package:site_historia/Model/notice_model.dart';
 import 'package:site_historia/Store/notice_store.dart';
@@ -20,6 +27,11 @@ import 'package:velocity_x/velocity_x.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
 
+/// Widget que recebe um objeto `Notice`. Onde são organizadas as informações para atualização
+/// da notícia. É composto pelos widgets `CustomHtmlEditor()` que generaliza o widget de edição de texto,
+///  `ImageWidget()` que generaliza a exibição e seleção da imagem da notícia e o `AudioWidget()` que
+///  exibe a seleção de áudio. Por fim, valida os dados e caso retorno seja verdadeiro,
+///  é atualizado no banco de dados.
 class AdminUpdateNoticePage extends StatefulWidget {
   final Notice notice;
   AdminUpdateNoticePage(this.notice);

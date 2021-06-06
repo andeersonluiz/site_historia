@@ -1,3 +1,10 @@
+/// Widget responsável por exibir a página de atualização de quadro (Admin).
+///
+/// {@category Desktop}
+/// {@subCategory Page}
+// ignore: library_names
+library AdminUpdateProjectPageDesktop;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
@@ -8,9 +15,9 @@ import 'package:site_historia/Components/widget/customTextFormField_component.da
 import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Components/widget/customToast_component.dart';
 import 'package:site_historia/Components/widget/erroMsg_component.dart';
-import 'package:site_historia/Components/widget/audio_desktop_component.dart';
+import 'package:site_historia/Components/widget/audio_component.dart';
 import 'package:site_historia/Components/widget/image_component.dart';
-import 'package:site_historia/Mobile/widget/video_mobile.dart';
+import 'package:site_historia/Components/widget/video_desktop.dart';
 import 'package:site_historia/Model/frame_model.dart';
 import 'package:site_historia/Store/frame_store.dart';
 import 'package:site_historia/Store/support_store.dart';
@@ -20,6 +27,11 @@ import 'package:velocity_x/velocity_x.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
 
+/// Widget que recebe um objeto `Frame`. Onde são organizadas as informações para atualização
+/// do quadro. É composto pelos widgets `CustomHtmlEditor()` que generaliza o widget de edição de texto,
+///  `ImageWidget()` que generaliza a exibição e seleção da imagem do quadro, `AudioWidget()` que
+///  exibe a seleção de áudio e o `VideoWidget()` que exibe a seleção de vídeo. Por fim,
+///  valida os dados e caso retorno seja verdadeiro, é atualizado no banco de dados.
 class AdminUpdateFramePage extends StatefulWidget {
   final Frame frame;
   AdminUpdateFramePage(this.frame);
@@ -112,7 +124,7 @@ class _AdminUpdateFramePageState
             AudioWidget(
               title: "Audio (Opcional)",
             ),
-            VideoWidgetMobile(
+            VideoWidget(
               title: "Video (Opcional)",
             ),
             CustomHtmlEditor(

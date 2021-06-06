@@ -1,3 +1,10 @@
+/// Widget responsável por exibir as informações de contato no footer.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library FooterContact;
+
 import 'package:flutter/material.dart';
 
 import 'footerIconButton_component.dart';

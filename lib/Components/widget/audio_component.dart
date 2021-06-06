@@ -1,3 +1,10 @@
+/// Widget responsável por exibir o widget de seleção de áudio
+///
+/// {@category Desktop}
+/// {@subCategory Widget}
+// ignore: library_names
+library AudioWidget;
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +13,6 @@ import 'package:provider/provider.dart';
 import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Components/widget/erroMsg_component.dart';
 import 'package:site_historia/Store/support_store.dart';
-
 
 class AudioWidget extends StatelessWidget {
   final title;

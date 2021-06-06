@@ -1,7 +1,16 @@
+/// Widget responsável por padronizar a exibição de informações do autor.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library AuthorInfo;
+
 import 'package:flutter/material.dart';
 
 class AuthorInfo extends StatelessWidget {
+  /// Exibe o nome do autor.
   final String author;
+  /// Exibe a data de postagem.
   final String datePost;
   AuthorInfo({required this.author, required this.datePost});
 

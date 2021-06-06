@@ -1,3 +1,10 @@
+/// Widget responsável por exibir a seleção de imagem na adição de imagem na página do admin.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library ImageWidget;
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +13,11 @@ import 'package:provider/provider.dart';
 import 'package:site_historia/Store/support_store.dart';
 
 class ImageWidget extends StatelessWidget {
+  /// Controle para verificar se é um projeto.
   final bool isProject;
+  /// Variável que captura a imagem.
   final PickedFile? image;
+  /// Título do projeto, exibido caso `isProject=true`.
   final String? titleProject;
   ImageWidget({required this.image, this.isProject = false, this.titleProject});
   @override

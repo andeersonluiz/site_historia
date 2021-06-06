@@ -1,3 +1,10 @@
+/// Widget responsável por exibir o acervo de livros na página de admin,
+/// na seção de acervos.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library BookCollectionWidget;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -8,6 +15,8 @@ import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Model/collection_item.dart';
 import 'package:site_historia/Store/collection_store.dart';
 
+/// O widget exibe todos os acervos de livros criados e permite o usuário
+/// adicionar ou remove-las.
 class BookCollectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

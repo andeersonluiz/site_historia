@@ -1,3 +1,10 @@
+/// Widget responsável por exibir do conteúdo em quadros e notícias que possuam áudio.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library AudioViewer;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:just_audio/just_audio.dart';

@@ -1,3 +1,10 @@
+/// Widget responsável por exibir a página de acervo.
+///
+/// {@category Component}
+/// {@subCategory Page}
+// ignore: library_names
+library CollectionPage;
+
 import 'package:flutter/material.dart';
 import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Desktop/footer/footer_desktop.dart';
@@ -5,6 +12,9 @@ import 'package:site_historia/Components/widget/collectionItem_component.dart';
 import 'package:site_historia/Mobile/footer/footer_mobile.dart';
 import 'package:site_historia/Model/collection_item.dart';
 import 'package:site_historia/Model/collection_model.dart';
+
+/// A tela de recomendações utiliza o objeto `Collection` e o widget `CollectionItemWidget()` para exibir
+/// as variáveis do objeto de acordo com o tipo que são: filmes, livros, artigos e outros.
 
 class CollectionPage extends StatelessWidget {
   final Collection collection;

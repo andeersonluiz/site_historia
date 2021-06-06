@@ -1,7 +1,8 @@
 /// Classe que faz a gerência dos temas.
 ///
 /// {@category Theme}
-
+// ignore: library_names
+library ThemeConfig;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

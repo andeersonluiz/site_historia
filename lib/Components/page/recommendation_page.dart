@@ -1,3 +1,10 @@
+/// Widget responsável por exibir a página de recomendações.
+///
+/// {@category Component}
+/// {@subCategory Page}
+// ignore: library_names
+library RecommendationPage;
+
 import 'package:flutter/material.dart';
 import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Desktop/footer/footer_desktop.dart';
@@ -5,6 +12,8 @@ import 'package:site_historia/Components/widget/recommendationItem_component.dar
 import 'package:site_historia/Model/recommendationItem_model.dart';
 import 'package:site_historia/Model/recommendation_model.dart';
 
+/// A tela de recomendações utiliza o objeto `Recommendation` e o widget `RecommendationItemWidget()` para exibir
+/// as variáveis do objeto de acordo com o tipo que são: youtube, blog, podcast e outros.
 class RecommendationPage extends StatelessWidget {
   final Recommendation recommendations;
   RecommendationPage(this.recommendations);

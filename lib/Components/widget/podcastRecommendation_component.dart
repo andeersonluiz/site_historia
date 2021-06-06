@@ -1,3 +1,10 @@
+/// Widget responsável por exibir as recomendações de podcasts na página de admin,
+/// na seção de recomendações.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library PodcastRecommendationWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +14,8 @@ import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Model/recommendationItem_model.dart';
 import 'package:site_historia/Store/recommendation_store.dart';
 
+/// O widget exibe todos as recomendações de podcasts criadas e permite o usuário
+/// adicionar ou remove-las.
 class PodcastRecommendationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,10 @@
+/// Widget responsável por exibir o conteudo html formatado.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library HtmlViewer;
+
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
@@ -6,6 +13,7 @@ import 'package:flutter_html/style.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:html/dom.dart' as dom;
 
+/// Utiliza o widget `Html` para formatar o conteúdo html.
 class HtmlViewer extends StatelessWidget {
   final String content;
   final EdgeInsetsGeometry? margin;

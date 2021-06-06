@@ -23,7 +23,9 @@
  *
  * @author fraser@google.com (Neil Fraser)
  */
-
+/// {@category Support}
+// ignore: library_names
+library DiffMatchPatch;
 import 'dart:collection';
 import 'dart:math';
 

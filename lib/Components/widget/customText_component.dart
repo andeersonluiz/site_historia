@@ -1,3 +1,10 @@
+/// Widget responsável por padronizar a exibição do texto.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library CustomText;
+
 import 'package:flutter/material.dart';
 
 class CustomText extends StatelessWidget {

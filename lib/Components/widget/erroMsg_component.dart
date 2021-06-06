@@ -1,3 +1,9 @@
+/// Widget responsável por padronizar a exibição de mensagem de erro.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library ErrorMsg;
 import 'package:flutter/material.dart';
 
 class ErrorMsg extends StatelessWidget {

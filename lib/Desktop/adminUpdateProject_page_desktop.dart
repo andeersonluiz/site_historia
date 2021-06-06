@@ -35,7 +35,7 @@ import 'dart:html' as html;
 /// do projeto. É composto pelos widgets `CustomHtmlEditor()` que generaliza o widget de edição de texto,
 ///  `ImageWidget()` que generaliza a exibição e seleção da imagem do projeto, `ParticipantWidgetDesktop()`
 ///  que exibe o widget de seleção de participantes e o `TeacherWidgetDesktop()` que exibe
-///  os professores a serem selecionados para o projeto.Por fim, Valida os dados e caso retorno seja verdadeiro,
+///  os professores a serem selecionados para o projeto. Por fim, valida os dados e caso retorno seja verdadeiro,
 ///  é atualizado no banco de dados.
 class AdminUpdateProjectPageDesktop extends StatefulWidget {
   final Project project;

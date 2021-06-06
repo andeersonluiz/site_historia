@@ -31,7 +31,7 @@ import 'package:site_historia/Store/teacher_store.dart';
 ///  A montagem do formulário é composta pelos widgets `CustomHtmlEditor()` que generaliza o widget de edição de texto,
 ///  `ImageWidget()` que generaliza a exibição e seleção da imagem do projeto, `ParticipantWidgetDesktop()`
 ///  que exibe o widget de seleção de participantes e o `TeacherWidgetDesktop()` que exibe
-///  os professores a serem selecionados para o projeto.Por fim, Valida os dados e caso retorno seja verdadeiro,
+///  os professores a serem selecionados para o projeto. Por fim, valida os dados e caso retorno seja verdadeiro,
 ///  é inserido no banco de dados.
 class AdminAddProjectPageDesktop extends StatefulWidget {
   @override

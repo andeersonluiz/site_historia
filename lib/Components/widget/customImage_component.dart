@@ -1,3 +1,10 @@
+/// Widget responsável por padronizar a exibição de imagem, de acordo com os parâmetros.
+///
+/// {@category Component}
+/// {@subCategory Widget}
+// ignore: library_names
+library CustomImage;
+
 import 'package:flutter/material.dart';
 
 class CustomImage extends StatelessWidget {
