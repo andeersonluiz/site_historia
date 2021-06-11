@@ -1,9 +1,9 @@
-/// Widget responsável por exibir informações de notícia.
+/// Widget responsável por exibir informações de notícia (versão desktop).
 ///
 /// {@category Component}
 /// {@subCategory Tile}
 // ignore: library_names
-library NoticeTile;
+library NoticeTileDesktop;
 
 import 'package:flutter/material.dart';
 import 'package:site_historia/Components/widget/customImage_component.dart';
@@ -13,9 +13,9 @@ import 'package:site_historia/Support/routesName_support.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 /// Recebe um objeto `Notice`, que exibe sua imagem, título, subtítulo e data de postagem.
-class NoticeTile extends StatelessWidget {
+class NoticeTileDesktop extends StatelessWidget {
   final Notice notice;
-  NoticeTile(this.notice);
+  NoticeTileDesktop(this.notice);
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +25,7 @@ class NoticeTile extends StatelessWidget {
           queryParameters: {"id": notice.id.toString()}));
     };
     final datePost = notice.datePost.split(" ");
-    return Container(
-      height: 200,
-      margin: EdgeInsets.symmetric(horizontal: 16.0),
-      width: MediaQuery.of(context).size.width,
+    return IntrinsicHeight(
       child: Row(
         children: [
           Expanded(
@@ -38,6 +35,7 @@ class NoticeTile extends StatelessWidget {
                 child: CustomImage(
                   height: 200,
                   image: notice.thumb,
+                  fit: BoxFit.contain,
                 )),
           ),
           Expanded(
@@ -54,6 +52,7 @@ class NoticeTile extends StatelessWidget {
                       onTap: _onTap,
                       splashColor: Colors.transparent,
                       child: CustomText(notice.title,
+
                           style: Theme.of(context).textTheme.headline5)),
                 ),
                 Padding(
@@ -63,6 +62,7 @@ class NoticeTile extends StatelessWidget {
                       splashColor: Colors.transparent,
                       child: CustomText(
                         notice.subtitle,
+                        textAlign: TextAlign.start,
                         style: Theme.of(context).textTheme.subtitle1,
                       )),
                 ),

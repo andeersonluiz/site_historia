@@ -47,7 +47,7 @@ class _NoticeScreenState extends State<NoticeScreen> {
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: ScreenTypeLayout(
-              mobile: NoticePageMobile(),
+              mobile: MediaQuery.of(context).size.width<600?NoticePageMobile():NoticePageDesktop(),
               desktop: StickyHeader(
                   header: CustomAppBarDesktop(), content: NoticePageDesktop())),
         ),

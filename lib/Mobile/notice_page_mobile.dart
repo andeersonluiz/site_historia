@@ -10,14 +10,15 @@ import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/widget/customLoading_component.dart';
 import 'package:site_historia/Components/widget/customText_component.dart';
-import 'package:site_historia/Components/widget/listNotices_component.dart';
+import 'package:site_historia/Mobile/footer/footer_mobile.dart';
+import 'package:site_historia/Mobile/widget/listNotices_mobile.dart';
 import 'package:site_historia/Mobile/widget/menuBarNotices_mobile.dart';
 import 'package:site_historia/Model/notice_model.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/notice_store.dart';
 
 /// Widget carrega todas as notícias através do método `getNotices()`.
-/// Usa o widget `MenuBarNoticesMobile()` que monta o menu de seleção de filtros e o `ListNotices()`
+/// Usa o widget `MenuBarNoticesMobile()` que monta o menu de seleção de filtros e o `ListNoticesMobile()`
 /// que exibe a lista de notícias.
 class NoticePageMobile extends StatefulWidget {
   @override
@@ -55,9 +56,10 @@ class _NoticePageMobileState extends State<NoticePageMobile> {
           case FutureStatus.fulfilled:
             List<Notice> listNotice =
                 noticeStore!.listNoticesFiltered!.value as List<Notice>;
-            return ListNotices(listNotice);
+            return Column(children: [ListNoticesMobile(listNotice),FooterMobile(),]);
         }
       }),
+
     ]);
   }
 }

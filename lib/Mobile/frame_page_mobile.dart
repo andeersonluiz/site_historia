@@ -51,8 +51,7 @@ class FramePageMobile extends StatelessWidget {
         ),
         HtmlViewer(
           frame.content,
-          margin: EdgeInsets.only(
-              left: 100.0, right: 100.0, top: 16.0, bottom: 16.0),
+          margin:EdgeInsets.all(32.0)
         ),
         Divider(
           thickness: 1.0,

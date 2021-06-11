@@ -15,7 +15,8 @@ import 'package:site_historia/Components/widget/customText_component.dart';
 
 class AudioViewer extends StatefulWidget {
   final urlAudio;
-  AudioViewer(this.urlAudio);
+  final margin;
+  AudioViewer(this.urlAudio,{this.margin=128.0});
 
   @override
   _AudioViewerState createState() => _AudioViewerState();
@@ -43,7 +44,7 @@ class _AudioViewerState extends State<AudioViewer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 128.0),
+      margin: EdgeInsets.symmetric(horizontal: widget.margin),
       padding: EdgeInsets.all(8.0),
       child: Column(children: [
         Padding(

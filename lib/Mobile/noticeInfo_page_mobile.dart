@@ -45,14 +45,14 @@ class NoticeInfoPageMobile extends StatelessWidget {
             child: HtmlViewer(
               notice.content,
               margin: EdgeInsets.only(
-                  left: 100.0, right: 100.0, top: 16.0, bottom: 16.0),
+                  left: 16.0, right: 16.0, top: 16.0, bottom: 16.0),
             )),
         notice.type == "Podcast"
             ? Divider(
                 thickness: 1.0,
               )
             : Container(),
-        notice.type == "Podcast" ? AudioViewer(notice.audio[1]) : Container(),
+        notice.type == "Podcast" ? AudioViewer(notice.audio[1],margin: 16.0,) : Container(),
         Divider(
           thickness: 1.0,
         ),

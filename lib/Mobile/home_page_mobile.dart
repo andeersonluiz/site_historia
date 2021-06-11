@@ -29,12 +29,12 @@ class HomePageMobile extends StatelessWidget {
         ),
         width > 600
             ? Row(children: [
-                Expanded(flex: 5, child: LatestPostsMobile(0.45)),
+                Expanded(flex: 5, child: Container(height: 525,child: LatestPostsMobile(0.45))),
                 Expanded(
                     flex: 5,
                     child: Container(
                         color: ThemeConfig.brownPodcast,
-                        child: LatestPodcastMobile(widthPercentageSize: 0.45))),
+                        child: Container(height: 525,child: LatestPodcastMobile(widthPercentageSize: 0.45)))),
               ])
             : Column(children: [
                 Container(
