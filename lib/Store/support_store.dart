@@ -47,11 +47,11 @@ abstract class _SupportStoreBase with Store {
 
   /// Usado em notícias e quadros para gerenciar o arquivo de áudio.
   @observable
-  PlatformFile _audioFile = PlatformFile();
+  PlatformFile _audioFile = PlatformFile(name:"",size:0);
 
   /// Usado em notícias e quadros para gerenciar o arquivo de vídeo.
   @observable
-  PlatformFile _videoFile = PlatformFile();
+  PlatformFile _videoFile = PlatformFile(name:"",size:0);
 
   /// Usado em projeto, notícias, quadros e professores para gerenciar a imagem.
   @observable
@@ -275,7 +275,7 @@ abstract class _SupportStoreBase with Store {
   /// Atualiza a variável audioFile.
   @action
   updateAudio(PlatformFile? newAudio) {
-    if (newAudio!.name != null) {
+    if (newAudio!.name != "") {
       clearError(ErrorForm.Audio);
     }
     this._audioFile = newAudio;
@@ -284,7 +284,7 @@ abstract class _SupportStoreBase with Store {
   /// Atualiza a variável videoFile.
   @action
   updateVideo(PlatformFile? newVideo) {
-    if (newVideo!.name != null) {
+    if (newVideo!.name != "") {
       this._msgErrorPopUp = "";
     }
     this._videoFile = newVideo;
@@ -593,7 +593,7 @@ abstract class _SupportStoreBase with Store {
     updateType(notice.type);
     updateTag(notice.tag);
     updateTopHeader(notice.isTopHeader);
-    updateAudio(PlatformFile(name: notice.audio[0]));
+    updateAudio(PlatformFile(name: notice.audio[0], size: 0));
     updatePath(PickedFile(notice.thumb));
     updateContent(null, notice.content, null, notice.id.toString());
   }
@@ -604,8 +604,8 @@ abstract class _SupportStoreBase with Store {
     updateSubTitle(frame.subtitle);
     updatePath(PickedFile(frame.imageHeader));
     updateSubtitleImage(frame.subtitleImage);
-    updateAudio(PlatformFile(name: frame.urlAudio[0]));
-    updateVideo(PlatformFile(name: frame.urlVideo[0]));
+    updateAudio(PlatformFile(name: frame.urlAudio[0], size: 0));
+    updateVideo(PlatformFile(name: frame.urlVideo[0], size: 0));
     updateContent(null, frame.content, null, frame.id.toString());
   }
 
@@ -764,7 +764,7 @@ abstract class _SupportStoreBase with Store {
     }
 
     if (type == "Podcast") {
-      if (audioFile!.name == null) {
+      if (audioFile!.name == "") {
         generateMsgError(ErrorForm.Audio, "Insira o audio do podcast.");
         err += "err7";
       } else {
@@ -846,9 +846,9 @@ abstract class _SupportStoreBase with Store {
 
   /// Valida o popUp para a inserção de vídeo.
   validatePopUp() {
-    if (urlPopUp == "" && videoFile!.name == null) {
+    if (urlPopUp == "" && videoFile!.name == "") {
       this._msgErrorPopUp = "Selecione um tipo.";
-    } else if (urlPopUp != "" && videoFile!.name != null) {
+    } else if (urlPopUp != "" && videoFile!.name != "") {
       this._msgErrorPopUp = "Selecione apenas um tipo.";
     } else {
       return "";
@@ -901,8 +901,8 @@ abstract class _SupportStoreBase with Store {
     _tag = "Podcast";
     _type = "Podcast";
     _link = "";
-    _audioFile = PlatformFile();
-    _videoFile = PlatformFile();
+    _audioFile = PlatformFile(name:"",size: 0);
+    _videoFile = PlatformFile(name:"",size: 0);
     _urlPopUp = "";
     teacherLocal = ObservableList<Teacher>();
     projectLocal = ObservableList<Project>();

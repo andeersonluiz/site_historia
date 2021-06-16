@@ -111,9 +111,9 @@ class NoticeFirestore {
 
       Uri urlAudio = Uri.parse("");
       String nameAudio = "";
-      if (audio.name != null && type == "Podcast") {
+      if (audio.name != "" && type == "Podcast") {
         metadata = audio.bytes!;
-        nameAudio = audio.name!;
+        nameAudio = audio.name;
         task = await storage()
             .ref()
             .child("notices/$nextId(audio).mp3")
@@ -179,7 +179,7 @@ class NoticeFirestore {
             .future;
         var result = await task.ref.getDownloadURL();
         notice.audio[0] = result.toString();
-        notice.audio[0] = audio.name!;
+        notice.audio[0] = audio.name;
       }
 
       Notice newNotice = Notice(

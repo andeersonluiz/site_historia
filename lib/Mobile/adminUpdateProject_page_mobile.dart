@@ -121,11 +121,11 @@ class _AdminUpdateProjectPageMobileState
                     initialText: supportStore.htmlContent,
                     mediaUploadInterceptor: (file, type) async {
                       var url = await projectStore.convertBase64ToUrl(
-                          file.name!,
+                          file.name,
                           file.bytes!,
                           widget.project.id.toString());
                       contentController.insertNetworkImage(url,
-                          filename: file.name!);
+                          filename: file.name);
                       return false;
                     },
                   ),

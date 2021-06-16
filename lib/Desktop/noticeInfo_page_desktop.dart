@@ -25,7 +25,7 @@ class NoticeInfoPageDesktop extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: CustomText(notice.title,
               style: Theme.of(context).textTheme.headline3),
         ),
@@ -42,6 +42,8 @@ class NoticeInfoPageDesktop extends StatelessWidget {
             ),
             child: HtmlViewer(
               notice.content,
+              margin: EdgeInsets.only(
+                  left: 100.0, right: 100.0, top: 16.0, bottom: 16.0),
 
             )),
         notice.type == "Podcast"

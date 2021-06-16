@@ -123,9 +123,9 @@ class _AdminAddProjectPageDesktopState
                       mediaUploadInterceptor: (file, type) async {
                         nextId ??= await projectStore.getNextId();
                         var url = await projectStore.convertBase64ToUrl(
-                            file.name!, file.bytes!, nextId.toString());
+                            file.name, file.bytes!, nextId.toString());
                         contentController.insertNetworkImage(url,
-                            filename: file.name!);
+                            filename: file.name);
                         return false;
                       },
                       initialText: supportStore.htmlContent,

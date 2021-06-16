@@ -52,7 +52,7 @@ class _VideoViewerState extends State<VideoViewer> {
         padding: const EdgeInsets.only(
             left: 8.0, right: 8.0, top: 8.0, bottom: 40.0),
         child: CustomText(
-          "Assita ao video:",
+          "Assista ao vídeo:",
           style: Theme.of(context).textTheme.headline5!,
         ),
       ),

@@ -60,9 +60,9 @@ class FrameFirestore {
 
       Uri urlAudio = Uri.parse("");
       String nameAudio = "";
-      if (audio.name != null) {
+      if (audio.name != "") {
         metadata = audio.bytes!;
-        nameAudio = audio.name!;
+        nameAudio = audio.name;
         task = await storage()
             .ref()
             .child("frames/$nextId(audio).mp3")
@@ -74,9 +74,9 @@ class FrameFirestore {
       Uri urlVideo = Uri.parse("");
       String nameVideo = "";
       if (video is PlatformFile) {
-        if (video.name != null) {
+        if (video.name != "") {
           metadata = video.bytes!;
-          nameVideo = video.name!;
+          nameVideo = video.name;
           task = await storage()
               .ref()
               .child("frames/$nextId(video).mp4")
@@ -147,7 +147,7 @@ class FrameFirestore {
             .put(metadata, UploadMetadata(contentType: 'audio/mp3'))
             .future;
         var result = await task.ref.getDownloadURL();
-        nameAudio = audio.name!;
+        nameAudio = audio.name;
         urlAudio = result.toString();
       }
 
@@ -162,7 +162,7 @@ class FrameFirestore {
               .put(metadata, UploadMetadata(contentType: 'video/mp4'))
               .future;
           var result = await task.ref.getDownloadURL();
-          nameVideo = video.name!;
+          nameVideo = video.name;
           urlVideo = result.toString();
         }
       } else if (video != "") {

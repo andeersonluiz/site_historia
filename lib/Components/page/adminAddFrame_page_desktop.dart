@@ -124,8 +124,8 @@ class _AdminAddFramePageState extends State<AdminAddFramePage> {
               mediaUploadInterceptor: (file, type) async {
                 nextId ??= await frameStore.getNextId();
                 var url = await frameStore.convertBase64ToUrl(
-                    file.name!, file.bytes!, nextId.toString());
-                contentController.insertNetworkImage(url, filename: file.name!);
+                    file.name, file.bytes!, nextId.toString());
+                contentController.insertNetworkImage(url, filename: file.name);
                 return false;
               },
               initialText: supportStore.htmlContent,

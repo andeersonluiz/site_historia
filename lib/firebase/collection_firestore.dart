@@ -27,8 +27,8 @@ class CollectionFirestore {
 
   static insertFile(String type, PlatformFile file, int id) async {
     var metadata = file.bytes;
-    var extension = file.name!.split(".").last;
-    var fileName = file.name!.split(extension)[0];
+    var extension = file.name.split(".").last;
+    var fileName = file.name.split(extension)[0];
     fileName = fileName.substring(0, fileName.length - 1);
     var result = await storage().ref("collections/$type").listAll();
     for (int i = 0; i < result.items.length; i++) {

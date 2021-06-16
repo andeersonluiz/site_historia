@@ -173,8 +173,8 @@ class _AdminAddNoticePageState extends State<AdminAddNoticePage> {
               mediaUploadInterceptor: (file, type) async {
                 nextId ??= await noticeStore!.getNextId();
                 var url = await noticeStore!.convertBase64ToUrl(
-                    file.name!, file.bytes!, nextId.toString());
-                contentController.insertNetworkImage(url, filename: file.name!);
+                    file.name, file.bytes!, nextId.toString());
+                contentController.insertNetworkImage(url, filename: file.name);
                 return false;
               },
               initialText: supportStore.htmlContent,

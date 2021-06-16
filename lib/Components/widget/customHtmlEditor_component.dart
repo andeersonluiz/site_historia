@@ -34,8 +34,6 @@ class CustomHtmlEditor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ///NÃO ESQUECER DE ADIICIONAR convertBase64ToUrl E  removeFilename PARA OS OUTROS STORES
-
     return Container(
       height: height,
       child: Theme(
@@ -57,7 +55,7 @@ class CustomHtmlEditor extends StatelessWidget {
             height: height,
           ),
           callbacks: Callbacks(
-            onChange: onChange,
+            onChangeContent: onChange,
             onBeforeCommand: onBeforeCommand,
           ),
           htmlToolbarOptions: HtmlToolbarOptions(
@@ -74,7 +72,7 @@ class CustomHtmlEditor extends StatelessWidget {
                   .copyWith(color: Theme.of(context).primaryColor),
               toolbarType: ToolbarType.nativeGrid,
               defaultToolbarButtons: [
-                FontSettingButtons(fontName: false, fontSizeUnit: false),
+                StyleButtons(),
                 FontButtons(
                     clearAll: false, superscript: false, subscript: false),
                 ParagraphButtons(

@@ -1,4 +1,4 @@
-/// Widget responsável por exibir menu de seleção na página de noticias (versão desktop).
+/// Widget responsável por exibir menu de seleção na página de notícias (versão desktop).
 ///
 /// {@category Desktop}
 /// {@subCategory Widget}

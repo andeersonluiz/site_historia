@@ -51,7 +51,7 @@ class _AudioViewerState extends State<AudioViewer> {
           padding: const EdgeInsets.only(
               left: 8.0, right: 8.0, top: 8.0, bottom: 40.0),
           child: CustomText(
-            "Ouça o audio:",
+            "Ouça o áudio:",
             style: Theme.of(context).textTheme.headline5!,
           ),
         ),

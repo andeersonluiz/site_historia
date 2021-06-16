@@ -136,8 +136,8 @@ class _AdminUpdateFramePageState
               initialText: supportStore.htmlContent,
               mediaUploadInterceptor: (file, type) async {
                 var url = await frameStore.convertBase64ToUrl(
-                    file.name!, file.bytes!, widget.frame.id.toString());
-                contentController.insertNetworkImage(url, filename: file.name!);
+                    file.name, file.bytes!, widget.frame.id.toString());
+                contentController.insertNetworkImage(url, filename: file.name);
                 return false;
               },
             ),

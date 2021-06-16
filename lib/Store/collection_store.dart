@@ -93,7 +93,7 @@ abstract class _CollectionStoreBase with Store {
   updateRecommendationArticleUrl(int id, PlatformFile file) async {
     var url = await CollectionFirestore.insertFile("article", file, id);
     collection!.articles[id].url = url.toString();
-    collection!.articles[id].urlName = file.name!;
+    collection!.articles[id].urlName = file.name;
     var newCollection = new Collection(
         movies: collection!.movies,
         articles: collection!.articles,
@@ -147,7 +147,7 @@ abstract class _CollectionStoreBase with Store {
     var url = await CollectionFirestore.insertFile(
         "book", file, collection!.books[id].id);
     collection!.books[id].url = url.toString();
-    collection!.books[id].urlName = file.name!;
+    collection!.books[id].urlName = file.name;
 
     var newCollection = new Collection(
         movies: collection!.movies,
@@ -202,7 +202,7 @@ abstract class _CollectionStoreBase with Store {
     var url = await CollectionFirestore.insertFile(
         "other", file, collection!.movies[id].id);
     collection!.others[id].url = url.toString();
-    collection!.others[id].urlName = file.name!;
+    collection!.others[id].urlName = file.name;
 
     var newCollection = new Collection(
         movies: collection!.movies,

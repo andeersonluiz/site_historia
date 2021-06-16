@@ -184,8 +184,8 @@ class _AdminUpdateNoticePageState
             initialText: supportStore.htmlContent,
             mediaUploadInterceptor: (file, type) async {
               var url = await noticeStore!.convertBase64ToUrl(
-                  file.name!, file.bytes!, widget.notice.id.toString());
-              contentController.insertNetworkImage(url, filename: file.name!);
+                  file.name, file.bytes!, widget.notice.id.toString());
+              contentController.insertNetworkImage(url, filename: file.name);
               return false;
             },
           ),

@@ -159,9 +159,9 @@ class VideoWidget extends StatelessWidget {
                             color: Colors.grey,
                             child: Center(
                               child: CustomText(
-                                supportStore.videoFile!.name == null
+                                supportStore.videoFile!.name == ""
                                     ? ""
-                                    : supportStore.videoFile!.name!,
+                                    : supportStore.videoFile!.name,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -176,7 +176,7 @@ class VideoWidget extends StatelessWidget {
                           color: Colors.red,
                         ),
                         onPressed: () {
-                          supportStore.updateVideo(PlatformFile());
+                          supportStore.updateVideo(PlatformFile(name:"",size:0));
                         },
                       ),
                     ],
@@ -209,7 +209,7 @@ class VideoWidget extends StatelessWidget {
                   paddingButton: EdgeInsets.zero,
                   text: "Fechar",
                   onPressed: () async {
-                    supportStore.updateVideo(PlatformFile());
+                    supportStore.updateVideo(PlatformFile(name:"",size:0));
                     supportStore.updateUrlPopUp("");
                     controllerUrl.clear();
                     Navigator.of(context).pop();
