@@ -187,6 +187,7 @@ class _AdminAddProjectPageDesktopState
                         onPressed: () async {
                           if (supportStore.validateProjectDesktop()) {
                             supportStore.setLoading(true);
+
                             var result = await projectStore.addProject(
                                 supportStore.title,
                                 supportStore.pathImage,

@@ -53,7 +53,7 @@ class AdminNoticePageDesktop extends StatelessWidget {
                         ),
                         child: ListTile(
                           leading: Icon(Icons.add_circle_rounded),
-                          title: CustomText("Adicionar Noticia",
+                          title: CustomText("Adicionar Noticia",isSelectable: false,
                               style: Theme.of(context).textTheme.bodyText1),
                           onTap: () => VxNavigator.of(context)
                               .push(Uri.parse(RouteNames.ADD_NOTICE)),
@@ -86,7 +86,7 @@ class AdminNoticePageDesktop extends StatelessWidget {
                                   })
                               : ListTile(
                                   leading: Icon(Icons.edit),
-                                  title: CustomText("Editar Menu Principal",
+                                  title: CustomText("Editar Menu Principal",isSelectable: false,
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyText1),

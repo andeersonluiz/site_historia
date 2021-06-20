@@ -27,7 +27,7 @@ class ErrorLoad extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
+            child: SelectableText(
               "Erro ao conectar ao banco dados, tente novamente mais tarde",
               style:
                   Theme.of(context).textTheme.headline6!.copyWith(color: color),

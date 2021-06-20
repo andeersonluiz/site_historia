@@ -32,6 +32,7 @@ class SearchBar extends StatelessWidget {
         contentPadding: EdgeInsets.zero,
         horizontalTitleGap: 0,
         title: TextField(
+          cursorColor: Theme.of(context).primaryColor,
           controller: controller,
           style: Theme.of(context)
               .textTheme
@@ -42,7 +43,9 @@ class SearchBar extends StatelessWidget {
                 .textTheme
                 .caption!
                 .copyWith(color: Theme.of(context).primaryColor),
-            hintText: 'Digite para pesquisar...',
+            focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Theme.of(context).primaryColor),),
+          hintText: 'Digite para pesquisar...',
             contentPadding: EdgeInsets.only(left: 16, bottom: 28.0),
           ),
         ),

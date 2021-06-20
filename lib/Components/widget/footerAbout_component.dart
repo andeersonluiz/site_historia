@@ -5,8 +5,10 @@
 // ignore: library_names
 library About;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class About extends StatelessWidget {
   final CrossAxisAlignment iconContactAlign;
@@ -25,14 +27,13 @@ class About extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: iconContactAlign,
       children: [
-        Text('Sobre nós',
+        SelectableText('Sobre nós',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
         Container(
           padding: EdgeInsets.only(right: 16.0),
           width: sizeContainerText,
-          child: Text(
-            'dapskdoapkdopaskdopa kdopas kodaspk opasdkoapspk dopask dopaskdopaskdopak opapsk dpoasdkopa sk dsadk aospkd askdosapk daopskd opsak dopas kdopsak dopsak opsadk osapko',
-            maxLines: 3,
+          child: SelectableText(
+            "Site da Coordenação de História do CEFET/Maracanã. Concebido, organizado e mantido pela professora Mariana Renou e os monitores: Lucas Muniz, Maria Eduarda Schwartz e Mariana Araújo. Desenvolvido e programado por Anderson Luiz Bernardes da Rocha.",            maxLines: 3,
             style: Theme.of(context).textTheme.caption,
             textAlign: textAlign,
           ),
@@ -41,17 +42,11 @@ class About extends StatelessWidget {
           crossAxisAlignment: iconContactAlign,
           mainAxisAlignment: iconSocialsAlign,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: GestureDetector(
-                  onTap: () {},
-                  child: Icon(
-                    FontAwesomeIcons.facebookSquare,
-                    size: 30,
-                  )),
-            ),
-            GestureDetector(
-                onTap: () {},
+            InkWell(
+                onTap: () {
+                      _launchURL("https://www.instagram.com/historia.cefetrj/");
+
+                },
                 child: Icon(
                   FontAwesomeIcons.instagramSquare,
                   size: 30,
@@ -61,4 +56,7 @@ class About extends StatelessWidget {
       ],
     );
   }
+  void _launchURL(String url) async =>
+      await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
+
 }

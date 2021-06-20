@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:site_historia/Components/widget/customImage_component.dart';
 import 'package:site_historia/Model/project_model.dart';
 import 'package:site_historia/Model/teacher_model.dart';
+import 'package:site_historia/Support/globals_variables.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Exibe uma imagem circular e informações referente ao professor.
@@ -31,7 +32,7 @@ class TeacherTile extends StatelessWidget {
             child: CustomImage(
               height: 150,
               width: MediaQuery.of(context).size.width,
-              image: teacher.image,
+              image: teacher.image==""?GlobalsVariables.srcDefaultImage:teacher.image,
               padding: EdgeInsets.zero,
               isOval: true,
             ),
@@ -40,10 +41,8 @@ class TeacherTile extends StatelessWidget {
             flex: 2,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: AutoSizeText(
+              child: SelectableText(
                 teacher.name,
-                maxFontSize: 20,
-                minFontSize: 5,
                 style: Theme.of(context)
                     .textTheme
                     .headline5!
@@ -94,11 +93,9 @@ class TeacherTile extends StatelessWidget {
     );
   }
 
-  AutoSizeText _buildText(String string, BuildContext context) {
-    return AutoSizeText(
+  SelectableText _buildText(String string, BuildContext context) {
+    return SelectableText(
       string,
-      maxFontSize: 20,
-      minFontSize: 5,
       maxLines: 2,
       textAlign: TextAlign.center,
       style: Theme.of(context)
@@ -108,13 +105,11 @@ class TeacherTile extends StatelessWidget {
     );
   }
 
-  AutoSizeText _buildTextProjects(
+  SelectableText _buildTextProjects(
       List<Project> projects, BuildContext context) {
     List<String> namesProjects = projects.map((e) => e.name).toList();
-    return AutoSizeText(
+    return SelectableText(
       "Projetos: " + namesProjects.join(", "),
-      maxFontSize: 20,
-      minFontSize: 13,
       maxLines: 2,
       textAlign: TextAlign.center,
       style: Theme.of(context)

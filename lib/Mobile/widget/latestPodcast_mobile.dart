@@ -44,8 +44,8 @@ class LatestPodcastMobile extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Ultimos Podcasts",
+                  child: SelectableText(
+                    "Últimos Podcasts",
                     style: Theme.of(context)
                         .textTheme
                         .headline5!

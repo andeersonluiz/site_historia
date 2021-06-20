@@ -45,7 +45,7 @@ class PostTileDesktop extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
-                      padding: EdgeInsets.all(4.0),
+                      padding: EdgeInsets.all(6.0),
                       decoration: BoxDecoration(
                         color: GlobalsVariables.colorByTag[notice.tag],
                         borderRadius: BorderRadius.circular(8),

@@ -116,7 +116,7 @@ class PodcastRecommendationWidget extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline5,
               ),
               content: new CustomText(
-                "Tem certeza que deseja excluir a referência ${item.name} com url ${item.url}?",
+                "Tem certeza que deseja excluir o podcast ${item.name} com url ${item.url}?",
                 style: Theme.of(context).textTheme.subtitle1,
               ),
               actions: <Widget>[

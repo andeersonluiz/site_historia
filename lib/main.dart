@@ -16,6 +16,7 @@ import 'package:site_historia/firebase/teacher_firestore.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'Store/support_store.dart';
+import 'Support/globals_variables.dart';
 import 'Theme/themeConfig.dart';
 import 'firebase/frame_firestore.dart';
 import 'firebase/project_firestore.dart';
@@ -104,6 +105,7 @@ class _MyAppState extends State<MyApp> {
     await projectStore.getProjectSortedByTitle();
     await frameStore.getFramesSortedByTitle();
     User? user = LoginAuth.getUser();
+    GlobalsVariables.loadTags();
     if (user != null) {
       await projectStore.getUsernameByUid(user.uid);
     }

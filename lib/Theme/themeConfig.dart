@@ -68,6 +68,7 @@ class ThemeConfig {
       bodyColor: textColor,
       displayColor: textColor,
       decorationColor: brown,
+
     ),
   );
 }

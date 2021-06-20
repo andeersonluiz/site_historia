@@ -79,8 +79,8 @@ abstract class _ProjectStoreBase with Store {
   }
 
   /// Exclui um projeto do banco de dados.
-  deleteProject(int id) {
-    ProjectFirestore.deleteProject(id);
+   deleteProject(int id) async{
+    await ProjectFirestore.deleteProject(id);
   }
 
   /// Retorna o nome do usuário que está logado.

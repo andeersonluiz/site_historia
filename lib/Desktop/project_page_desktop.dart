@@ -8,6 +8,7 @@ import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:site_historia/Components/widget/author_component.dart';
 import 'package:site_historia/Components/widget/customImage_component.dart';
+import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Components/widget/htmlViewer_component.dart';
 import 'package:site_historia/Desktop/footer/footer_desktop.dart';
 import 'package:site_historia/Model/project_model.dart';
@@ -22,46 +23,46 @@ class ProjectPageDesktop extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
-        Stack(children: [
-          CustomImage(
+        Container(
+          width: MediaQuery.of(context).size.width,
+          color: Colors.white,
+          child: CustomImage(
             height: 300,
             width: MediaQuery.of(context).size.width,
             image: project.imageHeader,
             padding: EdgeInsets.zero,
+            fit: BoxFit.fill,
           ),
-          Container(
-            height: 300,
-            width: MediaQuery.of(context).size.width,
-            color: Colors.white.withOpacity(0.4),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: Text(project.name,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline3!
-                        .copyWith(color: Theme.of(context).primaryColor)),
-              ),
-            ),
+        ),
+        Divider(
+          height: 0,
+          thickness: 1.0,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Center(
+            child: SelectableText(project.name,
+                textAlign: TextAlign.center,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline4!
+                    .copyWith(color: Theme.of(context).primaryColor)),
           ),
-        ]),
-        Divider(height: 1),
-        Container(
+        ),
+        Divider(height: 1,thickness: 1.0,),
+        IntrinsicHeight(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 flex: 7,
-                child: Container(
-                  decoration: DottedDecoration(
-                      shape: Shape.line, linePosition: LinePosition.right),
-                  child: Padding(
+                child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: HtmlViewer(project.content),
                   ),
-                ),
+
               ),
+              VerticalDivider(thickness: 1,),
               Expanded(
                 flex: 3,
                 child: Column(
@@ -70,7 +71,7 @@ class ProjectPageDesktop extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Center(
-                          child: Text("Participantes",
+                          child: CustomText("Participantes",
                               maxLines: 1,
                               style: Theme.of(context)
                                   .textTheme
@@ -83,7 +84,7 @@ class ProjectPageDesktop extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: Center(
-                            child: Text(
+                            child: CustomText(
                               teacher.name + " (Professor)",
                               style: Theme.of(context)
                                   .textTheme
@@ -94,10 +95,11 @@ class ProjectPageDesktop extends StatelessWidget {
                           ),
                         ),
                       for (var participant in project.participants)
+                        if(participant.name.trim()!="")
                         Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: Center(
-                            child: Text(
+                            child: CustomText(
                               participant.name + " (Aluno)",
                               style: Theme.of(context)
                                   .textTheme

@@ -15,8 +15,7 @@ import 'package:site_historia/Store/support_store.dart';
 /// e também define o número de colunas a serem utilizadas, caso o tamanho seja menor que 500px
 /// é utilizado apenas uma coluna, caso contrário, duas.
 class ProjectWidget extends StatelessWidget {
-  final _crossAxisCount;
-  ProjectWidget(this._crossAxisCount);
+  final _crossAxisCount=1;
   final _crossAxisSpacing = 8.0;
   final cellHeight = 60;
   @override

@@ -44,6 +44,7 @@ class _ItemPopUpMenuAppBarDesktopState extends State<ItemPopUpMenuAppBarDesktop>
       child: Container(
         height: double.infinity,
         child: PopupMenuButton(
+
           onSelected: (result) {
             int index = result as int;
             rotationController.animateBack(0.0);
@@ -58,7 +59,9 @@ class _ItemPopUpMenuAppBarDesktopState extends State<ItemPopUpMenuAppBarDesktop>
               rotationController.forward();
             }
             return PopupMenuItem(
+
                 value: item.id,
+                padding: EdgeInsets.all(8.0),
                 child: Text(item is Project ? item.name : item.title,
                     style: Theme.of(context).textTheme.bodyText1));
           }).toList(),
@@ -77,6 +80,7 @@ class _ItemPopUpMenuAppBarDesktopState extends State<ItemPopUpMenuAppBarDesktop>
                     color: Theme.of(context).iconTheme.color))
           ]),
           elevation: 8,
+
           offset: Offset(0, 59),
         ),
       ),

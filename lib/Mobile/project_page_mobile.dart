@@ -5,6 +5,7 @@
 // ignore: library_names
 library ProjectPageMobile;
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:site_historia/Components/widget/customImage_component.dart';
 import 'package:site_historia/Components/widget/htmlViewer_component.dart';
@@ -20,30 +21,27 @@ class ProjectPageMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Stack(children: [
           CustomImage(
             height: 200,
             width: MediaQuery.of(context).size.width,
             image: project.imageHeader,
             padding: EdgeInsets.zero,
           ),
-          Container(
-            height: 200,
-            width: MediaQuery.of(context).size.width,
-            color: Colors.white.withOpacity(0.4),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: Text(project.name,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline3!
-                        .copyWith(color: Theme.of(context).primaryColor)),
-              ),
-            ),
+        Divider(
+          height: 0,
+          thickness: 1.0,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Center(
+            child: SelectableText(project.name,
+                textAlign: TextAlign.center,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline4!
+                    .copyWith(color: Theme.of(context).primaryColor)),
           ),
-        ]),
+        ),
         Divider(
           height: 0,
           thickness: 1.0,
@@ -62,7 +60,7 @@ class ProjectPageMobile extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Center(
-                  child: Text("Participantes",
+                  child: SelectableText("Participantes",
                       maxLines: 1,
                       style: Theme.of(context)
                           .textTheme
@@ -74,7 +72,7 @@ class ProjectPageMobile extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Center(
-                    child: Text(
+                    child: SelectableText(
                       teacher.name + " (Professor)",
                       style: Theme.of(context)
                           .textTheme
@@ -87,7 +85,7 @@ class ProjectPageMobile extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Center(
-                    child: Text(
+                    child: SelectableText(
                       participant.name + " (Aluno)",
                       style: Theme.of(context)
                           .textTheme

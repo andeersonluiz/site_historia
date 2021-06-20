@@ -28,7 +28,7 @@ class _AdminAddProjectScreenState extends State<AdminAddProjectScreen> {
                   ? null
                   : AppBar(
                       centerTitle: true,
-                      title: Text("Adicionar Projeto"),
+                      title: SelectableText("Adicionar Projeto"),
                     ),
               body: ScreenTypeLayout(
                   mobile: AdminAddProjectPageMobile(),

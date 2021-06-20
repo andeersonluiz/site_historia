@@ -112,11 +112,6 @@ class _AdminUpdateTeacherPageState
                         image: supportStore.pathImage,
                       ),
                     ),
-                    Observer(builder: (_) {
-                      return supportStore.msgErrorImage == ""
-                          ? Container()
-                          : ErrorMsg(supportStore.msgErrorImage);
-                    }),
                     Center(
                         child: CustomText(
                             "Selecione os projetos que o professor participa",
@@ -134,7 +129,7 @@ class _AdminUpdateTeacherPageState
                               projectStore.listProjects!.value as List<Project>;
                           supportStore.createProjectLocal(projs, null);
                           return ProjectWidget(
-                              MediaQuery.of(context).size.width > 500 ? 2 : 1);
+                              );
                       }
                     }),
                     Observer(builder: (_) {

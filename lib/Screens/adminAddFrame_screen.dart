@@ -28,7 +28,7 @@ class _AdminAddFrameScreenState extends State<AdminAddFrameScreen> {
                   ? null
                   : AppBar(
                       centerTitle: true,
-                      title: Text("Adicionar Quadro"),
+                      title: SelectableText("Adicionar Quadro"),
                     ),
               body: ScreenTypeLayout(
                   mobile: AdminAddFramePage(),

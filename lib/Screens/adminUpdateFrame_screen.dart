@@ -42,7 +42,7 @@ class _AdminUpdateFrameScreenState extends State<AdminUpdateFrameScreen> {
               ? null
               : AppBar(
                   centerTitle: true,
-                  title: Text("Editar Quadro"),
+                  title: SelectableText("Editar Quadro"),
                 ),
           body: Observer(
             builder: (_) {

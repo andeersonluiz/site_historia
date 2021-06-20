@@ -30,10 +30,12 @@ class TeacherFirestore {
     try{
       var result = await firestore().collection("teachers").get();
       int nextId = result.docs.length+1;
-      var bytesImage = await image.readAsBytes();
-      var task = await storage().ref().child("teachers/$nextId.png").put(bytesImage,UploadMetadata(contentType: "image/png")).future;
-      var imageUrl = await task.ref.getDownloadURL();
-
+      var imageUrl= Uri.parse(image.path);
+      if(image.path!=""){
+        var bytesImage = await image.readAsBytes();
+        var task = await storage().ref().child("teachers/$nextId.png").put(bytesImage,UploadMetadata(contentType: "image/png")).future;
+        imageUrl = await task.ref.getDownloadURL();
+      }
       await firestore().collection("projects").get().then((listProjects) =>
           listProjects.docs.forEach((project) =>
               projects.forEach((element) async{
@@ -73,7 +75,7 @@ class TeacherFirestore {
       ) async {
     try{
       Uri urlImage = Uri.parse(image.path);
-      if(!image.path.contains("firebasestorage")){
+      if(!image.path.contains("firebasestorage") && image.path!=""){
         var bytesImage = await image.readAsBytes();
         var task = await storage().ref().child("teachers/${teacher.id}.png").put(bytesImage,UploadMetadata(contentType: "image/jpg")).future;
         urlImage = await task.ref.getDownloadURL();
@@ -137,7 +139,11 @@ class TeacherFirestore {
         });}
       );});
     await firestore().collection("teachers").doc(id.toString()).delete();
-    await storage().ref().child("teachers/$id.png").delete();
+    try{
+      await storage().ref().child("teachers/$id.png").delete();
+    }catch(e){
+
+    }
 
   }
 }

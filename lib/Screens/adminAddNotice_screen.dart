@@ -26,7 +26,7 @@ class _AdminAddNoticeScreenState extends State<AdminAddNoticeScreen> {
                   ? null
                   : AppBar(
                       centerTitle: true,
-                      title: Text("Adicionar Notícia"),
+                      title: SelectableText("Adicionar Notícia"),
                     ),
               body: ScreenTypeLayout(
                   mobile: AdminAddNoticePage(),

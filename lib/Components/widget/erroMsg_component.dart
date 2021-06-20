@@ -15,7 +15,7 @@ class ErrorMsg extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Text(
+      child: SelectableText(
         text,
         style: Theme.of(context).textTheme.caption!.copyWith(color: Colors.red),
       ),

@@ -20,6 +20,7 @@ class ProjectFirestore {
     final results = result.docs;
 
     List<Project> projects = [];
+
     results.forEach((item) {
       projects.add(Project.fromJson(item.data()));
     });
@@ -83,6 +84,29 @@ class ProjectFirestore {
           .future;
       Uri url = await task.ref.getDownloadURL();
 
+      await firestore()
+          .collection("teachers")
+          .get()
+          .then((listTeachers) => listTeachers.docs.forEach((teacher) async {
+        Teacher teach = Teacher.fromJson(teacher.data());
+        if (listTeacher.any((element) => teach.id == element.id)) {
+          var query = await firestore()
+              .collection("teachers")
+              .doc(teach.id.toString())
+              .get();
+          Teacher teacherTemp = Teacher.fromJson(query.data());
+
+          teacherTemp.projects.add(Project.fromJsonSimple({
+            'id': nextId,
+            'name': title,
+          }));
+          await firestore()
+              .collection("teachers")
+              .doc(teacher.id.toString())
+              .update(data: teacherTemp.toJson());
+        }
+      }));
+
       Project project = Project(
           id: nextId,
           author: author,
@@ -122,22 +146,26 @@ class ProjectFirestore {
           .collection("teachers")
           .get()
           .then((listTeachers) => listTeachers.docs.forEach((teacher) async {
-        Teacher teach = Teacher.fromJson(teacher.data());
+            Teacher teach = Teacher.fromJson(teacher.data());
+            // Verifica se o professor já possui o projeto e verifica se
+            // na lista de professores selecionados existe o professores escolhidos no checkbox
         if (!teach.projects.any((element) => id == element.id) &&
-            listTeacher.any((element) => id == element.id)) {
+            listTeacher.any((element) => teach.id == element.id)) {
           var query = await firestore()
               .collection("teachers")
               .doc(teach.id.toString())
               .get();
           Teacher teacherTemp = Teacher.fromJson(query.data());
+
           teacherTemp.projects.add(Project.fromJsonSimple({
-            'id': teacher.id,
+            'id': id,
             'name': title,
           }));
           await firestore()
               .collection("teachers")
-              .doc(teach.id.toString())
+              .doc(teacher.id.toString())
               .update(data: teacherTemp.toJson());
+
         } else if (teach.projects.any((element) => id == element.id) &&
             !listTeacher.any((element) => teach.id == element.id)) {
           var query = await firestore()
@@ -149,11 +177,10 @@ class ProjectFirestore {
               .removeWhere((element) => element.id == id);
           await firestore()
               .collection("teachers")
-              .doc(teach.id.toString())
+              .doc(teacherRes.id.toString())
               .update(data: teacherRes.toJson());
         }
       }));
-
       if (!imageHeader.path.contains("firebasestorage")) {
         var metadata = await imageHeader.readAsBytes();
         UploadTaskSnapshot task = await storage()
@@ -163,7 +190,6 @@ class ProjectFirestore {
             .future;
         url = await task.ref.getDownloadURL();
       }
-
       Project project = Project(
           id: id,
           author: author,
@@ -173,7 +199,6 @@ class ProjectFirestore {
           name: title,
           participants: listParticipants,
           teachers: listTeacher);
-
       await firestore()
           .collection("projects")
           .doc(id.toString())
@@ -195,6 +220,25 @@ class ProjectFirestore {
           .child("projects/$id(content)/${result.items[i].name}")
           .delete();
     }
+    await firestore()
+        .collection("teachers")
+        .get()
+        .then((listTeachers) => listTeachers.docs.forEach((teacher) async {
+      Teacher teach = Teacher.fromJson(teacher.data());
+      if (teach.projects.any((element) => id == element.id)) {
+        var query = await firestore()
+            .collection("teachers")
+            .doc(teach.id.toString())
+            .get();
+        Teacher teacherRes = Teacher.fromJson(query.data());
+        teacherRes.projects
+            .removeWhere((element) => element.id == id);
+        await firestore()
+            .collection("teachers")
+            .doc(teacherRes.id.toString())
+            .update(data: teacherRes.toJson());
+      }
+    }));
     return;
   }
 

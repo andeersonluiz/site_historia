@@ -47,7 +47,7 @@ class AdminProjectPageMobile extends StatelessWidget {
                           width: 1.0, color: Theme.of(context).primaryColor)),
                   child: ListTile(
                     leading: Icon(Icons.add_circle_rounded),
-                    title: CustomText("Adicionar Projeto",
+                    title: CustomText("Adicionar Projeto",isSelectable: false,
                         style: Theme.of(context).textTheme.bodyText1),
                     onTap: () => VxNavigator.of(context)
                         .push(Uri.parse(RouteNames.ADD_PROJECT)),

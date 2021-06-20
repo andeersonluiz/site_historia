@@ -51,19 +51,19 @@ class NoticeTileDesktop extends StatelessWidget {
                   child: InkWell(
                       onTap: _onTap,
                       splashColor: Colors.transparent,
-                      child: CustomText(notice.title,
+                      child: Text(notice.title,
 
-                          style: Theme.of(context).textTheme.headline5)),
+                          style: Theme.of(context).textTheme.headline5!.copyWith(color:Theme.of(context).primaryColor))),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(
                       onTap: _onTap,
                       splashColor: Colors.transparent,
-                      child: CustomText(
+                      child: Text(
                         notice.subtitle,
                         textAlign: TextAlign.start,
-                        style: Theme.of(context).textTheme.subtitle1,
+                        style: Theme.of(context).textTheme.subtitle1!.copyWith(color:Theme.of(context).primaryColor),
                       )),
                 ),
                 Spacer(),

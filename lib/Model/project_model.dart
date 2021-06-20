@@ -75,17 +75,19 @@ class Project {
   }
 
   /// Converter a classe `Project` em `json`.
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() {
+    return {
         'id': id,
-        'name': name,
-        'imageHeader': imageHeader,
-        'content': content,
-        'datePost': datePost,
+        'name': name.toString(),
+        'imageHeader': imageHeader.toString(),
+        'content': content.toString(),
+        'datePost': datePost.toString(),
         'teachers': teachers.map((e) => e.toJsonSimple()).toList(),
         'participants': participants.map((e) => e.toJson()).toList(),
-        'author': author,
+        'author': author.toString(),
       };
 
+  }
   /// Converter a classe `Project` em `json`. Usado para adicionar como um item de `Teacher`.
   Map<String, dynamic> toJsonSimple() {
     return {

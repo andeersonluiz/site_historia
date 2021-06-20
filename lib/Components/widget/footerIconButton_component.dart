@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 class IconButtonFooter extends StatelessWidget {
   final IconData icon;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   IconButtonFooter(this.icon, this.onPressed);
   @override
   Widget build(BuildContext context) {

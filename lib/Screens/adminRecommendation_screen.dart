@@ -27,7 +27,7 @@ class _AdminRecommendationScreenState extends State<AdminRecommendationScreen> {
               ? null
               : AppBar(
                   centerTitle: true,
-                  title: Text("Editar Recomendação"),
+                  title: SelectableText("Editar Recomendação"),
                 ),
           body: SingleChildScrollView(
             scrollDirection: Axis.vertical,

@@ -29,7 +29,7 @@ class _AdminProjectsScreenState extends State<AdminProjectsScreen> {
             ? null
             : AppBar(
                 centerTitle: true,
-                title: Text("Olá, ${GlobalsVariables.username}!!"),
+                title: SelectableText("Olá, ${GlobalsVariables.username}!!"),
               ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,

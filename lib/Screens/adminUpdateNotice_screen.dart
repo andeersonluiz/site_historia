@@ -43,7 +43,7 @@ class _AdminUpdateNoticeScreenState extends State<AdminUpdateNoticeScreen> {
               ? null
               : AppBar(
                   centerTitle: true,
-                  title: Text("Editar Notícia"),
+                  title: SelectableText("Editar Notícia"),
                 ),
           body: Observer(
             builder: (_) {

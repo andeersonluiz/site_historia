@@ -42,7 +42,7 @@ class _AdminUpdateTeacherScreenState extends State<AdminUpdateTeacherScreen> {
               ? null
               : AppBar(
                   centerTitle: true,
-                  title: Text("Editar Professor"),
+                  title: SelectableText("Editar Professor"),
                 ),
           body: Observer(builder: (_) {
             teacherStore.listTeachers ?? teacherStore.getTeachers();

@@ -28,7 +28,7 @@ class _AdminFramesScreenState extends State<AdminFramesScreen> {
             ? null
             : AppBar(
                 centerTitle: true,
-                title: Text("Olá, ${GlobalsVariables.username}!!"),
+                title: SelectableText("Olá, ${GlobalsVariables.username}!!"),
               ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,

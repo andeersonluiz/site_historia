@@ -51,6 +51,7 @@ class AdminTeacherPageMobile extends StatelessWidget {
                   child: ListTile(
                     leading: Icon(Icons.add_circle_rounded),
                     title: CustomText("Adicionar Professor",
+                        isSelectable: false,
                         style: Theme.of(context).textTheme.bodyText1),
                     onTap: () => VxNavigator.of(context)
                         .push(Uri.parse(RouteNames.ADD_TEACHER)),

@@ -160,7 +160,7 @@ class BookCollectionWidget extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline5,
               ),
               content: new CustomText(
-                "Tem certeza que deseja excluir o filme ${item.name} (A exclusão não pode ser desfeita)?",
+                "Tem certeza que deseja excluir o livro ${item.name} (A exclusão não pode ser desfeita)?",
                 style: Theme.of(context).textTheme.subtitle1,
               ),
               actions: <Widget>[

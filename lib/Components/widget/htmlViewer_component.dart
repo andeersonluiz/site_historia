@@ -106,7 +106,7 @@ class HtmlViewer extends StatelessWidget {
             backgroundColor: Theme.of(context).primaryColor,
           ),
         ),
-        Text(
+        SelectableText(
           node!.text,
           style: TextStyle(color: Theme.of(context).primaryColor),
         )
@@ -123,7 +123,7 @@ class HtmlViewer extends StatelessWidget {
       onTap: () {
         _launchURL(href);
       },
-      child: Text(
+      child: SelectableText(
         node!.text,
         style: TextStyle(
             color: Colors.blueAccent,

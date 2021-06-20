@@ -25,7 +25,7 @@ class _AdminCollectionScreenState extends State<AdminCollectionScreen> {
               ? null
               : AppBar(
                   centerTitle: true,
-                  title: Text("Editar Acervo"),
+                  title: SelectableText("Editar Acervo"),
                 ),
           body: SingleChildScrollView(
             scrollDirection: Axis.vertical,

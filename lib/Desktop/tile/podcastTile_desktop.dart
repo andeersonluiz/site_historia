@@ -4,6 +4,7 @@
 /// {@subCategory Tile}
 // ignore: library_names
 library PodcastTileDesktop;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:site_historia/Components/widget/customImage_component.dart';
 import 'package:site_historia/Support/globals_variables.dart';
@@ -43,17 +44,19 @@ class PodcastTileDesktop extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
-                      padding: EdgeInsets.all(4.0),
+                      padding: EdgeInsets.all(6.0),
                       decoration: BoxDecoration(
                         color: GlobalsVariables.colorByTag[podcast.tag],
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(podcast.tag,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText2!
-                              .copyWith(color: Theme.of(context).primaryColor)),
-                    ),
+
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2!
+                                .copyWith(color: Theme.of(context).primaryColor)),
+                      ),
+
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),

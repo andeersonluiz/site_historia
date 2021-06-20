@@ -27,7 +27,7 @@ class _AdminAddTeacherScreenState extends State<AdminAddTeacherScreen> {
                   ? null
                   : AppBar(
                       centerTitle: true,
-                      title: Text("Adicionar Professor"),
+                      title: SelectableText("Adicionar Professor"),
                     ),
               body: ScreenTypeLayout(
                   mobile: AdminAddTeacherPage(),

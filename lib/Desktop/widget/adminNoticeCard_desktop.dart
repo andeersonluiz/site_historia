@@ -178,7 +178,7 @@ class AdminNoticeCardDesktop extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline5,
               ),
               content: new CustomText(
-                "Tem certeza que deseja excluir o projeto ${notice.title}?",
+                "Tem certeza que deseja excluir a notícia ${notice.title}?",
                 style: Theme.of(context).textTheme.subtitle1,
               ),
               actions: <Widget>[

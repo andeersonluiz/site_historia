@@ -20,7 +20,7 @@ class AuthorInfo extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(right: 20.0, left: 20.0, bottom: 20.0),
-          child: Text(
+          child: SelectableText(
             "Autor: $author",
             style: Theme.of(context).textTheme.caption!.copyWith(
                 color: Theme.of(context).primaryColor,
@@ -30,7 +30,7 @@ class AuthorInfo extends StatelessWidget {
         Spacer(),
         Padding(
           padding: const EdgeInsets.only(right: 20.0, left: 20.0, bottom: 20.0),
-          child: Text(
+          child: SelectableText(
             "Data publicação: $datePost",
             style: Theme.of(context).textTheme.caption!.copyWith(
                 color: Theme.of(context).primaryColor,

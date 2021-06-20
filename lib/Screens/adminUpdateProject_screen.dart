@@ -43,7 +43,7 @@ class _AdminUpdateProjectScreenState extends State<AdminUpdateProjectScreen> {
               ? null
               : AppBar(
                   centerTitle: true,
-                  title: Text("Editar Projeto"),
+                  title: SelectableText("Editar Projeto"),
                 ),
           body: Observer(builder: (_) {
             projectStore.listProjects ?? projectStore.getProjects();

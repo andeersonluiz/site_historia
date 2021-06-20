@@ -31,7 +31,7 @@ class ListTeachers extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
+          child: SelectableText(
             "Professores",
             style: Theme.of(context)
                 .textTheme

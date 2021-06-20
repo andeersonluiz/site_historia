@@ -45,7 +45,7 @@ class LatestPostsMobile extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
+                  child: SelectableText(
                     "Ultimas Postagens",
                     style: Theme.of(context)
                         .textTheme

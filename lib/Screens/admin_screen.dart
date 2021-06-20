@@ -53,7 +53,7 @@ class _AdminScreenState extends State<AdminScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
+                    child: SelectableText(
                       "Área do Admin",
                       style: Theme.of(context)
                           .textTheme

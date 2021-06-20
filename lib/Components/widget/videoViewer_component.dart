@@ -225,7 +225,7 @@ class _YoutubeViewerState extends State<YoutubeViewer> {
         actions: <Widget>[
           new Center(
             child: TextButton(
-              child: new Text("Close"),
+              child: new SelectableText("Close"),
               onPressed: () {
                 Navigator.of(context).pop();
               },

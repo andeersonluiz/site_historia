@@ -15,6 +15,7 @@ import 'package:site_historia/Model/teacher_model.dart';
 import 'package:html/parser.dart';
 import 'package:site_historia/Support/DiffPackage/dmp_class.dart';
 import 'package:site_historia/Support/DiffPackage/diff_class.dart';
+import 'package:site_historia/Support/globals_variables.dart';
 
 part 'support_store.g.dart';
 
@@ -623,9 +624,9 @@ abstract class _SupportStoreBase with Store {
     if (title == "") {
       generateMsgError(ErrorForm.Title, "O titulo não pode ser vazio.");
       err += "err1";
-    } else if (title.length > 40) {
+    } else if (title.length > GlobalsVariables.maxCharactersTitle) {
       generateMsgError(
-          ErrorForm.Title, "O título não ter mais de 40 caracteres.");
+          ErrorForm.Title, "O título não ter mais de ${GlobalsVariables.maxCharactersTitle} caracteres.");
       err += "err2";
     } else {
       clearError(ErrorForm.Title);
@@ -681,9 +682,9 @@ abstract class _SupportStoreBase with Store {
     if (title == "") {
       generateMsgError(ErrorForm.Title, "O titulo não pode ser vazio.");
       err += "err1";
-    } else if (title.length > 40) {
+    } else if (title.length > GlobalsVariables.maxCharactersTitle) {
       generateMsgError(
-          ErrorForm.Title, "O título não ter mais de 40 caracteres.");
+          ErrorForm.Title, "O título não ter mais de ${GlobalsVariables.maxCharactersTitle} caracteres.");
       err += "err2";
     } else {
       clearError(ErrorForm.Title);
@@ -728,9 +729,9 @@ abstract class _SupportStoreBase with Store {
     if (title == "") {
       generateMsgError(ErrorForm.Title, "O titulo não pode ser vazio.");
       err += "err1";
-    } else if (title.length > 40) {
+    } else if (title.length > GlobalsVariables.maxCharactersTitle) {
       generateMsgError(
-          ErrorForm.Title, "O título não ter mais de 40 caracteres.");
+          ErrorForm.Title, "O título não ter mais de ${GlobalsVariables.maxCharactersTitle} caracteres.");
       err += "err2";
     } else {
       clearError(ErrorForm.Title);
@@ -739,9 +740,9 @@ abstract class _SupportStoreBase with Store {
     if (subtitle == "") {
       generateMsgError(ErrorForm.SubTitle, "O subtítulo não pode ser vazio.");
       err += "err3";
-    } else if (subtitle.length > 100) {
+    } else if (subtitle.length > GlobalsVariables.maxCharactersSubTitle) {
       generateMsgError(
-          ErrorForm.SubTitle, "O subtítulo não ter mais de 50 caracteres.");
+          ErrorForm.SubTitle, "O subtítulo não ter mais de ${GlobalsVariables.maxCharactersSubTitle} caracteres.");
       err += "err4";
     } else {
       clearError(ErrorForm.SubTitle);
@@ -802,9 +803,9 @@ abstract class _SupportStoreBase with Store {
     if (title == "") {
       generateMsgError(ErrorForm.Title, "O titulo não pode ser vazio.");
       err += "err1";
-    } else if (title.length > 40) {
+    } else if (title.length > GlobalsVariables.maxCharactersTitle) {
       generateMsgError(
-          ErrorForm.Title, "O título não ter mais de 40 caracteres.");
+          ErrorForm.Title, "O título não ter mais de ${GlobalsVariables.maxCharactersTitle} caracteres.");
       err += "err2";
     } else {
       clearError(ErrorForm.Title);
@@ -813,9 +814,9 @@ abstract class _SupportStoreBase with Store {
     if (subtitle == "") {
       generateMsgError(ErrorForm.SubTitle, "O subtítulo não pode ser vazio.");
       err += "err3";
-    } else if (subtitle.length > 100) {
+    } else if (subtitle.length > GlobalsVariables.maxCharactersSubTitle) {
       generateMsgError(
-          ErrorForm.SubTitle, "O subtítulo não ter mais de 50 caracteres.");
+          ErrorForm.SubTitle, "O subtítulo não ter mais de ${GlobalsVariables.maxCharactersSubTitle} caracteres.");
       err += "err4";
     } else {
       clearError(ErrorForm.SubTitle);
@@ -862,25 +863,17 @@ abstract class _SupportStoreBase with Store {
       generateMsgError(
           ErrorForm.Title, "O Nome do professor não pode ser vazio.");
       err += "err1";
-    } else if (title.length > 40) {
+    } else if (title.length > GlobalsVariables.maxCharactersTitle) {
       generateMsgError(ErrorForm.Title,
-          "O nome do professor não ter mais de 40 caracteres.");
+          "O nome do professor não ter mais de ${GlobalsVariables.maxCharactersTitle} caracteres.");
       err += "err2";
     } else {
       clearError(ErrorForm.Title);
     }
-
-    if (pathImage!.path == "") {
-      generateMsgError(
-          ErrorForm.Image, "Selecione uma imagem para o professor.");
-      err += "err5";
-    } else {
-      clearError(ErrorForm.Image);
-    }
     if (getProjects().length == 0) {
       generateMsgError(
           ErrorForm.Project, "Você deve selecionar pelo menos um projeto.");
-      err += "err5";
+      err += "err3";
     } else {
       clearError(ErrorForm.Project);
     }

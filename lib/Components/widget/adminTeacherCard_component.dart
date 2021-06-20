@@ -12,6 +12,7 @@ import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Model/teacher_model.dart';
 import 'package:site_historia/Store/project_store.dart';
 import 'package:site_historia/Store/teacher_store.dart';
+import 'package:site_historia/Support/globals_variables.dart';
 import 'package:site_historia/Support/routesName_support.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -28,7 +29,6 @@ class AdminTeacherCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final teacherStore = Provider.of<TeacherStore>(context);
     final projectStore = Provider.of<ProjectStore>(context);
-
     return Container(
       padding: EdgeInsets.all(8.0),
       child: Card(
@@ -66,7 +66,7 @@ class AdminTeacherCard extends StatelessWidget {
                     child: CustomImage(
                         fit: BoxFit.cover,
                         height: sizeCard,
-                        image: teacher.image)),
+                        image: teacher.image==""?GlobalsVariables.srcDefaultImage:teacher.image)),
                 Expanded(
                   flex: 7,
                   child: Container(
@@ -102,7 +102,7 @@ class AdminTeacherCard extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline5,
               ),
               content: new CustomText(
-                "Tem certeza que deseja excluir o projeto ${teacher.name}?",
+                "Tem certeza que deseja excluir o professor ${teacher.name}?",
                 style: Theme.of(context).textTheme.subtitle1,
               ),
               actions: <Widget>[

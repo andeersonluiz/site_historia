@@ -15,6 +15,7 @@ class CustomText extends StatelessWidget {
   final int? maxLines;
   final TextOverflow? overflow;
   final EdgeInsets padding;
+  final bool isSelectable;
   /*cor brown(primaryColor) */
   CustomText(
     this.text, {
@@ -24,20 +25,28 @@ class CustomText extends StatelessWidget {
     this.maxLines,
     this.overflow,
     this.padding = const EdgeInsets.all(8.0),
+        this.isSelectable=true,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: padding,
-      child: Text(
+      child: isSelectable?SelectableText(
         text,
         maxLines: maxLines,
-        overflow: overflow,
         textAlign: textAlign,
         style: style == null
             ? Theme.of(context).textTheme.caption!.copyWith(color: colorText)
             : style!.copyWith(color: colorText),
+      ):Text(
+        text,
+        maxLines: maxLines,
+        textAlign: textAlign,
+        style: style == null
+            ? Theme.of(context).textTheme.caption!.copyWith(color: colorText)
+            : style!.copyWith(color: colorText),
+        overflow: overflow,
       ),
     );
   }
