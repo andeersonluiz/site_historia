@@ -1,0 +1,20 @@
+name: Firestore Backups
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Backup'
+        default: 'Backup'
+        required: false
+  schedule:
+    - cron: '0 0 1-31/2  * *'
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          service_account_key: ${{ 7343f95f39246bc97141f0fda2a4331fce620057 }}
+
+      - run: gcloud config set project yourappid
+      - run: gcloud firestore export gs://yourbucket.appspot.com
