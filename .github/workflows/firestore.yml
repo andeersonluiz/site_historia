@@ -17,4 +17,4 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
 
       - run: gcloud config set project yourappid
-      - run: gcloud firestore export gs://yourbucket.appspot.com
+      - run: gcloud firestore export sitehistoria-439a7.appspot.com
