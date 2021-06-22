@@ -10,7 +10,7 @@ import 'package:site_historia/Components/widget/customButton_component.dart';
 import 'package:site_historia/Components/widget/customLoading_component.dart';
 import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Components/widget/customToast_component.dart';
-import 'package:site_historia/Components/widget/blogRecommendation_component.dart';
+import 'package:site_historia/Components/widget/videoRecommendation_component.dart';
 import 'package:site_historia/Components/widget/otherRecommendation_component.dart';
 import 'package:site_historia/Components/widget/podcastRecommendation_component.dart';
 import 'package:site_historia/Components/widget/youtubeRecommendation_component.dart';
@@ -58,10 +58,10 @@ class _AdminRecommendationPageState
                     ),
                     YoutubeRecommendationWidget(),
                     CustomText(
-                      "Blogs",
+                        "Filmes, Séries e documentários",
                       style: Theme.of(context).textTheme.headline5,
                     ),
-                    BlogRecommendationWidget(),
+                    VideoRecommendationWidget(),
                     CustomText(
                       "Podcasts",
                       style: Theme.of(context).textTheme.headline5,

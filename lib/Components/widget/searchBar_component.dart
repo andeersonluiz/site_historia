@@ -5,6 +5,7 @@
 // ignore: library_names
 library SearchBar;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Store/notice_store.dart';
@@ -23,42 +24,42 @@ class SearchBar extends StatelessWidget {
     return Container(
       width: width,
       margin: EdgeInsets.all(8.0),
-      decoration: ShapeDecoration(
-        color: Colors.white,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-      ),
-      child: ListTile(
-        contentPadding: EdgeInsets.zero,
-        horizontalTitleGap: 0,
-        title: TextField(
+      decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius:  BorderRadius.circular(32),
+    ),
+      child: TextField(
           cursorColor: Theme.of(context).primaryColor,
           controller: controller,
           style: Theme.of(context)
               .textTheme
               .caption!
               .copyWith(color: Theme.of(context).primaryColor),
+            textAlign: TextAlign.start,
           decoration: InputDecoration(
+            contentPadding: MediaQuery.of(context).size.width>600?EdgeInsets.only(top: 6.0,left: 8.0):EdgeInsets.only(top: 2,left: 8.0),
             labelStyle: Theme.of(context)
                 .textTheme
                 .caption!
                 .copyWith(color: Theme.of(context).primaryColor),
-            focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Theme.of(context).primaryColor),),
+            border: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            enabledBorder: InputBorder.none,
+            errorBorder: InputBorder.none,
+            disabledBorder: InputBorder.none,
+
           hintText: 'Digite para pesquisar...',
-            contentPadding: EdgeInsets.only(left: 16, bottom: 28.0),
+            suffixIcon: IconButton(
+              splashRadius: 25.0,
+              color: Theme.of(context).primaryColor,
+              icon: Icon(Icons.search),
+              onPressed: () {
+                noticeStore.search(controller.text);
+                noticeStore.updateMenuBar("");
+              },
+            ),
           ),
-        ),
-        trailing: IconButton(
-          padding: EdgeInsets.only(bottom: 28.0),
-          splashRadius: 25.0,
-          color: Theme.of(context).primaryColor,
-          icon: Icon(Icons.search),
-          onPressed: () {
-            noticeStore.search(controller.text);
-            noticeStore.updateMenuBar("");
-          },
-        ),
+
       ),
     );
   }

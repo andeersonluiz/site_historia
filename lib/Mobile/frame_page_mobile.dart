@@ -33,30 +33,37 @@ class FramePageMobile extends StatelessWidget {
           child: CustomText(frame.title,
               style: Theme.of(context).textTheme.headline4),
         ),
-        CustomText(
-          frame.subtitle,
-          style: Theme.of(context).textTheme.subtitle1,
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: CustomText(
+            frame.subtitle,
+            style: Theme.of(context).textTheme.subtitle1,
+          ),
         ),
         Divider(
           thickness: 1.0,
         ),
-        CustomImage(
-          width: 500,
-          height: 300,
-          image: frame.imageHeader,
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0,bottom: 0.0,left: 16.0,right: 16.0),
+          child: CustomImage(
+            width: 500,
+            height: 300,
+            image: frame.imageHeader,
+          ),
         ),
         CustomText(
           frame.subtitleImage,
+          padding: const EdgeInsets.only(top: 0.0,bottom: 8.0,left: 16.0,right: 16.0),
           style: Theme.of(context).textTheme.caption,
         ),
         HtmlViewer(
           frame.content,
-          margin:EdgeInsets.all(32.0)
+          margin:EdgeInsets.all(16.0)
         ),
         Divider(
           thickness: 1.0,
         ),
-        frame.urlAudio[1] != "" ? AudioViewer(frame.urlAudio[1]) : Container(),
+        frame.urlAudio[1] != "" ? AudioViewer(frame.urlAudio[1],margin: 16.0,) : Container(),
         frame.urlAudio[1] != ""
             ? Divider(
                 thickness: 1.0,

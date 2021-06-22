@@ -74,6 +74,10 @@ abstract class _SupportStoreBase with Store {
   @observable
   bool? _isLoading = false;
 
+  /// Utilizada para fazer o controle se o professor é da coordenação ou não.
+  @observable
+  bool _isCoord=false;
+
   /// Armazena os professores para ser utilizados nas checkboxes em projetos.
   @observable
   ObservableList<Teacher> teacherLocal = ObservableList<Teacher>();
@@ -137,6 +141,10 @@ abstract class _SupportStoreBase with Store {
   ///getter isLoading
   @computed
   bool? get isLoading => this._isLoading;
+
+  ///getter isCoord
+  @computed
+  bool? get isCoord => this._isCoord;
 
   ///mensagem de erro de título
   @observable
@@ -357,6 +365,12 @@ abstract class _SupportStoreBase with Store {
     this._isLoading = value;
   }
 
+  /// Atualiza a variável isLoading.
+  @action
+  setIsCoord(bool value) {
+    this._isCoord = value;
+  }
+
   /// Atualiza a variável verticalIsMax.
   @action
   changeVerticalBar() {
@@ -436,6 +450,7 @@ abstract class _SupportStoreBase with Store {
         id: teacher.id,
         checked: !teacher.checked,
         image: teacher.image,
+        isCoord: teacher.isCoord,
         link: teacher.link,
         projects: teacher.projects);
   }
@@ -457,8 +472,8 @@ abstract class _SupportStoreBase with Store {
         participants: project.participants,
         checked: !project.checked);
   }
-  /// Obtém os projetos localmente e verifica se eles estão com o checkbox selecionado através da variável booleana `checked`.
 
+  /// Obtém os projetos localmente e verifica se eles estão com o checkbox selecionado através da variável booleana `checked`.
   List<Project> getProjects() {
     List<Project> projects = [];
     for (int i = 0; i < projectLocal.length; i++) {
@@ -469,7 +484,7 @@ abstract class _SupportStoreBase with Store {
     return projects;
   }
 
-  /// gerencia a adição/remoção em participantsLocal de acordo com o tamanho do vetor escolhido pelo usuário
+  /// Gerencia a adição/remoção em participantsLocal de acordo com o tamanho do vetor escolhido pelo usuário
   @action
   addParticipants(int size) {
     int lengthParticipants = participantsLocal.length;
@@ -611,10 +626,10 @@ abstract class _SupportStoreBase with Store {
   }
 
   /// Carrega os dados anteriores para a atualização de um professor.
-
   loadInitialDataTeacher(Teacher teacher) {
     updateTitle(teacher.name);
     updateLink(teacher.link);
+    setIsCoord(teacher.isCoord);
     updatePath(PickedFile(teacher.image));
   }
 

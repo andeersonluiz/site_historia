@@ -11,9 +11,9 @@ class CustomCheckBox extends StatelessWidget {
   final String title;
   final bool value;
   final void Function(bool?) onChanged;
-
+  final MainAxisAlignment mainAxisAlignment;
   CustomCheckBox(
-      {required this.title, required this.value, required this.onChanged});
+      {required this.title, required this.value, required this.onChanged,this.mainAxisAlignment= MainAxisAlignment.start});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +30,7 @@ class CustomCheckBox extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
+            mainAxisAlignment: mainAxisAlignment,
             children: [
               Checkbox(
                 value: value,

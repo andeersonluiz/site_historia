@@ -55,7 +55,7 @@ class CustomImage extends StatelessWidget {
         : ClipOval(
             child: FadeInImage.assetNetwork(
             image: image,
-            fit: BoxFit.fill,
+            fit: fit,
             placeholder: "placeholder.gif",
           ));
   }

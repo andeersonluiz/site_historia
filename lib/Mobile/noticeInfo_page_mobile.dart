@@ -27,13 +27,16 @@ class NoticeInfoPageMobile extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: CustomText(notice.title,
               style: Theme.of(context).textTheme.headline3),
         ),
-        CustomText(
-          notice.subtitle,
-          style: Theme.of(context).textTheme.subtitle1,
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: CustomText(
+            notice.subtitle,
+            style: Theme.of(context).textTheme.subtitle1,
+          ),
         ),
         Divider(
           thickness: 1.0,

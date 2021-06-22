@@ -9,6 +9,7 @@ import 'package:site_historia/Components/widget/customImage_component.dart';
 import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Components/widget/listTeachers_component.dart';
 import 'package:site_historia/Mobile/footer/footer_mobile.dart';
+import 'package:site_historia/Support/globals_variables.dart';
 
 /// Widget exibe um texto sobre a coordenação de história e a lista de professores através do
 /// widget `ListTeachers()`.
@@ -44,7 +45,7 @@ class _AboutPageMobileState extends State<AboutPageMobile> {
                 height: 200,
                 fit: BoxFit.contain,
                 image:
-                    "https://blog.unp.br/wp-content/uploads/2020/10/curso-de-historia.jpg")),
+                GlobalsVariables.scrDefaultImageAboutPage,)),
         Padding(
           padding: const EdgeInsets.all(32.0),
           child: CustomText(

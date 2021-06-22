@@ -9,11 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Desktop/footer/footer_desktop.dart';
 import 'package:site_historia/Components/widget/recommendationItem_component.dart';
+import 'package:site_historia/Mobile/footer/footer_mobile.dart';
 import 'package:site_historia/Model/recommendationItem_model.dart';
 import 'package:site_historia/Model/recommendation_model.dart';
 
 /// A tela de recomendações utiliza o objeto `Recommendation` e o widget `RecommendationItemWidget()` para exibir
-/// as variáveis do objeto de acordo com o tipo que são: youtube, blog, podcast e outros.
+/// as variáveis do objeto de acordo com o tipo que são: youtube, filmes/séries, podcast e outros.
 class RecommendationPage extends StatelessWidget {
   final Recommendation recommendations;
   RecommendationPage(this.recommendations);
@@ -36,7 +37,7 @@ class RecommendationPage extends StatelessWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: CustomText(
-                  "Youtube",
+                  "Canais de youtube",
                   textAlign: TextAlign.left,
                   style: Theme.of(context).textTheme.headline5,
                 ),
@@ -46,12 +47,12 @@ class RecommendationPage extends StatelessWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: CustomText(
-                  "Blog",
+                  "Filmes, Séries e documentários",
                   textAlign: TextAlign.left,
                   style: Theme.of(context).textTheme.headline5,
                 ),
               ),
-              for (RecommendationItem rec in recommendations.blogList)
+              for (RecommendationItem rec in recommendations.videosList)
                 RecommendationItemWidget(rec),
               Align(
                 alignment: Alignment.centerLeft,
@@ -75,7 +76,9 @@ class RecommendationPage extends StatelessWidget {
                 RecommendationItemWidget(rec),
             ],
           )),
-      FooterDesktop(),
+      MediaQuery.of(context).size.width > 600
+          ? FooterDesktop()
+          : FooterMobile(),
     ]);
   }
 }

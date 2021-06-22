@@ -8,8 +8,8 @@ import 'package:site_historia/Model/recommendationItem_model.dart';
 class Recommendation {
   /// Lista de `RecommendationItem` com informações do youtube.
   List<RecommendationItem> youtubeList;
-  /// Lista de `RecommendationItem` com informações de blogs.
-  List<RecommendationItem> blogList;
+  /// Lista de `RecommendationItem` com informações de filmes, séries e documentários.
+  List<RecommendationItem> videosList;
   /// Lista de `RecommendationItem` com informações de podcasts.
   List<RecommendationItem> podcastList;
   /// Lista de `RecommendationItem` com informações de outros.
@@ -18,7 +18,7 @@ class Recommendation {
   /// Construtor da classe `Recommendation`.
   Recommendation(
       {required this.youtubeList,
-      required this.blogList,
+      required this.videosList,
       required this.podcastList,
       required this.othersList});
 
@@ -30,9 +30,9 @@ class Recommendation {
             .map<RecommendationItem>(
                 (item) => RecommendationItem.fromJson(item))
             .toList();
-    var blogList = json['blog'].isEmpty
+    var videosList = json['video'].isEmpty
         ? [RecommendationItem(id: 0, name: "", url: "")]
-        : json['blog']
+        : json['video']
             .map<RecommendationItem>(
                 (item) => RecommendationItem.fromJson(item))
             .toList();
@@ -49,7 +49,7 @@ class Recommendation {
                 (item) => RecommendationItem.fromJson(item))
             .toList();
     return Recommendation(
-        blogList: blogList,
+        videosList: videosList,
         podcastList: podcastList,
         youtubeList: youtubeList,
         othersList: othersList);
@@ -58,7 +58,7 @@ class Recommendation {
   Map<String, dynamic> toJson() {
     return {
       'youtube': youtubeList.map((e) => e.toJson()).toList(),
-      'blog': blogList.map((e) => e.toJson()).toList(),
+      'video': videosList.map((e) => e.toJson()).toList(),
       'podcast': podcastList.map((e) => e.toJson()).toList(),
       'other': othersList.map((e) => e.toJson()).toList(),
     };

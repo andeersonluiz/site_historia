@@ -9,6 +9,7 @@ import 'package:site_historia/Components/widget/customImage_component.dart';
 import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Desktop/footer/footer_desktop.dart';
 import 'package:site_historia/Components/widget/listTeachers_component.dart';
+import 'package:site_historia/Support/globals_variables.dart';
 
 /// Widget exibe um texto sobre a coordenação de história e a lista de professores através do
 /// widget `ListTeachers()`.
@@ -43,15 +44,15 @@ class _AboutPageDesktopState extends State<AboutPageDesktop> {
                     padding: const EdgeInsets.all(8.0),
                     child: CustomImage(
                       width: MediaQuery.of(context).size.width,
-                      image:
-                          "https://blog.unp.br/wp-content/uploads/2020/10/curso-de-historia.jpg",
+                      image: GlobalsVariables.scrDefaultImageAboutPage,
                     )),
               ),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: CustomText(
-                    "O Centro Federal de Educação Tecnológica Celso Suckow da Fonseca (Cefet/RJ) teve sua origem em 1917 como Escola Normal de Artes e Ofícios Wenceslau Braz. Atualmente, é uma instituição federal de ensino que se compreende como um espaço público de formação humana, científica e tecnológica. Oferece cursos técnicos integrados ao ensino médio, subsequentes (pós-médio), tecnológicos, de graduação e de pós-graduação lato sensu e stricto sensu (mestrado e doutorado), nas modalidades presencial e a distância. O Cefet/RJ atua na tríade ensino, pesquisa e extensão e visa contribuir para a formação de profissionais e cidadãos bem preparados para o desenvolvimento econômico, humano e social do país.\n\nCoordenação de História é possível conhecer os professores que a integram, os projetos que a coordenação desenvolve e atua, ter acesso a questões de vestibular, indicações de blogs, sites, canais, filmes e documentários relacionados a disciplina, materiais desenvolvidos por professores, alunos, estagiários e monitores, notícias, entre outros. A ideia é que seja ferramenta capaz de despertar o interesse pela disciplina, suscitar debates fundamentais, auxiliar nos estudos e contribuir de maneiras diversas para os processos de ensino-aprendizagem.\n\nSejam bem vindos e aproveitem!",
+                    "O Centro Federal de Educação Tecnológica Celso Suckow da Fonseca (Cefet/RJ) teve sua origem em 1917 como Escola Normal de Artes e Ofícios Wenceslau Braz. Atualmente, é uma instituição federal de ensino que se compreende como um espaço público de formação humana, científica e tecnológica. Oferece cursos técnicos integrados ao ensino médio, subsequentes (pós-médio), tecnológicos, de graduação e de pós-graduação lato sensu e stricto sensu (mestrado e doutorado), nas modalidades presencial e a distância. O Cefet/RJ atua na tríade ensino, pesquisa e extensão e visa contribuir para a formação de profissionais e cidadãos bem preparados para o desenvolvimento econômico, humano e social do país.\n\n"+
+"A coordenação de História do CEFET/campus Maracanã conta hoje com os professores efetivos: Aldilene Marinho César Almeida Diniz, Álvaro de Oliveira Senra, André Alexandre Guimarães Couto, Mariana Vitor Renou, Renato Lanna Fernandez, Samuel Silva Rodrigues de Oliveira, Thiago Rodrigues da Silva e Vanessa de Oliveira Brunow. Nosso objetivo principal é contribuir para uma formação completa, integral e crítica dos alunos, a partir da construção do conhecimento histórico. Nesta 3ª edição do site da Coordenação de História é possível conhecer os professores que a integram, os projetos que a coordenação desenvolve e atua, ter acesso a questões de vestibular, indicações de blogs, sites, canais, filmes e documentários relacionados a disciplina, materiais desenvolvidos por professores, alunos, estagiários e monitores, notícias, entre outros. A ideia é que seja ferramenta capaz de despertar o interesse pela disciplina, suscitar debates fundamentais, auxiliar nos estudos e contribuir de maneiras diversas para os processos de ensino-aprendizagem.\n\nSejam bem vindos e aproveitem!   ",
                     textAlign: TextAlign.justify,
                     style: Theme.of(context)
                         .textTheme

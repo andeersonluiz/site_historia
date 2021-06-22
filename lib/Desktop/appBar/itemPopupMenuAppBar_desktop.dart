@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
 import 'package:site_historia/Model/project_model.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:site_historia/Support/customPopupAppBar.dart' as mypopupAppBar;
 
 class ItemPopUpMenuAppBarDesktop extends StatefulWidget {
   /// Texto exibido no dropdown.
@@ -43,7 +44,7 @@ class _ItemPopUpMenuAppBarDesktopState extends State<ItemPopUpMenuAppBarDesktop>
       onpressed: () {},
       child: Container(
         height: double.infinity,
-        child: PopupMenuButton(
+        child: mypopupAppBar.PopupMenuButton(
 
           onSelected: (result) {
             int index = result as int;
@@ -58,7 +59,7 @@ class _ItemPopUpMenuAppBarDesktopState extends State<ItemPopUpMenuAppBarDesktop>
             if (widget.listItems.first == item) {
               rotationController.forward();
             }
-            return PopupMenuItem(
+            return mypopupAppBar.PopupMenuItem(
 
                 value: item.id,
                 padding: EdgeInsets.all(8.0),
@@ -81,7 +82,6 @@ class _ItemPopUpMenuAppBarDesktopState extends State<ItemPopUpMenuAppBarDesktop>
           ]),
           elevation: 8,
 
-          offset: Offset(0, 59),
         ),
       ),
     );

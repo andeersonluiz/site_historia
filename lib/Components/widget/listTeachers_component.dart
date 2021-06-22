@@ -71,7 +71,7 @@ class ListTeachers extends StatelessWidget {
                     mainAxisSpacing: 20.0,
                     crossAxisSpacing: _crossAxisSpacing,
                     padding: EdgeInsets.all(8.0),
-                    children: listTeachers
+                    children: listTeachers.where((element) => element.isCoord==true).toList()
                         .map((item) => Container(
                               height: sizeImage,
                               width: sizeImage,

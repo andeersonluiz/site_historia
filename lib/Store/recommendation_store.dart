@@ -28,7 +28,7 @@ abstract class _RecommendationStoreBase with Store {
         url: ""));
     var newRecommendation = new Recommendation(
         youtubeList: recommendation!.youtubeList,
-        blogList: recommendation!.blogList,
+        videosList: recommendation!.videosList,
         podcastList: recommendation!.podcastList,
         othersList: recommendation!.othersList);
     recommendation = newRecommendation;
@@ -52,48 +52,48 @@ abstract class _RecommendationStoreBase with Store {
     recommendation!.youtubeList.remove(recommendationItem);
     var newRecommendation = new Recommendation(
         youtubeList: recommendation!.youtubeList,
-        blogList: recommendation!.blogList,
+        videosList: recommendation!.videosList,
         podcastList: recommendation!.podcastList,
         othersList: recommendation!.othersList);
     recommendation = newRecommendation;
   }
 
-  /// Adiciona uma recomendação para a lista de blog.
+  /// Adiciona uma recomendação para a lista de filme/série/documentário".
   @action
   addBlog() {
-    recommendation!.blogList.add(new RecommendationItem(
-        id: recommendation!.blogList.length == 0
+    recommendation!.videosList.add(new RecommendationItem(
+        id: recommendation!.videosList.length == 0
             ? 0
-            : recommendation!.blogList.last.id + 1,
+            : recommendation!.videosList.last.id + 1,
         name: "",
         url: ""));
     var newRecommendation = new Recommendation(
         youtubeList: recommendation!.youtubeList,
-        blogList: recommendation!.blogList,
+        videosList: recommendation!.videosList,
         podcastList: recommendation!.podcastList,
         othersList: recommendation!.othersList);
     recommendation = newRecommendation;
   }
 
-  /// Atualiza o nome de uma recomendação de blog.
+  /// Atualiza o nome de uma recomendação de filme/série/documentário".
   @action
   updateRecommendationBlogName(int id, String name) {
-    recommendation!.blogList[id].name = name;
+    recommendation!.videosList[id].name = name;
   }
 
-  /// Atualiza o link de uma recomendação de blog.
+  /// Atualiza o link de uma recomendação de filme/série/documentário".
   @action
   updateRecommendationBlogUrl(int id, String url) {
-    recommendation!.blogList[id].url = url;
+    recommendation!.videosList[id].url = url;
   }
 
-  /// Exclui uma recomendação de blog.
+  /// Exclui uma recomendação de filme/série/documentário".
   @action
   removeBlog(RecommendationItem recommendationItem) {
-    recommendation!.blogList.remove(recommendationItem);
+    recommendation!.videosList.remove(recommendationItem);
     var newRecommendation = new Recommendation(
         youtubeList: recommendation!.youtubeList,
-        blogList: recommendation!.blogList,
+        videosList: recommendation!.videosList,
         podcastList: recommendation!.podcastList,
         othersList: recommendation!.othersList);
     recommendation = newRecommendation;
@@ -110,7 +110,7 @@ abstract class _RecommendationStoreBase with Store {
         url: ""));
     var newRecommendation = new Recommendation(
         youtubeList: recommendation!.youtubeList,
-        blogList: recommendation!.blogList,
+        videosList: recommendation!.videosList,
         podcastList: recommendation!.podcastList,
         othersList: recommendation!.othersList);
     recommendation = newRecommendation;
@@ -134,7 +134,7 @@ abstract class _RecommendationStoreBase with Store {
     recommendation!.podcastList.remove(recommendationItem);
     var newRecommendation = new Recommendation(
         youtubeList: recommendation!.youtubeList,
-        blogList: recommendation!.blogList,
+        videosList: recommendation!.videosList,
         podcastList: recommendation!.podcastList,
         othersList: recommendation!.othersList);
     recommendation = newRecommendation;
@@ -151,7 +151,7 @@ abstract class _RecommendationStoreBase with Store {
         url: ""));
     var newRecommendation = new Recommendation(
         youtubeList: recommendation!.youtubeList,
-        blogList: recommendation!.blogList,
+        videosList: recommendation!.videosList,
         podcastList: recommendation!.podcastList,
         othersList: recommendation!.othersList);
     recommendation = newRecommendation;
@@ -174,7 +174,7 @@ abstract class _RecommendationStoreBase with Store {
     recommendation!.othersList.remove(recommendationItem);
     var newRecommendation = new Recommendation(
         youtubeList: recommendation!.youtubeList,
-        blogList: recommendation!.blogList,
+        videosList: recommendation!.videosList,
         podcastList: recommendation!.podcastList,
         othersList: recommendation!.othersList);
     recommendation = newRecommendation;

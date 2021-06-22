@@ -1,10 +1,10 @@
-/// Widget responsável por exibir as recomendações de blog na página de admin,
+/// Widget responsável por exibir as recomendações de filmes/séries na página de admin,
 /// na seção de recomendações.
 ///
 /// {@category Component}
 /// {@subCategory Widget}
 // ignore: library_names
-library BlogRecommendationWidget;
+library VideoRecommendationWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -14,9 +14,9 @@ import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Model/recommendationItem_model.dart';
 import 'package:site_historia/Store/recommendation_store.dart';
 
-/// O widget exibe todos as recomendações de blog criadas e permite o usuário
+/// O widget exibe todos as recomendações de filmes, séries e documentários criadas e permite o usuário
 /// adicionar ou remove-las.
-class BlogRecommendationWidget extends StatelessWidget {
+class VideoRecommendationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final recommendationStore = Provider.of<RecommendationStore>(context);
@@ -25,14 +25,14 @@ class BlogRecommendationWidget extends StatelessWidget {
         Observer(builder: (_) {
           return ListView.builder(
               shrinkWrap: true,
-              itemCount: recommendationStore.recommendation!.blogList.length,
+              itemCount: recommendationStore.recommendation!.videosList.length,
               itemBuilder: (ctx, index) {
                 final controllerName = TextEditingController(
                     text: recommendationStore
-                        .recommendation!.blogList[index].name);
+                        .recommendation!.videosList[index].name);
                 final controllerUrl = TextEditingController(
                     text: recommendationStore
-                        .recommendation!.blogList[index].url);
+                        .recommendation!.videosList[index].url);
                 return Row(
                   children: [
                     Expanded(
@@ -70,19 +70,19 @@ class BlogRecommendationWidget extends StatelessWidget {
                     IconButton(
                         onPressed: () {
                           if (recommendationStore
-                                      .recommendation!.blogList[index].name !=
+                                      .recommendation!.videosList[index].name !=
                                   "" &&
                               recommendationStore
-                                      .recommendation!.blogList[index].url !=
+                                      .recommendation!.videosList[index].url !=
                                   "") {
                             _showMaterialDialog(
                                 context,
                                 recommendationStore
-                                    .recommendation!.blogList[index],
+                                    .recommendation!.videosList[index],
                                 recommendationStore);
                           } else {
                             recommendationStore.removeBlog(recommendationStore
-                                .recommendation!.blogList[index]);
+                                .recommendation!.videosList[index]);
                           }
                         },
                         icon: Icon(
@@ -94,7 +94,7 @@ class BlogRecommendationWidget extends StatelessWidget {
               });
         }),
         CustomButton(
-          text: "Adicionar recomendação de blog",
+          text: "Adicionar recomendação de filme/série/documentário",
           expandButton: true,
           onPressed: () {
             recommendationStore.addBlog();
@@ -114,7 +114,7 @@ class BlogRecommendationWidget extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline5,
               ),
               content: new CustomText(
-                "Tem certeza que deseja excluir o blog ${item.name} com url ${item.url}?",
+                "Tem certeza que deseja excluir o filme/série/documentário ${item.name} com url ${item.url}?",
                 style: Theme.of(context).textTheme.subtitle1,
               ),
               actions: <Widget>[

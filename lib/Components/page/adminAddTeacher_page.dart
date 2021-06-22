@@ -9,6 +9,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/widget/customButton_component.dart';
+import 'package:site_historia/Components/widget/customCheckBox_component.dart';
 import 'package:site_historia/Components/widget/customLoading_component.dart';
 import 'package:site_historia/Components/widget/customTextFormField_component.dart';
 import 'package:site_historia/Components/widget/customText_component.dart';
@@ -55,7 +56,6 @@ class _AdminAddTeacherPageState
       child: Container(
         padding: EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CustomTextFormField(
               hintText: "Insira o nome do Professor",
@@ -83,6 +83,14 @@ class _AdminAddTeacherPageState
               },
               textInputType: TextInputType.url,
             ),
+            Observer(
+              builder: (ctx) =>
+                  CustomCheckBox(title: "É da coordenação?",mainAxisAlignment: MainAxisAlignment.center, value: supportStore.isCoord!, onChanged: (value){
+                    supportStore.setIsCoord(value!);
+                  }),
+
+              ),
+
             Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CustomText("Foto professor",
@@ -92,6 +100,7 @@ class _AdminAddTeacherPageState
                 image: supportStore.pathImage,
               ),
             ),
+
             Center(
                 child: CustomText(
                     "Selecione os projetos que o professor participa",
@@ -127,6 +136,7 @@ class _AdminAddTeacherPageState
                       supportStore.title,
                       supportStore.pathImage!,
                       supportStore.getProjects(),
+                      supportStore.isCoord!,
                       supportStore.link,
                     );
                     supportStore.setLoading(false);

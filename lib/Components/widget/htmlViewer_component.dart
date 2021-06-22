@@ -29,6 +29,7 @@ class HtmlViewer extends StatelessWidget {
           "p": Style(
             color: Theme.of(context).primaryColor,
             fontSize: FontSize(16.0),
+            textAlign: TextAlign.justify
           ),
           "pre": Style(
               color: Theme.of(context).primaryColor,

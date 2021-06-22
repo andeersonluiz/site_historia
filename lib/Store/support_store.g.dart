@@ -96,6 +96,13 @@ mixin _$SupportStore on _SupportStoreBase, Store {
       (_$isLoadingComputed ??= Computed<bool?>(() => super.isLoading,
               name: '_SupportStoreBase.isLoading'))
           .value;
+  Computed<bool?>? _$isCoordComputed;
+
+  @override
+  bool? get isCoord =>
+      (_$isCoordComputed ??= Computed<bool?>(() => super.isCoord,
+              name: '_SupportStoreBase.isCoord'))
+          .value;
   Computed<String>? _$msgErrorTitleComputed;
 
   @override
@@ -359,6 +366,21 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   set _isLoading(bool? value) {
     _$_isLoadingAtom.reportWrite(value, super._isLoading, () {
       super._isLoading = value;
+    });
+  }
+
+  final _$_isCoordAtom = Atom(name: '_SupportStoreBase._isCoord');
+
+  @override
+  bool get _isCoord {
+    _$_isCoordAtom.reportRead();
+    return super._isCoord;
+  }
+
+  @override
+  set _isCoord(bool value) {
+    _$_isCoordAtom.reportWrite(value, super._isCoord, () {
+      super._isCoord = value;
     });
   }
 
@@ -727,6 +749,17 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   }
 
   @override
+  dynamic setIsCoord(bool value) {
+    final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
+        name: '_SupportStoreBase.setIsCoord');
+    try {
+      return super.setIsCoord(value);
+    } finally {
+      _$_SupportStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic changeVerticalBar() {
     final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
         name: '_SupportStoreBase.changeVerticalBar');
@@ -823,6 +856,7 @@ videoFile: ${videoFile},
 htmlContent: ${htmlContent},
 urlPopUp: ${urlPopUp},
 isLoading: ${isLoading},
+isCoord: ${isCoord},
 msgErrorTitle: ${msgErrorTitle},
 msgErrorSubTitle: ${msgErrorSubTitle},
 msgErrorImage: ${msgErrorImage},

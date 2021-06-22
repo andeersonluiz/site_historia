@@ -11,6 +11,7 @@ class GlobalsVariables {
   static String username = "";
   static int sizeCarousel = 5;
   static String srcDefaultImage = "https://firebasestorage.googleapis.com/v0/b/sitehistoria-439a7.appspot.com/o/defaultImage%2Fsem-imagem-avatar.png?alt=media&token=ab2353f8-42a6-4269-a84c-d2ad52246313";
+  static String scrDefaultImageAboutPage = "https://firebasestorage.googleapis.com/v0/b/sitehistoria-439a7.appspot.com/o/defaultImage%2Fcurso-de-historia.jpg?alt=media&token=1bd9fe96-d47e-468f-a1d2-35fbc30716b1";
   static Map<String, Color> colorByTag = {};
 
   static List<String> types = [

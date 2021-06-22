@@ -30,10 +30,11 @@ abstract class _TeacherStoreBase with Store {
       String name,
       PickedFile image,
       List<Project> projects,
+      bool isCoord,
       String link,
       ) async {
 
-    var result = await TeacherFirestore.addTeacher(name, image, projects, link);
+    var result = await TeacherFirestore.addTeacher(name, image, projects, isCoord, link);
     if(result){
       await getTeachers();
       return true;
@@ -48,9 +49,10 @@ abstract class _TeacherStoreBase with Store {
       String name,
       PickedFile image,
       List<Project> projects,
+      bool isCoord,
       String link,
       ) async {
-    var result = await TeacherFirestore.updateTeacher(teacher,name, image, projects, link);
+    var result = await TeacherFirestore.updateTeacher(teacher,name, image, projects,isCoord, link);
     if(result){
       await getTeachers();
       return true;

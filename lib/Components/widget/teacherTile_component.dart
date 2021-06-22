@@ -34,6 +34,7 @@ class TeacherTile extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               image: teacher.image==""?GlobalsVariables.srcDefaultImage:teacher.image,
               padding: EdgeInsets.zero,
+              fit: BoxFit.cover,
               isOval: true,
             ),
           ),
@@ -43,6 +44,7 @@ class TeacherTile extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: SelectableText(
                 teacher.name,
+                textAlign: TextAlign.center,
                 style: Theme.of(context)
                     .textTheme
                     .headline5!

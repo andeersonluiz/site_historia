@@ -16,6 +16,8 @@ class Teacher {
   List<Project> projects;
   /// Url de acesso a informações mais completas do professor.
   String link;
+  /// Variável de controle para verificar se o professor é da coordenação de história
+  bool isCoord;
   /// Variável de controle local para exibir os professores que estão em um projeto. Usado na adição/edição de projetos.
   bool checked;
 
@@ -26,18 +28,19 @@ class Teacher {
     required this.image,
     required this.projects,
     required this.link,
+    required this.isCoord,
     required this.checked,
   });
 
   /// Converter as informações recebidas em `json` do banco de dados para a classe `Teacher`.
   factory Teacher.fromJson(Map<String, dynamic> json) {
     List<Project> listProjects = json['projects'].map<Project>((project)=>Project.fromJsonSimple(project)).toList();
-
     return Teacher(
         id: json['id'],
         name: json['name'],
         image: json['image'],
         projects: listProjects,
+        isCoord:json['isCoord'],
         link: json['link'],
         checked: false);
   }
@@ -50,6 +53,7 @@ class Teacher {
         name: json['name'],
         image: "",
         projects: [],
+        isCoord:false,
         link: "",
         checked: false);
   }
@@ -61,6 +65,7 @@ class Teacher {
       'name': name,
       'image': image,
       'projects': projects.map((project) => project.toJsonSimple()).toList(),
+      'isCoord':isCoord,
       'link': link,
     };
   }

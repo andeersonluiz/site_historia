@@ -34,10 +34,10 @@ mixin _$TeacherStore on _TeacherStoreBase, Store {
   final _$addTeacherAsyncAction = AsyncAction('_TeacherStoreBase.addTeacher');
 
   @override
-  Future addTeacher(
-      String name, PickedFile image, List<Project> projects, String link) {
+  Future addTeacher(String name, PickedFile image, List<Project> projects,
+      bool isCoord, String link) {
     return _$addTeacherAsyncAction
-        .run(() => super.addTeacher(name, image, projects, link));
+        .run(() => super.addTeacher(name, image, projects, isCoord, link));
   }
 
   final _$updateTeacherAsyncAction =
@@ -45,9 +45,9 @@ mixin _$TeacherStore on _TeacherStoreBase, Store {
 
   @override
   Future updateTeacher(Teacher teacher, String name, PickedFile image,
-      List<Project> projects, String link) {
-    return _$updateTeacherAsyncAction
-        .run(() => super.updateTeacher(teacher, name, image, projects, link));
+      List<Project> projects, bool isCoord, String link) {
+    return _$updateTeacherAsyncAction.run(() =>
+        super.updateTeacher(teacher, name, image, projects, isCoord, link));
   }
 
   final _$deleteTeacherAsyncAction =

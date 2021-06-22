@@ -25,6 +25,7 @@ class TeacherFirestore {
       String name,
       PickedFile image,
       List<Project> projects,
+      bool isCoord,
       String link,
       ) async {
     try{
@@ -55,6 +56,7 @@ class TeacherFirestore {
         name: name,
         image: imageUrl.toString(),
         checked: false,
+        isCoord:isCoord,
         link: link,
         projects: projects,
       );
@@ -71,6 +73,7 @@ class TeacherFirestore {
       String name,
       PickedFile image,
       List<Project> projects,
+      bool isCoord,
       String link,
       ) async {
     try{
@@ -114,6 +117,7 @@ class TeacherFirestore {
         name:  name,
         image: urlImage.toString(),
         checked:  teacher.checked,
+        isCoord: isCoord,
         link: link,
         projects: projects,
 

@@ -7,8 +7,8 @@ library MenuBarNoticesMobile;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:site_historia/Support/customPopupFilter.dart' as mypopupFilter;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:html_editor_enhanced/utils/shims/dart_ui_real.dart';
 import 'package:provider/provider.dart';
 import 'package:site_historia/Components/widget/searchBar_component.dart';
 import 'package:site_historia/Store/notice_store.dart';
@@ -33,10 +33,11 @@ class MenuBarNoticesMobile extends StatelessWidget {
           ),
           Spacer(),
           Container(
-            child: PopupMenuButton<String>(
+            child: mypopupFilter.PopupMenuButton<String>(
               itemBuilder: (_) => GlobalsVariables.filters
                   .map(
-                    (value) => PopupMenuItem(
+                    (value) => mypopupFilter
+                        .PopupMenuItem(
                       value: value,
                       child: Text(
                         value,
@@ -53,7 +54,6 @@ class MenuBarNoticesMobile extends StatelessWidget {
                 noticeStore.filterListNotices(value);
               },
               icon: Icon(FontAwesomeIcons.filter),
-              offset: Offset(0, 39),
             ),
           ),
         ]));
