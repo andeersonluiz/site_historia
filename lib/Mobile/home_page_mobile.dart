@@ -28,14 +28,22 @@ class HomePageMobile extends StatelessWidget {
           height: 0,
         ),
         width > 600
-            ? Row(children: [
-                Expanded(flex: 5, child: Container(height: 525,child: LatestPostsMobile(0.45))),
-                Expanded(
-                    flex: 5,
-                    child: Container(
-                        color: ThemeConfig.brownPodcast,
-                        child: Container(height: 525,child: LatestPodcastMobile(widthPercentageSize: 0.45)))),
-              ])
+            ? IntrinsicHeight(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                  Expanded(flex: 5, child: Container(constraints: BoxConstraints(
+                    minHeight: 525,
+                  ),child: LatestPostsMobile(0.45))),
+                  Expanded(
+                      flex: 5,
+                      child: Container(
+                          color: ThemeConfig.brownPodcast,
+                          child: Container(constraints: BoxConstraints(
+                            minHeight: 525,
+                          ),child: LatestPodcastMobile(widthPercentageSize: 0.45)))),
+                ]),
+            )
             : Column(children: [
                 Container(
                     width: MediaQuery.of(context).size.width,

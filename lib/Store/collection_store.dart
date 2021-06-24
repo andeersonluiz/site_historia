@@ -22,42 +22,42 @@ abstract class _CollectionStoreBase with Store {
   @observable
   bool isLoading = false;
 
-  /// Adiciona um acervo para a lista de filme.
+  /// Adiciona um acervo para a lista de questões de vestibular.
   @action
-  addMovie() {
-    collection!.movies.add(new CollectionItem(
-        id: collection!.movies.length == 0 ? 0 : collection!.movies.last.id + 1,
+  addExam() {
+    collection!.exams.add(new CollectionItem(
+        id: collection!.exams.length == 0 ? 0 : collection!.exams.last.id + 1,
         name: "",
         url: "",
         urlName: ""));
 
     var newCollection = new Collection(
-        movies: collection!.movies,
+        exams: collection!.exams,
         articles: collection!.articles,
         books: collection!.books,
         others: collection!.others);
     collection = newCollection;
   }
 
-  /// Atualiza o nome de um acervo de filme.
+  /// Atualiza o nome de um acervo de questão de vestibular.
   @action
   updateRecommendationMovieName(int id, String name) {
-    collection!.movies[id].name = name;
+    collection!.exams[id].name = name;
   }
 
-  /// Atualiza o link de um acervo de filme.
+  /// Atualiza o link de um acervo de questão de vestibular.
   @action
   updateRecommendationMovieUrl(int id, String url) async {
-    collection!.movies[id].url = url;
-    collection!.movies[id].urlName = url;
+    collection!.exams[id].url = url;
+    collection!.exams[id].urlName = url;
   }
 
   /// Exclui um acervo de filme.
   @action
-  removeMovie(CollectionItem collectionItem, int id) {
-    collection!.movies.remove(collectionItem);
+  removeExam(CollectionItem collectionItem, int id) {
+    collection!.exams.remove(collectionItem);
     var newCollection = new Collection(
-        movies: collection!.movies,
+        exams: collection!.exams,
         articles: collection!.articles,
         books: collection!.books,
         others: collection!.others);
@@ -75,7 +75,7 @@ abstract class _CollectionStoreBase with Store {
         url: "",
         urlName: ""));
     var newCollection = new Collection(
-        movies: collection!.movies,
+        exams: collection!.exams,
         articles: collection!.articles,
         books: collection!.books,
         others: collection!.others);
@@ -95,7 +95,7 @@ abstract class _CollectionStoreBase with Store {
     collection!.articles[id].url = url.toString();
     collection!.articles[id].urlName = file.name;
     var newCollection = new Collection(
-        movies: collection!.movies,
+        exams: collection!.exams,
         articles: collection!.articles,
         books: collection!.books,
         others: collection!.others);
@@ -112,7 +112,7 @@ abstract class _CollectionStoreBase with Store {
     }
     collection!.articles.remove(collectionItem);
     var newCollection = new Collection(
-        movies: collection!.movies,
+        exams: collection!.exams,
         articles: collection!.articles,
         books: collection!.books,
         others: collection!.others);
@@ -128,7 +128,7 @@ abstract class _CollectionStoreBase with Store {
         url: "",
         urlName: ""));
     var newCollection = new Collection(
-        movies: collection!.movies,
+        exams: collection!.exams,
         articles: collection!.articles,
         books: collection!.books,
         others: collection!.others);
@@ -150,7 +150,7 @@ abstract class _CollectionStoreBase with Store {
     collection!.books[id].urlName = file.name;
 
     var newCollection = new Collection(
-        movies: collection!.movies,
+        exams: collection!.exams,
         articles: collection!.articles,
         books: collection!.books,
         others: collection!.others);
@@ -167,7 +167,7 @@ abstract class _CollectionStoreBase with Store {
     }
     collection!.books.remove(collectionItem);
     var newCollection = new Collection(
-        movies: collection!.movies,
+        exams: collection!.exams,
         articles: collection!.articles,
         books: collection!.books,
         others: collection!.others);
@@ -183,7 +183,7 @@ abstract class _CollectionStoreBase with Store {
         url: "",
         urlName: ""));
     var newCollection = new Collection(
-        movies: collection!.movies,
+        exams: collection!.exams,
         articles: collection!.articles,
         books: collection!.books,
         others: collection!.others);
@@ -200,12 +200,12 @@ abstract class _CollectionStoreBase with Store {
   @action
   updateRecommendationOtherUrl(int id, PlatformFile file) async {
     var url = await CollectionFirestore.insertFile(
-        "other", file, collection!.movies[id].id);
+        "other", file, collection!.exams[id].id);
     collection!.others[id].url = url.toString();
     collection!.others[id].urlName = file.name;
 
     var newCollection = new Collection(
-        movies: collection!.movies,
+        exams: collection!.exams,
         articles: collection!.articles,
         books: collection!.books,
         others: collection!.others);
@@ -222,7 +222,7 @@ abstract class _CollectionStoreBase with Store {
     }
     collection!.others.remove(collectionItem);
     var newCollection = new Collection(
-        movies: collection!.movies,
+        exams: collection!.exams,
         articles: collection!.articles,
         books: collection!.books,
         others: collection!.others);
@@ -247,7 +247,7 @@ abstract class _CollectionStoreBase with Store {
   setLoadingArticle(int index, bool value) {
     collection!.articles[index].isLoading = value;
     var newCollection = new Collection(
-        movies: collection!.movies,
+        exams: collection!.exams,
         articles: collection!.articles,
         books: collection!.books,
         others: collection!.others);
@@ -260,7 +260,7 @@ abstract class _CollectionStoreBase with Store {
   setLoadingBook(int index, bool value) {
     collection!.books[index].isLoading = value;
     var newCollection = new Collection(
-        movies: collection!.movies,
+        exams: collection!.exams,
         articles: collection!.articles,
         books: collection!.books,
         others: collection!.others);
@@ -273,7 +273,7 @@ abstract class _CollectionStoreBase with Store {
   setLoadingOther(int index, bool value) {
     collection!.others[index].isLoading = value;
     var newCollection = new Collection(
-        movies: collection!.movies,
+        exams: collection!.exams,
         articles: collection!.articles,
         books: collection!.books,
         others: collection!.others);

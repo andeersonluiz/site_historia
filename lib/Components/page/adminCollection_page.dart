@@ -56,7 +56,7 @@ class _AdminCollectionPageState
                   key: _formKey,
                   child: Column(children: [
                     CustomText(
-                      "Filmes",
+                      "Provas",
                       style: Theme.of(context).textTheme.headline5,
                     ),
                     MovieCollectionWidget(),

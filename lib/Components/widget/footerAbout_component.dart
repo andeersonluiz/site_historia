@@ -42,13 +42,23 @@ class About extends StatelessWidget {
           crossAxisAlignment: iconContactAlign,
           mainAxisAlignment: iconSocialsAlign,
           children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: InkWell(
+                  onTap: () {
+                        _launchURL("https://www.instagram.com/historia.cefetrj/");
+                  },
+                  child: Icon(
+                    FontAwesomeIcons.instagramSquare,
+                    size: 30,
+                  )),
+            ),
             InkWell(
                 onTap: () {
-                      _launchURL("https://www.instagram.com/historia.cefetrj/");
-
+                  _launchURL("https://www.youtube.com/channel/UC4qs9NuHpSUB9U1-R29HNWg");
                 },
                 child: Icon(
-                  FontAwesomeIcons.instagramSquare,
+                  FontAwesomeIcons.youtubeSquare,
                   size: 30,
                 )),
           ],

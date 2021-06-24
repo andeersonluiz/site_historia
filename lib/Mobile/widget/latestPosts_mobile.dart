@@ -40,13 +40,12 @@ class LatestPostsMobile extends StatelessWidget {
             List<Notice> listNotices =
                 noticeStore.listRecentNotices!.value as List<Notice>;
             return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SelectableText(
-                    "Ultimas Postagens",
+                    "Últimas Postagens",
                     style: Theme.of(context)
                         .textTheme
                         .headline5!

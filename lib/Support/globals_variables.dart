@@ -35,7 +35,9 @@ class GlobalsVariables {
     query.docs.forEach((e) {
       var value = e.data();
       colorByTag[value["name"]] = hexToColor(value["color"]);
-      tags.add(value["name"]+"x");
+      if(!tags.contains(value["name"])){
+        tags.add(value["name"]);
+      }
     }
     );
   }

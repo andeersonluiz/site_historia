@@ -56,7 +56,28 @@ class _NoticePageMobileState extends State<NoticePageMobile> {
           case FutureStatus.fulfilled:
             List<Notice> listNotice =
                 noticeStore!.listNoticesFiltered!.value as List<Notice>;
-            return Column(children: [ListNoticesMobile(listNotice),FooterMobile(),]);
+            if(listNotice.isEmpty){
+              return Container(
+                height: 500,
+                child:Column(
+                    children: [Expanded(
+                      child: Center(
+                        child: CustomText(
+                          "Não foram encontrados resultados para sua pesquisa :(",
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                      ),
+                    ),FooterMobile(),
+
+                    ]
+                ),
+              );
+            }
+
+            return Container(
+                constraints: BoxConstraints(
+                  minHeight: 500,
+                ),child: Column(children: [ListNoticesMobile(listNotice),FooterMobile(),]));
         }
       }),
 

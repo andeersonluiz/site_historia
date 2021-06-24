@@ -56,7 +56,28 @@ class _NoticePageDesktopState extends State<NoticePageDesktop> {
           case FutureStatus.fulfilled:
             List<Notice> listNotice =
                 noticeStore!.listNoticesFiltered!.value as List<Notice>;
-            return Column(children: [ListNoticesDesktop(listNotice),FooterDesktop(),]);
+            if(listNotice.isEmpty){
+              return Container(
+                height: 500,
+                child:Column(
+                  children: [Expanded(
+                    child: Center(
+                      child: CustomText(
+                        "Não foram encontrados resultados para sua pesquisa :(",
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                    ),
+                  ),FooterDesktop(),
+
+                  ]
+                ),
+              );
+            }
+            return Container(
+                constraints: BoxConstraints(
+                  minHeight: 500,
+                ),
+                child: Column(children: [ListNoticesDesktop(listNotice),listNotice.length==1?Container(height: 100,):Container(),FooterDesktop(),]));
         }
       }),
 

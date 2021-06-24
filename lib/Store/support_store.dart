@@ -36,7 +36,7 @@ abstract class _SupportStoreBase with Store {
 
   /// Usado em notícias para definir a tag da notícia.
   @observable
-  String _tag = "Podcast";
+  String _tag = GlobalsVariables.tags[0];
 
   /// Usado em notícias para definir se a notícia aparece ou não na página principal.
   @observable

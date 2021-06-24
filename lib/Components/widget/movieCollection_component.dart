@@ -26,12 +26,12 @@ class MovieCollectionWidget extends StatelessWidget {
         Observer(builder: (_) {
           return ListView.builder(
               shrinkWrap: true,
-              itemCount: collectionStore.collection!.movies.length,
+              itemCount: collectionStore.collection!.exams.length,
               itemBuilder: (ctx, index) {
                 var controllerName = TextEditingController(
-                    text: collectionStore.collection!.movies[index].name);
+                    text: collectionStore.collection!.exams[index].name);
                 var controllerUrl = TextEditingController(
-                    text: collectionStore.collection!.movies[index].url);
+                    text: collectionStore.collection!.exams[index].url);
 
                 return Row(
                   children: [
@@ -69,18 +69,18 @@ class MovieCollectionWidget extends StatelessWidget {
                     )),
                     IconButton(
                         onPressed: () {
-                          if (collectionStore.collection!.movies[index].name !=
+                          if (collectionStore.collection!.exams[index].name !=
                                   "" &&
-                              collectionStore.collection!.movies[index].url !=
+                              collectionStore.collection!.exams[index].url !=
                                   "") {
                             _showMaterialDialog(
                                 context,
-                                collectionStore.collection!.movies[index],
+                                collectionStore.collection!.exams[index],
                                 collectionStore,
                                 index);
                           } else {
-                            collectionStore.removeMovie(
-                                collectionStore.collection!.movies[index],
+                            collectionStore.removeExam(
+                                collectionStore.collection!.exams[index],
                                 index);
                           }
                         },
@@ -96,7 +96,7 @@ class MovieCollectionWidget extends StatelessWidget {
           text: "Adicionar novo filme",
           expandButton: true,
           onPressed: () {
-            collectionStore.addMovie();
+            collectionStore.addExam();
           },
         ),
       ]),
@@ -120,7 +120,7 @@ class MovieCollectionWidget extends StatelessWidget {
                 CustomButton(
                     text: "Sim",
                     onPressed: () async {
-                      await collectionStore.removeMovie(item, index);
+                      await collectionStore.removeExam(item, index);
                       await collectionStore
                           .saveCollection(collectionStore.collection!);
                       Navigator.of(context).pop();

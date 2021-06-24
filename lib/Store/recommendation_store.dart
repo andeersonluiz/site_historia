@@ -3,6 +3,8 @@
 /// {@category Store}
 // ignore: library_names
 library RecommendationStore;
+import 'dart:convert';
+
 import 'package:mobx/mobx.dart';
 import 'package:site_historia/Model/recommendationItem_model.dart';
 import 'package:site_historia/Model/recommendation_model.dart';
@@ -60,7 +62,7 @@ abstract class _RecommendationStoreBase with Store {
 
   /// Adiciona uma recomendação para a lista de filme/série/documentário".
   @action
-  addBlog() {
+  addVideo() {
     recommendation!.videosList.add(new RecommendationItem(
         id: recommendation!.videosList.length == 0
             ? 0
@@ -77,19 +79,19 @@ abstract class _RecommendationStoreBase with Store {
 
   /// Atualiza o nome de uma recomendação de filme/série/documentário".
   @action
-  updateRecommendationBlogName(int id, String name) {
+  updateRecommendationVideoName(int id, String name) {
     recommendation!.videosList[id].name = name;
   }
 
   /// Atualiza o link de uma recomendação de filme/série/documentário".
   @action
-  updateRecommendationBlogUrl(int id, String url) {
+  updateRecommendationVideoUrl(int id, String url) {
     recommendation!.videosList[id].url = url;
   }
 
   /// Exclui uma recomendação de filme/série/documentário".
   @action
-  removeBlog(RecommendationItem recommendationItem) {
+  removeVideo(RecommendationItem recommendationItem) {
     recommendation!.videosList.remove(recommendationItem);
     var newRecommendation = new Recommendation(
         youtubeList: recommendation!.youtubeList,
@@ -183,6 +185,12 @@ abstract class _RecommendationStoreBase with Store {
   /// Atualiza a recomendação no banco de dados.
   @action
   saveRecommendation(Recommendation recommendation) async {
+
+    /*recommendation.videosList.clear();
+    for (int i=0;i<86;i++){
+      print(data[i]);
+      recommendation.videosList.add(RecommendationItem.fromJson(data["data"]![i]));
+    }*/
     await RecommendationFirestore.updateRecommendations(recommendation);
   }
 }

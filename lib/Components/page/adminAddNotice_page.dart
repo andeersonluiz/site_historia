@@ -103,7 +103,7 @@ class _AdminAddNoticePageState extends State<AdminAddNoticePage> {
                     padding: const EdgeInsets.all(8.0),
                     child: Center(
                         child: CustomText(
-                      "Tag da noticia\n(visivel no site)",
+                      "Tag da notícia\n(visivel no site)",
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.subtitle1,
                     )),
@@ -146,13 +146,13 @@ class _AdminAddNoticePageState extends State<AdminAddNoticePage> {
             Observer(
               builder: (_) => supportStore.type == "Podcast"
                   ? AudioWidget(
-                      title: "Audio Podcast",
+                      title: "Áudio Podcast",
                     )
                   : Container(),
             ),
             Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CustomText("Imagem titulo",
+                child: CustomText("Imagem título",
                     style: Theme.of(context).textTheme.headline6)),
             Observer(
               builder: (ctx) => ImageWidget(

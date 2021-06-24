@@ -43,7 +43,7 @@ class LatestPostsDesktop extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SelectableText(
-                    "Ultimas Postagens",
+                    "Últimas Postagens",
                     style: Theme.of(context)
                         .textTheme
                         .headline5!
@@ -51,13 +51,16 @@ class LatestPostsDesktop extends StatelessWidget {
                   ),
                 ),
                 for (var notice in listNotices)
-                  InkWell(
-                      onTap: () {
-                        VxNavigator.of(context).push(Uri(
-                            path: RouteNames.NOTICES,
-                            queryParameters: {"id": notice.id.toString()}));
-                      },
-                      child: PostTileDesktop(notice)),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: InkWell(
+                        onTap: () {
+                          VxNavigator.of(context).push(Uri(
+                              path: RouteNames.NOTICES,
+                              queryParameters: {"id": notice.id.toString()}));
+                        },
+                        child: PostTileDesktop(notice)),
+                  ),
               ],
             );
         }

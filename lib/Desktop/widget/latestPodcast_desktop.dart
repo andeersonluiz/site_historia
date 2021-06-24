@@ -51,13 +51,17 @@ class LatestPodcastDesktop extends StatelessWidget {
                     ),
                   ),
                   for (var notice in listNotices)
-                    InkWell(
-                        onTap: () {
-                          VxNavigator.of(context).push(Uri(
-                              path: RouteNames.NOTICES,
-                              queryParameters: {"id": notice.id.toString()}));
-                        },
-                        child: PodcastTileDesktop(notice)),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: InkWell(
+                          onTap: () {
+                            VxNavigator.of(context).push(Uri(
+                                path: RouteNames.NOTICES,
+                                queryParameters: {"id": notice.id.toString()}));
+                          },
+                          child: PodcastTileDesktop(notice)),
+                    ),
+
                 ]);
         }
       },

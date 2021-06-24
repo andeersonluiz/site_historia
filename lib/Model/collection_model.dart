@@ -6,8 +6,8 @@ library Collection;
 import 'package:site_historia/Model/collection_item.dart';
 
 class Collection {
-  /// Lista de `CollectionItem` com informações de filme.
-  List<CollectionItem> movies;
+  /// Lista de `CollectionItem` com informações de questões de vestibular.
+  List<CollectionItem> exams;
   /// Lista de `CollectionItem` com informações de artigos.
   List<CollectionItem> articles;
   /// Lista de `CollectionItem` com informações de livros.
@@ -17,16 +17,16 @@ class Collection {
 
   /// Construtor da classe `Collection`.
   Collection(
-      {required this.movies,
+      {required this.exams,
       required this.articles,
       required this.books,
       required this.others});
 
   /// Converter as informações recebidas em `json` do banco de dados para a classe `Collection`.
   factory Collection.fromJson(Map<String, dynamic> json) {
-    var movies = json['movies'].isEmpty
+    var exams = json['exams'].isEmpty
         ? [CollectionItem(id: 0, name: "", url: "", urlName: "")]
-        : json['movies']
+        : json['exams']
             .map<CollectionItem>((item) => CollectionItem.fromJson(item))
             .toList();
     var articles = json['articles'].isEmpty
@@ -45,12 +45,12 @@ class Collection {
             .map<CollectionItem>((item) => CollectionItem.fromJson(item))
             .toList();
     return Collection(
-        movies: movies, articles: articles, books: books, others: others);
+        exams: exams, articles: articles, books: books, others: others);
   }
   /// Converter a classe `Collection` em `json`.
   Map<String, dynamic> toJson() {
     return {
-      'movies': movies.map((e) => e.toJson()).toList(),
+      'exams': exams.map((e) => e.toJson()).toList(),
       'articles': articles.map((e) => e.toJson()).toList(),
       'books': books.map((e) => e.toJson()).toList(),
       'others': others.map((e) => e.toJson()).toList(),

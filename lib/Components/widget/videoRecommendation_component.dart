@@ -42,7 +42,7 @@ class VideoRecommendationWidget extends StatelessWidget {
                       controller: controllerName,
                       textInputType: TextInputType.name,
                       onChanged: (newName) {
-                        recommendationStore.updateRecommendationBlogName(
+                        recommendationStore.updateRecommendationVideoName(
                             index, newName);
                       },
                       validator: (text) {
@@ -58,7 +58,7 @@ class VideoRecommendationWidget extends StatelessWidget {
                       controller: controllerUrl,
                       textInputType: TextInputType.url,
                       onChanged: (newUrl) {
-                        recommendationStore.updateRecommendationBlogUrl(
+                        recommendationStore.updateRecommendationVideoUrl(
                             index, newUrl);
                       },
                       validator: (text) {
@@ -81,7 +81,7 @@ class VideoRecommendationWidget extends StatelessWidget {
                                     .recommendation!.videosList[index],
                                 recommendationStore);
                           } else {
-                            recommendationStore.removeBlog(recommendationStore
+                            recommendationStore.removeVideo(recommendationStore
                                 .recommendation!.videosList[index]);
                           }
                         },
@@ -97,7 +97,7 @@ class VideoRecommendationWidget extends StatelessWidget {
           text: "Adicionar recomendação de filme/série/documentário",
           expandButton: true,
           onPressed: () {
-            recommendationStore.addBlog();
+            recommendationStore.addVideo();
           },
         ),
       ]),
@@ -121,7 +121,7 @@ class VideoRecommendationWidget extends StatelessWidget {
                 CustomButton(
                     text: "Sim",
                     onPressed: () async {
-                      recommendationStore.removeBlog(item);
+                      recommendationStore.removeVideo(item);
                       Navigator.of(context).pop();
                     }),
                 CustomButton(

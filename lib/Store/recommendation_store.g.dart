@@ -82,44 +82,44 @@ mixin _$RecommendationStore on _RecommendationStoreBase, Store {
   }
 
   @override
-  dynamic addBlog() {
+  dynamic addVideo() {
     final _$actionInfo = _$_RecommendationStoreBaseActionController.startAction(
-        name: '_RecommendationStoreBase.addBlog');
+        name: '_RecommendationStoreBase.addVideo');
     try {
-      return super.addBlog();
+      return super.addVideo();
     } finally {
       _$_RecommendationStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic updateRecommendationBlogName(int id, String name) {
+  dynamic updateRecommendationVideoName(int id, String name) {
     final _$actionInfo = _$_RecommendationStoreBaseActionController.startAction(
-        name: '_RecommendationStoreBase.updateRecommendationBlogName');
+        name: '_RecommendationStoreBase.updateRecommendationVideoName');
     try {
-      return super.updateRecommendationBlogName(id, name);
+      return super.updateRecommendationVideoName(id, name);
     } finally {
       _$_RecommendationStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic updateRecommendationBlogUrl(int id, String url) {
+  dynamic updateRecommendationVideoUrl(int id, String url) {
     final _$actionInfo = _$_RecommendationStoreBaseActionController.startAction(
-        name: '_RecommendationStoreBase.updateRecommendationBlogUrl');
+        name: '_RecommendationStoreBase.updateRecommendationVideoUrl');
     try {
-      return super.updateRecommendationBlogUrl(id, url);
+      return super.updateRecommendationVideoUrl(id, url);
     } finally {
       _$_RecommendationStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic removeBlog(RecommendationItem recommendationItem) {
+  dynamic removeVideo(RecommendationItem recommendationItem) {
     final _$actionInfo = _$_RecommendationStoreBaseActionController.startAction(
-        name: '_RecommendationStoreBase.removeBlog');
+        name: '_RecommendationStoreBase.removeVideo');
     try {
-      return super.removeBlog(recommendationItem);
+      return super.removeVideo(recommendationItem);
     } finally {
       _$_RecommendationStoreBaseActionController.endAction(_$actionInfo);
     }

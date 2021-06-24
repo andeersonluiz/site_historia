@@ -10,7 +10,7 @@ class TitleNames {
   static const String PROJECTS = "Projeto ";
   static const String NOTICES = "Noticias";
   static const String FRAMES = "Quadro";
-  static const String EXAM = "Vestibular";
+  //static const String EXAM = "Vestibular";
   static const String RECOMMENDATIONS = "Recomendações";
   static const String COLLECTION = "Acervo";
   static const String ADMIN = "Admin";

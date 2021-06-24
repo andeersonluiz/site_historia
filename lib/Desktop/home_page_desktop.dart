@@ -21,15 +21,23 @@ class HomePageDesktop extends StatelessWidget {
     return Column(children: [
       SliderImageDesktop(),
       Divider(height: 1),
-      Row(children: [
-        Expanded(flex: 5, child: Container(height: 525, child: LatestPostsDesktop())),
-        Expanded(
-            flex: 5,
-            child: Container(
-                height: 525,
-                color: ThemeConfig.brownPodcast,
-                child: LatestPodcastDesktop())),
-      ]),
+      IntrinsicHeight(
+        child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+          Expanded(flex: 5, child: Container(constraints: BoxConstraints(
+    minHeight: 525,
+    ), child: LatestPostsDesktop())),
+          Expanded(
+              flex: 5,
+              child: Container(
+                  constraints: BoxConstraints(
+    minHeight: 525,
+    ),
+                  color: ThemeConfig.brownPodcast,
+                  child: LatestPodcastDesktop())),
+        ]),
+      ),
       Divider(height: 1),
       FooterDesktop(),
     ]);

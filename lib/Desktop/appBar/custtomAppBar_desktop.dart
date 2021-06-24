@@ -54,7 +54,7 @@ class _CustomAppBarDesktopState extends State<CustomAppBarDesktop> {
           ItemAppBarDesktop("Notícias", RouteNames.NOTICES),
           ItemPopUpMenuAppBarDesktop(
               "Quadros", RouteNames.FRAMES, frameStore.listFramesOrdered),
-          ItemAppBarDesktop("Vestibular", RouteNames.EXAM),
+          //ItemAppBarDesktop("Vestibular", RouteNames.EXAM),
           ItemAppBarDesktop("Recomendações", RouteNames.RECOMMENDATIONS),
           ItemAppBarDesktop("Acervo", RouteNames.COLLECTION),
         ],

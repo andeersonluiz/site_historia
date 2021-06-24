@@ -35,20 +35,20 @@ class CollectionPage extends StatelessWidget {
             Divider(
               thickness: 1.0,
             ),
-            collection.movies.length > 0
+            collection.exams.length > 0
                 ? Align(
                     alignment: Alignment.centerLeft,
                     child: CustomText(
-                      "Filmes",
+                      "Provas",
                       textAlign: TextAlign.left,
                       style: Theme.of(context).textTheme.headline5,
                     ),
                   )
                 : Container(),
-            for (CollectionItem collection in collection.movies)
+            for (CollectionItem collection in collection.exams)
               CollectionItemWidget(
                 collection,
-                isMovie: true,
+                isExam: true,
               ),
             collection.books.length > 0
                 ? Align(

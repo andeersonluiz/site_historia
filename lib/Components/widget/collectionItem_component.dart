@@ -13,8 +13,8 @@ import 'package:url_launcher/url_launcher.dart';
 /// Recebe um objeto `CollectionItemWidget`, onde exibe o nome do item e sua url.
 class CollectionItemWidget extends StatelessWidget {
   final CollectionItem collectionItem;
-  final bool isMovie;
-  CollectionItemWidget(this.collectionItem, {this.isMovie = false});
+  final bool isExam;
+  CollectionItemWidget(this.collectionItem, {this.isExam = false});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,7 +38,7 @@ class CollectionItemWidget extends StatelessWidget {
                   color: Theme.of(context).primaryColor),
             ),
             TextSpan(
-                text: isMovie ? "Assistir" : "Baixar",
+                text: isExam ? "Acessar" : "Baixar",
                 style: Theme.of(context).textTheme.subtitle1!.copyWith(
                     color: Colors.blueAccent,
                     decoration: TextDecoration.underline,

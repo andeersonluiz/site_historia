@@ -88,11 +88,11 @@ mixin _$CollectionStore on _CollectionStoreBase, Store {
       ActionController(name: '_CollectionStoreBase');
 
   @override
-  dynamic addMovie() {
+  dynamic addExam() {
     final _$actionInfo = _$_CollectionStoreBaseActionController.startAction(
-        name: '_CollectionStoreBase.addMovie');
+        name: '_CollectionStoreBase.addExam');
     try {
-      return super.addMovie();
+      return super.addExam();
     } finally {
       _$_CollectionStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -110,11 +110,11 @@ mixin _$CollectionStore on _CollectionStoreBase, Store {
   }
 
   @override
-  dynamic removeMovie(CollectionItem collectionItem, int id) {
+  dynamic removeExam(CollectionItem collectionItem, int id) {
     final _$actionInfo = _$_CollectionStoreBaseActionController.startAction(
-        name: '_CollectionStoreBase.removeMovie');
+        name: '_CollectionStoreBase.removeExam');
     try {
-      return super.removeMovie(collectionItem, id);
+      return super.removeExam(collectionItem, id);
     } finally {
       _$_CollectionStoreBaseActionController.endAction(_$actionInfo);
     }

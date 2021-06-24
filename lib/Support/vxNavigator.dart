@@ -109,11 +109,11 @@ class VelocityxNavigator {
           }
           return MaterialPage(child: FrameScreen(id));
         },
-        RouteNames.EXAM: (_, __) => MaterialPage(
+        /*RouteNames.EXAM: (_, __) => MaterialPage(
             child: Title(
                 title: TitleNames.EXAM,
                 color: Colors.black,
-                child: HomeScreen())),
+                child: HomeScreen())),*/
         RouteNames.RECOMMENDATIONS: (_, __) => MaterialPage(
             child: Title(
                 title: TitleNames.RECOMMENDATIONS,

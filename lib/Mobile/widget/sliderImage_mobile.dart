@@ -12,6 +12,8 @@ import 'package:provider/provider.dart';
 import 'package:site_historia/Components/widget/customLoading_component.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/notice_store.dart';
+import 'package:site_historia/Support/routesName_support.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 import '../../Components/widget/sliderContainer_component.dart';
 import '../../Model/notice_model.dart';
@@ -68,10 +70,17 @@ class _SliderImageMobileState extends State<SliderImageMobile> {
                               });
                             }),
                         items: listNotices.map((item) {
-                          return SliderContainer(
-                            notice: item,
-                            sizeContainer: 110,
-                            maxLinesSubtitle: 1,
+                          return InkWell(
+                            onTap: () {
+                              VxNavigator.of(context).push(Uri(
+                                  path: RouteNames.NOTICES,
+                                  queryParameters: {"id": item.id.toString()}));
+                            },
+                            child: SliderContainer(
+                              notice: item,
+                              sizeContainer: 110,
+                              maxLinesSubtitle: 1,
+                            ),
                           );
                         }).toList(),
                       )
@@ -115,10 +124,17 @@ class _SliderImageMobileState extends State<SliderImageMobile> {
             });
           }),
       items: listNotices.map((item) {
-        return SliderContainer(
-          notice: item,
-          sizeContainer: 110,
-          maxLinesSubtitle: 1,
+        return InkWell(
+        onTap: () {
+          VxNavigator.of(context).push(Uri(
+              path: RouteNames.NOTICES,
+              queryParameters: {"id": item.id.toString()}));
+        },
+          child: SliderContainer(
+            notice: item,
+            sizeContainer: 110,
+            maxLinesSubtitle: 1,
+          ),
         );
       }).toList(),
     );

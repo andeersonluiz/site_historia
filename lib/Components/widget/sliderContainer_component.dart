@@ -5,6 +5,7 @@
 // ignore: library_names
 library SliderContainer;
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../Model/notice_model.dart';
@@ -42,11 +43,16 @@ class SliderContainer extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        notice.title,
-                        style: Theme.of(context).textTheme.headline4,
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: AutoSizeText(
+                          notice.title,
+                          minFontSize: 15,
+                          maxFontSize: 34,
+                          maxLines: 2,
+                          style: Theme.of(context).textTheme.headline4,
+                        ),
                       ),
                     ),
                     Padding(
@@ -54,7 +60,7 @@ class SliderContainer extends StatelessWidget {
                       child: Text(
                           notice.subtitle,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: maxLinesSubtitle,
+                          maxLines: 1,
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.subtitle1),
                     ),

@@ -105,7 +105,7 @@ class _MyAppState extends State<MyApp> {
     await projectStore.getProjectSortedByTitle();
     await frameStore.getFramesSortedByTitle();
     User? user = LoginAuth.getUser();
-    GlobalsVariables.loadTags();
+    await GlobalsVariables.loadTags();
     if (user != null) {
       await projectStore.getUsernameByUid(user.uid);
     }

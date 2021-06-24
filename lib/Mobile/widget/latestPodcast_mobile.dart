@@ -39,8 +39,7 @@ class LatestPodcastMobile extends StatelessWidget {
             List<Notice> listNotices =
                 noticeStore.listRecentPodcast!.value as List<Notice>;
             return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),

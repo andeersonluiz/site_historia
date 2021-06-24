@@ -23,62 +23,64 @@ class PodcastTileMobile extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(16.0),
       width: MediaQuery.of(context).size.width * widthPercentage,
-      height: 120,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-              flex: 4,
-              child: CustomImage(
-                height: 150,
-                image: podcast.thumb,
-                circularRadius: 8.0,
-                padding: EdgeInsets.zero,
-              )),
-          Expanded(
-            flex: 6,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      padding: EdgeInsets.all(4.0),
-                      decoration: BoxDecoration(
-                        color: GlobalsVariables.colorByTag[podcast.tag],
-                        borderRadius: BorderRadius.circular(8),
+      height: 150,
+      child: IntrinsicHeight(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+                flex: 4,
+                child: CustomImage(
+                  image: podcast.thumb,
+                  circularRadius: 8.0,
+                  padding: EdgeInsets.zero,
+                )),
+            Expanded(
+              flex: 6,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        padding: EdgeInsets.all(4.0),
+                        decoration: BoxDecoration(
+                          color: GlobalsVariables.colorByTag[podcast.tag],
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(podcast.tag,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2!
+                                .copyWith(color: Theme.of(context).primaryColor)),
                       ),
-                      child: Text(podcast.tag,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        podcast.title,
+                        maxLines: 3,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline6!
+                            .copyWith(color: Theme.of(context).primaryColor).copyWith(fontSize: 17.5),
+                      ),
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          podcast.datePost,
                           style: Theme.of(context)
                               .textTheme
                               .bodyText2!
-                              .copyWith(color: Theme.of(context).primaryColor)),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      podcast.title,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline6!
-                          .copyWith(color: Theme.of(context).primaryColor),
-                    ),
-                  ),
-                  Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        podcast.datePost,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText2!
-                            .copyWith(color: Theme.of(context).primaryColor),
-                      )),
-                ]),
-          )
-        ],
+                              .copyWith(color: Theme.of(context).primaryColor),
+                        )),
+                  ]),
+            )
+          ],
+        ),
       ),
     );
   }

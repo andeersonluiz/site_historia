@@ -41,7 +41,7 @@ class CustomDropdown extends StatelessWidget {
                           child: Container(
                         width: MediaQuery.of(context).size.width,
                         child: ButtonTheme(
-                            child: CustomText(value,
+                            child: CustomText(value,isSelectable:false,
                                 style: Theme.of(context).textTheme.caption)),
                       )),
                     ))
