@@ -41,6 +41,13 @@ mixin _$SupportStore on _SupportStoreBase, Store {
       (_$isTopHeaderComputed ??= Computed<bool>(() => super.isTopHeader,
               name: '_SupportStoreBase.isTopHeader'))
           .value;
+  Computed<String>? _$descriptionComputed;
+
+  @override
+  String get description =>
+      (_$descriptionComputed ??= Computed<String>(() => super.description,
+              name: '_SupportStoreBase.description'))
+          .value;
   Computed<String>? _$linkComputed;
 
   @override
@@ -336,6 +343,21 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   set _htmlContent(String? value) {
     _$_htmlContentAtom.reportWrite(value, super._htmlContent, () {
       super._htmlContent = value;
+    });
+  }
+
+  final _$_descriptionAtom = Atom(name: '_SupportStoreBase._description');
+
+  @override
+  String get _description {
+    _$_descriptionAtom.reportRead();
+    return super._description;
+  }
+
+  @override
+  set _description(String value) {
+    _$_descriptionAtom.reportWrite(value, super._description, () {
+      super._description = value;
     });
   }
 
@@ -672,6 +694,17 @@ mixin _$SupportStore on _SupportStoreBase, Store {
   }
 
   @override
+  dynamic updateDescription(String newDescription) {
+    final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
+        name: '_SupportStoreBase.updateDescription');
+    try {
+      return super.updateDescription(newDescription);
+    } finally {
+      _$_SupportStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic updateLink(String newLink) {
     final _$actionInfo = _$_SupportStoreBaseActionController.startAction(
         name: '_SupportStoreBase.updateLink');
@@ -848,6 +881,7 @@ subtitle: ${subtitle},
 type: ${type},
 tag: ${tag},
 isTopHeader: ${isTopHeader},
+description: ${description},
 link: ${link},
 pathImage: ${pathImage},
 subtitleImage: ${subtitleImage},

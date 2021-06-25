@@ -38,6 +38,9 @@ class LatestPodcastMobile extends StatelessWidget {
           case FutureStatus.fulfilled:
             List<Notice> listNotices =
                 noticeStore.listRecentPodcast!.value as List<Notice>;
+            if(listNotices.isEmpty){
+              return Container();
+            }
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [

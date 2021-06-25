@@ -58,8 +58,8 @@ class _AdminAddFramePageState extends State<AdminAddFramePage> {
         child: Column(
           children: [
             CustomTextFormField(
-              hintText: "Insira o titulo do Quadro",
-              labelText: "Titulo",
+              hintText: "Insira o título do Quadro",
+              labelText: "Título",
               maxCharacters: GlobalsVariables.maxCharactersTitle,
               initialValue: supportStore.title,
               onChanged: (text) {
@@ -89,7 +89,7 @@ class _AdminAddFramePageState extends State<AdminAddFramePage> {
             }),
             Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CustomText("Imagem titulo",
+                child: CustomText("Imagem título (Resolução recomendado:1300x768)",
                     style: Theme.of(context).textTheme.headline6)),
             Observer(
               builder: (ctx) => ImageWidget(

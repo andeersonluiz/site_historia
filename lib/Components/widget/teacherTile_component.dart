@@ -12,7 +12,9 @@ import 'package:site_historia/Components/widget/customImage_component.dart';
 import 'package:site_historia/Model/project_model.dart';
 import 'package:site_historia/Model/teacher_model.dart';
 import 'package:site_historia/Support/globals_variables.dart';
+import 'package:site_historia/Support/routesName_support.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 /// Exibe uma imagem circular e informações referente ao professor.
 class TeacherTile extends StatelessWidget {
@@ -29,13 +31,18 @@ class TeacherTile extends StatelessWidget {
         children: [
           Expanded(
             flex: 8,
-            child: CustomImage(
-              height: 150,
-              width: MediaQuery.of(context).size.width,
-              image: teacher.image==""?GlobalsVariables.srcDefaultImage:teacher.image,
-              padding: EdgeInsets.zero,
-              fit: BoxFit.cover,
-              isOval: true,
+            child: InkWell(
+              onTap: (){
+                VxNavigator.of(context).push(Uri(path: RouteNames.TEACHERS,queryParameters: {"id":teacher.id.toString()}));
+              },
+              child: CustomImage(
+                height: 150,
+                width: MediaQuery.of(context).size.width,
+                image: teacher.image==""?GlobalsVariables.srcDefaultImage:teacher.image,
+                padding: EdgeInsets.zero,
+                fit: BoxFit.cover,
+                isOval: true,
+              ),
             ),
           ),
           Expanded(
@@ -88,7 +95,7 @@ class TeacherTile extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: teacher.projects.length > 0
                     ? _buildTextProjects(teacher.projects, context)
-                    : _buildText("Projetos: -", context)),
+                    : _buildText("Projeto(s): -", context)),
           ),
         ],
       ),
@@ -111,7 +118,7 @@ class TeacherTile extends StatelessWidget {
       List<Project> projects, BuildContext context) {
     List<String> namesProjects = projects.map((e) => e.name).toList();
     return SelectableText(
-      "Projetos: " + namesProjects.join(", "),
+      "Projeto(s): " + namesProjects.join(", "),
       maxLines: 2,
       textAlign: TextAlign.center,
       style: Theme.of(context)

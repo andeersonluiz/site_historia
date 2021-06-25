@@ -21,77 +21,85 @@ class CollectionPage extends StatelessWidget {
   CollectionPage(this.collection);
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.all(16.0),
-          child: Column(children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: CustomText("Acervo",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline4!),
+    return Container(
+      constraints: BoxConstraints(
+        minHeight: MediaQuery.of(context).size.height,
+        maxHeight: double.infinity,
+      ),
+      child: IntrinsicHeight(
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(16.0),
+              child: Column(children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CustomText("Acervo",
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headline4!),
+                ),
+                Divider(
+                  thickness: 1.0,
+                ),
+                collection.exams.length > 0
+                    ? Align(
+                        alignment: Alignment.centerLeft,
+                        child: CustomText(
+                          "Provas",
+                          textAlign: TextAlign.left,
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                      )
+                    : Container(),
+                for (CollectionItem collection in collection.exams)
+                  CollectionItemWidget(
+                    collection,
+                    isExam: true,
+                  ),
+                collection.books.length > 0
+                    ? Align(
+                        alignment: Alignment.centerLeft,
+                        child: CustomText(
+                          "Livros",
+                          textAlign: TextAlign.left,
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                      )
+                    : Container(),
+                for (CollectionItem collection in collection.books)
+                  CollectionItemWidget(collection),
+                collection.articles.length > 0
+                    ? Align(
+                        alignment: Alignment.centerLeft,
+                        child: CustomText(
+                          "Artigos",
+                          textAlign: TextAlign.left,
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                      )
+                    : Container(),
+                for (CollectionItem collection in collection.articles)
+                  CollectionItemWidget(collection),
+                collection.others.length > 0
+                    ? Align(
+                        alignment: Alignment.centerLeft,
+                        child: CustomText(
+                          "Outros",
+                          textAlign: TextAlign.left,
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                      )
+                    : Container(),
+                for (CollectionItem collection in collection.others)
+                  CollectionItemWidget(collection),
+              ]),
             ),
-            Divider(
-              thickness: 1.0,
-            ),
-            collection.exams.length > 0
-                ? Align(
-                    alignment: Alignment.centerLeft,
-                    child: CustomText(
-                      "Provas",
-                      textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.headline5,
-                    ),
-                  )
-                : Container(),
-            for (CollectionItem collection in collection.exams)
-              CollectionItemWidget(
-                collection,
-                isExam: true,
-              ),
-            collection.books.length > 0
-                ? Align(
-                    alignment: Alignment.centerLeft,
-                    child: CustomText(
-                      "Livros",
-                      textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.headline5,
-                    ),
-                  )
-                : Container(),
-            for (CollectionItem collection in collection.books)
-              CollectionItemWidget(collection),
-            collection.articles.length > 0
-                ? Align(
-                    alignment: Alignment.centerLeft,
-                    child: CustomText(
-                      "Artigos",
-                      textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.headline5,
-                    ),
-                  )
-                : Container(),
-            for (CollectionItem collection in collection.articles)
-              CollectionItemWidget(collection),
-            collection.others.length > 0
-                ? Align(
-                    alignment: Alignment.centerLeft,
-                    child: CustomText(
-                      "Outros",
-                      textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.headline5,
-                    ),
-                  )
-                : Container(),
-            for (CollectionItem collection in collection.others)
-              CollectionItemWidget(collection),
-          ]),
+            MediaQuery.of(context).size.width > 600
+                ? Expanded(child: FooterDesktop())
+                : FooterMobile(),
+          ],
         ),
-        MediaQuery.of(context).size.width > 600
-            ? FooterDesktop()
-            : FooterMobile(),
-      ],
+      ),
     );
   }
 }

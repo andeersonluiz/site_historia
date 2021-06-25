@@ -8,6 +8,7 @@ class RouteNames {
   static const String HOME = "/inicio";
   static const String ABOUT = "/coordenacao";
   static const String PROJECTS = "/projetos";
+  static const String TEACHERS = "/professor";
   static const String NOTICES = "/noticias";
   static const String FRAMES = "/quadros";
   static const String EXAM = "/vestibular";

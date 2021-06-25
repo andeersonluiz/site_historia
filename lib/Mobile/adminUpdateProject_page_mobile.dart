@@ -82,8 +82,8 @@ class _AdminUpdateProjectPageMobileState
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CustomTextFormField(
-                    hintText: "Insira o titulo",
-                    labelText: "Titulo",
+                    hintText: "Insira o título",
+                    labelText: "Título",
                     maxCharacters: GlobalsVariables.maxCharactersTitle,
                     initialValue: supportStore.title,
                     onChanged: (text) {
@@ -98,7 +98,7 @@ class _AdminUpdateProjectPageMobileState
                   }),
                   Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: CustomText("Imagem titulo",
+                      child: CustomText("Imagem título (Resolução recomendado:3000x600)",
                           style: Theme.of(context).textTheme.headline6)),
                   Observer(
                     builder: (ctx) => ImageWidget(

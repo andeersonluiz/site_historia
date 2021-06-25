@@ -41,13 +41,13 @@ abstract class _CollectionStoreBase with Store {
 
   /// Atualiza o nome de um acervo de questão de vestibular.
   @action
-  updateRecommendationMovieName(int id, String name) {
+  updateRecommendationExamName(int id, String name) {
     collection!.exams[id].name = name;
   }
 
   /// Atualiza o link de um acervo de questão de vestibular.
   @action
-  updateRecommendationMovieUrl(int id, String url) async {
+  updateRecommendationExamUrl(int id, String url) async {
     collection!.exams[id].url = url;
     collection!.exams[id].urlName = url;
   }

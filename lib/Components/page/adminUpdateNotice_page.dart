@@ -69,8 +69,8 @@ class _AdminUpdateNoticePageState
         padding: EdgeInsets.all(16.0),
         child: Column(children: [
           CustomTextFormField(
-            hintText: "Insira o titulo da Noticia",
-            labelText: "Titulo",
+            hintText: "Insira o título da Noticia",
+            labelText: "Título",
             maxCharacters: GlobalsVariables.maxCharactersTitle,
             initialValue: supportStore.title,
             onChanged: (text) {
@@ -163,7 +163,7 @@ class _AdminUpdateNoticePageState
           ),
           Padding(
               padding: const EdgeInsets.all(8.0),
-              child: CustomText("Imagem titulo",
+              child: CustomText("Imagem título (Resolução recomendada (1300x768)",
                   style: Theme.of(context).textTheme.headline6)),
           Observer(
             builder: (ctx) => ImageWidget(

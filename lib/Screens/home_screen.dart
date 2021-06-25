@@ -6,6 +6,7 @@ library HomeScreen;
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:site_historia/Desktop/appBar/custtomAppBar_desktop.dart';
+import 'package:site_historia/Desktop/footer/footer_desktop.dart';
 import 'package:site_historia/Support/IconsData_support.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import '../Desktop/home_page_desktop.dart';

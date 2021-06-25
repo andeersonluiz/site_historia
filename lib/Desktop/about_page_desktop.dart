@@ -21,55 +21,62 @@ class AboutPageDesktop extends StatefulWidget {
 class _AboutPageDesktopState extends State<AboutPageDesktop> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: CustomText("Coordenação de História",
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline4!),
-        ),
-        Divider(
-          height: 1,
-        ),
-        Container(
-          margin: EdgeInsets.all(16),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CustomImage(
-                      width: MediaQuery.of(context).size.width,
-                      image: GlobalsVariables.scrDefaultImageAboutPage,
-                    )),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: CustomText(
-                    "O Centro Federal de Educação Tecnológica Celso Suckow da Fonseca (Cefet/RJ) teve sua origem em 1917 como Escola Normal de Artes e Ofícios Wenceslau Braz. Atualmente, é uma instituição federal de ensino que se compreende como um espaço público de formação humana, científica e tecnológica. Oferece cursos técnicos integrados ao ensino médio, subsequentes (pós-médio), tecnológicos, de graduação e de pós-graduação lato sensu e stricto sensu (mestrado e doutorado), nas modalidades presencial e a distância. O Cefet/RJ atua na tríade ensino, pesquisa e extensão e visa contribuir para a formação de profissionais e cidadãos bem preparados para o desenvolvimento econômico, humano e social do país.\n\n"+
-"A coordenação de História do CEFET/campus Maracanã conta hoje com os professores efetivos: Aldilene Marinho César Almeida Diniz, Álvaro de Oliveira Senra, André Alexandre Guimarães Couto, Mariana Vitor Renou, Renato Lanna Fernandez, Samuel Silva Rodrigues de Oliveira, Thiago Rodrigues da Silva e Vanessa de Oliveira Brunow. Nosso objetivo principal é contribuir para uma formação completa, integral e crítica dos alunos, a partir da construção do conhecimento histórico. Nesta 3ª edição do site da Coordenação de História é possível conhecer os professores que a integram, os projetos que a coordenação desenvolve e atua, ter acesso a questões de vestibular, indicações de blogs, sites, canais, filmes e documentários relacionados a disciplina, materiais desenvolvidos por professores, alunos, estagiários e monitores, notícias, entre outros. A ideia é que seja ferramenta capaz de despertar o interesse pela disciplina, suscitar debates fundamentais, auxiliar nos estudos e contribuir de maneiras diversas para os processos de ensino-aprendizagem.\n\nSejam bem vindos e aproveitem!   ",
-                    textAlign: TextAlign.justify,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
-                        .copyWith(color: Theme.of(context).primaryColor),
+    return Container(
+      constraints: BoxConstraints(
+        minHeight: MediaQuery.of(context).size.height,
+        maxHeight: double.infinity,
+      ),
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: CustomText("Coordenação de História",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headline4!),
+            ),
+            Divider(
+              height: 1,
+            ),
+            Container(
+              margin: EdgeInsets.all(16),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CustomImage(
+                          width: MediaQuery.of(context).size.width,
+                          image: GlobalsVariables.scrDefaultImageAboutPage,
+                        )),
                   ),
-                ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: CustomText(
+                        "O Centro Federal de Educação Tecnológica Celso Suckow da Fonseca (Cefet/RJ) teve sua origem em 1917 como Escola Normal de Artes e Ofícios Wenceslau Braz. Atualmente, é uma instituição federal de ensino que se compreende como um espaço público de formação humana, científica e tecnológica. Oferece cursos técnicos integrados ao ensino médio, subsequentes (pós-médio), tecnológicos, de graduação e de pós-graduação lato sensu e stricto sensu (mestrado e doutorado), nas modalidades presencial e a distância. O Cefet/RJ atua na tríade ensino, pesquisa e extensão e visa contribuir para a formação de profissionais e cidadãos bem preparados para o desenvolvimento econômico, humano e social do país.\n\n"+
+"A coordenação de História do CEFET/campus Maracanã conta hoje com os professores efetivos: Aldilene Marinho César Almeida Diniz, Álvaro de Oliveira Senra, André Alexandre Guimarães Couto, Mariana Vitor Renou, Renato Lanna Fernandez, Samuel Silva Rodrigues de Oliveira, Thiago Rodrigues da Silva e Vanessa de Oliveira Brunow. Nosso objetivo principal é contribuir para uma formação completa, integral e crítica dos alunos, a partir da construção do conhecimento histórico. Nesta 3ª edição do site da Coordenação de História é possível conhecer os professores que a integram, os projetos que a coordenação desenvolve e atua, ter acesso a questões de vestibular, indicações de blogs, sites, canais, filmes e documentários relacionados a disciplina, materiais desenvolvidos por professores, alunos, estagiários e monitores, notícias, entre outros. A ideia é que seja ferramenta capaz de despertar o interesse pela disciplina, suscitar debates fundamentais, auxiliar nos estudos e contribuir de maneiras diversas para os processos de ensino-aprendizagem.\n\nSejam bem vindos e aproveitem!   ",
+                        textAlign: TextAlign.justify,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1!
+                            .copyWith(color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-        Divider(
-          thickness: 1.0,
-        ),
-        Container(margin: EdgeInsets.all(16.0), child: ListTeachers()),
-        FooterDesktop()
-      ],
+            ),
+            Divider(
+              thickness: 1.0,
+            ),
+            Container(margin: EdgeInsets.all(16.0), child: ListTeachers()),
+            FooterDesktop()
+          ],
+
+      ),
     );
   }
 }

@@ -20,65 +20,73 @@ class RecommendationPage extends StatelessWidget {
   RecommendationPage(this.recommendations);
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Container(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: CustomText("Recomendações",
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headline4!),
-              ),
-              Divider(
-                thickness: 1.0,
-              ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: CustomText(
-                  "Canais de youtube",
-                  textAlign: TextAlign.left,
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-              ),
-              for (RecommendationItem rec in recommendations.youtubeList)
-                RecommendationItemWidget(rec),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: CustomText(
-                  "Filmes, Séries e documentários",
-                  textAlign: TextAlign.left,
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-              ),
-              for (RecommendationItem rec in recommendations.videosList)
-                RecommendationItemWidget(rec),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: CustomText(
-                  "Podcast",
-                  textAlign: TextAlign.left,
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-              ),
-              for (RecommendationItem rec in recommendations.podcastList)
-                RecommendationItemWidget(rec),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: CustomText(
-                  "Outros",
-                  textAlign: TextAlign.left,
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-              ),
-              for (RecommendationItem rec in recommendations.othersList)
-                RecommendationItemWidget(rec),
-            ],
-          )),
-      MediaQuery.of(context).size.width > 600
-          ? FooterDesktop()
-          : FooterMobile(),
-    ]);
+    return Container(
+      constraints: BoxConstraints(
+        minHeight: MediaQuery.of(context).size.height,
+        maxHeight: double.infinity,
+      ),
+      child: IntrinsicHeight(
+        child: Column(children: [
+          Container(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: CustomText("Recomendações",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headline4!),
+                  ),
+                  Divider(
+                    thickness: 1.0,
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: CustomText(
+                      "Canais de youtube",
+                      textAlign: TextAlign.left,
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                  ),
+                  for (RecommendationItem rec in recommendations.youtubeList)
+                    RecommendationItemWidget(rec),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: CustomText(
+                      "Filmes, Séries e documentários",
+                      textAlign: TextAlign.left,
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                  ),
+                  for (RecommendationItem rec in recommendations.videosList)
+                    RecommendationItemWidget(rec),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: CustomText(
+                      "Podcast",
+                      textAlign: TextAlign.left,
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                  ),
+                  for (RecommendationItem rec in recommendations.podcastList)
+                    RecommendationItemWidget(rec),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: CustomText(
+                      "Outros",
+                      textAlign: TextAlign.left,
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                  ),
+                  for (RecommendationItem rec in recommendations.othersList)
+                    RecommendationItemWidget(rec),
+                ],
+              )),
+          MediaQuery.of(context).size.width > 600
+              ? Expanded(child: FooterDesktop())
+              : FooterMobile(),
+        ]),
+      ),
+    );
   }
 }

@@ -23,6 +23,7 @@ class CustomTextFormField extends StatelessWidget {
   final EdgeInsets padding;
   final TextInputAction? textInputAction;
   final FocusNode? focusNode;
+  final int? maxLines;
   CustomTextFormField({
     this.labelText,
     this.initialValue,
@@ -38,6 +39,7 @@ class CustomTextFormField extends StatelessWidget {
     this.padding = const EdgeInsets.all(8.0),
     this.textInputAction,
     this.focusNode,
+    this.maxLines=1,
   });
 
   @override
@@ -53,6 +55,7 @@ class CustomTextFormField extends StatelessWidget {
           onChanged: onChanged,
           validator: validator,
           focusNode: focusNode,
+          maxLines: maxLines,
           onFieldSubmitted: onFieldSubmitted,
           textInputAction: textInputAction,
           style: Theme.of(context)

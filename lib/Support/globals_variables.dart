@@ -20,7 +20,7 @@ class GlobalsVariables {
   ];
 
   static List<String> tags = [];
-
+  static double sizeFooterDesktop = 170;
   static List<String> filters = [
     'Tudo',
     'Podcast',

@@ -42,7 +42,7 @@ class MovieCollectionWidget extends StatelessWidget {
                       controller: controllerName,
                       textInputType: TextInputType.name,
                       onChanged: (newName) {
-                        collectionStore.updateRecommendationMovieName(
+                        collectionStore.updateRecommendationExamName(
                             index, newName);
                       },
                       validator: (text) {
@@ -58,7 +58,7 @@ class MovieCollectionWidget extends StatelessWidget {
                       controller: controllerUrl,
                       textInputType: TextInputType.url,
                       onChanged: (newUrl) {
-                        collectionStore.updateRecommendationMovieUrl(
+                        collectionStore.updateRecommendationExamUrl(
                             index, newUrl);
                       },
                       validator: (text) {

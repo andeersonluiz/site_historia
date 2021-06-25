@@ -12,6 +12,8 @@ class Teacher {
   String name;
   /// Url da imagem do professor.
   String image;
+  /// Descrição do professor.
+  String description;
   /// Lista de projetos que o professor participa.
   List<Project> projects;
   /// Url de acesso a informações mais completas do professor.
@@ -26,6 +28,7 @@ class Teacher {
     required this.id,
     required this.name,
     required this.image,
+    required this.description,
     required this.projects,
     required this.link,
     required this.isCoord,
@@ -39,6 +42,7 @@ class Teacher {
         id: json['id'],
         name: json['name'],
         image: json['image'],
+        description: json['description'],
         projects: listProjects,
         isCoord:json['isCoord'],
         link: json['link'],
@@ -52,6 +56,7 @@ class Teacher {
         id: json['id'],
         name: json['name'],
         image: "",
+        description:"",
         projects: [],
         isCoord:false,
         link: "",
@@ -64,6 +69,7 @@ class Teacher {
       'id': id,
       'name': name,
       'image': image,
+      'description':description,
       'projects': projects.map((project) => project.toJsonSimple()).toList(),
       'isCoord':isCoord,
       'link': link,

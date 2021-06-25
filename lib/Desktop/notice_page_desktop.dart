@@ -16,6 +16,7 @@ import 'package:site_historia/Desktop/widget/menuBarNotices_desktop.dart';
 import 'package:site_historia/Model/notice_model.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';
 import 'package:site_historia/Store/notice_store.dart';
+import 'package:site_historia/Support/globals_variables.dart';
 
 /// Widget carrega todas as notícias através do método `getNotices()`.
 /// Usa o widget `MenuBarNoticesDesktop()` que monta o menu de seleção de filtros e o `ListNoticesDesktop()`
@@ -37,50 +38,56 @@ class _NoticePageDesktopState extends State<NoticePageDesktop> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: CustomText("Notícias",
-            style: Theme.of(context).textTheme.headline4),
-      ),
-      Divider(
-        thickness: 1.0,
-      ),
-      MenuBarNoticesDesktop(),
-      Observer(builder: (_) {
-        switch (noticeStore!.listNoticesFiltered!.status) {
-          case FutureStatus.pending:
-            return CustomLoading();
-          case FutureStatus.rejected:
-            return ErrorLoad(color: Theme.of(context).primaryColor);
-          case FutureStatus.fulfilled:
-            List<Notice> listNotice =
-                noticeStore!.listNoticesFiltered!.value as List<Notice>;
-            if(listNotice.isEmpty){
-              return Container(
-                height: 500,
-                child:Column(
-                  children: [Expanded(
-                    child: Center(
-                      child: CustomText(
-                        "Não foram encontrados resultados para sua pesquisa :(",
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
+    return Container(
+      child: Column(children: [
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: CustomText("Notícias",
+              style: Theme.of(context).textTheme.headline4),
+        ),
+        Divider(
+          thickness: 1.0,
+        ),
+        MenuBarNoticesDesktop(),
+        Observer(builder: (_) {
+          switch (noticeStore!.listNoticesFiltered!.status) {
+            case FutureStatus.pending:
+              return CustomLoading();
+            case FutureStatus.rejected:
+              return ErrorLoad(color: Theme.of(context).primaryColor);
+            case FutureStatus.fulfilled:
+              List<Notice> listNotice =
+                  noticeStore!.listNoticesFiltered!.value as List<Notice>;
+              if(listNotice.isEmpty){
+                return Container(
+                  constraints: BoxConstraints(
+                    minHeight: MediaQuery.of(context).size.height-GlobalsVariables.sizeFooterDesktop,
+                    maxHeight: double.infinity,
+                  ),
+                  child:IntrinsicHeight(
+                    child: Column(
+                      children: [CustomText(
+                            "Não foram encontrados resultados para sua pesquisa :(",
+                            style: Theme.of(context).textTheme.headline6,
+                          ),Expanded(child: FooterDesktop()),
+
+                      ]
                     ),
-                  ),FooterDesktop(),
-
-                  ]
-                ),
+                  ),
+                );
+              }
+              return  Container(
+                            constraints: BoxConstraints(
+                              minHeight: MediaQuery.of(context).size.height-GlobalsVariables.sizeFooterDesktop,
+                              maxHeight: double.infinity,
+                            ),
+                            child: IntrinsicHeight(child: Column(children: [ListNoticesDesktop(listNotice),
+                              Expanded(child: FooterDesktop()),])),
               );
-            }
-            return Container(
-                constraints: BoxConstraints(
-                  minHeight: 500,
-                ),
-                child: Column(children: [ListNoticesDesktop(listNotice),listNotice.length==1?Container(height: 100,):Container(),FooterDesktop(),]));
-        }
-      }),
+          }
+        }),
 
-    ]);
+      ]),
+    );
   }
 }

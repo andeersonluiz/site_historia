@@ -66,6 +66,10 @@ abstract class _SupportStoreBase with Store {
   @observable
   String? _htmlContent = "";
 
+  /// Usado em professores gerenciar a descrição.
+  @observable
+  String _description = "";
+
   /// Usado em quadros para gerenciar o texto de vídeo selecionado.
   @observable
   String? _urlPopUp = "";
@@ -109,6 +113,10 @@ abstract class _SupportStoreBase with Store {
   ///getter isTopHeader
   @computed
   bool get isTopHeader => this._isTopHeader;
+
+  ///getter description
+  @computed
+  String get description => this._description;
 
   ///getter link
   @computed
@@ -273,6 +281,12 @@ abstract class _SupportStoreBase with Store {
   @action
   updateTopHeader(bool newTopHeader) {
     this._isTopHeader = newTopHeader;
+  }
+
+  /// Atualiza a variável description.
+  @action
+  updateDescription(String newDescription) {
+    this._description = newDescription;
   }
 
   /// Atualiza a variável link.
@@ -450,6 +464,7 @@ abstract class _SupportStoreBase with Store {
         id: teacher.id,
         checked: !teacher.checked,
         image: teacher.image,
+        description: teacher.description,
         isCoord: teacher.isCoord,
         link: teacher.link,
         projects: teacher.projects);
@@ -637,7 +652,7 @@ abstract class _SupportStoreBase with Store {
   validateProjectMobileTab1() {
     String err = "";
     if (title == "") {
-      generateMsgError(ErrorForm.Title, "O titulo não pode ser vazio.");
+      generateMsgError(ErrorForm.Title, "O título não pode ser vazio.");
       err += "err1";
     } else if (title.length > GlobalsVariables.maxCharactersTitle) {
       generateMsgError(
@@ -647,7 +662,7 @@ abstract class _SupportStoreBase with Store {
       clearError(ErrorForm.Title);
     }
     if (pathImage!.path == "") {
-      generateMsgError(ErrorForm.Image, "Selecione uma imagem titulo.");
+      generateMsgError(ErrorForm.Image, "Selecione uma imagem título.");
       err += "err3";
     } else {
       clearError(ErrorForm.Image);
@@ -695,7 +710,7 @@ abstract class _SupportStoreBase with Store {
   validateProjectDesktop() {
     String err = "";
     if (title == "") {
-      generateMsgError(ErrorForm.Title, "O titulo não pode ser vazio.");
+      generateMsgError(ErrorForm.Title, "O título não pode ser vazio.");
       err += "err1";
     } else if (title.length > GlobalsVariables.maxCharactersTitle) {
       generateMsgError(
@@ -705,7 +720,7 @@ abstract class _SupportStoreBase with Store {
       clearError(ErrorForm.Title);
     }
     if (pathImage!.path == "") {
-      generateMsgError(ErrorForm.Image, "Selecione uma imagem titulo.");
+      generateMsgError(ErrorForm.Image, "Selecione uma imagem título.");
       err += "err3";
     } else {
       clearError(ErrorForm.Image);
@@ -742,7 +757,7 @@ abstract class _SupportStoreBase with Store {
   validateNotice() {
     String err = "";
     if (title == "") {
-      generateMsgError(ErrorForm.Title, "O titulo não pode ser vazio.");
+      generateMsgError(ErrorForm.Title, "O título não pode ser vazio.");
       err += "err1";
     } else if (title.length > GlobalsVariables.maxCharactersTitle) {
       generateMsgError(
@@ -764,7 +779,7 @@ abstract class _SupportStoreBase with Store {
     }
 
     if (pathImage!.path == "") {
-      generateMsgError(ErrorForm.Image, "Selecione uma imagem titulo.");
+      generateMsgError(ErrorForm.Image, "Selecione uma imagem título.");
       err += "err5";
     } else {
       clearError(ErrorForm.Image);
@@ -816,7 +831,7 @@ abstract class _SupportStoreBase with Store {
   validateFrame() {
     String err = "";
     if (title == "") {
-      generateMsgError(ErrorForm.Title, "O titulo não pode ser vazio.");
+      generateMsgError(ErrorForm.Title, "O título não pode ser vazio.");
       err += "err1";
     } else if (title.length > GlobalsVariables.maxCharactersTitle) {
       generateMsgError(
@@ -838,7 +853,7 @@ abstract class _SupportStoreBase with Store {
     }
 
     if (pathImage!.path == "") {
-      generateMsgError(ErrorForm.Image, "Selecione uma imagem titulo.");
+      generateMsgError(ErrorForm.Image, "Selecione uma imagem título.");
       err += "err5";
     } else {
       clearError(ErrorForm.Image);

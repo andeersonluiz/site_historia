@@ -28,6 +28,7 @@ import 'package:site_historia/Screens/loading_screen.dart';
 import 'package:site_historia/Screens/notice_screen.dart';
 import 'package:site_historia/Screens/project_screen.dart';
 import 'package:site_historia/Screens/recommendations_screen.dart';
+import 'package:site_historia/Screens/teacher_screen.dart';
 import 'package:site_historia/Support/routesName_support.dart';
 import 'package:site_historia/Support/titleNames_support.dart';
 import 'package:site_historia/firebase/login_auth.dart';
@@ -86,6 +87,16 @@ class VelocityxNavigator {
           }
 
           return MaterialPage(child: ProjectScreen(id));
+        },
+        RouteNames.TEACHERS: (uri, __) {
+          String? id = uri.queryParameters["id"];
+          if (id == null || int.tryParse(id) == null || id == "") {
+            return MaterialPage(
+                child: Loading(
+                  redirect: true,
+                ));
+          }
+          return MaterialPage(child: TeacherScreen(id));
         },
         RouteNames.NOTICES: (uri, __) {
           final id = uri.queryParameters['id'];

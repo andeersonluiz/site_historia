@@ -39,6 +39,9 @@ class LatestPostsMobile extends StatelessWidget {
           case FutureStatus.fulfilled:
             List<Notice> listNotices =
                 noticeStore.listRecentNotices!.value as List<Notice>;
+            if(listNotices.isEmpty){
+              return Container();
+            }
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [

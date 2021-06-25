@@ -20,45 +20,53 @@ class HomePageMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
 
-    return Column(
-      children: [
-        SliderImageMobile(),
-        Divider(
-          thickness: 1.0,
-          height: 0,
+    return Container(
+      constraints: BoxConstraints(
+        minHeight: MediaQuery.of(context).size.height,
+        maxHeight: double.infinity,
+      ),
+      child: IntrinsicHeight(
+        child: Column(
+          children: [
+            Expanded(child: SliderImageMobile()),
+            Divider(
+              thickness: 1.0,
+              height: 0,
+            ),
+            width > 600
+                ? IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                      Expanded(flex: 5, child: Container(constraints: BoxConstraints(
+                        minHeight: 525,
+                      ),child: LatestPostsMobile(0.45))),
+                      Expanded(
+                          flex: 5,
+                          child: Container(
+                              color: ThemeConfig.brownPodcast,
+                              child: Container(constraints: BoxConstraints(
+                                minHeight: 525,
+                              ),child: LatestPodcastMobile(widthPercentageSize: 0.45)))),
+                    ]),
+                )
+                : Column(children: [
+                    Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: LatestPostsMobile(1)),
+                    Container(
+                        width: MediaQuery.of(context).size.width,
+                        color: ThemeConfig.brownPodcast,
+                        child: LatestPodcastMobile(widthPercentageSize: 1)),
+                  ]),
+            Divider(
+              thickness: 1.0,
+              height: 0,
+            ),
+            FooterMobile(),
+          ],
         ),
-        width > 600
-            ? IntrinsicHeight(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                  Expanded(flex: 5, child: Container(constraints: BoxConstraints(
-                    minHeight: 525,
-                  ),child: LatestPostsMobile(0.45))),
-                  Expanded(
-                      flex: 5,
-                      child: Container(
-                          color: ThemeConfig.brownPodcast,
-                          child: Container(constraints: BoxConstraints(
-                            minHeight: 525,
-                          ),child: LatestPodcastMobile(widthPercentageSize: 0.45)))),
-                ]),
-            )
-            : Column(children: [
-                Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: LatestPostsMobile(1)),
-                Container(
-                    width: MediaQuery.of(context).size.width,
-                    color: ThemeConfig.brownPodcast,
-                    child: LatestPodcastMobile(widthPercentageSize: 1)),
-              ]),
-        Divider(
-          thickness: 1.0,
-          height: 0,
-        ),
-        FooterMobile(),
-      ],
+      ),
     );
   }
 }

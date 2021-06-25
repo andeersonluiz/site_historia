@@ -113,12 +113,27 @@ class _AdminUpdateTeacherPageState
                     ),
                     Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: CustomText("Foto professor",
+                        child: CustomText("Foto professor (Tamanho quadrado (100x100,200x200...)",
                             style: Theme.of(context).textTheme.headline6)),
                     Observer(
                       builder: (ctx) => ImageWidget(
                         image: supportStore.pathImage,
                       ),
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CustomText("Descrição do professor",
+                            style: Theme.of(context).textTheme.headline6)),
+                    CustomTextFormField(
+                      hintText:
+                      "Insira a descrição sobre professor (opcional)",
+                      labelText: "Descrição",
+                      initialValue: supportStore.description,
+                      maxLines: null,
+                      onChanged: (text) {
+                        supportStore.updateDescription(text);
+                      },
+                      textInputType: TextInputType.name,
                     ),
                     Center(
                         child: CustomText(
@@ -157,6 +172,7 @@ class _AdminUpdateTeacherPageState
                               widget.teacher,
                               supportStore.title,
                               supportStore.pathImage!,
+                              supportStore.description,
                               supportStore.getProjects(),
                               supportStore.isCoord!,
                               supportStore.link,

@@ -6,6 +6,7 @@
 library FooterDesktop;
 
 import 'package:flutter/material.dart';
+import 'package:site_historia/Support/globals_variables.dart';
 import '../../Components/widget/footerContact_component.dart';
 import '../../Components/widget/footerAbout_component.dart';
 
@@ -13,22 +14,25 @@ import '../../Components/widget/footerAbout_component.dart';
 class FooterDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 170,
-      color: Theme.of(context).primaryColor,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(children: [
-          FooterContact(),
-          Expanded(
-            child: About(
-              iconContactAlign: CrossAxisAlignment.start,
-              textAlign: TextAlign.justify,
-              iconSocialsAlign: MainAxisAlignment.start,
-              sizeContainerText: 550,
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        height: GlobalsVariables.sizeFooterDesktop,
+        color: Theme.of(context).primaryColor,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(children: [
+            FooterContact(),
+            Expanded(
+              child: About(
+                iconContactAlign: CrossAxisAlignment.start,
+                textAlign: TextAlign.justify,
+                iconSocialsAlign: MainAxisAlignment.start,
+                sizeContainerText: 550,
+              ),
             ),
-          ),
-        ]),
+          ]),
+        ),
       ),
     );
   }

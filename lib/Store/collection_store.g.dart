@@ -39,13 +39,13 @@ mixin _$CollectionStore on _CollectionStoreBase, Store {
     });
   }
 
-  final _$updateRecommendationMovieUrlAsyncAction =
-      AsyncAction('_CollectionStoreBase.updateRecommendationMovieUrl');
+  final _$updateRecommendationExamUrlAsyncAction =
+      AsyncAction('_CollectionStoreBase.updateRecommendationExamUrl');
 
   @override
-  Future updateRecommendationMovieUrl(int id, String url) {
-    return _$updateRecommendationMovieUrlAsyncAction
-        .run(() => super.updateRecommendationMovieUrl(id, url));
+  Future updateRecommendationExamUrl(int id, String url) {
+    return _$updateRecommendationExamUrlAsyncAction
+        .run(() => super.updateRecommendationExamUrl(id, url));
   }
 
   final _$updateRecommendationArticleUrlAsyncAction =
@@ -99,11 +99,11 @@ mixin _$CollectionStore on _CollectionStoreBase, Store {
   }
 
   @override
-  dynamic updateRecommendationMovieName(int id, String name) {
+  dynamic updateRecommendationExamName(int id, String name) {
     final _$actionInfo = _$_CollectionStoreBaseActionController.startAction(
-        name: '_CollectionStoreBase.updateRecommendationMovieName');
+        name: '_CollectionStoreBase.updateRecommendationExamName');
     try {
-      return super.updateRecommendationMovieName(id, name);
+      return super.updateRecommendationExamName(id, name);
     } finally {
       _$_CollectionStoreBaseActionController.endAction(_$actionInfo);
     }
