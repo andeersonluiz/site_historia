@@ -13,7 +13,6 @@ import 'package:site_historia/Components/widget/htmlViewer_component.dart';
 import 'package:site_historia/Components/widget/videoViewer_component.dart';
 import 'package:site_historia/Desktop/footer/footer_desktop.dart';
 import 'package:site_historia/Model/frame_model.dart';
-import 'package:site_historia/Support/globals_variables.dart';
 
 /// Widget que recebe um objeto `Frame`. Onde são organizadas as informações do quadro.
 /// Utiliza o widget `HtmlViewer(String conteudo)` para generalizar o visualizador de html,

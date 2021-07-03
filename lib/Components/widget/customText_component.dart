@@ -25,7 +25,7 @@ class CustomText extends StatelessWidget {
     this.maxLines,
     this.overflow,
     this.padding = const EdgeInsets.all(8.0),
-        this.isSelectable=true,
+    this.isSelectable=true,
   });
 
   @override

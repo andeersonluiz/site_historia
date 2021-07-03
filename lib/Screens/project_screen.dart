@@ -10,7 +10,6 @@ import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:site_historia/Components/widget/customLoading_component.dart';
 import 'package:site_historia/Desktop/appBar/custtomAppBar_desktop.dart';
-import 'package:site_historia/Desktop/footer/footer_desktop.dart';
 import 'package:site_historia/Desktop/project_page_desktop.dart';
 import 'package:site_historia/Mobile/project_page_mobile.dart';
 import 'package:site_historia/Screens/errorLoad_screen.dart';

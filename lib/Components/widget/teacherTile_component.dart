@@ -5,7 +5,6 @@
 // ignore: library_names
 library TeacherTile;
 
-import 'package:auto_size_text_pk/auto_size_text_pk.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:site_historia/Components/widget/customImage_component.dart';

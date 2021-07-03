@@ -3,7 +3,6 @@
 /// {@category Store}
 // ignore: library_names
 library RecommendationStore;
-import 'dart:convert';
 
 import 'package:mobx/mobx.dart';
 import 'package:site_historia/Model/recommendationItem_model.dart';

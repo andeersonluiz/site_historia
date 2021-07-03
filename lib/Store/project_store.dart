@@ -85,10 +85,8 @@ abstract class _ProjectStoreBase with Store {
 
   /// Retorna o nome do usuário que está logado.
   getUsernameByUid(String uid) async {
-    if (GlobalsVariables.username == "") {
-      String name = await ProjectFirestore.getUsernameByUid(uid);
-      GlobalsVariables.username = name;
-    }
+    String name = await ProjectFirestore.getUsernameByUid(uid);
+    GlobalsVariables.username = name;
     return GlobalsVariables.username;
   }
 

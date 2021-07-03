@@ -112,7 +112,7 @@ class AdminFrameCardMobile extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                  "Data do Post: " +
+                                  "Última atualização: " +
                                       frameStore
                                           .listFrames!.value[index].datePost,
                                   maxLines: 1,

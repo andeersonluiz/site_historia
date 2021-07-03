@@ -27,6 +27,9 @@ dartdoc:
     "Component":
       markdown: doc/Component.md
       name: Component
+    "Lib":
+      markdown: doc/Lib.md
+      name: Lib
   subcategories:
     "Page":
       markdown: doc/Page.md

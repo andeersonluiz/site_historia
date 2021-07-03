@@ -74,6 +74,7 @@ class AdminNoticePageDesktop extends StatelessWidget {
                               ? ListTile(
                                   leading: Icon(Icons.check_circle),
                                   title: CustomText("Salvar Alterações",
+                                      isSelectable: false,
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyText1),

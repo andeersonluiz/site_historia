@@ -4,15 +4,12 @@
 /// {@subCategory Page}
 // ignore: library_names
 library ProjectPageDesktop;
-import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:flutter/material.dart';
-import 'package:site_historia/Components/widget/author_component.dart';
 import 'package:site_historia/Components/widget/customImage_component.dart';
 import 'package:site_historia/Components/widget/customText_component.dart';
 import 'package:site_historia/Components/widget/htmlViewer_component.dart';
 import 'package:site_historia/Desktop/footer/footer_desktop.dart';
 import 'package:site_historia/Model/project_model.dart';
-import 'package:site_historia/Support/globals_variables.dart';
 
 /// Widget que recebe um objeto `Project`. Onde são organizadas as informações do projeto.
 /// O widget `HtmlViewer(String conteudo)` é usado para generalizar o visualizador de html.

@@ -5,8 +5,6 @@
 // ignore: library_names
 library HomePageDesktop;
 import 'package:flutter/material.dart';
-import 'package:site_historia/Support/globals_variables.dart';
-
 import '../Theme/themeConfig.dart';
 import 'footer/footer_desktop.dart';
 import 'widget/latestPodcast_desktop.dart';

@@ -1,3 +1,9 @@
+/// Classe main que inicia a aplicação.
+///
+/// {@category Lib}
+// ignore: library_names
+library Main;
+
 import 'package:firebase/firebase.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

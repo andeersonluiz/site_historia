@@ -645,6 +645,7 @@ abstract class _SupportStoreBase with Store {
     updateTitle(teacher.name);
     updateLink(teacher.link);
     setIsCoord(teacher.isCoord);
+    updateDescription(teacher.description);
     updatePath(PickedFile(teacher.image));
   }
 
@@ -924,6 +925,7 @@ abstract class _SupportStoreBase with Store {
     _tag = "Podcast";
     _type = "Podcast";
     _link = "";
+    _description="";
     _audioFile = PlatformFile(name:"",size: 0);
     _videoFile = PlatformFile(name:"",size: 0);
     _urlPopUp = "";

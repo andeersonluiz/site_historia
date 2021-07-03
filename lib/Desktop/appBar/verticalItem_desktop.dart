@@ -67,9 +67,11 @@ class VerticalItemDesktop extends StatelessWidget {
           if (title == "Sair") {
             await LoginAuth.signOut();
             CustomToast.showToast("Você saiu com sucesso!", Colors.green);
+            VxNavigator.of(context).push(Uri.parse(path));
+          }else {
+            VxNavigator.of(context).pop();
+            VxNavigator.of(context).push(Uri.parse(path));
           }
-          VxNavigator.of(context).pop();
-          VxNavigator.of(context).push(Uri.parse(path));
         });
   }
 }

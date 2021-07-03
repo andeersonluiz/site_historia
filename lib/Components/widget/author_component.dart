@@ -5,7 +5,6 @@
 // ignore: library_names
 library AuthorInfo;
 
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class AuthorInfo extends StatelessWidget {
@@ -32,7 +31,7 @@ class AuthorInfo extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 20.0, left: 20.0, bottom: 20.0),
           child: Text(
-            "Ultima atualização: $datePost",
+            "Última atualização: $datePost",
             style: Theme.of(context).textTheme.caption!.copyWith(
                 color: Theme.of(context).primaryColor,
                 fontStyle: FontStyle.italic),
@@ -53,7 +52,7 @@ class AuthorInfo extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 20.0, left: 20.0, bottom: 20.0),
           child: Text(
-            "Ultima atualização: $datePost",
+            "Última atualização: $datePost",
             style: Theme.of(context).textTheme.caption!.copyWith(
                 color: Theme.of(context).primaryColor,
                 fontStyle: FontStyle.italic),

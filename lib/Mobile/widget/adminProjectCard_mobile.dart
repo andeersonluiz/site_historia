@@ -97,7 +97,7 @@ class AdminProjectCardMobile extends StatelessWidget {
                               .copyWith(color: Theme.of(context).primaryColor)),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text("Data do Post: " + project.datePost,
+                        child: Text("Última atualização: " + project.datePost,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context)
